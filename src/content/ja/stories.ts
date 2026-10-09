@@ -1,0 +1,145 @@
+import type { Story } from '../types';
+
+/** Short listening stories built from vocabulary of earlier lessons (original texts). */
+export const stories: Story[] = [
+  {
+    id: 'ja.st.1',
+    title: 'Hana się przedstawia',
+    afterLesson: 'ja.l13',
+    stage: 1,
+    context: 'Japońska studentka przedstawia siebie i przyjaciółkę.',
+    lines: [
+      { text: 'はじめまして。わたしは ハナです。', pl: 'Miło mi. Jestem Hana.', romaji: 'hajimemashite. watashi wa hana desu.' },
+      { text: 'にほんじんです。がくせいです。', pl: 'Jestem Japonką. Jestem studentką.', romaji: 'nihonjin desu. gakusei desu.' },
+      { text: 'ともだちの アニャさんは ポーランドじんです。', pl: 'Moja przyjaciółka Ania jest Polką.', romaji: 'tomodachi no anya-san wa poorandojin desu.' },
+      { text: 'アニャさんも がくせいです。', pl: 'Ania też jest studentką.', romaji: 'anya-san mo gakusei desu.' },
+      { text: 'どうぞ よろしく おねがいします。', pl: 'Miło mi was poznać.', romaji: 'douzo yoroshiku onegaishimasu.' },
+    ],
+    questions: [
+      {
+        id: 'ja.st.1-q1',
+        prompt: 'Kim jest Hana?',
+        options: ['Japońską studentką', 'Polską studentką', 'Nauczycielką'],
+        answer: 0,
+        explanation: 'にほんじんです。がくせいです。',
+      },
+      {
+        id: 'ja.st.1-q2',
+        prompt: 'Skąd jest Ania?',
+        options: ['Z Polski', 'Z Japonii', 'Nie wiadomo'],
+        answer: 0,
+        explanation: 'アニャさんは ポーランドじんです。',
+      },
+    ],
+  },
+  {
+    id: 'ja.st.2',
+    title: 'W sklepie',
+    afterLesson: 'ja.l14',
+    stage: 1,
+    context: 'Krótkie zakupy w konbini.',
+    lines: [
+      { speaker: 'Sprzedawca', text: 'いらっしゃいませ。', pl: 'Witamy!', romaji: 'irasshaimase.' },
+      { speaker: 'Klient', text: 'すみません、これは いくらですか。', pl: 'Przepraszam, ile to kosztuje?', romaji: 'sumimasen, kore wa ikura desu ka.' },
+      { speaker: 'Sprzedawca', text: 'それは {百二十|ひゃくにじゅう}{円|えん}です。', pl: 'To kosztuje sto dwadzieścia jenów.', romaji: 'sore wa hyakunijuu en desu.' },
+      { speaker: 'Klient', text: 'じゃあ、これと コーヒーを ください。', pl: 'To poproszę to i kawę.', romaji: 'jaa, kore to koohii o kudasai.' },
+      {
+        speaker: 'Sprzedawca',
+        text: 'コーヒーは {二百|にひゃく}{円|えん}です。ぜんぶで {三百二十|さんびゃくにじゅう}{円|えん}です。',
+        pl: 'Kawa kosztuje dwieście jenów. Razem trzysta dwadzieścia jenów.',
+        romaji: 'koohii wa nihyaku en desu. zenbu de sanbyaku nijuu en desu.',
+      },
+      { speaker: 'Klient', text: 'ありがとう ございます。', pl: 'Dziękuję bardzo.', romaji: 'arigatou gozaimasu.' },
+    ],
+    questions: [
+      {
+        id: 'ja.st.2-q1',
+        prompt: 'Ile kosztuje pierwsza rzecz?',
+        options: ['120 jenów', '200 jenów', '320 jenów'],
+        answer: 0,
+        explanation: 'それは 百二十円です。',
+      },
+      {
+        id: 'ja.st.2-q2',
+        prompt: 'Ile klient płaci razem?',
+        options: ['320 jenów', '120 jenów', '230 jenów'],
+        answer: 0,
+        explanation: 'ぜんぶで 三百二十円です。',
+      },
+    ],
+  },
+  {
+    id: 'ja.st.3',
+    title: 'Mój dzień',
+    afterLesson: 'ja.l16',
+    stage: 2,
+    context: 'Student opowiada o swoim zwykłym dniu.',
+    lines: [
+      { text: 'わたしは まいにち {六|ろく}じに おきます。', pl: 'Codziennie wstaję o szóstej.', romaji: 'watashi wa mainichi rokuji ni okimasu.' },
+      { text: 'あさ コーヒーを のみます。ごはんは たべません。', pl: 'Rano piję kawę. Śniadania nie jem.', romaji: 'asa koohii o nomimasu. gohan wa tabemasen.' },
+      { text: '{八|はち}じに だいがくへ いきます。', pl: 'O ósmej jadę na uczelnię.', romaji: 'hachiji ni daigaku e ikimasu.' },
+      { text: 'だいがくで にほんごを べんきょうします。', pl: 'Na uczelni uczę się japońskiego.', romaji: 'daigaku de nihongo o benkyou shimasu.' },
+      { text: 'よる うちで テレビを みます。そして {十一|じゅういち}じに ねます。', pl: 'Wieczorem oglądam w domu telewizję. A o jedenastej idę spać.', romaji: 'yoru uchi de terebi o mimasu. soshite juuichiji ni nemasu.' },
+    ],
+    questions: [
+      {
+        id: 'ja.st.3-q1',
+        prompt: 'O której narrator wstaje?',
+        options: ['O szóstej', 'O ósmej', 'O jedenastej'],
+        answer: 0,
+        explanation: '六じに おきます。',
+      },
+      {
+        id: 'ja.st.3-q2',
+        prompt: 'Gdzie uczy się japońskiego?',
+        options: ['Na uczelni', 'W domu', 'W kawiarni'],
+        answer: 0,
+        explanation: 'だいがくで にほんごを べんきょうします。',
+      },
+      {
+        id: 'ja.st.3-q3',
+        prompt: 'O której idzie spać?',
+        options: ['O 23:00', 'O 22:00', 'O 21:00'],
+        answer: 0,
+        explanation: '十一じに ねます — o jedenastej (wieczorem).',
+      },
+    ],
+  },
+  {
+    id: 'ja.st.4',
+    title: 'Wycieczka do Kioto',
+    afterLesson: 'ja.l18',
+    stage: 3,
+    context: 'Ola opowiada o sobotniej wycieczce.',
+    lines: [
+      { text: '{土曜日|どようび}に でんしゃで きょうとへ いきました。', pl: 'W sobotę pojechałam pociągiem do Kioto.', romaji: 'doyoubi ni densha de kyouto e ikimashita.' },
+      { text: 'きょうとには おてらが たくさん あります。', pl: 'W Kioto jest dużo świątyń.', romaji: 'kyouto ni wa otera ga takusan arimasu.' },
+      { text: '{山|やま}の {上|うえ}の おてらは とても きれいでした。', pl: 'Świątynia na górze była bardzo piękna.', romaji: 'yama no ue no otera wa totemo kirei deshita.' },
+      { text: 'ひるごはんに おいしい ラーメンを たべました。', pl: 'Na obiad zjadłam pyszny ramen.', romaji: 'hirugohan ni oishii raamen o tabemashita.' },
+      { text: 'よる {九|く}じに うちへ かえりました。', pl: 'Wieczorem o dziewiątej wróciłam do domu.', romaji: 'yoru kuji ni uchi e kaerimashita.' },
+    ],
+    questions: [
+      {
+        id: 'ja.st.4-q1',
+        prompt: 'Czym Ola pojechała do Kioto?',
+        options: ['Pociągiem', 'Autobusem', 'Samochodem'],
+        answer: 0,
+        explanation: 'でんしゃで — pociągiem.',
+      },
+      {
+        id: 'ja.st.4-q2',
+        prompt: 'Co zjadła na obiad?',
+        options: ['Ramen', 'Sushi', 'Rybę'],
+        answer: 0,
+        explanation: 'おいしい ラーメンを たべました。',
+      },
+      {
+        id: 'ja.st.4-q3',
+        prompt: 'O której wróciła do domu?',
+        options: ['O 21:00', 'O 19:00', 'O 9:00 rano'],
+        answer: 0,
+        explanation: 'よる 九じに — wieczorem o dziewiątej.',
+      },
+    ],
+  },
+];

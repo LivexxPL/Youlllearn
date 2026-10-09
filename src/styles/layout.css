@@ -1,0 +1,228 @@
+/*
+ * App shell.
+ *  - Phones (< 768px): bottom navigation bar, one column.
+ *  - Tablets (>= 768px): navigation rail on the left (or right for left-handed mode is not
+ *    applied to navigation — only to drawing tools), wider content.
+ *  - Desktop (>= 1100px): labelled sidebar and multi-column dashboards.
+ */
+.app {
+  min-height: var(--app-height);
+}
+
+.app__main {
+  min-height: var(--app-height);
+}
+
+.nav {
+  position: fixed;
+  z-index: 40;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch;
+  height: calc(var(--nav-height) + var(--safe-bottom));
+  padding: 0 calc(var(--safe-right) + var(--sp-1)) var(--safe-bottom) calc(var(--safe-left) + var(--sp-1));
+  background: color-mix(in srgb, var(--bg-elevated) 92%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border);
+}
+
+.nav__brand {
+  display: none;
+}
+
+.nav__item {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-width: 0;
+  padding: var(--sp-1) 0;
+  border: none;
+  background: none;
+  color: var(--text-subtle);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-decoration: none;
+  position: relative;
+  touch-action: manipulation;
+}
+
+.nav__icon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 32px;
+  border-radius: var(--radius-pill);
+  transition: background var(--dur) var(--ease-out);
+}
+
+.nav__label {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nav__item[aria-current='page'] {
+  color: var(--primary);
+}
+
+.nav__item[aria-current='page'] .nav__icon {
+  background: var(--primary-soft);
+}
+
+.nav__badge {
+  position: absolute;
+  top: 4px;
+  left: calc(50% + 10px);
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: var(--radius-pill);
+  background: var(--accent-bright);
+  color: #2b1a00;
+  font-size: 0.68rem;
+  line-height: 18px;
+  font-weight: 800;
+  text-align: center;
+}
+
+/* Full-screen activities hide the navigation. */
+.app--immersive .nav {
+  display: none;
+}
+
+.app--immersive .page {
+  padding-bottom: calc(var(--safe-bottom) + var(--sp-6));
+}
+
+@media (min-width: 768px) {
+  :root {
+    --nav-width: 96px;
+  }
+
+  .nav {
+    top: 0;
+    right: auto;
+    bottom: 0;
+    width: calc(var(--nav-width) + var(--safe-left));
+    height: auto;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: var(--sp-2);
+    padding: calc(var(--safe-top) + var(--sp-4)) var(--sp-2) calc(var(--safe-bottom) + var(--sp-4))
+      calc(var(--safe-left) + var(--sp-2));
+    border-top: none;
+    border-right: 1px solid var(--border);
+  }
+
+  .nav__brand {
+    display: grid;
+    place-items: center;
+    margin-bottom: var(--sp-4);
+  }
+
+  .nav__item {
+    flex: 0 0 auto;
+    min-height: 68px;
+    font-size: 0.75rem;
+  }
+
+  .app:not(.app--immersive) .app__main {
+    padding-left: calc(var(--nav-width) + var(--safe-left));
+  }
+
+  .page {
+    padding-bottom: calc(var(--safe-bottom) + var(--sp-10));
+    padding-left: calc(var(--sp-6));
+    padding-right: calc(var(--safe-right) + var(--sp-6));
+    gap: var(--sp-6);
+  }
+
+  .app--immersive .page {
+    padding-left: calc(var(--safe-left) + var(--sp-6));
+  }
+}
+
+@media (min-width: 1100px) {
+  :root {
+    --nav-width: 232px;
+  }
+
+  .nav {
+    align-items: stretch;
+    padding-inline: var(--sp-4);
+  }
+
+  .nav__brand {
+    justify-content: start;
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    padding: var(--sp-2) var(--sp-3);
+    font-weight: 800;
+    font-size: var(--fs-l);
+  }
+
+  .nav__item {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: var(--sp-3);
+    min-height: 52px;
+    padding: 0 var(--sp-3);
+    border-radius: var(--radius-m);
+    font-size: var(--fs-m);
+  }
+
+  .nav__item[aria-current='page'] {
+    background: var(--primary-soft);
+  }
+
+  .nav__item[aria-current='page'] .nav__icon {
+    background: transparent;
+  }
+
+  .nav__icon {
+    width: 28px;
+  }
+
+  .nav__badge {
+    position: static;
+    margin-left: auto;
+  }
+}
+
+/* Dashboard grid used by Home/Progress on wide screens. */
+.dash {
+  display: grid;
+  gap: var(--sp-5);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 1100px) {
+  .dash {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    align-items: start;
+  }
+  .dash__span {
+    grid-column: 1 / -1;
+  }
+}
+
+.split {
+  display: grid;
+  gap: var(--sp-5);
+}
+
+@media (min-width: 900px) {
+  .split {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+  }
+}
