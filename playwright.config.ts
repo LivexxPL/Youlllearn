@@ -26,7 +26,7 @@ export default defineConfig({
     { name: 'phone', use: { ...devices['Pixel 7'], launchOptions } },
     {
       name: 'tablet',
-      testIgnore: /visual\.spec/,
+      testIgnore: /(visual|readme-shots)\.spec/,
       use: { viewport: { width: 1180, height: 820 }, hasTouch: true, isMobile: false, launchOptions },
     },
     // Screenshot-only projects (visual.spec.ts runs only with SCREENSHOTS=1).

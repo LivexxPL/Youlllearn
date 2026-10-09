@@ -7,5 +7,5 @@ licensed under **Creative Commons Attribution-Share Alike 3.0**
 
 The data was obtained from the npm package `@madcat/kanjivg` (a republication of KanjiVG)
 and reduced to the SVG path data of each stroke, in stroke order. This derived file is
-distributed under the same CC BY-SA 3.0 licence. The rest of Polyglot Quest is licensed
-separately (see LICENSE).
+distributed under the same CC BY-SA 3.0 licence. This notice covers only the stroke data;
+see CONTENT_SOURCES.md for every other resource.

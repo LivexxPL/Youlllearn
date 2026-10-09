@@ -13,10 +13,12 @@ column is kept honest: a milestone is "done" only when it is implemented *and* c
 | --- | --- | --- |
 | Node.js 22, npm 10 | ✅ | |
 | Java 21 (OpenJDK), Gradle 8.14 | ✅ | Matches Capacitor 8 / AGP 8.13 requirements |
-| Android SDK | ❌ | `dl.google.com` is blocked by this sandbox's network policy, so `sdkmanager`/platform downloads are impossible here. The Android project is generated and a CI workflow builds the APK on GitHub Actions. |
-| Chromium (Playwright) | ✅ | `/opt/pw-browsers` — used for E2E tests and screenshot QA |
-| Network to npm, maven.google.com | ✅ | |
-| Network to Tatoeba, Wikimedia, Tofugu, GitHub releases | ❌ | Blocked; see CONTENT_SOURCES.md for consequences |
+| Android SDK, Android Gradle Plugin | ❌ | Both are served only from `dl.google.com`, which this sandbox's network policy blocks (`maven.google.com` redirects there). **No APK can be compiled here.** The Android project is generated and verified, and `.github/workflows/android.yml` builds the APK on GitHub Actions. |
+| Chromium (Playwright) | ✅ | `/opt/pw-browsers`, used for E2E tests and screenshot QA |
+| Network to npm, Maven Central, services.gradle.org | ✅ | |
+| Direct access to Tatoeba, Wikimedia, Tofugu, research sites | ❌ | Blocked. Licences and sources were checked through web search instead (see CONTENT_SOURCES.md, docs/LEARNING_METHODOLOGY.md). |
+| Audio output / TTS voices | ❌ | Headless Chromium has no voices here, so TTS quality was not evaluated by ear; the fallbacks were exercised instead. |
+| Push to GitHub | ❌ | `git push` returns 403 (the Claude GitHub App has no access to the repository). Work is committed locally on `claude/polyglot-quest-app-6awz6m`. |
 
 ## 2. Architecture decisions
 
@@ -39,17 +41,18 @@ column is kept honest: a milestone is "done" only when it is implemented *and* c
 
 | # | Milestone | Status |
 | --- | --- | --- |
-| 1 | Architecture & working application shell | in progress |
-| 2 | Mobile-first UI & navigation | planned |
-| 3 | Learning engine & real beginner lessons (es/de/ja) | content written & validated; engine/UI in progress |
-| 4 | Audio Quest (audio-first learning) | planned |
-| 5 | Spaced repetition, daily goals, motivation | SRS core done & tested; UI planned |
-| 6 | Stylus & tablet support | planned |
-| 7 | Persistence, offline, import/export | planned |
-| 8 | Tests, optimisation, Android packaging | planned |
-| 9 | Documentation | planned |
+| 1 | Architecture & working application shell | ✅ done |
+| 2 | Mobile-first UI & navigation | ✅ done: visual QA on phone (light/dark), tablet, desktop |
+| 3 | Learning engine & real beginner lessons (es/de/ja) | ✅ done: 47 lessons; every lesson session is built and checked by tests |
+| 4 | Audio Quest (audio-first learning) | ✅ done: all 15 requirements (docs/AUDIO.md); screen-off playback only "where supported" |
+| 5 | Spaced repetition, daily goals, motivation | ✅ done |
+| 6 | Stylus & tablet support | ✅ done: Pointer Events canvas, KanjiVG stroke guides, stylus mode, notes |
+| 7 | Persistence, offline, import/export | ✅ done: IndexedDB, PWA precache, JSON export/import (E2E-tested round trip) |
+| 8 | Tests, optimisation, Android packaging | ✅ tests (182 unit, 14 E2E) and Android project/CI. ⚠️ APK not compiled in this sandbox (SDK blocked); built by CI. |
+| 9 | Documentation | ✅ done |
 
-(The table is updated at the end of each milestone.)
+Checks run after the milestones: `npm run lint`, `npm run typecheck`, `npm test`,
+`npm run build`, `npm run build:native`, and `npx playwright test` (phone + tablet).
 
 ## 4. Scope of the MVP
 

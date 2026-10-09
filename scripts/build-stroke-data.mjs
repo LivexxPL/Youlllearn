@@ -59,6 +59,6 @@ writeFileSync(
 );
 writeFileSync(
   join(root, 'src/content/ja/STROKES_LICENSE.md'),
-  `# Stroke-order data\n\n\`strokes.json\` contains stroke paths for ${Object.keys(out).length} characters extracted from\n**KanjiVG** (https://kanjivg.tagaini.net), copyright © Ulrich Apel and contributors,\nlicensed under **Creative Commons Attribution-Share Alike 3.0**\n(https://creativecommons.org/licenses/by-sa/3.0/).\n\nThe data was obtained from the npm package \`@madcat/kanjivg\` (a republication of KanjiVG)\nand reduced to the SVG path data of each stroke, in stroke order. This derived file is\ndistributed under the same CC BY-SA 3.0 licence. The rest of Polyglot Quest is licensed\nseparately (see LICENSE).\n`,
+  `# Stroke-order data\n\n\`strokes.json\` contains stroke paths for ${Object.keys(out).length} characters extracted from\n**KanjiVG** (https://kanjivg.tagaini.net), copyright © Ulrich Apel and contributors,\nlicensed under **Creative Commons Attribution-Share Alike 3.0**\n(https://creativecommons.org/licenses/by-sa/3.0/).\n\nThe data was obtained from the npm package \`@madcat/kanjivg\` (a republication of KanjiVG)\nand reduced to the SVG path data of each stroke, in stroke order. This derived file is\ndistributed under the same CC BY-SA 3.0 licence. This notice covers only the stroke data;\nsee CONTENT_SOURCES.md for every other resource.\n`,
 );
 console.log(`Stroke data: ${Object.keys(out).length} characters (${[...kanjiSet].length} kanji). Missing: ${missing.join('') || 'none'}`);
