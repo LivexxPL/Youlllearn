@@ -5,36 +5,38 @@ import { defineConfig, devices } from '@playwright/test';
 // PW_CHROMIUM_PATH (or the default sandbox path) lets the tests use it
 // instead of downloading a browser.
 const sandboxChromium = process.env.PW_CHROMIUM_PATH ?? '/opt/pw-browsers/chromium';
-const executablePath = existsSync(sandboxChromium) ? sandboxChromium : undefined;
+const launchOptions = existsSync(sandboxChromium) ? { executablePath: sandboxChromium } : {};
 
 export default defineConfig({
   testDir: './e2e',
-  timeout: 60_000,
+  // Whole lessons are ~50 exercises; reduced motion (honoured by the app) keeps them fast.
+  timeout: 180_000,
   expect: { timeout: 10_000 },
   fullyParallel: false,
   retries: process.env.CI ? 1 : 0,
   reporter: process.env.CI ? [['list'], ['html', { open: 'never' }]] : 'list',
   use: {
-    baseURL: 'http://localhost:4173',
+    baseURL: 'http://localhost:4173/',
     trace: 'retain-on-failure',
     locale: 'pl-PL',
-    launchOptions: executablePath ? { executablePath } : {},
+    contextOptions: { reducedMotion: 'reduce' },
+    launchOptions,
   },
   projects: [
-    { name: 'phone', use: { ...devices['Pixel 7'], launchOptions: executablePath ? { executablePath } : {} } },
+    { name: 'phone', use: { ...devices['Pixel 7'], launchOptions } },
     {
       name: 'tablet',
-      use: {
-        viewport: { width: 1180, height: 820 },
-        hasTouch: true,
-        isMobile: false,
-        launchOptions: executablePath ? { executablePath } : {},
-      },
+      testIgnore: /visual\.spec/,
+      use: { viewport: { width: 1180, height: 820 }, hasTouch: true, isMobile: false, launchOptions },
     },
+    // Screenshot-only projects (visual.spec.ts runs only with SCREENSHOTS=1).
+    { name: 'tablet-shots', testMatch: /visual\.spec/, use: { viewport: { width: 1180, height: 820 }, hasTouch: true, launchOptions } },
+    { name: 'desktop-shots', testMatch: /visual\.spec/, use: { viewport: { width: 1440, height: 900 }, launchOptions } },
+    { name: 'phone-dark-shots', testMatch: /visual\.spec/, use: { ...devices['Pixel 7'], launchOptions } },
   ],
   webServer: {
     command: 'npm run preview -- --port 4173 --strictPort',
-    url: 'http://localhost:4173',
+    url: 'http://localhost:4173/',
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
   },

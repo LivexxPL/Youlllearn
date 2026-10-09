@@ -8,6 +8,7 @@ export const pl = {
   'nav.home': 'Start',
   'nav.learn': 'Nauka',
   'nav.audio': 'Audio Quest',
+  'nav.audioShort': 'Audio',
   'nav.review': 'Powtórki',
   'nav.progress': 'Postępy',
   'nav.settings': 'Ustawienia',
@@ -63,6 +64,7 @@ export const pl = {
   // Units / plurals
   'unit.min': { one: '{count} minuta', few: '{count} minuty', many: '{count} minut', other: '{count} minuty' },
   'unit.minShort': { one: '{count} min', other: '{count} min' },
+  'unit.secShort': '{count} s',
   'unit.hourShort': { one: '{count} h', other: '{count} h' },
   'unit.words': { one: '{count} słowo', few: '{count} słowa', many: '{count} słów', other: '{count} słowa' },
   'unit.lessons': { one: '{count} lekcja', few: '{count} lekcje', many: '{count} lekcji', other: '{count} lekcji' },
@@ -146,9 +148,9 @@ export const pl = {
 
   // Recommendations
   'rec.lesson': 'Następna lekcja',
-  'rec.lessonDesc': '{title} · ok. {min} min',
+  'rec.lessonDesc': '{title}',
   'rec.review': 'Powtórka',
-  'rec.reviewDesc': '{count} kart · ok. {min} min',
+  'rec.reviewDesc': '{cards} czeka na powtórkę',
   'rec.reviewWhy': 'Te słowa warto odświeżyć teraz, zanim się zatrą.',
   'rec.audio': 'Słuchanie',
   'rec.audioDesc': 'Audio Quest z materiału, który już znasz',
@@ -202,7 +204,7 @@ export const pl = {
   'lesson.retryTitle': 'Wróćmy do kilku pytań',
   'lesson.retryBody': 'Druga próba po chwili przerwy to jeden z najskuteczniejszych sposobów nauki.',
   'lesson.summaryTitle': 'Lekcja ukończona!',
-  'lesson.summaryLearned': 'Czego się uczysz w tej lekcji',
+  'lesson.summaryLearned': 'Podsumowanie lekcji',
   'lesson.summaryAccuracy': 'Trafność',
   'lesson.summaryXp': 'Zdobyte XP',
   'lesson.summaryNew': 'Nowe słowa',
@@ -653,6 +655,8 @@ export const pl = {
   'write.showOrder': 'Pokaż kolejność kresek',
   'write.animate': 'Animuj',
   'write.strokes': { one: '{count} kreska', few: '{count} kreski', many: '{count} kresek', other: '{count} kreski' },
+  /** Accusative ("narysowano 1 kreskę", "wzór ma 5 kresek"). */
+  'write.strokesAcc': { one: '{count} kreskę', few: '{count} kreski', many: '{count} kresek', other: '{count} kreski' },
   'write.pen': 'Pióro',
   'write.eraser': 'Gumka',
   'write.undo': 'Cofnij',

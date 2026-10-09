@@ -9,8 +9,8 @@ const config: CapacitorConfig = {
   webDir: 'dist',
   android: {
     allowMixedContent: false,
-    // Keeps WebView debugging available in debug builds only.
-    webContentsDebuggingEnabled: undefined,
+    // WebView debugging stays at Capacitor's default: enabled only in
+    // debuggable (debug) builds.
   },
   plugins: {
     SystemBars: {

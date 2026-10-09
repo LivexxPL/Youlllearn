@@ -73,6 +73,16 @@
   color: var(--primary);
 }
 
+/* Phones show the short label; the full one stays available to screen readers. */
+.nav__label-full {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
 .nav__item[aria-current='page'] .nav__icon {
   background: var(--primary-soft);
 }
@@ -190,6 +200,18 @@
 
   .nav__icon {
     width: 28px;
+  }
+
+  .nav__label-full {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+  }
+
+  .nav__label-short {
+    display: none;
   }
 
   .nav__badge {

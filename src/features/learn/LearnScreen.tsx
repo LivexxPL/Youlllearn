@@ -123,7 +123,9 @@ export function LearnScreen() {
                             <TargetText text={lesson.subtitle} courseId={course.id} />
                           </span>
                         )}
-                        <span>· {t('common.minutesApprox', { count: lesson.minutes })}</span>
+                        <span className="trail__min">
+                          <Clock size={12} /> {t('common.minutesApprox', { count: lesson.minutes })}
+                        </span>
                         {p && (
                           <span className="trail__score">
                             <Star size={12} /> {formatPercent(p.bestAccuracy)}

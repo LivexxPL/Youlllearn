@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Brain, CircleCheck, Dumbbell, Info, Play, Search, Timer } from 'lucide-react';
+import { Brain, Dumbbell, Info, Play, Search, Timer } from 'lucide-react';
 import { useSettings } from '../../state/settings';
 import { getCourse } from '../../content/registry';
 import { useCards, useCompletedSet } from '../../state/hooks';
@@ -7,7 +7,7 @@ import { cardStatus, countDue, isStruggling, type Card, type CardStatus } from '
 import { reviewMinutes } from '../../engine/recommend';
 import { navigate } from '../../app/router';
 import { t, formatDate } from '../../i18n';
-import { Banner, PageHeader } from '../../components/ui';
+import { PageHeader } from '../../components/ui';
 import { CourseSwitcher } from '../home/HomeScreen';
 import { MemoryBar, type MemoryState } from '../../components/charts';
 import { TargetText } from '../../components/TargetText';
@@ -129,7 +129,6 @@ export default function ReviewScreen() {
                     </div>
                   </div>
                   <span className={`status-pill status-pill--${st}`}>
-                    {st === 'established' && <CircleCheck size={14} />}
                     {t(`review.status.${st}` as never)}
                   </span>
                 </li>
@@ -138,7 +137,6 @@ export default function ReviewScreen() {
           </ul>
         </section>
       )}
-      {!cards?.length && <Banner>{t('review.nothingYet')}</Banner>}
     </div>
   );
 }

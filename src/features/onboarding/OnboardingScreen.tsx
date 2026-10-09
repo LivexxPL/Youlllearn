@@ -23,7 +23,8 @@ const GOALS: DailyGoal[] = [5, 10, 20, 30];
 export function OnboardingScreen() {
   const { settings, update } = useSettings();
   const [step, setStep] = useState(0);
-  const [picked, setPicked] = useState<CourseId[]>(settings.courses.length ? settings.courses : []);
+  // First run starts with nothing selected; re-running onboarding keeps the current choice.
+  const [picked, setPicked] = useState<CourseId[]>(settings.onboarded ? settings.courses : []);
   const [goal, setGoal] = useState<DailyGoal>(settings.dailyGoalMin);
   const first = picked[0] ?? 'es';
   const status = useAudioStatus(getCourse(first).speechLang);

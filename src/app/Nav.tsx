@@ -7,6 +7,8 @@ import { brand } from '../config/brand';
 interface NavItem {
   path: string;
   labelKey: MessageKey;
+  /** Shorter label for the phone bottom bar, where six items share the width. */
+  shortKey?: MessageKey;
   icon: ReactNode;
   match: (seg0: string | undefined) => boolean;
 }
@@ -14,7 +16,7 @@ interface NavItem {
 const ITEMS: NavItem[] = [
   { path: '/', labelKey: 'nav.home', icon: <House size={22} />, match: (s) => !s },
   { path: '/learn', labelKey: 'nav.learn', icon: <BookOpen size={22} />, match: (s) => s === 'learn' || s === 'write' || s === 'kana' },
-  { path: '/audio', labelKey: 'nav.audio', icon: <Headphones size={22} />, match: (s) => s === 'audio' },
+  { path: '/audio', labelKey: 'nav.audio', shortKey: 'nav.audioShort', icon: <Headphones size={22} />, match: (s) => s === 'audio' },
   { path: '/review', labelKey: 'nav.review', icon: <RotateCcw size={22} />, match: (s) => s === 'review' },
   { path: '/progress', labelKey: 'nav.progress', icon: <ChartColumn size={22} />, match: (s) => s === 'progress' },
   { path: '/settings', labelKey: 'nav.settings', icon: <Settings size={22} />, match: (s) => s === 'settings' || s === 'about' },
@@ -43,7 +45,16 @@ export function Nav({ reviewBadge }: { reviewBadge?: number }) {
             }}
           >
             <span className="nav__icon">{item.icon}</span>
-            <span className="nav__label">{t(item.labelKey)}</span>
+            {item.shortKey ? (
+              <span className="nav__label">
+                <span className="nav__label-full">{t(item.labelKey)}</span>
+                <span className="nav__label-short" aria-hidden="true">
+                  {t(item.shortKey)}
+                </span>
+              </span>
+            ) : (
+              <span className="nav__label">{t(item.labelKey)}</span>
+            )}
             {item.path === '/review' && reviewBadge ? <span className="nav__badge">{reviewBadge > 99 ? '99+' : reviewBadge}</span> : null}
           </a>
         );

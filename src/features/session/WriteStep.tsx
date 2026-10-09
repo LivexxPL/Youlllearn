@@ -12,7 +12,7 @@ import type { SelfRating } from '../../engine/srs';
 import { useSpeaker } from '../../components/AudioButton';
 
 export function hintText(h: StrokeHint): string {
-  if (h.kind === 'count') return t('write.strokeCountDiff', { drawn: t('write.strokes', { count: h.drawn ?? 0 }), expected: t('write.strokes', { count: h.expected ?? 0 }) });
+  if (h.kind === 'count') return t('write.strokeCountDiff', { drawn: t('write.strokesAcc', { count: h.drawn ?? 0 }), expected: t('write.strokesAcc', { count: h.expected ?? 0 }) });
   if (h.kind === 'start') return t('write.strokeStartFar', { n: h.stroke ?? 0 });
   return t('write.strokeDirection', { n: h.stroke ?? 0 });
 }

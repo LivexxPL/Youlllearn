@@ -1985,7 +1985,8 @@
 }
 
 .settings-section .list-row .segmented {
-  flex: 1 1 260px;
+  flex: 1 1 auto;
+  min-width: min(100%, 260px);
 }
 
 .range {
@@ -2029,20 +2030,25 @@
   justify-content: flex-start;
 }
 
+.pad-tools .icon-btn {
+  width: 42px;
+  height: 42px;
+}
+
 .pad-sizes {
   display: flex;
   align-items: center;
-  gap: 2px;
-  margin-inline-start: var(--sp-2);
-  padding-inline-start: var(--sp-2);
+  gap: 0;
+  margin-inline-start: var(--sp-1);
+  padding-inline-start: var(--sp-1);
   border-inline-start: 1px solid var(--border);
 }
 
 .pad-size {
   display: grid;
   place-items: center;
-  width: 40px;
-  height: 40px;
+  width: 34px;
+  height: 42px;
   border: none;
   border-radius: 50%;
   background: transparent;
@@ -2120,6 +2126,12 @@
     flex-wrap: nowrap;
     position: sticky;
     top: var(--sp-4);
+  }
+
+  .pad-tools .icon-btn,
+  .pad-size {
+    width: 48px;
+    height: 48px;
   }
 
   .pad-sizes {
@@ -2408,8 +2420,9 @@ body.is-writing {
   font-size: var(--fs-xs);
 }
 
-@media (max-width: 420px) {
-  .notes__status {
-    display: none;
-  }
+
+.trail__min {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
 }

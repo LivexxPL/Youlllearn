@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Polyglot Quest</string>
+    <string name="title_activity_main">Polyglot Quest</string>
+    <string name="package_name">com.polyglotquest.app</string>
+    <string name="custom_url_scheme">com.polyglotquest.app</string>
+</resources>

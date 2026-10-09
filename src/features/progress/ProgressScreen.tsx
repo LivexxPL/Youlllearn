@@ -249,8 +249,8 @@ export default function ProgressScreen() {
 
           <section className="stack stack--s" aria-labelledby="ach-title">
             <h2 id="ach-title" className="section-title">
-              <span>
-                <Award size={20} style={{ verticalAlign: '-4px', marginRight: 6 }} />
+              <span className="row" style={{ gap: 'var(--sp-2)' }}>
+                <Award size={20} />
                 {t('progress.achievements')}
               </span>
               <span className="chip">

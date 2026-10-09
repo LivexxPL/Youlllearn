@@ -79,6 +79,7 @@ export function weekdayShort(dayIndex: number): string {
 
 /** "12 min" / "1 h 5 min" */
 export function formatDuration(seconds: number): string {
+  if (seconds < 60) return t('unit.secShort', { count: Math.max(0, Math.round(seconds)) });
   const min = Math.round(seconds / 60);
   if (min < 60) return t('unit.minShort', { count: min });
   const h = Math.floor(min / 60);

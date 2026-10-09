@@ -166,9 +166,9 @@ export function HomeScreen() {
   const recTitle = rec.kind === 'lesson' ? t('rec.lesson') : rec.kind === 'review' ? t('rec.review') : rec.kind === 'audio' ? t('rec.audio') : t('rec.repeatLesson');
   const recDesc =
     rec.kind === 'lesson' && rec.lesson
-      ? t('rec.lessonDesc', { title: rec.lesson.title, min: rec.lesson.minutes })
+      ? t('rec.lessonDesc', { title: rec.lesson.title })
       : rec.kind === 'review'
-        ? t('rec.reviewDesc', { count: Math.min(due, 15), min: rec.minutes })
+        ? t('rec.reviewDesc', { cards: t('unit.cards', { count: Math.min(due, 15) }) })
         : rec.kind === 'audio'
           ? t('rec.audioDesc')
           : t('rec.repeatLessonDesc');
@@ -225,7 +225,7 @@ export function HomeScreen() {
             <button type="button" className="card quick-card" onClick={() => navigate('/audio')}>
               <Headphones size={22} />
               <span className="card__title">{t('nav.audio')}</span>
-              <span className="subtle">{t('rec.audioDesc')}</span>
+              <span className="subtle">{t('aq.subtitle')}</span>
             </button>
           </div>
 
