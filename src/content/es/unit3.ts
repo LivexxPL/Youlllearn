@@ -525,6 +525,7 @@ export const unit3: Unit = {
         {
           type: 'choice',
           id: 'es.x.10-3',
+          optionsLang: 'pl',
           concept: 'es.g.time',
           prompt: 'Która to godzina: „son las seis menos cuarto”?',
           options: ['5:45', '6:15', '6:45'],

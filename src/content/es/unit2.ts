@@ -274,6 +274,7 @@ export const unit2: Unit = {
         {
           type: 'choice',
           id: 'es.x.05-3',
+          optionsLang: 'pl',
           concept: 'es.g.numbers',
           prompt: 'Ile to jest „quince”?',
           options: ['15', '50', '5'],
@@ -430,6 +431,7 @@ export const unit2: Unit = {
         {
           type: 'choice',
           id: 'es.x.06-4',
+          optionsLang: 'pl',
           concept: 'es.g.ser-plural',
           prompt: 'Co znaczy „¿Tienes hermanos?”',
           options: ['Masz rodzeństwo?', 'Masz rodziców?', 'Masz dzieci?'],

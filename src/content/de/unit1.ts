@@ -361,6 +361,7 @@ export const unit1: Unit = {
         {
           type: 'choice',
           id: 'de.x.03-1',
+          optionsLang: 'pl',
           concept: 'de.g.pronunciation',
           prompt: 'Jak przeczytasz „drei” (trzy)?',
           options: ['„draj”', '„drej”', '„dri”'],
@@ -370,6 +371,7 @@ export const unit1: Unit = {
         {
           type: 'choice',
           id: 'de.x.03-2',
+          optionsLang: 'pl',
           concept: 'de.g.pronunciation',
           prompt: 'Jak przeczytasz „vier” (cztery)?',
           options: ['„fir”', '„wier”', '„fajer”'],
@@ -387,6 +389,7 @@ export const unit1: Unit = {
         {
           type: 'choice',
           id: 'de.x.03-4',
+          optionsLang: 'pl',
           concept: 'de.g.pronunciation',
           prompt: 'Jak brzmi „ch” w słowie „ich”?',
           options: ['Miękko, podobnie do „ś”', 'Jak polskie „ch”', 'Jak „k”'],

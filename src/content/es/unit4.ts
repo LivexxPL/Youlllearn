@@ -403,6 +403,7 @@ export const unit4: Unit = {
         {
           type: 'choice',
           id: 'es.x.14-4',
+          optionsLang: 'pl',
           concept: 'es.g.ir-a',
           prompt: 'Co znaczy „¿Vas a viajar?”',
           options: ['Będziesz podróżować?', 'Podróżowałeś?', 'Podróżujesz codziennie?'],

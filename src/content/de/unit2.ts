@@ -237,6 +237,7 @@ export const unit2: Unit = {
         {
           type: 'choice',
           id: 'de.x.05-2',
+          optionsLang: 'pl',
           concept: 'de.g.numbers',
           prompt: 'Ile to jest „einundzwanzig”?',
           options: ['21', '12', '201'],

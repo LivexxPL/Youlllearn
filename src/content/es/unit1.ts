@@ -373,6 +373,7 @@ export const unit1: Unit = {
         {
           type: 'choice',
           id: 'es.x.03-1',
+          optionsLang: 'pl',
           concept: 'es.g.pronunciation',
           prompt: 'Jak przeczytasz słowo „gente”?',
           options: ['„chente”', '„gente” jak po polsku', '„dżente”'],
@@ -400,6 +401,7 @@ export const unit1: Unit = {
         {
           type: 'choice',
           id: 'es.x.03-4',
+          optionsLang: 'pl',
           concept: 'es.g.stress',
           prompt: 'Na którą sylabę pada akcent w słowie „adiós”?',
           options: ['a-DIÓS', 'A-diós'],

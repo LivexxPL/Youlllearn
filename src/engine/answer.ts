@@ -37,7 +37,8 @@ const PUNCT_RE = /[.,!?¿¡;:"'“”„«»‚‘’…()[\]{}–—\-/\\。、
 export function normalize(text: string, lang: AnswerLang): string {
   let s = text.normalize('NFC').trim();
   if (lang === 'ja') {
-    s = stripRuby(s).replace(/[\s　]+/g, '');
+    // \s also matches the ideographic space (U+3000).
+    s = stripRuby(s).replace(/\s+/g, '');
     s = s.replace(PUNCT_RE, '');
     return canonicalKana(s.toLowerCase());
   }

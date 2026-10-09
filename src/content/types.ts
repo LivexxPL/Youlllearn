@@ -135,6 +135,8 @@ export type AuthoredExercise =
       concept?: string;
       prompt: string;
       target?: string;
+      /** Language of the options; default: target language (Japanese: detected from kana). */
+      optionsLang?: 'pl' | 'target';
       options: string[];
       answer: number;
       explanation: string;

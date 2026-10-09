@@ -505,6 +505,7 @@ export const unit3: Unit = {
         {
           type: 'choice',
           id: 'de.x.10-1',
+          optionsLang: 'pl',
           concept: 'de.g.time',
           prompt: 'Która to godzina: „halb sieben”?',
           options: ['6:30', '7:30', '7:00'],
