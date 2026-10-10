@@ -43,12 +43,23 @@ minutes at stage 1 the playlist holds about 46 entries (≈ 13 s each).
   installed, the app says which voice it used instead.
 - **Two speakers.** Dialogues use voice slots A/B. With only one voice installed, slot B gets
   a lower pitch so the speakers stay distinguishable.
-- **Speeds.** Rates come from `rateFor(speed, stage)`: slow 0.62; normal 0.82 / 0.92 / 1.0 by
-  stage; natural 1.05. All are multiplied by the user's speech-rate setting (70–130%).
+- **Speeds.** Rates come from `rateFor(speed, stage)`: normal 0.82 / 0.92 / 1.0 by stage;
+  slow is two thirds of that stage's normal rate (0.54 / 0.61 / 0.66, at least 0.5), so the
+  slow button is always clearly slower; natural 1.05. All are multiplied by the user's
+  speech-rate setting (70–130%).
+- **Replacing speech.** Starting an utterance replaces the one in progress, for example
+  tapping the slow button while the normal version plays. Chrome applies
+  `speechSynthesis.cancel()` asynchronously, and its late "interrupted" notification can
+  remove an utterance queued straight after the cancel. The web engine therefore waits
+  120 ms after cancelling speech that is still playing. The replaced utterance is settled at
+  once, so its caller continues; the Android engine does not always report the end of a
+  flushed utterance.
 - **Failure handling.** A watchdog finishes utterances that never report an end, which some
-  engines do after backgrounding. Stopping playback settles every pending utterance. A
-  failed utterance becomes a short pause, so the hands-free playlist keeps going with
-  on-screen text. When no voice exists, listening exercises show the text and say so.
+  engines do after backgrounding. It allows 4 s for a network voice to start, then the
+  expected duration once speech has started (kanji count as several morae), so slow speech
+  is not cut short. Stopping playback settles every pending utterance. A failed utterance
+  becomes a short pause, so the hands-free playlist keeps going with on-screen text. When
+  no voice exists, listening exercises show the text and say so.
 - **Recorded audio (extension point).** `src/services/audio/recorded.ts` maps exact texts
   to files under `public/audio/<course>/`. Mapped recordings are played instead of TTS. The
   MVP ships none (see CONTENT_SOURCES.md for licensed candidates).

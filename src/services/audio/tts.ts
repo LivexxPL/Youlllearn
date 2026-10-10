@@ -68,17 +68,42 @@ export function rankVoices(voices: VoiceInfo[], lang: string): VoiceInfo[] {
     .map((x) => x.v);
 }
 
+/**
+ * Rough spoken duration of a text at a speech rate, in ms (used by the watchdog). Kanji are
+ * read as several morae, so a short Japanese string can take much longer than its length suggests.
+ */
+export function expectedDurationMs(text: string, rate: number): number {
+  let ms = 0;
+  for (const ch of text) {
+    if (/[\u4e00-\u9fff]/.test(ch)) ms += 300;
+    else if (/[\u3040-\u30ff]/.test(ch)) ms += 160;
+    else if (/[\p{L}\p{N}]/u.test(ch)) ms += 90;
+    else ms += 40;
+  }
+  return ms / Math.max(0.4, rate);
+}
+
+/** Network voices can take a while to start speaking. */
+const STARTUP_ALLOWANCE_MS = 4000;
+/** Pause after cancel() before the next utterance: Chrome applies cancel() asynchronously. */
+export const CANCEL_SETTLE_MS = 120;
+
 // ---------------------------------------------------------------------------
 
-class WebSpeechEngine implements TtsEngine {
+export class WebSpeechEngine implements TtsEngine {
   readonly kind = 'web' as const;
   private list: VoiceInfo[] = [];
   private raw: SpeechSynthesisVoice[] = [];
   private listeners = new Set<() => void>();
   private current: { resolve: () => void } | null = null;
 
+  constructor(
+    private readonly getSynth: () => SpeechSynthesis = () => window.speechSynthesis,
+    private readonly Utterance: typeof SpeechSynthesisUtterance = window.SpeechSynthesisUtterance,
+  ) {}
+
   async init() {
-    const synth = window.speechSynthesis;
+    const synth = this.getSynth();
     const load = () => {
       this.raw = synth.getVoices();
       this.list = this.raw.map((v) => ({ id: v.voiceURI, name: v.name, lang: v.lang, local: v.localService, isDefault: v.default }));
@@ -103,43 +128,69 @@ class WebSpeechEngine implements TtsEngine {
   }
 
   speak(text: string, opts: SpeakOptions): Promise<void> {
-    const synth = window.speechSynthesis;
+    const synth = this.getSynth();
+    // Replacing speech that is still playing (e.g. the slow button right after the normal one):
+    // Chrome applies cancel() asynchronously and can drop an utterance queued right after it
+    // as "interrupted", so the new one would never be heard.
+    const busy = synth.speaking || synth.pending;
     this.stop();
     return new Promise<void>((resolve, reject) => {
-      const u = new SpeechSynthesisUtterance(text);
+      const u = new this.Utterance(text);
       u.lang = opts.lang;
       u.rate = opts.rate;
       u.pitch = opts.pitch ?? 1;
       const voice = this.raw.find((v) => v.voiceURI === opts.voiceId);
       if (voice) u.voice = voice;
       let done = false;
-      const finish = () => {
-        if (done) return;
+      let watchdog: ReturnType<typeof setTimeout> | undefined;
+      let delayed: ReturnType<typeof setTimeout> | undefined;
+      const cleanup = () => {
         done = true;
         clearTimeout(watchdog);
-        this.current = null;
+        clearTimeout(delayed);
+        if (this.current === handle) this.current = null;
+      };
+      const finish = () => {
+        if (done) return;
+        cleanup();
         resolve();
       };
-      // Watchdog: some engines never fire `end` (e.g. after the tab was backgrounded).
-      const watchdog = setTimeout(finish, 1500 + (text.length * 160) / Math.max(0.4, opts.rate));
+      const handle = { resolve: finish };
+      // Watchdog: some engines never fire `end` (e.g. after the tab was backgrounded). It allows
+      // for a slow start (network voices), then for the expected duration once speech starts,
+      // so slow speech is never cut short.
+      const duration = expectedDurationMs(text, opts.rate);
+      const arm = (ms: number) => {
+        clearTimeout(watchdog);
+        watchdog = setTimeout(finish, ms);
+      };
+      u.onstart = () => {
+        if (!done) arm(1500 + duration * 1.5);
+      };
       u.onend = finish;
       u.onerror = (e) => {
+        if (done) return;
         if (e.error === 'interrupted' || e.error === 'canceled') finish();
         else {
-          done = true;
-          clearTimeout(watchdog);
+          cleanup();
           reject(new Error(e.error));
         }
       };
-      this.current = { resolve: finish };
-      synth.speak(u);
+      this.current = handle;
+      const start = () => {
+        if (done) return;
+        arm(STARTUP_ALLOWANCE_MS + 1500 + duration * 1.5);
+        synth.speak(u);
+      };
+      if (busy) delayed = setTimeout(start, CANCEL_SETTLE_MS);
+      else start();
     });
   }
 
   stop() {
     const cur = this.current;
     this.current = null;
-    window.speechSynthesis.cancel();
+    this.getSynth().cancel();
     cur?.resolve();
   }
 }

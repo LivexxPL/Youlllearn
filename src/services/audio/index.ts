@@ -35,11 +35,16 @@ export interface ResolvedVoice {
 
 type Listener = () => void;
 
-/** Base rates per stage and speed. Values were chosen to stay intelligible on common engines. */
+/**
+ * Base rates per stage and speed. Values were chosen to stay intelligible on common engines.
+ * Slow is always about two thirds of the normal rate of the same stage, so the slow button is
+ * clearly audible as slower (a fixed slow rate was barely slower than stage-1 normal speech).
+ */
 export function rateFor(speed: Speed, stage: ListeningStage, userMultiplier = 1): number {
+  const normal = stage === 1 ? 0.82 : stage === 2 ? 0.92 : 1;
   const base: Record<Speed, number> = {
-    slow: 0.62,
-    normal: stage === 1 ? 0.82 : stage === 2 ? 0.92 : 1,
+    slow: Math.max(0.5, normal * 0.66),
+    normal,
     natural: 1.05,
   };
   return Math.max(0.4, Math.min(1.6, base[speed] * userMultiplier));
@@ -141,6 +146,10 @@ class AudioService {
 
   async speakRaw(text: string, lang: string, rate: number, slot: VoiceSlot) {
     await this.init();
+    // The new utterance replaces any that is still playing (engines flush their queue). Settle
+    // the old ones so their callers continue and the playing counter cannot get stuck; the
+    // Android engine does not always report the end of a flushed utterance.
+    for (const settle of [...this.pending]) settle();
     const { voice } = this.resolve(lang, slot);
     // With a single voice, a slight pitch change helps tell two speakers apart.
     const sameVoiceForB = slot === 'b' && this.voicesFor(lang).length < 2;

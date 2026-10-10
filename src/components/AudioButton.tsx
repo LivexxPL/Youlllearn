@@ -48,11 +48,15 @@ export function AudioButton({
   const status = useAudioStatus(accent ?? getCourse(courseId).speechLang);
   const [active, setActive] = useState<Speed | null>(null);
   const played = useRef(false);
+  /** Latest playback; an older one that was replaced (e.g. normal → slow) must not reset the state. */
+  const playback = useRef(0);
   const key = typeof content === 'string' ? content : content.text;
 
   const play = async (speed: Speed) => {
+    const id = ++playback.current;
     setActive(speed);
     await speak(content, speed, { accent });
+    if (playback.current !== id) return;
     setActive(null);
     onPlayed?.();
   };
