@@ -6,6 +6,7 @@ import {
   Brain,
   Brush,
   Calendar,
+  Compass,
   Crown,
   Flame,
   Footprints,
@@ -23,6 +24,7 @@ import {
   Shield,
   Star,
   Sunrise,
+  TrendingUp,
   Trophy,
 } from 'lucide-react';
 import type { ReactNode } from 'react';
@@ -43,6 +45,8 @@ const ICONS: Record<string, ReactNode> = {
   footprints: <Footprints size={22} />,
   map: <MapIcon size={22} />,
   mountain: <Mountain size={22} />,
+  compass: <Compass size={22} />,
+  climb: <TrendingUp size={22} />,
   gem: <Gem size={22} />,
   treasure: <Crown size={22} />,
   anchor: <Anchor size={22} />,

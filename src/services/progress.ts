@@ -278,10 +278,12 @@ export async function aggregateStats(now = Date.now(), database: PolyglotDB = db
     getMeta<{ comeback?: boolean; perfect?: boolean }>('flags', {}, database),
   ]);
   const totals = Object.fromEntries(allCourses().map((c) => [c.id, c.lessons.length])) as Record<CourseId, number>;
+  const a2 = new Set(allCourses().flatMap((c) => c.units.filter((u) => u.level === 'A2').flatMap((u) => u.lessons.map((l) => l.id))));
   const perCourse = Object.fromEntries(COURSE_ORDER.map((c) => [c, 0])) as Record<CourseId, number>;
   for (const p of progress) perCourse[p.courseId] += 1;
   return {
     lessonsCompleted: progress.length,
+    levelA2Lessons: progress.filter((p) => a2.has(p.id)).length,
     completedLessonIds: new Set(progress.map((p) => p.id)),
     lessonsPerCourse: perCourse,
     courseLessonTotals: totals,
