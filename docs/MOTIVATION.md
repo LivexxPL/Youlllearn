@@ -75,9 +75,9 @@ with targets scaled to the daily goal.
 One per week from: 5 active days, N lessons, N listening minutes, N reviews, 15 speaking
 exercises, or goal × 5 active minutes.
 
-## Badges (24) and personal bests
+## Badges (26) and personal bests
 
-Milestones for lessons (1/10/25), words started (50/150), established words (25), streaks
+Milestones for lessons (1/10/25/50), the first lesson of level A2, words started (50/150), established words (25), streaks
 (3/7/30), active days (20), listening (30/120 min), reviews (100/500), speaking (25),
 hiragana and katakana completed, handwriting (50), all three courses tried, comeback,
 a perfect lesson, and completing each course. Locked badges show how to earn them.
@@ -91,8 +91,14 @@ The home screen suggests one activity (`src/engine/recommend.ts`):
 1. 15 or more reviews due (or 8 or more once today's goal is met) → a review session first.
 2. Goal met, and at least one lesson done → a review if anything is due, otherwise a relaxed
    5-minute Audio Quest session.
-3. Otherwise → the next lesson.
+3. Otherwise → the next lesson: the first unfinished lesson after the furthest completed one,
+   so a learner who started at a higher level keeps moving forward (gaps left behind are
+   suggested once nothing comes after them).
 4. Course finished → a review if anything is due, otherwise repeat a lesson.
+
+The learning path labels every unit with its level (Kana, A1, A2) and offers a shortcut at
+the start of each later level ("Zacznij od poziomu A2") for learners who already know the
+earlier material. The Progress screen shows completed lessons per level.
 
 The card always shows the estimated time (lesson minutes, or 18 s per review card).
 
