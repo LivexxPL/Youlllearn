@@ -119,10 +119,17 @@ export function StatTile({ value, label, note, icon }: { value: ReactNode; label
 export function Sheet({ open, onClose, title, children, labelledBy }: { open: boolean; onClose: () => void; title?: ReactNode; children: ReactNode; labelledBy?: string }) {
   const id = useId();
   const ref = useRef<HTMLDivElement>(null);
+  // Callers pass inline callbacks. Reading the latest one through a ref keeps the focus effect
+  // below from re-running on every parent render, which used to move focus out of a field
+  // being typed in (and every 5 s, when activity tracking refreshes live queries).
+  const onCloseRef = useRef(onClose);
+  useEffect(() => {
+    onCloseRef.current = onClose;
+  });
   const handler = useCallback(() => {
-    onClose();
+    onCloseRef.current();
     return true;
-  }, [onClose]);
+  }, []);
   useBackHandler(handler, open);
 
   useEffect(() => {
@@ -131,7 +138,7 @@ export function Sheet({ open, onClose, title, children, labelledBy }: { open: bo
     const el = ref.current;
     el?.querySelector<HTMLElement>('button, [href], input, select, textarea')?.focus();
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === 'Escape') onCloseRef.current();
       if (e.key === 'Tab' && el) {
         const focusables = el.querySelectorAll<HTMLElement>('button:not([disabled]), [href], input, select, textarea');
         if (!focusables.length) return;
@@ -151,7 +158,7 @@ export function Sheet({ open, onClose, title, children, labelledBy }: { open: bo
       document.removeEventListener('keydown', onKey);
       prev?.focus?.();
     };
-  }, [open, onClose]);
+  }, [open]);
 
   if (!open) return null;
   return (

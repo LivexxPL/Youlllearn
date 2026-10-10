@@ -143,7 +143,10 @@ test.describe('data safety', () => {
     expect(file.suggestedFilename()).toMatch(/\.json$/);
 
     await page.getByRole('button', { name: 'Usuń wszystkie postępy' }).click();
-    await page.locator('#reset-confirm').fill('USUŃ');
+    // Typed key by key: the field must keep focus while the screen re-renders.
+    await page.locator('#reset-confirm').click();
+    await page.keyboard.type('USUŃ', { delay: 30 });
+    await expect(page.locator('#reset-confirm')).toHaveValue('USUŃ');
     await page.getByRole('dialog').getByRole('button', { name: 'Usuń wszystkie postępy' }).click();
     await expect(page).toHaveURL(/#\/onboarding/);
 
