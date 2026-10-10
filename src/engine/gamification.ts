@@ -118,7 +118,6 @@ export function evaluateStreak(prev: StreakState, active: ReadonlySet<string>, t
     d = addDays(d, 1);
   }
   if (!s.lastEvaluated || s.lastEvaluated < yesterday) s.lastEvaluated = yesterday;
-  s.protectedDays = s.protectedDays.filter((x) => x >= addDays(today, -120));
 
   const todayActive = active.has(today);
   let current = 0;
@@ -127,6 +126,9 @@ export function evaluateStreak(prev: StreakState, active: ReadonlySet<string>, t
     if (active.has(cursor)) current += 1;
     cursor = addDays(cursor, -1);
   }
+  // Forget old shield days, but never those inside the current run (a long streak would break).
+  const keepFrom = addDays(today, -120) < cursor ? addDays(today, -120) : cursor;
+  s.protectedDays = s.protectedDays.filter((x) => x >= keepFrom);
   s.best = Math.max(s.best, current);
   return { state: s, current, todayActive, usedShields, earnedShields, broken };
 }

@@ -67,6 +67,19 @@ describe('forgiving streak', () => {
     expect(r.state.shields).toBeGreaterThanOrEqual(1);
   });
 
+  it('keeps a shield day that lies more than 120 days back inside a long streak', () => {
+    // 200 days of activity with one missed day 150 days ago, bridged by a shield.
+    const start = addDays(today, -199);
+    const missed = addDays(today, -150);
+    const active = new Set(days(start, 200).filter((d) => d !== missed));
+    const r = evaluateStreak(initialStreak, active, today);
+    expect(r.usedShields).toEqual([missed]);
+    expect(r.current).toBe(199);
+    // Evaluating again on later days must not cut the streak at the old shield day.
+    const next = evaluateStreak(r.state, new Set([...active, addDays(today, 1)]), addDays(today, 1));
+    expect(next.current).toBe(200);
+  });
+
   it('resets the streak (but nothing else) when no shield is left', () => {
     const active = new Set([...days('2026-03-10', 2), ...days('2026-03-15', 6)]);
     const r = evaluateStreak(initialStreak, active, today);

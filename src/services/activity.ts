@@ -13,6 +13,12 @@ export type ActivityKind = 'lesson' | 'review' | 'audio' | 'writing';
 
 const IDLE_MS = 60_000;
 const FLUSH_EVERY = 5;
+/**
+ * Browsers throttle timers in the background (about once a minute), e.g. during hands-free
+ * listening with the screen off. Each tick therefore counts the time that really passed, but
+ * at most this many seconds, so a suspended device does not add hours at once.
+ */
+const MAX_TICK_SEC = 65;
 
 class ActivityTracker {
   private kind: ActivityKind | null = null;
@@ -21,12 +27,14 @@ class ActivityTracker {
   private listening = false;
   private pending = { activeSec: 0, listeningSec: 0, openSec: 0 };
   private ticks = 0;
+  private lastTick = 0;
   private timer: ReturnType<typeof setInterval> | null = null;
   private listeners = new Set<(sessionActive: number) => void>();
   private sessionActive = 0;
 
   install() {
     if (this.timer || typeof window === 'undefined') return;
+    this.lastTick = Date.now();
     this.timer = setInterval(() => this.tick(), 1000);
     document.addEventListener('visibilitychange', () => {
       if (document.visibilityState === 'hidden') this.flush();
@@ -66,17 +74,21 @@ class ActivityTracker {
   }
 
   private tick() {
+    const now = Date.now();
+    const sec = Math.min(MAX_TICK_SEC, Math.max(0, Math.round((now - this.lastTick) / 1000)));
+    this.lastTick = now;
+    if (!sec) return;
     const visible = document.visibilityState === 'visible';
-    if (visible) this.pending.openSec += 1;
+    if (visible) this.pending.openSec += sec;
     if (this.kind) {
-      const interacting = visible && Date.now() - this.lastInteraction < IDLE_MS;
+      const interacting = visible && now - this.lastInteraction < IDLE_MS;
       // Listening counts even with the screen off/in background (pocket mode).
       if (interacting || this.listening) {
-        this.pending.activeSec += 1;
-        this.sessionActive += 1;
+        this.pending.activeSec += sec;
+        this.sessionActive += sec;
         this.listeners.forEach((l) => l(this.sessionActive));
       }
-      if (this.listening) this.pending.listeningSec += 1;
+      if (this.listening) this.pending.listeningSec += sec;
     }
     this.ticks += 1;
     if (this.ticks % FLUSH_EVERY === 0) this.flush();

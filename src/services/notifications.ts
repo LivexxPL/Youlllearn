@@ -52,7 +52,18 @@ export function reminderMessage(dayIndex: number): string {
 let webTimer: ReturnType<typeof setInterval> | null = null;
 let lastWebFire = '';
 
-export async function rescheduleReminders(settings: Settings): Promise<void> {
+let queue: Promise<void> = Promise.resolve();
+
+/**
+ * Re-schedules reminders for the given settings. Calls run one after another: concurrent
+ * cancel/schedule rounds on Android could otherwise leave a removed weekday scheduled.
+ */
+export function rescheduleReminders(settings: Settings): Promise<void> {
+  queue = queue.then(() => applyReminders(settings)).catch((e: unknown) => console.warn('reminders', e));
+  return queue;
+}
+
+async function applyReminders(settings: Settings): Promise<void> {
   const { enabled, time, days } = settings.reminders;
   if (isNative()) {
     const pending = await LocalNotifications.getPending();
