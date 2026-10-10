@@ -139,6 +139,7 @@ describe('achievements', () => {
   const base: AggregateStats = {
     lessonsCompleted: 0,
     levelA2Lessons: 0,
+    levelB1Lessons: 0,
     completedLessonIds: new Set(),
     lessonsPerCourse: { es: 0, de: 0, ja: 0 },
     courseLessonTotals: { es: 14, de: 15, ja: 18 },
@@ -162,9 +163,11 @@ describe('achievements', () => {
     expect(newlyUnlocked(stats, new Set(ids))).toEqual([]);
   });
 
-  it('reward long journeys and the step to A2', () => {
+  it('reward long journeys and the steps to A2 and B1', () => {
     const ids = newlyUnlocked({ ...base, lessonsCompleted: 50, levelA2Lessons: 1 }, new Set()).map((a) => a.id);
     expect(ids).toEqual(expect.arrayContaining(['lessons-25', 'lessons-50', 'level-a2']));
+    expect(ids).not.toContain('level-b1');
+    expect(newlyUnlocked({ ...base, levelB1Lessons: 1 }, new Set()).map((a) => a.id)).toContain('level-b1');
     expect(newlyUnlocked({ ...base, lessonsCompleted: 49 }, new Set()).map((a) => a.id)).not.toContain('lessons-50');
   });
 

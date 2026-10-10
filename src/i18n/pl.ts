@@ -532,6 +532,8 @@ export const pl = {
   'ach.lessons-50.desc': 'Ukończ 50 lekcji',
   'ach.level-a2': 'Wyższy poziom',
   'ach.level-a2.desc': 'Ukończ pierwszą lekcję poziomu A2',
+  'ach.level-b1': 'Próg samodzielności',
+  'ach.level-b1.desc': 'Ukończ pierwszą lekcję poziomu B1',
   'ach.words-50': 'Zbieracz słów',
   'ach.words-50.desc': 'Rozpocznij naukę 50 słów i zwrotów',
   'ach.words-150': 'Skarbiec słów',

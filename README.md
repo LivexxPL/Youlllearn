@@ -59,7 +59,7 @@ an Android app (Capacitor). No account, no ads, no paid APIs: progress stays on 
 
 **Motivation** ([docs/MOTIVATION.md](docs/MOTIVATION.md))
 - Daily goal of 5/10/20/30 active minutes (active time is counted separately from app-open
-  time), daily quests, weekly challenge, XP and levels, 26 badges, personal bests.
+  time), daily quests, weekly challenge, XP and levels, 27 badges, personal bests.
 - Forgiving streak with shields. A broken streak never resets learning progress.
 - Configurable reminders: real local notifications on Android; in-app only on the web, and
   the app says so.

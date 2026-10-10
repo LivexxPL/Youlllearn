@@ -75,9 +75,9 @@ with targets scaled to the daily goal.
 One per week from: 5 active days, N lessons, N listening minutes, N reviews, 15 speaking
 exercises, or goal × 5 active minutes.
 
-## Badges (26) and personal bests
+## Badges (27) and personal bests
 
-Milestones for lessons (1/10/25/50), the first lesson of level A2, words started (50/150), established words (25), streaks
+Milestones for lessons (1/10/25/50), the first lessons of levels A2 (A2 or A2+) and B1, words started (50/150), established words (25), streaks
 (3/7/30), active days (20), listening (30/120 min), reviews (100/500), speaking (25),
 hiragana and katakana completed, handwriting (50), all three courses tried, comeback,
 a perfect lesson, and completing each course. Locked badges show how to earn them.

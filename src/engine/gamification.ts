@@ -271,7 +271,10 @@ export function weeklyValue(stats: Map<string, DailyStats>, anyDayOfWeek: string
 export interface AggregateStats {
   lessonsCompleted: number;
   /** Completed lessons that belong to units labelled A2. */
+  /** Completed lessons of units labelled A2 or A2+. */
   levelA2Lessons: number;
+  /** Completed lessons of units labelled B1. */
+  levelB1Lessons: number;
   completedLessonIds: ReadonlySet<string>;
   lessonsPerCourse: Record<CourseId, number>;
   courseLessonTotals: Record<CourseId, number>;
@@ -302,6 +305,7 @@ export const ACHIEVEMENTS: AchievementDef[] = [
   { id: 'lessons-25', icon: 'mountain', check: (s) => s.lessonsCompleted >= 25 },
   { id: 'lessons-50', icon: 'compass', check: (s) => s.lessonsCompleted >= 50 },
   { id: 'level-a2', icon: 'climb', check: (s) => s.levelA2Lessons >= 1 },
+  { id: 'level-b1', icon: 'rocket', check: (s) => s.levelB1Lessons >= 1 },
   { id: 'words-50', icon: 'gem', check: (s) => s.itemsStarted >= 50 },
   { id: 'words-150', icon: 'treasure', check: (s) => s.itemsStarted >= 150 },
   { id: 'established-25', icon: 'anchor', check: (s) => s.established >= 25 },
