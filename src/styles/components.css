@@ -42,17 +42,13 @@
 .btn--primary {
   --btn-bg: var(--primary);
   --btn-fg: var(--on-primary);
-  --btn-shadow: 0 3px 0 var(--primary-strong);
-}
-
-[data-theme='dark'] .btn--primary {
-  --btn-shadow: 0 3px 0 #0d7d70;
+  --btn-shadow: 0 3px 0 var(--primary-edge);
 }
 
 .btn--accent {
   --btn-bg: var(--accent-bright);
-  --btn-fg: #2b1a00;
-  --btn-shadow: 0 3px 0 #b45309;
+  --btn-fg: var(--on-accent);
+  --btn-shadow: 0 3px 0 var(--accent-edge);
 }
 
 .btn--success {
@@ -157,18 +153,21 @@
 }
 
 .card--hero {
-  background: linear-gradient(145deg, var(--primary) 0%, #0e5f73 100%);
-  color: #fff;
+  background: var(--hero-bg);
+  color: var(--on-hero);
   border: none;
   box-shadow: var(--shadow-2);
 }
 
-[data-theme='dark'] .card--hero {
-  background: linear-gradient(145deg, #134e4a 0%, #13394a 100%);
+.card--hero .muted {
+  color: var(--on-hero-muted);
 }
 
-.card--hero .muted {
-  color: rgb(255 255 255 / 0.82);
+/* Pastel hero cards carry dark text: their main button takes the primary colour to stand out. */
+[data-hero='light'] .card--hero .btn--accent {
+  --btn-bg: var(--primary);
+  --btn-fg: var(--on-primary);
+  --btn-shadow: 0 3px 0 var(--primary-edge);
 }
 
 .card__title {
@@ -667,7 +666,7 @@ a.list-row:active {
 
 .toast--reward {
   background: var(--accent-bright);
-  color: #2b1a00;
+  color: var(--on-accent);
 }
 
 .toast--success {

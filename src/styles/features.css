@@ -353,18 +353,15 @@
   border-radius: 50%;
   background: var(--primary);
   color: var(--on-primary);
-  box-shadow: 0 4px 0 var(--primary-strong);
+  box-shadow: 0 4px 0 var(--primary-edge);
   transition: transform var(--dur-fast) var(--ease-out);
   touch-action: manipulation;
 }
 
-[data-theme='dark'] .audio-btn {
-  box-shadow: 0 4px 0 #0d7d70;
-}
 
 .audio-btn:active:not(:disabled) {
   transform: translateY(3px);
-  box-shadow: 0 1px 0 var(--primary-strong);
+  box-shadow: 0 1px 0 var(--primary-edge);
 }
 
 .audio-btn:disabled {
@@ -1073,12 +1070,12 @@
 }
 
 .hero__chip {
-  background: rgb(255 255 255 / 0.16);
-  color: #fff;
+  background: var(--hero-overlay);
+  color: var(--on-hero);
 }
 
 .hero__eyebrow {
-  color: rgb(255 255 255 / 0.82);
+  color: var(--on-hero-muted);
 }
 
 .hero__title {
@@ -1094,30 +1091,30 @@
 
 .hero__why,
 .hero__muted {
-  color: rgb(255 255 255 / 0.84);
+  color: var(--on-hero-muted);
 }
 
 .hero__resume {
-  color: #fff;
+  color: var(--on-hero);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 
 .card--hero .segmented {
-  background: rgb(255 255 255 / 0.14);
+  background: var(--hero-overlay);
 }
 
 .card--hero .segmented button {
-  color: rgb(255 255 255 / 0.9);
+  color: var(--on-hero);
 }
 
 .card--hero .segmented button[aria-pressed='true'] {
   background: #fff;
-  color: #0b4f49;
+  color: var(--hero-pressed-fg);
 }
 
 .card--hero .switch {
-  background: rgb(255 255 255 / 0.28);
+  background: var(--hero-overlay-strong);
 }
 
 .card--hero .switch[aria-checked='true'] {
@@ -1126,9 +1123,9 @@
 
 .card--hero .btn--outline {
   --btn-bg: transparent;
-  --btn-border: rgb(255 255 255 / 0.6);
+  --btn-border: var(--hero-outline);
   --btn-shadow: none;
-  color: #fff;
+  color: var(--on-hero);
 }
 
 .mode-grid {
@@ -1671,11 +1668,11 @@
   width: 64px;
   height: 64px;
   border-radius: 20px;
-  background: linear-gradient(145deg, var(--accent-bright), #d97706);
-  color: #2b1a00;
+  background: linear-gradient(145deg, var(--accent-bright), var(--accent-deep));
+  color: var(--on-accent);
   font-size: var(--fs-2xl);
   font-weight: 800;
-  box-shadow: 0 4px 0 #b45309;
+  box-shadow: 0 4px 0 var(--accent-edge);
   transform: rotate(-4deg);
 }
 
@@ -2538,4 +2535,126 @@ body.is-writing {
 
 .install-banner__cta {
   align-self: flex-start;
+}
+
+/* Colour palette picker (Settings → Wygląd) */
+.palette-row {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.palette-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(132px, 1fr));
+  gap: var(--sp-3);
+}
+
+.palette-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  padding: var(--sp-2);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  cursor: pointer;
+  transition:
+    border-color var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+
+.palette-card:active {
+  transform: scale(0.97);
+}
+
+.palette-card.is-selected {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px var(--primary-soft);
+}
+
+.palette-card:has(input:focus-visible) {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.palette-card__preview {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px;
+  border-radius: var(--radius-s);
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+.palette-card__hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  padding: 6px;
+  border-radius: 8px;
+}
+
+.palette-card__line {
+  width: 55%;
+  height: 5px;
+  border-radius: 3px;
+  opacity: 0.85;
+}
+
+.palette-card__cta {
+  height: 10px;
+  border-radius: 5px;
+}
+
+.palette-card__row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 18px;
+  padding: 0 6px;
+  border: 1px solid;
+  border-radius: 6px;
+}
+
+.palette-card__pill {
+  width: 40%;
+  height: 6px;
+  border-radius: 3px;
+}
+
+.palette-card__dot {
+  width: 8px;
+  height: 8px;
+  margin-left: auto;
+  border-radius: 50%;
+}
+
+.palette-card__name {
+  font-size: var(--fs-s);
+  font-weight: 650;
+  line-height: 1.25;
+}
+
+.palette-card__check {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  padding: 2px;
+  box-sizing: content-box;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--on-primary);
+}
+
+.palette-surprise {
+  align-self: flex-start;
+}
+
+@media (prefers-contrast: more) {
+  body {
+    background-image: none;
+  }
 }

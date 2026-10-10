@@ -16,6 +16,7 @@ import { navigate } from '../../app/router';
 import { recognitionAvailable } from '../../services/audio/speech';
 import { brand } from '../../config/brand';
 import { InstallSection } from './InstallCard';
+import { PalettePicker } from './PalettePicker';
 
 function Section({ icon, title, children }: { icon: ReactNode; title: string; children: ReactNode }) {
   return (
@@ -184,6 +185,7 @@ export default function SettingsScreen() {
       </Section>
 
       <Section icon={<Palette size={20} />} title={t('set.appearance')}>
+        <PalettePicker />
         <div className="list-row" style={{ flexWrap: 'wrap' }}>
           <div className="list-row__body list-row__title">{t('set.theme')}</div>
           <Segmented<ThemePref>

@@ -5,6 +5,7 @@
 import Dexie, { type EntityTable } from 'dexie';
 import type { CourseId } from '../content/types';
 import type { Card } from '../engine/srs';
+import type { PaletteId } from '../config/palettes';
 
 export type ThemePref = 'system' | 'light' | 'dark';
 export type MotionPref = 'system' | 'reduce' | 'full';
@@ -29,6 +30,10 @@ export interface Settings {
   courses: CourseId[];
   dailyGoalMin: DailyGoal;
   theme: ThemePref;
+  /** Colour palette (src/config/palettes.ts). */
+  palette: PaletteId;
+  /** Show the palette's background motif. */
+  bgPattern: boolean;
   textScale: number;
   motion: MotionPref;
   sounds: boolean;

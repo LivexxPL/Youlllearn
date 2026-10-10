@@ -1,8 +1,9 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { createContext, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useState, type ReactNode } from 'react';
 import { SystemBars, SystemBarsStyle } from '@capacitor/core';
 import { db, type Settings } from '../services/db';
 import { isNative, prefersDark, prefersReducedMotion } from '../services/platform';
-import { brand } from '../config/brand';
+import { applyAppearance, type Appearance } from '../services/appearance';
+import { PALETTE_IDS } from '../config/palettes';
 import { setUiLang } from '../i18n';
 import { COURSE_IDS } from '../content/types';
 
@@ -19,6 +20,8 @@ export function defaultSettings(now = Date.now()): Settings {
     courses: ['es'],
     dailyGoalMin: 10,
     theme: 'system',
+    palette: 'classic',
+    bgPattern: true,
     textScale: 1,
     motion: 'system',
     sounds: true,
@@ -50,8 +53,21 @@ export function migrateSettings(stored: Partial<Settings> | undefined): Settings
   if (!COURSE_IDS.includes(merged.activeCourse)) merged.activeCourse = 'es';
   merged.courses = (merged.courses ?? []).filter((c) => COURSE_IDS.includes(c));
   if (merged.courses.length === 0) merged.courses = [merged.activeCourse];
+  // A backup from a newer version may name a palette this version does not have.
+  if (!PALETTE_IDS.includes(merged.palette)) merged.palette = 'classic';
   merged.schema = SETTINGS_SCHEMA;
   return merged;
+}
+
+/** What the display looks like for these settings and the system preferences. */
+export function appearanceFor(s: Settings, systemDark = prefersDark(), systemReduce = prefersReducedMotion()): Appearance {
+  return {
+    theme: s.theme === 'system' ? (systemDark ? 'dark' : 'light') : s.theme,
+    motion: s.motion === 'system' ? (systemReduce ? 'reduce' : 'full') : s.motion,
+    textScale: s.textScale,
+    palette: s.palette,
+    pattern: s.bgPattern,
+  };
 }
 
 export async function loadSettings(): Promise<Settings> {
@@ -89,20 +105,17 @@ export function SettingsProvider({ initial, children }: { initial: Settings; chi
     };
   }, []);
 
-  const resolvedTheme: 'light' | 'dark' = settings.theme === 'system' ? (systemDark ? 'dark' : 'light') : settings.theme;
-  const resolvedMotion = settings.motion === 'system' ? (systemReduce ? 'reduce' : 'full') : settings.motion;
+  const appearance = appearanceFor(settings, systemDark, systemReduce);
+  const resolvedTheme = appearance.theme;
+  const { motion, textScale, palette, pattern } = appearance;
 
-  useEffect(() => {
-    const root = document.documentElement;
-    root.dataset.theme = resolvedTheme;
-    root.dataset.motion = resolvedMotion;
-    root.style.setProperty('--text-scale', String(settings.textScale));
-    const color = resolvedTheme === 'dark' ? brand.darkBackgroundColor : brand.backgroundColor;
-    document.querySelectorAll('meta[name="theme-color"]').forEach((m) => m.setAttribute('content', color));
+  // Before paint, so that switching palettes never shows a frame in the old colours.
+  useLayoutEffect(() => {
+    applyAppearance({ theme: resolvedTheme, motion, textScale, palette, pattern });
     if (isNative()) {
       SystemBars.setStyle({ style: resolvedTheme === 'dark' ? SystemBarsStyle.Dark : SystemBarsStyle.Light }).catch(() => {});
     }
-  }, [resolvedTheme, resolvedMotion, settings.textScale]);
+  }, [resolvedTheme, motion, textScale, palette, pattern]);
 
   useEffect(() => {
     setUiLang(settings.uiLang);

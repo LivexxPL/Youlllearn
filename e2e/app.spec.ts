@@ -278,3 +278,47 @@ test.describe('getting the app', () => {
     await expect(banner).toBeHidden();
   });
 });
+
+test.describe('appearance', () => {
+  // Requests must reach the page (not a service worker cache) so that the app code can be held back.
+  test.use({ serviceWorkers: 'block' });
+
+  test('pastel palettes apply at once, and the saved one is painted before the app loads', async ({ page }) => {
+    await onboard(page, { courses: ['es'] });
+    await page.goto('./#/settings');
+    const root = page.locator('html');
+    const primary = () => page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue('--primary').trim());
+    const bodyPattern = () => page.evaluate(() => getComputedStyle(document.body).backgroundImage);
+
+    await page.getByTestId('palette-strawberry').click();
+    await expect(root).toHaveAttribute('data-palette', 'strawberry');
+    expect(await primary()).toBe('#bd2459');
+    expect(await bodyPattern()).toMatch(/^url\("data:image\/svg\+xml/);
+    await page.getByRole('switch', { name: 'Wzorek w tle' }).click();
+    await expect.poll(bodyPattern).toBe('none');
+
+    // index.html restores the colours on its own, before the app code runs.
+    const appCode = /\/(assets\/index-[^/]*\.js|src\/main\.tsx)$/;
+    await page.route(appCode, (route) => route.abort());
+    await page.reload();
+    await expect(root).toHaveAttribute('data-palette', 'strawberry');
+    expect(await primary()).toBe('#bd2459');
+    await expect(page.getByTestId('palette-picker')).toHaveCount(0);
+    await page.unroute(appCode);
+
+    await page.reload();
+    await page.getByTestId('palette-classic').click();
+    await expect(root).toHaveAttribute('data-palette', 'classic');
+    expect(await primary()).toBe('#0f766e');
+    await expect(page.getByRole('switch', { name: 'Wzorek w tle' })).toHaveCount(0);
+  });
+
+  test('"surprise me" picks another pastel palette', async ({ page }) => {
+    await onboard(page, { courses: ['es'] });
+    await page.goto('./#/settings');
+    await page.getByRole('button', { name: 'Wylosuj motyw' }).click();
+    await expect(page.locator('html')).not.toHaveAttribute('data-palette', 'classic');
+    await expect(page.getByText(/Motyw „.+” włączony/)).toBeVisible();
+    await expect(page.getByTestId('palette-picker').locator('input:checked')).toHaveCount(1);
+  });
+});

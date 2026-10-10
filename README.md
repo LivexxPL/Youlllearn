@@ -74,6 +74,13 @@ an Android app (Capacitor). No account, no ads, no paid APIs: progress stays on 
 - Adaptive layouts: bottom tabs on phones, navigation rail on tablets, sidebar and
   multi-column dashboards on desktop; keyboard shortcuts.
 
+**Look and feel**
+- Classic theme plus seven pastel colour themes (strawberry, mint, lavender, peach, lemon,
+  sky, candy floss), each in light and dark mode, with an optional background motif (hearts,
+  leaves, sparkles, bubbles, seeds, clouds, confetti) and a "surprise me" button. Every
+  palette is contrast-tested (text ≥ 4.5:1, body text ≥ 7:1).
+- Text size, reduced motion, sounds and haptics are settings too.
+
 **Data and privacy**
 - IndexedDB storage, JSON export/import (Android: share sheet), reset with confirmation.
 - Offline-first: all content is bundled. Nothing is sent anywhere, except speech

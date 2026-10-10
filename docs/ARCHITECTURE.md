@@ -43,7 +43,7 @@ android/        Capacitor Android project
 
 | Table | Content |
 | --- | --- |
-| `settings` | One record: courses, goal, theme, audio, romaji/furigana, stylus, reminders… |
+| `settings` | One record: courses, goal, theme and colour palette, audio, romaji/furigana, stylus, reminders… |
 | `cards` | SRS state per item/sentence/concept (docs/SRS_ALGORITHM.md) |
 | `lessonProgress` | Completion, best/last accuracy per lesson |
 | `dailyStats` | Per day: active seconds, listening seconds, open seconds, exercises, correct, new items, reviews, lessons, speaking, writing, audio sessions, XP, best run, courses |
@@ -76,6 +76,14 @@ rail; ≥ 1100 px a labelled sidebar and two-column dashboards. Content width is
 - **Tokens** (`styles/tokens.css`): spacing on a 4 px grid, radii, type scale, 48/56 px touch
   targets, and colour roles for light and dark themes. Theme, text size (4 steps, on top of
   system font scaling) and motion (system / reduced / full) are user settings.
+- **Colour palettes** (`config/palettes.ts`): the classic palette lives in `tokens.css`; seven
+  pastel palettes (strawberry, mint, lavender, peach, lemon, sky, candy floss), each with a
+  light and a dark version, override the colour tokens as inline custom properties on
+  `<html>` (`services/appearance.ts`), with an optional background motif (an SVG tile).
+  `palettes.test.ts` checks every palette and mode: body text ≥ 7:1, secondary text, links,
+  buttons, hero text and status colours ≥ 4.5:1, chart bars ≥ 3:1, and that the classic data
+  matches `tokens.css`. The applied colours are cached in localStorage, and a small inline
+  script in `index.html` paints them before the app loads (no flash of the default theme).
 - **Components** (`components/ui.tsx`, `components.css`): buttons with a tactile pressed
   state, cards, chips, progress bar and ring, switch, segmented control, list rows, bottom
   sheet (focus trap, Escape/back to close), banners, toasts.

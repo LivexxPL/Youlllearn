@@ -8,7 +8,8 @@ import './styles/components.css';
 import './styles/layout.css';
 import './styles/features.css';
 import { App } from './app/App';
-import { SettingsProvider, defaultSettings, loadSettings } from './state/settings';
+import { SettingsProvider, appearanceFor, defaultSettings, loadSettings } from './state/settings';
+import { applyAppearance } from './services/appearance';
 import { setUiLang } from './i18n';
 import { audio } from './services/audio';
 import { activity } from './services/activity';
@@ -55,6 +56,7 @@ async function bootstrap() {
     storageError = true;
   }
   setUiLang(settings.uiLang);
+  applyAppearance(appearanceFor(settings));
   installViewportHeight();
   installNativeHandlers();
   activity.install();

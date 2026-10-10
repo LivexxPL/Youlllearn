@@ -65,6 +65,8 @@ export default defineConfig(({ mode }) => {
       environment: 'node',
       include: ['src/**/*.test.ts'],
       setupFiles: ['src/test/setup.ts'],
+      // tokens.css is read as text by src/config/palettes.test.ts (other CSS stays stubbed).
+      css: { include: [/tokens\.css/] },
     },
   };
 });

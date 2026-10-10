@@ -96,7 +96,7 @@
   padding: 0 5px;
   border-radius: var(--radius-pill);
   background: var(--accent-bright);
-  color: #2b1a00;
+  color: var(--on-accent);
   font-size: 0.68rem;
   line-height: 18px;
   font-weight: 800;
