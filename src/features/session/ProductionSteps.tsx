@@ -44,7 +44,7 @@ export function TypeStep({ ex, courseId, locked, onResult }: StepProps<ExerciseO
 
   const result = useCallback(
     (given: string) => {
-      const r = checkAnswer(given, ex.accepted, { lang: courseId, lexicon: lexiconFor(courseId) });
+      const r = checkAnswer(given, ex.accepted, { lang: courseId, lexicon: lexiconFor(courseId), romaji: ex.romaji ? [ex.romaji] : undefined });
       onResult({
         correct: r.verdict !== 'wrong',
         almost: r.verdict === 'almost',

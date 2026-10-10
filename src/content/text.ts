@@ -31,7 +31,8 @@ export function acceptedTargets(courseId: CourseId, x: Item | Sentence): string[
   if (courseId === 'ja') {
     for (const t of [...out]) out.push(rubyToKana(t));
     const reading = 'reading' in x ? x.reading : undefined;
-    if (reading) out.push(reading);
+    // Kanji list several readings (よん・し); each one is a correct answer on its own.
+    if (reading) out.push(reading, ...reading.split('・'));
   }
   if ('kind' in x && x.text.includes(' / ')) out.push(...x.text.split(' / '));
   return unique(out.map((s) => s.trim()).filter(Boolean));

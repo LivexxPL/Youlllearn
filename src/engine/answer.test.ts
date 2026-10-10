@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { buildLexicon, checkAnswer, editDistance, normalize } from './answer';
+import { buildLexicon, checkAnswer, editDistance, normalize, particlesAsSpoken } from './answer';
+import { acceptedTargets } from '../content/text';
+import type { Item, Sentence } from '../content/types';
 
 describe('normalize', () => {
   it('drops punctuation, case and extra spaces', () => {
@@ -88,6 +90,40 @@ describe('checkAnswer — Japanese', () => {
     expect(r.verdict).toBe('almost');
     expect(r.issues).toContain('script');
   });
+  it('accepts every reading of a kanji with several readings', () => {
+    const four: Item = { id: 'ja.kj.yon', kind: 'kanji', text: '四', reading: 'よん・し', pl: 'cztery' };
+    const accepted = acceptedTargets('ja', four);
+    for (const typed of ['四', 'よん', 'yon', 'し', 'shi']) {
+      expect(checkAnswer(typed, accepted, { lang: 'ja' }).verdict, typed).toBe('correct');
+    }
+    expect(checkAnswer('yonshi', accepted, { lang: 'ja' }).verdict).toBe('correct'); // the joined form stays harmless
+    expect(checkAnswer('go', accepted, { lang: 'ja' }).verdict).toBe('wrong');
+  });
+
+  it('accepts particles typed as pronounced (wa, o, e) and the authored romaji', () => {
+    const s: Sentence = { id: 'ja.s.x', text: 'わたしは がっこうへ いきます。', pl: 'Idę do szkoły.', romaji: 'watashi wa gakkou e ikimasu.' };
+    const accepted = acceptedTargets('ja', s);
+    expect(checkAnswer('watashi wa gakkou e ikimasu', accepted, { lang: 'ja' }).verdict).toBe('correct');
+    expect(checkAnswer('watashi ha gakkou he ikimasu', accepted, { lang: 'ja' }).verdict).toBe('correct');
+    expect(checkAnswer('わたしは がっこうへ いきます', accepted, { lang: 'ja' }).verdict).toBe('correct');
+    // The kana answer still has to use the particle spelling.
+    expect(checkAnswer('わたしわ がっこうえ いきます', accepted, { lang: 'ja' }).verdict).toBe('wrong');
+    expect(checkAnswer('Watashi wa gakkou e ikimasu.', accepted, { lang: 'ja', romaji: [s.romaji!] }).verdict).toBe('correct');
+    expect(checkAnswer('konnichiwa', ['こんにちは'], { lang: 'ja' }).verdict).toBe('correct');
+    expect(checkAnswer('konbanwa', ['こんばんは'], { lang: 'ja' }).verdict).toBe('correct');
+    // Strictness about long vowels is unchanged.
+    expect(checkAnswer('ojisan', ['おじいさん'], { lang: 'ja' }).verdict).toBe('wrong');
+    expect(particlesAsSpoken('ほんを よみます。')).toBe('ほんお よみます。');
+    expect(particlesAsSpoken('はは')).toBe('はわ'); // literal kana is accepted as well (see checkAnswer)
+    expect(checkAnswer('haha', ['はは'], { lang: 'ja' }).verdict).toBe('correct');
+  });
+
+  it("keeps n' to separate ん from a following vowel or y", () => {
+    expect(checkAnswer("hon'ya", ['ほんや'], { lang: 'ja' }).verdict).toBe('correct');
+    expect(checkAnswer('hon’ya', ['ほんや'], { lang: 'ja' }).verdict).toBe('correct');
+    expect(checkAnswer("zenbu de sen'en desu", ['ぜんぶで せんえんです'], { lang: 'ja' }).verdict).toBe('correct');
+  });
+
   it('ignores spaces and punctuation', () => {
     expect(checkAnswer('わたしはがくせいです', ['わたしは がくせいです。'], { lang: 'ja' }).verdict).toBe('correct');
   });

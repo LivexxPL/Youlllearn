@@ -8,7 +8,7 @@
  *    accents on a phone keyboard, one-letter typos in long words),
  *  - always say *what* was off, so "almost" answers still teach something.
  */
-import { canonicalKana, looksLikeRomaji, stripRuby, toHiragana, kataToHira, isKatakana } from './kana';
+import { canonicalKana, looksLikeRomaji, rubyToKana, stripRuby, toHiragana, kataToHira, isKatakana } from './kana';
 
 export type AnswerLang = 'es' | 'de' | 'ja' | 'pl';
 export type Verdict = 'correct' | 'almost' | 'wrong';
@@ -23,6 +23,8 @@ export interface CheckOptions {
    * not an accepted answer is a real mistake, never a "typo" (pero ≠ perro).
    */
   lexicon?: ReadonlySet<string>;
+  /** Japanese: authored romaji of the expected answer, accepted as typed (e.g. "watashi wa gakusei desu"). */
+  romaji?: readonly string[];
 }
 
 export interface CheckResult {
@@ -112,7 +114,7 @@ export function checkAnswer(input: string, accepted: readonly string[], opts: Ch
   const inp = normalize(input, lang);
   if (!inp) return { verdict: 'wrong', expected: first, issues: ['empty'] };
 
-  if (lang === 'ja') return checkJapanese(input, inp, accepted);
+  if (lang === 'ja') return checkJapanese(input, inp, accepted, opts.romaji ?? []);
 
   let best: CheckResult = { verdict: 'wrong', expected: first, issues: [] };
   for (const candidate of accepted) {
@@ -156,16 +158,39 @@ function compareSequence(inp: string, exp: string, opts: CheckOptions): Omit<Che
   return issues.size === 0 ? { verdict: 'correct', issues: [] } : { verdict: 'almost', issues: [...issues] };
 }
 
-function checkJapanese(raw: string, inp: string, accepted: readonly string[]): CheckResult {
+/** Romaji compared loosely: case, spaces, punctuation, hyphens and apostrophes do not matter. */
+function normalizeRomaji(text: string): string {
+  return text.normalize('NFC').toLowerCase().replace(/[\s.,!?;:'’"\-…]+/g, '');
+}
+
+/**
+ * Kana as pronounced: the particles は, を and へ at the end of a chunk are said "wa", "o" and
+ * "e", which is how learners type them in romaji (watashi wa, konnichiwa, gakkou e).
+ */
+export function particlesAsSpoken(kana: string): string {
+  const spoken: Record<string, string> = { は: 'わ', を: 'お', へ: 'え' };
+  return kana.replace(/[はをへ](?=[\s、。！？!?.,]|$)/g, (p) => spoken[p]);
+}
+
+function checkJapanese(raw: string, inp: string, accepted: readonly string[], romajiAnswers: readonly string[]): CheckResult {
   const first = accepted[0] ?? '';
   const romaji = looksLikeRomaji(raw);
-  const inputKana = romaji ? canonicalKana(toHiragana(raw.replace(/[\s.,!?'’-]+/g, (m) => (m.includes('-') ? '-' : '')))) : inp;
+  // Apostrophes are kept: n' separates ん from a following vowel or y (hon'ya = ほんや).
+  const inputKana = romaji ? canonicalKana(toHiragana(raw.replace(/’/g, "'").replace(/[\s.,!?-]+/g, (m) => (m.includes('-') ? '-' : '')))) : inp;
   const rawHasKatakana = [...raw].some((ch) => isKatakana(ch) && ch !== 'ー');
+
+  if (romaji) {
+    const typed = normalizeRomaji(raw);
+    if (typed && romajiAnswers.some((r) => normalizeRomaji(r) === typed)) {
+      return { verdict: 'correct', expected: first, issues: ['romaji'] };
+    }
+  }
 
   for (const candidate of accepted) {
     const exp = normalize(candidate, 'ja');
     if (!exp) continue;
-    if (inputKana === exp) {
+    const spoken = romaji ? normalize(particlesAsSpoken(rubyToKana(candidate)), 'ja') : exp;
+    if (inputKana === exp || inputKana === spoken) {
       const issues: AnswerIssue[] = romaji ? ['romaji'] : [];
       // Hiragana typed for a katakana word: understandable, but the script matters.
       const expectedKatakana = [...stripRuby(candidate)].some((ch) => isKatakana(ch) && ch !== 'ー');
