@@ -186,7 +186,7 @@ export const stories: Story[] = [
       { text: 'Es regnet und es ist sehr kalt.', pl: 'Pada deszcz i jest bardzo zimno.' },
       { text: 'Ich ziehe einen Pullover und eine Jacke an und gehe zur Ärztin.', pl: 'Zakładam sweter oraz kurtkę i idę do lekarki.' },
       {
-        text: 'Die Ärztin sagt: „Sie haben eine Grippe. Bleiben Sie zu Hause und schlafen Sie viel!”',
+        text: 'Die Ärztin sagt: „Sie haben eine Grippe. Bleiben Sie zu Hause und schlafen Sie viel!“',
         pl: 'Lekarka mówi: „Ma pan grypę. Proszę zostać w domu i dużo spać!”',
       },
       { text: 'Jetzt bin ich im Bett und trinke viel Tee.', pl: 'Teraz leżę w łóżku i piję dużo herbaty.' },

@@ -308,7 +308,7 @@ export const unitPast: Unit = {
           note: 'Nieregularny: przeszłość よかったです, przeczenie よくないです (od starszej formy よい).',
         }),
         p('tanoshii', 'たのしい', 'przyjemny; fajny', {
-          plAlts: ['przyjemny', 'fajny', 'zabawny', 'udany'],
+          plAlts: ['przyjemny', 'fajny', 'udany'],
           note: 'O tym, co sami przeżywamy: たのしかったです — było fajnie.',
         }),
         p('shizuka', 'しずか', 'cichy; spokojny', { plAlts: ['cichy', 'spokojny'], note: 'Przymiotnik na な: しずかな まち — ciche miasto.' }),
@@ -458,7 +458,7 @@ export const unitPast: Unit = {
           K: { name: 'Kuba', voice: 'b', accent: 'ja-JP' },
         },
         lines: [
-          { speaker: 'N', text: 'クバさん、しゅうまつは どうでしたか。', pl: 'Kuba, jak minął weekend?', romaji: 'kuba-san, shuumatsu wa dou deshita ka.' },
+          { speaker: 'N', text: 'クバさん、しゅうまつは どうでしたか。', pl: 'Kubo, jak minął weekend?', romaji: 'kuba-san, shuumatsu wa dou deshita ka.' },
           {
             speaker: 'K',
             text: 'かまくらへ いきました。とても たのしかったです。',
@@ -648,7 +648,7 @@ export const unitPast: Unit = {
               ['?', 'いくつ', 'なんにん', 'なんまい', 'なんぼん'],
             ],
           },
-          contrast: 'Polski też ma coś podobnego: „dwie sztuki”, „trzy butelki”, a nawet osobne liczebniki dla grup ludzi („dwoje dzieci”, „troje przyjaciół”). Po japońsku licznik jest jednak obowiązkowy i zrasta się z liczbą, czasem zmieniając jej brzmienie: いっぽん, さんぼん, ろっぽん.',
+          contrast: 'Polski też ma coś podobnego: „dwie sztuki”, „trzy butelki”, a nawet osobne liczebniki dla grup ludzi („dwoje dzieci”, „troje przyjaciół”). Po japońsku licznik jest jednak obowiązkowy i zrasta się z liczbą, czasem zmieniając brzmienie: いっぽん, さんぼん, ろっぽん.',
         },
         {
           id: 'ja.g.quantity',
@@ -657,7 +657,7 @@ export const unitPast: Unit = {
             'Liczba z licznikiem stoi zwykle **po** rzeczowniku i jego partykule, tuż przed czasownikiem: [[りんごを みっつ ください。]] — Poproszę trzy jabłka. [[ともだちが ふたり きました。]] — Przyszło dwoje przyjaciół.',
             'Po samej liczbie nie dodajemy partykuły: ✗ みっつを → ✓ りんごを みっつ.',
             'Tak samo mówimy o połowie: [[ケーキを はんぶん たべました。]] — Zjadłem / zjadłam połowę ciasta.',
-            'Przy minutach (分) brzmienie też się zmienia: [[ごふん]], ale [[いっぷん]], [[さんぷん]], [[じゅっぷん]]. Wpół do: [[{三|さん}じ{半|はん}]] — 3:30.',
+            'Przy minutach (分) brzmienie też się zmienia: [[ごふん]], ale [[いっぷん]], [[さんぷん]], [[じゅっぷん]]. Pół godziny: [[{三|さん}じ{半|はん}]] — 3:30 (po polsku „wpół do czwartej”).',
           ],
           contrast: 'Po polsku liczba stoi przed rzeczownikiem: „trzy jabłka”. Po japońsku zwykle za nim — jak w zamówieniu „jabłka, trzy sztuki”: りんごを みっつ.',
         },

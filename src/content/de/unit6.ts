@@ -644,7 +644,7 @@ export const unit6: Unit = {
           id: 'de.g.dass-wenn',
           title: 'Dass i wenn — czasownik na koniec',
           body: [
-            'Spójniki [[dass]] (że) i [[wenn]] (jeśli, gdy) działają tak jak znany Ci już [[weil]] (bo): odmieniony czasownik idzie **na sam koniec** zdania podrzędnego, a przed spójnikiem stawiamy **przecinek**: [[Ich glaube, dass er krank ist.]]',
+            'Spójniki [[dass]] (że) i [[wenn]] (jeśli, gdy) działają tak jak znany ci już [[weil]] (bo): odmieniony czasownik idzie **na sam koniec** zdania podrzędnego, a przed spójnikiem stawiamy **przecinek**: [[Ich glaube, dass er krank ist.]]',
             'Opinie: [[Ich finde, dass…]] (uważam, że…), [[Ich glaube, dass…]] (myślę, że…), [[Ich denke, dass…]] (myślę, że…). W mowie dass bywa pomijane — wtedy szyk zostaje zwykły: [[Ich glaube, er ist krank.]]',
             'Czasownik rozdzielny łączy się na końcu w jedno słowo: [[Ich weiß, dass du früh aufstehst.]] Czasownik modalny stoi za bezokolicznikiem, na samym końcu: [[Ich lerne Deutsch, weil ich in Wien arbeiten will.]]',
           ],
@@ -886,7 +886,7 @@ export const unit6: Unit = {
           pl: 'Mój dziadek jest starszy od mojej babci.',
           options: ['älter', 'alter', 'am ältesten'],
           answer: 'älter',
-          explanation: 'Alt → älter: krótkie przymiotniki z a, o, u dostają w stopniu wyższym przegłos.',
+          explanation: 'Alt → älter: krótkie przymiotniki z a, o, u często dostają w stopniu wyższym przegłos.',
         },
         {
           type: 'gap',

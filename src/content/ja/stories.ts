@@ -191,7 +191,7 @@ export const stories: Story[] = [
     lines: [
       { text: 'あした ケンさんは ともだち {三人|さんにん}と こうえんへ いきます。', pl: 'Jutro Ken idzie z trojgiem przyjaciół do parku.', romaji: 'ashita ken-san wa tomodachi sannin to kouen e ikimasu.' },
       { speaker: 'Ken', text: 'すみません、りんごを {四|よっ}つ ください。', pl: 'Przepraszam, poproszę cztery jabłka.', romaji: 'sumimasen, ringo o yottsu kudasai.' },
-      { speaker: 'Sprzedawczyni', text: 'はい。りんごは {一|ひと}つ {百|ひゃく}{円|えん}です。', pl: 'Proszę. Jabłko kosztuje sto jenów za sztukę.', romaji: 'hai. ringo wa hitotsu hyaku en desu.' },
+      { speaker: 'Sprzedawczyni', text: 'はい。りんごは {一|ひと}つ {百|ひゃく}{円|えん}です。', pl: 'Proszę. Jabłka kosztują sto jenów za sztukę.', romaji: 'hai. ringo wa hitotsu hyaku en desu.' },
       { speaker: 'Ken', text: 'じゃあ、おちゃも {四本|よんほん} ください。', pl: 'To poproszę też cztery butelki herbaty.', romaji: 'jaa, ocha mo yonhon kudasai.' },
       { speaker: 'Sprzedawczyni', text: 'ぜんぶで {千二百|せんにひゃく}{円|えん}です。', pl: 'Razem tysiąc dwieście jenów.', romaji: 'zenbu de sen nihyaku en desu.' },
       { speaker: 'Ken', text: 'あ、パンも {二|ふた}つ ください。', pl: 'A, poproszę jeszcze dwie bułki.', romaji: 'a, pan mo futatsu kudasai.' },
@@ -230,13 +230,13 @@ export const stories: Story[] = [
     context: 'Ola i Kenta zwiedzają muzeum w Tokio.',
     lines: [
       { speaker: 'Przewodniczka', text: 'すみません、ここに {名前|なまえ}を {書|か}いて ください。', pl: 'Przepraszam, proszę tu wpisać swoje imię.', romaji: 'sumimasen, koko ni namae o kaite kudasai.' },
-      { speaker: 'Ola', text: 'はい。しゃしんを とっても いいですか。', pl: 'Dobrze. Czy można robić zdjęcia?', romaji: 'hai. shashin o tottemo ii desu ka.' },
+      { speaker: 'Ola', text: 'はい。しゃしんを とっても いいですか。', pl: 'Dobrze. Czy można robić zdjęcia?', romaji: 'hai. shashin o totte mo ii desu ka.' },
       { speaker: 'Przewodniczka', text: 'いいえ、{中|なか}で しゃしんを とらないで ください。', pl: 'Nie, w środku proszę nie robić zdjęć.', romaji: 'iie, naka de shashin o toranaide kudasai.' },
       { speaker: 'Przewodniczka', text: 'これにも さわらないで ください。', pl: 'Tego też proszę nie dotykać.', romaji: 'kore ni mo sawaranaide kudasai.' },
       { speaker: 'Kenta', text: 'ちょっと {休|やす}みたいです。', pl: 'Chciałbym trochę odpocząć.', romaji: 'chotto yasumitai desu.' },
       { speaker: 'Ola', text: 'じゃあ、カフェで コーヒーを {飲|の}みませんか。', pl: 'To może napijemy się kawy w kawiarni?', romaji: 'jaa, kafe de koohii o nomimasen ka.' },
       { speaker: 'Kenta', text: 'いいですね。{行|い}きましょう。', pl: 'Świetnie. Chodźmy.', romaji: 'ii desu ne. ikimashou.' },
-      { text: '{二人|ふたり}は カフェで ケーキを {食|た}べて います。', pl: 'Teraz oboje jedzą w kawiarni ciasto.', romaji: 'futari wa kafe de keeki o tabete imasu.' },
+      { text: '{二人|ふたり}は カフェで ケーキを {食|た}べています。', pl: 'Teraz oboje jedzą w kawiarni ciasto.', romaji: 'futari wa kafe de keeki o tabete imasu.' },
     ],
     questions: [
       {

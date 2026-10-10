@@ -295,8 +295,8 @@ export const unit6: Unit = {
           body: [
             'Czasowniki na -er i -ir mają w indefinido wspólne końcówki: **-í, -iste, -ió, -imos, -isteis, -ieron**. [[comí]] — jadłem / jadłam, [[salió]] — wyszedł / wyszła.',
             'Tak jak przy -ar, kreska w formach „ja” i „on / ona” jest obowiązkowa: [[comí]], [[comió]]. Forma „my” czasowników na -ir jest taka sama jak w czasie teraźniejszym: [[salimos]] — wychodzimy albo wyszliśmy.',
-            'Gdy przed końcówką stoi samogłoska, i zmienia się w y: leer → [[leyó]], [[leyeron]]. Krótkie ver nie ma kresek: [[vi]], [[viste]], [[vio]].',
-            'Wymiana samogłoski z czasu teraźniejszego (vuelvo) w indefinido znika: [[volví]], [[volvió]].',
+            'Gdy przed końcówką stoi samogłoska, w formach „on / ona” i „oni” i zmienia się w y: leer → [[leyó]], [[leyeron]]. Krótkie ver nie ma kresek: [[vi]], [[viste]], [[vio]].',
+            'W czasownikach na -er wymiana samogłoski z czasu teraźniejszego (vuelvo) w indefinido znika: [[volví]], [[volvió]]. Czasowniki na -ir z wymianą mają w formach „on / ona” i „oni” e → i albo o → u: [[dormí]], ale [[durmió]].',
           ],
           table: {
             head: ['Osoba', 'comer', 'salir', 'conocer'],
@@ -457,7 +457,6 @@ export const unit6: Unit = {
         noun('la-montana', 'la montaña', 'góra; góry', 'f', { plAlts: ['góry', 'góra'], note: 'Ir a la montaña — jechać w góry (w liczbie pojedynczej!).' }),
         word('agosto', 'agosto', 'sierpień', {
           pos: 'noun',
-          plAlts: ['w sierpniu'],
           note: 'Miesiące piszemy małą literą i zwykle bez rodzajnika: en agosto — w sierpniu.',
         }),
         phrase('que-tal-el-viaje', '¿qué tal el viaje?', 'jak minęła podróż?', {

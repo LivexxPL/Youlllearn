@@ -101,7 +101,7 @@ export const unit5: Unit = {
           body: [
             'Zaimek zwrotny stoi **tuż za odmienionym czasownikiem**: [[Ich dusche mich morgens.]] Gdy zdanie zaczyna się od czegoś innego (inwersja), podmiot przechodzi za czasownik, a zaimek zwrotny stoi **zaraz za podmiotem**: [[Morgens dusche ich mich.]]',
             'Przedrostek czasownika rozdzielnego i tak idzie na koniec: [[Dann ziehe ich mich an.]] Z czasownikiem modalnym zaimek zostaje z przodu, a bezokolicznik ucieka na koniec: [[Ich muss mich beeilen.]]',
-            'Plan dnia opowiadamy słowami [[zuerst]] (najpierw), [[dann]] / [[danach]] (potem) oraz [[morgens]], [[mittags]], [[abends]]. Każde z nich zajmuje 1. miejsce, więc czasownik stoi tuż za nim: [[Danach frühstücke ich.]]',
+            'Plan dnia opowiadamy słowami [[zuerst]] (najpierw), [[dann]] / [[danach]] (potem) oraz [[morgens]], [[mittags]], [[abends]]. Każde z nich na początku zdania zajmuje 1. miejsce, więc czasownik stoi tuż za nim: [[Danach frühstücke ich.]]',
           ],
           table: {
             head: ['1. miejsce', '2. miejsce: czasownik', 'Dalej'],

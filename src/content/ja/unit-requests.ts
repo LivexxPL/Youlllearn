@@ -206,7 +206,7 @@ export const unitRequests: Unit = {
       dialogue: {
         id: 'ja.d.22',
         title: 'Na lekcji japońskiego',
-        context: 'Michał uczy się japońskiego w szkole językowej. Prowadzi pani Mori.',
+        context: 'Michał uczy się japońskiego w szkole językowej. Lekcję prowadzi pani Mori.',
         speakers: {
           T: { name: 'Pani Mori', voice: 'a', accent: 'ja-JP' },
           M: { name: 'Michał', voice: 'b', accent: 'ja-JP' },
@@ -540,7 +540,6 @@ export const unitRequests: Unit = {
         p('issho', 'いっしょに', 'razem', { plAlts: ['wspólnie'], note: 'いっしょに 行きませんか — może pójdziemy razem?' }),
         p('jikan', '{時間|じかん}', 'czas', {
           reading: 'じかん',
-          plAlts: ['wolny czas'],
           note: '時間が あります — mam czas. Także „godzina” jako długość: 一時間 (いちじかん).',
         }),
         p('tai', '〜たいです', 'chcę …', {
@@ -712,7 +711,7 @@ export const unitRequests: Unit = {
           {
             speaker: 'Y',
             text: 'カロリナさん、{土曜日|どようび}は {時間|じかん}が ありますか。',
-            pl: 'Karolina, masz czas w sobotę?',
+            pl: 'Karolino, masz czas w sobotę?',
             romaji: 'karorina-san, doyoubi wa jikan ga arimasu ka.',
           },
           { speaker: 'K', text: 'はい、ひまです。', pl: 'Tak, mam wolne.', romaji: 'hai, hima desu.' },
