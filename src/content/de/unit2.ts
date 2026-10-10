@@ -320,7 +320,7 @@ export const unit2: Unit = {
         noun('die-schwester', 'die Schwester', 'siostra', 'f', { plural: 'die Schwestern' }),
         noun('der-sohn', 'der Sohn', 'syn', 'm'),
         noun('die-tochter', 'die Tochter', 'córka', 'f'),
-        noun('die-oma', 'die Oma', 'babcia', 'f', { plAlts: ['babcia'], note: 'Oficjalnie: die Großmutter.' }),
+        noun('die-oma', 'die Oma', 'babcia', 'f', { note: 'Oficjalnie: die Großmutter.' }),
         noun('der-opa', 'der Opa', 'dziadek', 'm', { note: 'Oficjalnie: der Großvater.' }),
         word('mein', 'mein / meine', 'mój / moja', { pos: 'pron', tts: 'mein, meine', alts: ['mein', 'meine'], plAlts: ['mój', 'moja', 'moje'] }),
         word('dein', 'dein / deine', 'twój / twoja', { pos: 'pron', tts: 'dein, deine', alts: ['dein', 'deine'], plAlts: ['twój', 'twoja', 'twoje'] }),

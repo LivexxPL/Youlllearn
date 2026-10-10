@@ -98,6 +98,31 @@ describe.each(courses.map((c) => [c.id, c] as [string, Course]))('course %s', (_
     }
   });
 
+  it('introduces every word and sentence only once', () => {
+    // Kana characters may share a reading with particles (か, の); everything else must be unique,
+    // otherwise one word would get two independent review cards.
+    const items = new Map<string, string>();
+    for (const item of course.items.values()) {
+      if (item.kind === 'kana') continue;
+      const key = `${item.kind === 'kanji' ? 'kanji' : 'word'}:${normalize(stripRuby(item.text), course.id)}`;
+      expect(items.get(key), `${item.id} repeats ${items.get(key)}`).toBeUndefined();
+      items.set(key, item.id);
+    }
+    const sentences = new Map<string, string>();
+    for (const s of course.sentences.values()) {
+      const key = normalize(stripRuby(s.text), course.id);
+      expect(sentences.get(key), `${s.id} repeats ${sentences.get(key)}`).toBeUndefined();
+      sentences.set(key, s.id);
+    }
+  });
+
+  it('keeps alternative answers distinct from the main one', () => {
+    for (const x of [...course.items.values(), ...course.sentences.values()]) {
+      expect(x.plAlts ?? [], `${x.id} plAlts`).not.toContain(x.pl);
+      expect(x.alts ?? [], `${x.id} alts`).not.toContain(x.text);
+    }
+  });
+
   it('contains no placeholder text', () => {
     for (const str of allStrings(course.units)) {
       expect(CODE_MARKER.test(str) || FILLER.test(str), str).toBe(false);
@@ -143,6 +168,31 @@ describe('Japanese specifics', () => {
       expect((k.on?.length ?? 0) + (k.kun?.length ?? 0), k.id).toBeGreaterThan(0);
       expect(k.words?.length, k.id).toBeGreaterThan(0);
     }
+  });
+
+  it('writes kanji with furigana and only after they are taught', () => {
+    // 曜 only appears inside weekday names (月曜日 …), which are learned as whole words.
+    const allowed = new Set(['曜']);
+    const taught = new Set<string>();
+    const problems: string[] = [];
+    const scan = (where: string, text: string) => {
+      const outside = text.replace(/\{[^}|]+\|[^}]+\}/g, '');
+      if (/[\u4e00-\u9fff]/.test(outside)) problems.push(`${where}: kanji without furigana in ${text}`);
+      for (const m of text.matchAll(/\{([^}|]+)\|[^}]+\}/g)) {
+        for (const ch of m[1]) {
+          if (/[\u4e00-\u9fff]/.test(ch) && !taught.has(ch) && !allowed.has(ch)) problems.push(`${where}: ${ch} is not taught yet (${m[0]})`);
+        }
+      }
+    };
+    for (const lesson of ja.lessons) {
+      for (const item of lesson.items) if (item.kind === 'kanji') taught.add(item.text);
+      for (const item of lesson.items) if (item.kind !== 'kanji') scan(item.id, item.text);
+      for (const s of lesson.sentences) scan(s.id, s.text);
+      for (const g of lesson.grammar ?? []) for (const ex of g.examples ?? []) scan(ex.id, ex.text);
+      for (const line of lesson.dialogue?.lines ?? []) scan(`${lesson.id} dialogue`, line.text);
+      for (const st of ja.stories.filter((x) => x.afterLesson === lesson.id)) for (const line of st.lines) scan(st.id, line.text);
+    }
+    expect(problems).toEqual([]);
   });
 
   it('covers the full basic hiragana and katakana', () => {

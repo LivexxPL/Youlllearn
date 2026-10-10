@@ -30,7 +30,7 @@ export const unit3: Unit = {
         phrase('todos-los-dias', 'todos los días', 'codziennie', { plAlts: ['każdego dnia'] }),
       ],
       sentences: [
-        s('07-1', 'Hablo un poco de español.', 'Mówię trochę po hiszpańsku.'),
+        s('07-1', 'Hablas español muy bien.', 'Mówisz po hiszpańsku bardzo dobrze.', { plAlts: ['Bardzo dobrze mówisz po hiszpańsku.'] }),
         s('07-2', 'Estudio inglés y español.', 'Uczę się angielskiego i hiszpańskiego.'),
         s('07-3', '¿Trabajas o estudias?', 'Pracujesz czy studiujesz?', { plAlts: ['Pracujesz czy się uczysz?'] }),
         s('07-4', 'Mi padre trabaja mucho.', 'Mój tata dużo pracuje.', { plAlts: ['Mój ojciec dużo pracuje.'] }),
