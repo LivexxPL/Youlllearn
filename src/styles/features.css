@@ -2513,6 +2513,19 @@ body.is-writing {
   align-self: flex-start;
 }
 
+.install__qr {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.install__qr img {
+  flex: none;
+  border-radius: var(--radius-s);
+  /* QR codes need a light quiet zone, also in the dark theme. */
+  background: #fff;
+}
+
 .install__done {
   gap: var(--sp-2);
   color: var(--success);

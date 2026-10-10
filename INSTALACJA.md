@@ -7,6 +7,12 @@ Są dwa sposoby. Oba są darmowe, bez konta i bez reklam. Postępy zostają na T
 | **Aplikacja w przeglądarce** (najprostszy) | **https://livexxpl.github.io/Youlllearn/** | Każdy telefon, tablet i komputer: Android, iPhone, iPad, Windows, Mac |
 | **Aplikacja na Androida (APK)** | **https://github.com/LivexxPL/Youlllearn/releases/download/android-latest/polyglot-quest.apk** | Telefony i tablety z Androidem |
 
+Czytasz to na komputerze? Zeskanuj kod aparatem telefonu:
+
+| Aplikacja w przeglądarce | Aplikacja na Androida (APK) |
+| :-: | :-: |
+| <img src="docs/qr/web.svg" width="160" alt="Kod QR z linkiem do aplikacji w przeglądarce"> | <img src="docs/qr/apk.svg" width="160" alt="Kod QR z linkiem do pliku APK"> |
+
 Obie wersje są budowane automatycznie przy każdej zmianie w projekcie. Aplikacja webowa
 trafia do sieci dopiero wtedy, gdy przejdzie wszystkie testy.
 
@@ -82,3 +88,11 @@ npm run dev        # http://localhost:5173
 ```
 
 Więcej: [README.md](README.md) i [docs/ANDROID_BUILD.md](docs/ANDROID_BUILD.md).
+
+Kody QR (`docs/qr/*.svg`, używane też w aplikacji) wygenerowano biblioteką
+[qrcode](https://www.npmjs.com/package/qrcode) (MIT). Po zmianie linków wygeneruj je ponownie:
+
+```bash
+npx qrcode@1.5.4 -t svg -e M -q 4 -d 0f141a -l ffffff -o docs/qr/web.svg "https://livexxpl.github.io/Youlllearn/"
+npx qrcode@1.5.4 -t svg -e M -q 4 -d 0f141a -l ffffff -o docs/qr/apk.svg "https://github.com/LivexxPL/Youlllearn/releases/download/android-latest/polyglot-quest.apk"
+```

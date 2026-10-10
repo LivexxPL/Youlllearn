@@ -10,6 +10,8 @@ import { isNative } from '../../services/platform';
 import { canPromptInstall, installPlatform, isStandalone, onInstallChange, promptInstall } from '../../services/pwa';
 import { getMeta, setMeta } from '../../services/db';
 import { useToast } from '../../components/Toasts';
+// Same QR code as in INSTALACJA.md (regenerate both when brand.links.web changes).
+import qrWeb from '../../../docs/qr/web.svg';
 
 const DISMISS_KEY = 'installHintDismissed';
 
@@ -81,6 +83,13 @@ export function InstallSection() {
             <Download size={18} /> {t('install.apk')}
           </a>
         </>
+      )}
+      {platform === 'other' && (
+        // On a computer: open the same app on the phone without typing the address.
+        <div className="install__qr">
+          <img src={qrWeb} width={136} height={136} alt={t('install.qrAlt')} data-testid="install-qr" />
+          <p className="subtle">{t('install.qr')}</p>
+        </div>
       )}
       <button type="button" className="btn btn--ghost" onClick={() => void share()}>
         <Share2 size={18} /> {t('install.share')}

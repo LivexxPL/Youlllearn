@@ -9,6 +9,10 @@ an Android app (Capacitor). No account, no ads, no paid APIs: progress stays on 
 > **[aplikację na Androida (APK)](https://github.com/LivexxPL/Youlllearn/releases/download/android-latest/polyglot-quest.apk)**.
 > Instrukcja krok po kroku: **[INSTALACJA.md](INSTALACJA.md)**.
 
+| Aplikacja w przeglądarce | Aplikacja na Androida (APK) |
+| :-: | :-: |
+| <img src="docs/qr/web.svg" width="140" alt="Kod QR z linkiem do aplikacji w przeglądarce"> | <img src="docs/qr/apk.svg" width="140" alt="Kod QR z linkiem do pliku APK"> |
+
 <p>
   <img src="docs/screenshots/home.jpg" width="200" alt="Home screen: next lesson, time estimate, daily quests">
   <img src="docs/screenshots/lesson-choice.jpg" width="200" alt="Listening exercise in a lesson">

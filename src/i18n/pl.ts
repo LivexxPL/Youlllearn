@@ -652,6 +652,8 @@ export const pl = {
   'install.other': 'W Chrome lub Edge użyj ikony instalacji na końcu paska adresu albo menu ⋮ → „Zainstaluj aplikację”. Na telefonie: menu przeglądarki → „Dodaj do ekranu głównego”.',
   'install.android': 'Wolisz zwykłą aplikację na Androida? Pobierz plik APK i otwórz go — przypomnienia działają w niej także przy zamkniętej aplikacji.',
   'install.apk': 'Pobierz aplikację na Androida (APK)',
+  'install.qr': 'Chcesz ćwiczyć na telefonie? Zeskanuj ten kod aparatem telefonu — otworzy się ta sama aplikacja.',
+  'install.qrAlt': 'Kod QR z linkiem do aplikacji',
   'install.share': 'Udostępnij link do aplikacji',
   'install.linkCopied': 'Skopiowano link do aplikacji.',
   'install.dismiss': 'Nie teraz',

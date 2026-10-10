@@ -234,8 +234,12 @@ test.describe('getting the app', () => {
     if (testInfo.project.name === 'phone') {
       // Pixel 7 = Android: the APK has one permanent link.
       await expect(apk).toHaveAttribute('href', 'https://github.com/LivexxPL/Youlllearn/releases/download/android-latest/polyglot-quest.apk');
+      await expect(section.getByTestId('install-qr')).toHaveCount(0);
     } else {
+      // A computer browser: a QR code opens the app on the phone.
       await expect(apk).toHaveCount(0);
+      await expect(section.getByTestId('install-qr')).toBeVisible();
+      expect(await section.getByTestId('install-qr').evaluate((img: HTMLImageElement) => img.naturalWidth)).toBeGreaterThan(0);
     }
 
     // A dismissed banner stays away after a reload.
