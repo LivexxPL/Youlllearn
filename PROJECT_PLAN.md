@@ -18,7 +18,7 @@ column is kept honest: a milestone is "done" only when it is implemented *and* c
 | Network to npm, Maven Central, services.gradle.org | ✅ | |
 | Direct access to Tatoeba, Wikimedia, Tofugu, research sites | ❌ | Blocked. Licences and sources were checked through web search instead (see CONTENT_SOURCES.md, docs/LEARNING_METHODOLOGY.md). |
 | Audio output / TTS voices | ❌ | Headless Chromium has no voices here, so TTS quality was not evaluated by ear; the fallbacks were exercised instead. |
-| Push to GitHub | ❌ | `git push` returns 403 (the Claude GitHub App has no access to the repository). Work is committed locally on `claude/polyglot-quest-app-6awz6m`. |
+| Push to GitHub | ✅ | Initially refused (403) until GitHub access was reconnected. The branch `claude/polyglot-quest-app-6awz6m` is now on GitHub. |
 
 ## 2. Architecture decisions
 
