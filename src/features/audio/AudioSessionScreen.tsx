@@ -6,6 +6,7 @@
  * - listen / repeat / shadowing / dictation — exercise sessions in the shared player
  */
 import { useCallback, useEffect, useMemo, useRef, useState, type PointerEvent as ReactPointerEvent } from 'react';
+import { screenShortcutAllowed } from '../../app/keys';
 import {
   BookHeadphones,
   CheckCircle2,
@@ -298,8 +299,11 @@ function HandsFree({ query }: { query: URLSearchParams }) {
   const autoStarted = useRef(false);
   useEffect(() => {
     if (!list?.length || autoStarted.current) return;
-    autoStarted.current = true;
-    const id = setTimeout(() => start(0), 400);
+    // Marked when it fires: if `start` changes meanwhile, the re-run schedules it again.
+    const id = setTimeout(() => {
+      autoStarted.current = true;
+      start(0);
+    }, 400);
     return () => clearTimeout(id);
   }, [list, start]);
 
@@ -337,7 +341,7 @@ function HandsFree({ query }: { query: URLSearchParams }) {
   // Keyboard: Space pause/resume, arrows previous/next.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (finished) return;
+      if (finished || !screenShortcutAllowed(e)) return;
       if (e.key === ' ') {
         e.preventDefault();
         toggle();
@@ -629,7 +633,7 @@ function AudioFlashcards() {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (!card) return;
+      if (!card || !screenShortcutAllowed(e)) return;
       if (e.key === ' ') {
         e.preventDefault();
         play();

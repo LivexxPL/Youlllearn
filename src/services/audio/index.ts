@@ -50,8 +50,9 @@ export function rateFor(speed: Speed, stage: ListeningStage, userMultiplier = 1)
   return Math.max(0.4, Math.min(1.6, base[speed] * userMultiplier));
 }
 
-class AudioService {
-  private engine: TtsEngine = createTtsEngine();
+export class AudioService {
+  constructor(private readonly engine: TtsEngine = createTtsEngine()) {}
+
   private ready: Promise<void> | null = null;
   private listeners = new Set<Listener>();
   private preferred: Record<string, string> = {};
@@ -104,17 +105,24 @@ class AudioService {
     return rankVoices(this.engine.voices(), lang);
   }
 
-  /** Voice for a language tag, honouring the user's choice per language. */
-  resolve(lang: string, slot: VoiceSlot = 'a'): ResolvedVoice {
+  /**
+   * Voice for a language tag. The voice chosen in Settings wins (even from another region, e.g.
+   * a Mexican voice for the Spanish course), unless the text asks for a specific accent
+   * (`explicitAccent`, e.g. an es-MX dialogue line) and a voice of that region exists.
+   * Slot 'b' (second speaker) gets a different voice when there is one.
+   */
+  resolve(lang: string, slot: VoiceSlot = 'a', explicitAccent = false): ResolvedVoice {
     const ranked = this.voicesFor(lang);
     const exactRegion = ranked.filter((v) => normLang(v.lang) === normLang(lang));
     const userId = this.preferred[langBase(lang)] ?? this.preferred[lang];
-    let voice: VoiceInfo | null = null;
-    if (userId && exactRegion.length === 0) voice = ranked.find((v) => v.id === userId) ?? null;
-    if (userId && !voice) voice = exactRegion.find((v) => v.id === userId) ?? null;
-    if (!voice) {
-      const list = exactRegion.length ? exactRegion : ranked;
-      voice = slot === 'b' && list.length > 1 ? list[1] : (list[0] ?? null);
+    const chosen = userId ? (ranked.find((v) => v.id === userId) ?? null) : null;
+    const honourChoice = chosen && (!explicitAccent || exactRegion.length === 0 || normLang(chosen.lang) === normLang(lang));
+    const pool = exactRegion.length ? exactRegion : ranked;
+    const primary = (honourChoice ? chosen : null) ?? pool[0] ?? null;
+    let voice = primary;
+    if (slot === 'b' && primary) {
+      const sameRegion = ranked.filter((v) => v.id !== primary.id && normLang(v.lang) === normLang(primary.lang));
+      voice = sameRegion[0] ?? pool.find((v) => v.id !== primary.id) ?? primary;
     }
     return { voice, exact: Boolean(voice && normLang(voice.lang) === normLang(lang)), lang };
   }
@@ -136,7 +144,7 @@ class AudioService {
     const rate = rateFor(opts.speed ?? 'normal', opts.stage ?? 1, this.userRate);
     const url = recordedAudioUrl(courseId, text);
     if (url) return this.playUrl(url, rate);
-    return this.speakRaw(text, lang, rate, opts.slot ?? 'a');
+    return this.speakRaw(text, lang, rate, opts.slot ?? 'a', Boolean(opts.accent));
   }
 
   /** Speaks Polish (translations / narration in Audio Quest). */
@@ -144,15 +152,15 @@ class AudioService {
     return this.speakRaw(text.replace(/[;/]/g, ', '), 'pl-PL', rateFor('normal', 3, this.userRate), 'a');
   }
 
-  async speakRaw(text: string, lang: string, rate: number, slot: VoiceSlot) {
+  async speakRaw(text: string, lang: string, rate: number, slot: VoiceSlot, explicitAccent = false) {
     await this.init();
     // The new utterance replaces any that is still playing (engines flush their queue). Settle
     // the old ones so their callers continue and the playing counter cannot get stuck; the
     // Android engine does not always report the end of a flushed utterance.
     for (const settle of [...this.pending]) settle();
-    const { voice } = this.resolve(lang, slot);
-    // With a single voice, a slight pitch change helps tell two speakers apart.
-    const sameVoiceForB = slot === 'b' && this.voicesFor(lang).length < 2;
+    const { voice } = this.resolve(lang, slot, explicitAccent);
+    // Without a second voice, a slight pitch change helps tell two speakers apart.
+    const sameVoiceForB = slot === 'b' && voice?.id === this.resolve(lang, 'a', explicitAccent).voice?.id;
     this.playing += 1;
     this.emit();
     try {

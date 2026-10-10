@@ -96,6 +96,8 @@ export class WebSpeechEngine implements TtsEngine {
   private raw: SpeechSynthesisVoice[] = [];
   private listeners = new Set<() => void>();
   private current: { resolve: () => void } | null = null;
+  /** Until this time a cancel() of playing speech may still be in flight (see speak()). */
+  private settleUntil = 0;
 
   constructor(
     private readonly getSynth: () => SpeechSynthesis = () => window.speechSynthesis,
@@ -131,9 +133,10 @@ export class WebSpeechEngine implements TtsEngine {
     const synth = this.getSynth();
     // Replacing speech that is still playing (e.g. the slow button right after the normal one):
     // Chrome applies cancel() asynchronously and can drop an utterance queued right after it
-    // as "interrupted", so the new one would never be heard.
-    const busy = synth.speaking || synth.pending;
+    // as "interrupted", so the new one would never be heard. stop() remembers when it
+    // cancelled playing speech, which also covers audio.stop() followed by a new utterance.
     this.stop();
+    const settle = Math.max(0, this.settleUntil - Date.now());
     return new Promise<void>((resolve, reject) => {
       const u = new this.Utterance(text);
       u.lang = opts.lang;
@@ -182,15 +185,17 @@ export class WebSpeechEngine implements TtsEngine {
         arm(STARTUP_ALLOWANCE_MS + 1500 + duration * 1.5);
         synth.speak(u);
       };
-      if (busy) delayed = setTimeout(start, CANCEL_SETTLE_MS);
+      if (settle > 0) delayed = setTimeout(start, settle);
       else start();
     });
   }
 
   stop() {
+    const synth = this.getSynth();
+    if (synth.speaking || synth.pending) this.settleUntil = Date.now() + CANCEL_SETTLE_MS;
     const cur = this.current;
     this.current = null;
-    this.getSynth().cancel();
+    synth.cancel();
     cur?.resolve();
   }
 }

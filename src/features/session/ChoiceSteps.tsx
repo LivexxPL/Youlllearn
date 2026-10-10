@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import { modalOpen, screenShortcutAllowed } from '../../app/keys';
 import { Eye, Headphones, RotateCcw } from 'lucide-react';
 import type { StepProps, ExerciseOf } from './types';
 import { ActionBar } from './ActionBar';
@@ -59,7 +60,7 @@ export function OptionList({
   useEffect(() => {
     if (locked) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+      if (!screenShortcutAllowed(e)) return;
       const n = Number(e.key);
       if (n >= 1 && n <= options.length) {
         e.preventDefault();
@@ -104,7 +105,7 @@ function CheckBar({ disabled, onCheck, locked, extra }: { disabled: boolean; onC
   useEffect(() => {
     if (locked) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Enter' && !disabled && !(e.target instanceof HTMLButtonElement)) {
+      if (e.key === 'Enter' && !disabled && !(e.target instanceof HTMLButtonElement) && !modalOpen() && !e.isComposing) {
         e.preventDefault();
         onCheck();
       }

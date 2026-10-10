@@ -37,6 +37,8 @@ export function SpeakStep({ ex, courseId, locked, showRomaji, onResult }: StepPr
   const [heard, setHeard] = useState<{ transcript: string; report: MatchReport } | null>(null);
   const [srError, setSrError] = useState<string | null>(null);
   const [round, setRound] = useState(0);
+  /** Current shadowing run; leaving the step or restarting invalidates the old one. */
+  const shadowRun = useRef(0);
   const content = { text: ex.text, tts: ex.item?.tts ?? ex.sentence?.tts, reading: ex.item?.reading, kind: ex.item?.kind };
   const reading = ex.item?.reading ?? (courseId === 'ja' ? rubyToKana(ex.text) : undefined);
   const morae = useMemo(() => (courseId === 'ja' && reading ? splitMorae(kataToHira(reading)) : null), [courseId, reading]);
@@ -47,6 +49,9 @@ export function SpeakStep({ ex, courseId, locked, showRomaji, onResult }: StepPr
     return () => {
       clearTimeout(id);
       recorder.current?.release();
+      // Stop a shadowing loop that is still running (it would talk over the next exercise).
+      shadowRun.current += 1;
+      activity.setListening(false);
     };
   }, [ex.key]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -84,12 +89,15 @@ export function SpeakStep({ ex, courseId, locked, showRomaji, onResult }: StepPr
   };
 
   const shadow = async () => {
+    const run = ++shadowRun.current;
     const speeds: Speed[] = ['slow', 'normal', 'natural'];
+    activity.setListening(true);
     for (let i = 0; i < speeds.length; i++) {
       setRound(i + 1);
-      activity.setListening(true);
       await speak(content, speeds[i]);
+      if (shadowRun.current !== run) return;
       await new Promise((r) => setTimeout(r, 700));
+      if (shadowRun.current !== run) return;
     }
     activity.setListening(false);
     setRound(0);

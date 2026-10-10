@@ -61,7 +61,8 @@ async function bootstrap() {
   audio.configure({ voices: settings.voices, speechRate: settings.speechRate });
   audio.init();
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && runBackHandlers()) e.preventDefault();
+    // Escape while an input method is composing (e.g. Japanese kana → kanji) belongs to the IME.
+    if (e.key === 'Escape' && !e.isComposing && runBackHandlers()) e.preventDefault();
   });
   if (storageError) document.body.dataset.storageError = '1';
 

@@ -67,8 +67,11 @@ export function AudioButton({
 
   useEffect(() => {
     if (!autoPlay || played.current || status === 'unsupported') return;
-    played.current = true;
-    const id = setTimeout(() => play('normal'), 250);
+    // Marked inside the timer: an effect re-run (e.g. React StrictMode) must not cancel it for good.
+    const id = setTimeout(() => {
+      played.current = true;
+      play('normal');
+    }, 250);
     return () => {
       clearTimeout(id);
       audio.stop();

@@ -11,6 +11,7 @@
  * - Undo/redo covers drawing, erasing and clearing.
  */
 import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState, type ReactNode } from 'react';
+import { isTextEntry } from '../../app/keys';
 import { Eraser, Grid3x3, PenLine, Redo2, Trash2, Undo2 } from 'lucide-react';
 import type { Stroke, StrokePoint } from '../../services/db';
 import { t } from '../../i18n';
@@ -184,6 +185,8 @@ export const WritingPad = forwardRef<WritingPadHandle, WritingPadProps>(function
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (!(e.ctrlKey || e.metaKey) || e.key.toLowerCase() !== 'z') return;
+      // Ctrl+Z in a text field (e.g. the note title) undoes the typing, not the drawing.
+      if (isTextEntry(e.target)) return;
       e.preventDefault();
       if (e.shiftKey) doRedo();
       else doUndo();

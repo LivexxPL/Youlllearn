@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { CANCEL_SETTLE_MS, WebSpeechEngine, expectedDurationMs } from './tts';
-import { rateFor } from './index';
+import { AudioService, rateFor } from './index';
 
 class FakeUtterance {
   lang = '';
@@ -84,6 +84,18 @@ describe('web speech engine', () => {
     expect(slowDone).toBe(true);
   });
 
+  it('also waits when speech was stopped just before (audio.stop() then a new line)', async () => {
+    const synth = fakeSynth();
+    const engine = engineWith(synth);
+    void engine.speak('Erste Zeile', { lang: 'de-DE', rate: 1 });
+    engine.stop();
+    const next = engine.speak('Zweite Zeile', { lang: 'de-DE', rate: 1 });
+    await vi.advanceTimersByTimeAsync(CANCEL_SETTLE_MS + 5);
+    expect(synth.queue.map((u) => u.text)).toEqual(['Zweite Zeile']);
+    synth.finishCurrent();
+    await next;
+  });
+
   it('does not start a replaced utterance after stop()', async () => {
     const synth = fakeSynth();
     const engine = engineWith(synth);
@@ -135,5 +147,37 @@ describe('speech rates', () => {
   it('estimates longer durations for kanji than for their character count', () => {
     expect(expectedDurationMs('毎日', 1)).toBeGreaterThan(expectedDurationMs('ab', 1) * 2);
     expect(expectedDurationMs('hola', 0.5)).toBe(expectedDurationMs('hola', 1) * 2);
+  });
+});
+
+describe('voice choice', () => {
+  const voices = [
+    { id: 'es1', name: 'Spain A', lang: 'es-ES', local: true, isDefault: false },
+    { id: 'es2', name: 'Spain B', lang: 'es-ES', local: true, isDefault: false },
+    { id: 'mx1', name: 'Mexico', lang: 'es-MX', local: true, isDefault: false },
+  ];
+  const engine = {
+    kind: 'web' as const,
+    init: async () => {},
+    voices: () => voices,
+    speak: async () => {},
+    stop: () => {},
+    onVoicesChanged: () => () => {},
+  };
+
+  it('uses the voice chosen in Settings, even from another region', () => {
+    const service = new AudioService(engine);
+    service.configure({ voices: { es: 'mx1' }, speechRate: 1 });
+    expect(service.resolve('es-ES').voice?.id).toBe('mx1');
+    // A line tagged with an accent still gets a voice of that region.
+    expect(service.resolve('es-ES', 'a', true).voice?.id).toBe('es1');
+    expect(service.resolve('es-MX', 'a', true).voice?.id).toBe('mx1');
+  });
+
+  it('gives the second speaker a different voice when one exists', () => {
+    const service = new AudioService(engine);
+    service.configure({ voices: {}, speechRate: 1 });
+    expect(service.resolve('es-ES').voice?.id).toBe('es1');
+    expect(service.resolve('es-ES', 'b').voice?.id).toBe('es2');
   });
 });

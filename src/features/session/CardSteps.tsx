@@ -221,27 +221,29 @@ export function ExamplesStep({ ex, courseId, locked, showRomaji, onContinue }: S
 export function useDialoguePlayer(courseId: CourseId, dialogue: { lines: { speaker?: string; text: string }[]; speakers?: Dialogue['speakers'] }, stage?: 1 | 2 | 3) {
   const speak = useSpeaker(courseId);
   const [current, setCurrent] = useState(-1);
-  const cancelled = useRef(false);
+  /** Id of the current playback run: starting a new one (tapping a line) ends the old loop. */
+  const run = useRef(0);
   const playing = useAudioPlaying();
 
   const playFrom = async (start = 0) => {
-    cancelled.current = false;
+    const id = ++run.current;
+    audio.stop();
     activity.setListening(true);
     for (let i = start; i < dialogue.lines.length; i++) {
-      if (cancelled.current) break;
       setCurrent(i);
       const line = dialogue.lines[i];
       const sp = line.speaker ? dialogue.speakers?.[line.speaker] : undefined;
       await speak(line.text, 'normal', { slot: sp?.voice ?? (i % 2 === 0 ? 'a' : 'b'), accent: sp?.accent, stage });
-      if (cancelled.current) break;
+      if (run.current !== id) return;
       await new Promise((r) => setTimeout(r, 450));
+      if (run.current !== id) return;
     }
     activity.setListening(false);
     setCurrent(-1);
   };
 
   const stop = () => {
-    cancelled.current = true;
+    run.current += 1;
     audio.stop();
     activity.setListening(false);
     setCurrent(-1);
@@ -256,7 +258,7 @@ export function AccentLabel({ courseId, accent }: { courseId: CourseId; accent?:
   const course = getCourse(courseId);
   if (!accent || course.accents.length < 2) return null;
   const info = course.accents.find((a) => a.id === accent);
-  const resolved = audio.resolve(accent);
+  const resolved = audio.resolve(accent, 'a', true);
   return (
     <span className="accent-label">
       {t('audio.accent', { accent: `${info?.label ?? accent} (${accent})` })}
