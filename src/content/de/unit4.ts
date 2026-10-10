@@ -7,7 +7,7 @@ export const unit4: Unit = {
   id: 'de.u4',
   title: 'Unterwegs',
   description: 'Czasowniki modalne, podróże z celownikiem, studia i czas przeszły Perfekt.',
-  level: 'A1–A2',
+  level: 'A1',
   lessons: [
     {
       id: 'de.l12',

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BookOpen, Check, Clock, Grid3x3, NotebookPen, PenLine, Play, Star } from 'lucide-react';
+import { BookOpen, Check, Clock, FastForward, Grid3x3, NotebookPen, PenLine, Play, Star } from 'lucide-react';
 import { useSettings } from '../../state/settings';
 import { getCourse } from '../../content/registry';
 import { useCompleted, useLessonProgress, useShowRomaji } from '../../state/hooks';
@@ -12,6 +12,7 @@ import { TargetText } from '../../components/TargetText';
 import { SpeakIcon } from '../../components/AudioButton';
 import { gloss, itemRomaji } from '../../content/text';
 import { nextLesson } from '../../engine/recommend';
+import { jumpTargets } from '../../engine/levels';
 
 function LessonPreview({ lesson, onClose, ahead }: { lesson: Lesson; onClose: () => void; ahead: boolean }) {
   const { settings } = useSettings();
@@ -75,6 +76,8 @@ export function LearnScreen() {
   const completed = completedState ?? new Set<string>();
   const next = nextLesson(course, completed);
   const nextIndex = next ? course.lessonIndex.get(next.id)! : course.lessons.length;
+  // Learners who already know a level can start the next one from its first unit.
+  const jumps = completedState ? jumpTargets(course, completed, nextIndex) : [];
 
   return (
     <div className="page">
@@ -97,7 +100,9 @@ export function LearnScreen() {
       )}
 
       {/* The path is drawn once progress is loaded, so "next" never points at the wrong lesson. */}
-      {completedState && course.units.map((unit) => (
+      {completedState && course.units.map((unit) => {
+        const jump = jumps.find((j) => j.first.id === unit.lessons[0]?.id);
+        return (
         <section key={unit.id} className="unit" aria-labelledby={`${unit.id}-title`}>
           <div className="unit__header">
             <div className="unit__title-row">
@@ -111,6 +116,11 @@ export function LearnScreen() {
             </div>
             <p className="subtle">{unit.description}</p>
           </div>
+          {jump && (
+            <button type="button" className="btn btn--outline btn--block level-jump" onClick={() => setPreview(jump.first)} data-testid={`level-jump-${jump.level}`}>
+              <FastForward size={18} /> {t('learn.levelJump', { level: jump.level })}
+            </button>
+          )}
           <ol className="trail">
             {unit.lessons.map((lesson) => {
               const idx = course.lessonIndex.get(lesson.id)!;
@@ -150,7 +160,8 @@ export function LearnScreen() {
             })}
           </ol>
         </section>
-      ))}
+        );
+      })}
       {preview && <LessonPreview lesson={preview} onClose={() => setPreview(null)} ahead={(course.lessonIndex.get(preview.id) ?? 0) > nextIndex} />}
     </div>
   );

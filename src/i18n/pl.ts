@@ -87,6 +87,7 @@ export const pl = {
   'course.choose': 'Wybierz język',
   'course.active': 'Aktywny kurs',
   'course.lessonsDone': '{done} z {total} lekcji',
+  'progress.levelDone': '{level}: {done}/{total}',
 
   // Onboarding
   'onb.welcomeTitle': 'Witaj w Polyglot Quest',
@@ -165,6 +166,7 @@ export const pl = {
   'learn.title': 'Ścieżka nauki',
   'learn.framework': 'Odniesienie: {framework}',
   'learn.unitLevel': 'Poziom',
+  'learn.levelJump': 'Znasz już wcześniejszy materiał? Zacznij od poziomu {level}',
   'learn.lessonDone': 'Ukończona',
   'learn.lessonNext': 'Następna',
   'learn.lessonOpen': 'Otwórz lekcję',

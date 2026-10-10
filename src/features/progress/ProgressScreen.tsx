@@ -32,6 +32,7 @@ import { useSettings } from '../../state/settings';
 import { allCourses, getCourse } from '../../content/registry';
 import { ACHIEVEMENTS, evaluateStreak, initialStreak, isActiveDay, levelForXp, personalBests, type StreakState } from '../../engine/gamification';
 import { estimatedRetention } from '../../engine/srs';
+import { levelProgress } from '../../engine/levels';
 import { lastNDays, parseDayKey } from '../../engine/dates';
 import { t, formatDate, formatDuration, formatNumber, formatPercent, weekdayShort } from '../../i18n';
 import { LangBadge, PageHeader, ProgressBar, Segmented, StatTile } from '../../components/ui';
@@ -217,7 +218,9 @@ export default function ProgressScreen() {
               {t('progress.perCourse')}
             </h2>
             {allCourses().map((c) => {
-              const done = [...(progress?.values() ?? [])].filter((p) => p.courseId === c.id).length;
+              const completedIds = new Set([...(progress?.values() ?? [])].filter((p) => p.courseId === c.id).map((p) => p.id));
+              const done = completedIds.size;
+              const levels = levelProgress(c, completedIds).filter((lv) => lv.level);
               return (
                 <div key={c.id} className="row">
                   <LangBadge courseId={c.id} size={36} />
@@ -229,6 +232,11 @@ export default function ProgressScreen() {
                       <span className="subtle">{t('course.lessonsDone', { done, total: c.lessons.length })}</span>
                     </div>
                     <ProgressBar value={done} max={c.lessons.length} thin label={c.name} />
+                    {levels.length > 1 && (
+                      <span className="subtle">
+                        {levels.map((lv) => t('progress.levelDone', { level: lv.level, done: lv.done, total: lv.total })).join(' · ')}
+                      </span>
+                    )}
                   </div>
                 </div>
               );

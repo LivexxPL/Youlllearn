@@ -1503,6 +1503,11 @@
   font-weight: 700;
 }
 
+.level-jump {
+  justify-content: flex-start;
+  text-align: start;
+}
+
 .trail {
   margin: 0;
   padding: 0;
