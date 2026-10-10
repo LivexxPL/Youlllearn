@@ -184,6 +184,26 @@ test.describe('data safety', () => {
   });
 });
 
+/** Reads a value the app keeps in IndexedDB (the meta store), as the next app start will. */
+const storedMeta = (page: Page, key: string) =>
+  page.evaluate(
+    (k) =>
+      new Promise<unknown>((resolve, reject) => {
+        const open = indexedDB.open('polyglot-quest');
+        open.onerror = () => reject(open.error);
+        open.onsuccess = () => {
+          const db = open.result;
+          const get = db.transaction('meta').objectStore('meta').get(k);
+          get.onsuccess = () => {
+            db.close();
+            resolve(get.result?.value);
+          };
+          get.onerror = () => reject(get.error);
+        };
+      }),
+    key,
+  );
+
 test.describe('getting the app', () => {
   /** What Chrome does when the app can be installed (the real event needs an installable origin). */
   const offerInstall = (page: Page) =>
@@ -244,12 +264,17 @@ test.describe('getting the app', () => {
 
     // A dismissed banner stays away after a reload.
     await page.getByRole('navigation').getByRole('link', { name: 'Start' }).click();
-    await page.getByTestId('install-banner').getByRole('button', { name: 'Nie teraz' }).click();
+    const banner = page.getByTestId('install-banner');
+    await banner.getByRole('button', { name: 'Nie teraz' }).click();
+    await expect(banner).toBeHidden();
+    // The choice is saved in the background: reload only once it is stored.
+    await expect.poll(() => storedMeta(page, 'installHintDismissed')).toBe(true);
     await page.reload();
+    expect(await storedMeta(page, 'installHintDismissed')).toBe(true);
     await offerInstall(page);
     await expect(page.getByTestId('continue')).toBeVisible();
     // The dismissal is read from the database after the first render: give it time to show up.
     await page.waitForTimeout(500);
-    await expect(page.getByTestId('install-banner')).toBeHidden();
+    await expect(banner).toBeHidden();
   });
 });
