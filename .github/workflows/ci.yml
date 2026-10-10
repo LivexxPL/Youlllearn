@@ -1,5 +1,7 @@
 # Web checks: lint, types, unit tests, production build and Playwright E2E
 # (phone + tablet viewports). Runs on every push and pull request.
+# On pushes, the tested build is published to GitHub Pages (gh-pages branch):
+#   https://<owner>.github.io/<repo>/  (see INSTALACJA.md)
 name: CI
 
 on:
@@ -16,6 +18,8 @@ jobs:
   web:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    permissions:
+      contents: write # publishes the tested build to the gh-pages branch
     steps:
       - uses: actions/checkout@v5
 
@@ -35,6 +39,23 @@ jobs:
 
       - name: E2E tests
         run: npm run test:e2e
+
+      # Only a build that passed every check above is published. Relative paths and hash
+      # routing let the app run from the /<repo>/ subfolder of GitHub Pages.
+      - name: Publish the web app (GitHub Pages)
+        if: github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          site="$RUNNER_TEMP/site"
+          cp -r dist "$site"
+          touch "$site/.nojekyll"
+          cd "$site"
+          git init -q -b gh-pages
+          git add -A
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+            commit -q -m "Deploy ${GITHUB_SHA::7} from ${GITHUB_REF_NAME}"
+          git push -q --force "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" gh-pages
 
       - name: Upload Playwright report
         if: failure()

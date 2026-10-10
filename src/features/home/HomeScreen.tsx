@@ -15,6 +15,7 @@ import { LangBadge, ProgressBar, ProgressRing, Sheet } from '../../components/ui
 import { weekDays } from '../../engine/dates';
 import { questStatuses, challengeStatus, type QuestStatus, type ChallengeStatus } from '../../services/progress';
 import { isUpdateReady, onUpdateReady, applyUpdate } from '../../services/pwa';
+import { InstallBanner } from '../settings/InstallCard';
 import type { CourseId } from '../../content/types';
 
 function greetingKey(): 'home.greetingMorning' | 'home.greetingDay' | 'home.greetingEvening' {
@@ -187,6 +188,8 @@ export function HomeScreen() {
         </div>
         <CourseSwitcher />
       </header>
+
+      <InstallBanner />
 
       {updateReady && (
         <div className="banner" role="status">

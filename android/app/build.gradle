@@ -35,6 +35,16 @@ android {
         }
     }
     signingConfigs {
+        // Fixed debug key, committed on purpose (password "android", like Android's own debug
+        // key). Every CI build is signed the same way, so a newer debug APK installs over the
+        // previous one and keeps the learner's progress. It is public: never use it for the
+        // Play Store (see docs/ANDROID_BUILD.md for the release key).
+        debug {
+            storeFile file('debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
         release {
             if (releaseStoreFile) {
                 storeFile rootProject.file(releaseStoreFile)
@@ -45,6 +55,9 @@ android {
         }
     }
     buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
         release {
             if (releaseStoreFile) {
                 signingConfig signingConfigs.release

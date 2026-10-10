@@ -183,3 +183,69 @@ test.describe('data safety', () => {
     await expect(lessonsDone(page, 1)).toBeVisible();
   });
 });
+
+test.describe('getting the app', () => {
+  /** What Chrome does when the app can be installed (the real event needs an installable origin). */
+  const offerInstall = (page: Page) =>
+    page.evaluate(() => {
+      const w = window as unknown as { prompted: number };
+      w.prompted = 0;
+      const e = Object.assign(new Event('beforeinstallprompt', { cancelable: true }), {
+        prompt: async () => {
+          w.prompted += 1;
+        },
+        userChoice: Promise.resolve({ outcome: 'accepted' }),
+      });
+      window.dispatchEvent(e);
+    });
+
+  test('the install button, the banner and the links', async ({ page }, testInfo) => {
+    await onboard(page, { courses: ['es'] });
+    const banner = page.getByTestId('install-banner');
+    await expect(banner).toBeHidden();
+
+    await offerInstall(page);
+    await expect(banner).toBeVisible();
+    await banner.getByRole('button', { name: 'Zainstaluj aplikację' }).click();
+    await expect.poll(() => page.evaluate(() => (window as unknown as { prompted: number }).prompted)).toBe(1);
+    await page.evaluate(() => window.dispatchEvent(new Event('appinstalled')));
+    await expect(banner).toBeHidden();
+
+    await page.getByRole('navigation').getByRole('link', { name: 'Ustawienia' }).click();
+    const section = page.getByTestId('install-section');
+    await expect(section.getByText('Aplikacja jest zainstalowana na tym urządzeniu.')).toBeVisible();
+    // The share button copies the permanent link where there is no share sheet.
+    if (testInfo.project.name === 'tablet') {
+      await page.context().grantPermissions(['clipboard-read', 'clipboard-write']);
+      await page.evaluate(() => Object.defineProperty(navigator, 'share', { value: undefined }));
+      await section.getByRole('button', { name: 'Udostępnij link do aplikacji' }).click();
+      await expect(page.getByText('Skopiowano link do aplikacji.')).toBeVisible();
+      expect(await page.evaluate(() => navigator.clipboard.readText())).toBe('https://livexxpl.github.io/Youlllearn/');
+    }
+  });
+
+  test('instructions and the Android download before installing', async ({ page }, testInfo) => {
+    await onboard(page, { courses: ['es'] });
+    await page.goto('./#/settings');
+    const section = page.getByTestId('install-section');
+    await offerInstall(page);
+    await expect(section.getByRole('button', { name: 'Zainstaluj aplikację' })).toBeVisible();
+    const apk = section.getByTestId('install-apk');
+    if (testInfo.project.name === 'phone') {
+      // Pixel 7 = Android: the APK has one permanent link.
+      await expect(apk).toHaveAttribute('href', 'https://github.com/LivexxPL/Youlllearn/releases/download/android-latest/polyglot-quest.apk');
+    } else {
+      await expect(apk).toHaveCount(0);
+    }
+
+    // A dismissed banner stays away after a reload.
+    await page.getByRole('navigation').getByRole('link', { name: 'Start' }).click();
+    await page.getByTestId('install-banner').getByRole('button', { name: 'Nie teraz' }).click();
+    await page.reload();
+    await offerInstall(page);
+    await expect(page.getByTestId('continue')).toBeVisible();
+    // The dismissal is read from the database after the first render: give it time to show up.
+    await page.waitForTimeout(500);
+    await expect(page.getByTestId('install-banner')).toBeHidden();
+  });
+});

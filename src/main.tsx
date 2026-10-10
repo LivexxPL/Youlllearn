@@ -14,7 +14,7 @@ import { audio } from './services/audio';
 import { activity } from './services/activity';
 import { isNative } from './services/platform';
 import { canGoBack, currentPath, goBack, navigate, runBackHandlers } from './app/router';
-import { registerServiceWorker } from './services/pwa';
+import { captureInstallPrompt, registerServiceWorker } from './services/pwa';
 import type { Settings } from './services/db';
 
 function installViewportHeight() {
@@ -76,4 +76,6 @@ async function bootstrap() {
   registerServiceWorker();
 }
 
+// Before anything async: the browser may offer installation right after loading.
+captureInstallPrompt();
 bootstrap();

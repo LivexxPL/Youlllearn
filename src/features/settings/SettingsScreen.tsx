@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
-import { Bell, BookOpen, Download, Info, Keyboard, Mic, Palette, PenLine, Upload, Trash2, Volume2, Database, Target, Languages } from 'lucide-react';
+import { Bell, BookOpen, Download, Info, Keyboard, Mic, Palette, PenLine, Upload, Trash2, Volume2, Database, Target, Languages, Smartphone } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useSettings, TEXT_SCALES, loadSettings } from '../../state/settings';
 import { allCourses, getCourse } from '../../content/registry';
@@ -15,6 +15,7 @@ import { BackupError, importData, readBackupFile, resetAll, saveBackup } from '.
 import { navigate } from '../../app/router';
 import { recognitionAvailable } from '../../services/audio/speech';
 import { brand } from '../../config/brand';
+import { InstallSection } from './InstallCard';
 
 function Section({ icon, title, children }: { icon: ReactNode; title: string; children: ReactNode }) {
   return (
@@ -318,6 +319,10 @@ export default function SettingsScreen() {
             <Banner variant="warn">{t('set.remindersDenied')}</Banner>
           </div>
         )}
+      </Section>
+
+      <Section icon={<Smartphone size={20} />} title={t('install.title')}>
+        <InstallSection />
       </Section>
 
       <Section icon={<Database size={20} />} title={t('set.data')}>

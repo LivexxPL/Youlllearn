@@ -4,6 +4,11 @@ Mobile-first, audio-first language learning for Polish speakers: **Spanish, Germ
 Japanese from zero to A2**. One codebase runs in the browser (installable PWA, works offline) and as
 an Android app (Capacitor). No account, no ads, no paid APIs: progress stays on the device.
 
+> **Jak zacząć (PL):** otwórz **[aplikację w przeglądarce](https://livexxpl.github.io/Youlllearn/)**
+> na telefonie, tablecie albo komputerze i dodaj ją do ekranu głównego, albo pobierz
+> **[aplikację na Androida (APK)](https://github.com/LivexxPL/Youlllearn/releases/download/android-latest/polyglot-quest.apk)**.
+> Instrukcja krok po kroku: **[INSTALACJA.md](INSTALACJA.md)**.
+
 <p>
   <img src="docs/screenshots/home.jpg" width="200" alt="Home screen: next lesson, time estimate, daily quests">
   <img src="docs/screenshots/lesson-choice.jpg" width="200" alt="Listening exercise in a lesson">
@@ -89,14 +94,17 @@ npm run dev            # http://localhost:5173
 | `npm run strokes` | Re-extract KanjiVG stroke data for the characters used in the course |
 | `npm run android:debug` / `android:release` / `android:bundle` | Android builds (need JDK 21 + Android SDK) |
 
-**Install as a web app:** open the deployed site in Chrome/Edge/Safari and use "Install app" /
-"Add to Home screen". Any static host works, because the app uses relative paths and hash
-routing.
+**Use it on any device:** open https://livexxpl.github.io/Youlllearn/ (published by CI
+after every successful run) and use "Install app" / "Add to Home screen"; the app also
+offers its own install button (Settings → *Aplikacja na telefonie*). Any static host works,
+because the app uses relative paths and hash routing.
 
-**Install on Android:** download `app-debug.apk` from the *Android* GitHub Actions run, or
-build it yourself ([docs/ANDROID_BUILD.md](docs/ANDROID_BUILD.md)). For pronunciation audio,
-make sure the phone has Spanish/German/Japanese text-to-speech voices installed. The app
-checks this and links to the installer.
+**Install on Android:** download the newest APK from the permanent link
+https://github.com/LivexxPL/Youlllearn/releases/download/android-latest/polyglot-quest.apk
+(updates install over the previous version and keep progress), or build it yourself
+([docs/ANDROID_BUILD.md](docs/ANDROID_BUILD.md)). For pronunciation audio, make sure the
+phone has Spanish/German/Japanese text-to-speech voices installed. The app checks this and
+links to the installer. Step-by-step guide in Polish: [INSTALACJA.md](INSTALACJA.md).
 
 ## Documentation
 

@@ -27,3 +27,5 @@ android/app/src/main/res/xml/config.xml
 android/keystore.properties
 *.jks
 *.keystore
+# The shared debug key is public on purpose (see android/app/build.gradle).
+!android/app/debug.keystore

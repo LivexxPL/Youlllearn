@@ -1,5 +1,5 @@
 # Android builds (Capacitor). Produces:
-#   - app-debug.apk               always (installable, debug-signed)
+#   - app-debug.apk               always (installable, signed with the shared debug key)
 #   - app-release.apk / .aab      signed, when the signing secrets below are set
 #   - app-release-unsigned.apk    otherwise (must be signed before installing)
 #
@@ -7,6 +7,10 @@
 #   ANDROID_KEYSTORE_BASE64   base64 of the .jks file (base64 -w0 polyglot-release.jks)
 #   ANDROID_KEYSTORE_PASSWORD, ANDROID_KEY_ALIAS, ANDROID_KEY_PASSWORD
 # See docs/ANDROID_BUILD.md.
+#
+# On pushes the newest installable APK is also published as the GitHub release
+# "android-latest", so phones can download it from one permanent link:
+#   https://github.com/<owner>/<repo>/releases/download/android-latest/polyglot-quest.apk
 name: Android
 
 on:
@@ -23,6 +27,8 @@ jobs:
   apk:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    permissions:
+      contents: write # publishes the APK as the release "android-latest"
     env:
       VERSION_CODE: ${{ github.run_number }}
     steps:
@@ -100,3 +106,29 @@ jobs:
             android/app/build/outputs/apk/release/*.apk
             android/app/build/outputs/bundle/release/*.aab
           if-no-files-found: error
+
+      - name: Publish the APK (release "android-latest")
+        if: github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          SIGNED: ${{ steps.signing.outputs.signed }}
+        run: |
+          if [ "$SIGNED" = "true" ]; then
+            cp android/app/build/outputs/apk/release/app-release.apk polyglot-quest.apk
+            kind="podpisana wersja produkcyjna"
+          else
+            cp android/app/build/outputs/apk/debug/app-debug.apk polyglot-quest.apk
+            kind="wersja testowa (debug), podpisana publicznym kluczem z repozytorium"
+          fi
+          notes="Najnowsza aplikacja Polyglot Quest na Androida: ${kind}.
+          Zbudowana automatycznie z commita ${GITHUB_SHA::7} (gałąź ${GITHUB_REF_NAME}, build ${VERSION_CODE}).
+
+          Instalacja: otwórz ten link na telefonie, pobierz plik polyglot-quest.apk i otwórz go.
+          Przy pierwszej instalacji Android zapyta o zgodę na instalowanie aplikacji z przeglądarki.
+          Kolejne wersje instalują się na poprzednią i zachowują postępy.
+          Instrukcja: INSTALACJA.md w repozytorium."
+          gh release delete android-latest --yes --cleanup-tag 2>/dev/null || true
+          gh release create android-latest polyglot-quest.apk \
+            --title "Polyglot Quest na Androida (najnowsza wersja)" \
+            --notes "$notes" --target "$GITHUB_SHA" --latest

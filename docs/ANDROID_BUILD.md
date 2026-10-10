@@ -42,6 +42,12 @@ cd android && ./gradlew assembleDebug
 
 To develop in Android Studio: `npm run cap:sync && npx cap open android`.
 
+Debug builds are signed with the **shared debug key** `android/app/debug.keystore` (password
+`android`, alias `androiddebugkey`), committed on purpose. Every build, local or CI, is
+signed the same way, so a newer debug APK installs over the previous one and keeps the
+learner's progress. The key is public: it is fine for testing and personal use, never for a
+store release (use the release key from §3).
+
 ## 3. Release APK and App Bundle
 
 Release builds must be signed. **Without signing credentials** `assembleRelease` produces
@@ -94,8 +100,24 @@ CI sets it to the workflow run number.
   `ANDROID_KEY_ALIAS` and `ANDROID_KEY_PASSWORD` are set, the release APK is signed and an
   **AAB** is built too. Otherwise an unsigned release APK is uploaded.
 
-Download the APK from the run's *Artifacts* section, then install it with `adb install` or
-by opening it on the phone (allow "install unknown apps").
+On every push the workflow also publishes the installable APK (the signed release APK when
+the secrets are set, otherwise the debug APK) as the GitHub release **`android-latest`**,
+replacing the previous one. Phones can therefore always download the newest version from one
+permanent link, without logging in or unpacking a ZIP:
+
+https://github.com/LivexxPL/Youlllearn/releases/download/android-latest/polyglot-quest.apk
+
+Adding the signing secrets later switches that link from the debug key to the release key.
+Android does not install an app over one signed with another key, so phones that have the
+debug APK must uninstall it once (export the progress first, import it afterwards).
+
+The same APK is also attached to each run's *Artifacts* section. Install it by opening it on
+the phone (allow "install unknown apps") or with `adb install -r`. Step-by-step instructions
+in Polish: [INSTALACJA.md](../INSTALACJA.md).
+
+`ci.yml` publishes the tested web build to the `gh-pages` branch, served by GitHub Pages at
+https://livexxpl.github.io/Youlllearn/ (enable Pages once: *Settings → Pages → Deploy from a
+branch → gh-pages*).
 
 ## 5. What the Android build contains
 

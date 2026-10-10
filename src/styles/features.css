@@ -2503,3 +2503,26 @@ body.is-writing {
   align-items: center;
   gap: 3px;
 }
+
+/* Getting the app onto a device */
+.install {
+  padding: var(--sp-3) var(--sp-4) var(--sp-4);
+}
+
+.install .btn {
+  align-self: flex-start;
+}
+
+.install__done {
+  gap: var(--sp-2);
+  color: var(--success);
+  font-weight: 650;
+}
+
+.install-banner {
+  align-items: flex-start;
+}
+
+.install-banner__cta {
+  align-self: flex-start;
+}
