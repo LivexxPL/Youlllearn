@@ -75,6 +75,12 @@ On a correct answer (grade ≥ 3):
 5. The interval is capped at 365 days. **Until the item has at least one production success,
    it is capped at 14 days.** Recognising a word is not the same as being able to use it.
 
+**Early reviews.** Extra practice, audio flashcards and writing practice can review a card
+before its due day. A success then only shows recall after the time that actually passed, so
+the interval becomes `max(interval, elapsedDays × factor)`; ease and the repetition count do
+not change. Without this rule, practising a word every few minutes would push it out for
+months. A mistake made early is still a lapse.
+
 On a wrong answer (grade < 3): `lapses + 1`, `ease − 0.2` (min 1.3), `reps ← 0`. The card goes
 to `relearning` with the 10-minute step, and its eventual return interval is set to 30% of
 the old one. (Implementations of SM-2 differ on whether a failure changes the easiness. This

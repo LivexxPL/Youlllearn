@@ -95,6 +95,32 @@ describe('review scheduling', () => {
     expect(cardStatus(c, c.lastReviewed)).not.toBe('established');
   });
 
+  it('does not grow intervals from practice before the due date', () => {
+    // A new word practised correctly every 10 minutes (extra practice, audio flashcards…).
+    let card = introduceCard('es.hola', 'es', 'item', [good()], T0);
+    let t = T0;
+    for (let i = 0; i < 12; i++) {
+      t += 10 * MINUTE;
+      card = reviewCard(card, good('production'), t);
+    }
+    expect(card.interval).toBeLessThanOrEqual(2);
+    expect(card.due - t).toBeLessThanOrEqual(2 * DAY);
+    expect(cardStatus(card, t)).not.toBe('established');
+  });
+
+  it('credits the time that actually passed when a review comes a little early', () => {
+    let card = graduate(introduceCard('es.hola', 'es', 'item', [good()], T0), T0);
+    for (let i = 0; i < 3; i++) card = reviewCard(card, good('production'), card.due);
+    const interval = card.interval;
+    const early = card.lastReviewed! + Math.round(interval * 0.7) * DAY;
+    const after = reviewCard(card, good('production'), early);
+    expect(after.interval).toBeGreaterThan(interval);
+    expect(after.due).toBeGreaterThan(card.due);
+    expect(after.reps).toBe(card.reps);
+    // A mistake made early still counts as a lapse.
+    expect(reviewCard(card, bad('production'), early).phase).toBe('relearning');
+  });
+
   it('handles lapses with relearning and reduced ease', () => {
     let c = graduate(introduceCard('d', 'es', 'item', [good('production')], T0), T0);
     for (let i = 0; i < 3; i++) c = reviewCard(c, good('production'), c.due);

@@ -230,6 +230,20 @@ export function reviewCard(input: Card, outcome: Outcome, now: number): Card {
     return card;
   }
 
+  // Reviewed before it was due (extra practice, audio flashcards, writing practice): a success
+  // only proves recall after the time that actually passed. The interval may grow from that,
+  // never from the scheduled interval, otherwise practising a word every few minutes would
+  // push it out for months. Ease and the repetition count stay unchanged.
+  if (input.due > endOfDay(now)) {
+    const factor = isProductionSkill(outcome.skill) ? card.ease : Math.min(card.ease, 1.6);
+    let next = Math.max(card.interval, elapsedDays * factor);
+    if (card.productionOk === 0) next = Math.min(next, Math.max(card.interval, 14));
+    next = Math.min(MAX_INTERVAL_DAYS, next);
+    card.interval = Math.round(next * 10) / 10;
+    card.due = Math.max(input.due, now + card.interval * DAY);
+    return card;
+  }
+
   card.ease = nextEase(card.ease, grade);
   card.reps += 1;
   const overdue = Math.max(0, elapsedDays - card.interval);
