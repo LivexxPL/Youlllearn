@@ -11,36 +11,57 @@ export interface Route {
   query: URLSearchParams;
 }
 
-function parse(hash: string): Route {
+/** A malformed escape (e.g. a truncated %E3) must not stop the app from starting. */
+function decodeSegment(segment: string): string {
+  try {
+    return decodeURIComponent(segment);
+  } catch {
+    return segment;
+  }
+}
+
+export function parse(hash: string): Route {
   const raw = hash.replace(/^#/, '') || '/';
   const [pathPart, queryPart = ''] = raw.split('?');
   const path = pathPart.startsWith('/') ? pathPart : `/${pathPart}`;
   return {
     path,
-    segments: path.split('/').filter(Boolean).map(decodeURIComponent),
+    segments: path.split('/').filter(Boolean).map(decodeSegment),
     query: new URLSearchParams(queryPart),
   };
 }
 
+/**
+ * Number of in-app navigations that history.back() can undo. It is stored in each history
+ * entry's state, so it stays right after going back, forward or reloading. (Counting
+ * popstate events does not work: assigning location.hash fires popstate too.)
+ */
+function entryDepth(): number {
+  const state = window.history.state as { pqDepth?: unknown } | null;
+  return typeof state?.pqDepth === 'number' ? state.pqDepth : 0;
+}
+
 let currentHash = typeof window !== 'undefined' ? window.location.hash : '';
 let currentRoute = parse(currentHash);
-/** Number of in-app navigations that can be undone with history.back(). */
-let depth = 0;
+let depth = typeof window !== 'undefined' ? entryDepth() : 0;
 const listeners = new Set<() => void>();
 
 function emit() {
   for (const l of listeners) l();
 }
 
+/** Reads the route and depth from the current history entry. */
+function sync() {
+  depth = entryDepth();
+  if (window.location.hash === currentHash) return;
+  currentHash = window.location.hash;
+  currentRoute = parse(currentHash);
+  emit();
+}
+
 if (typeof window !== 'undefined') {
-  window.addEventListener('hashchange', () => {
-    currentHash = window.location.hash;
-    currentRoute = parse(currentHash);
-    emit();
-  });
-  window.addEventListener('popstate', () => {
-    depth = Math.max(0, depth - 1);
-  });
+  window.addEventListener('hashchange', sync);
+  window.addEventListener('popstate', sync);
 }
 
 function subscribe(cb: () => void) {
@@ -55,12 +76,10 @@ export function useRoute(): Route {
 export function navigate(to: string, opts: { replace?: boolean } = {}) {
   const hash = `#${to}`;
   if (hash === window.location.hash) return;
-  if (opts.replace) {
-    window.location.replace(hash);
-  } else {
-    depth += 1;
-    window.location.hash = to;
-  }
+  // pushState/replaceState fire neither hashchange nor popstate, so sync() is called directly.
+  if (opts.replace) window.history.replaceState({ pqDepth: depth }, '', hash);
+  else window.history.pushState({ pqDepth: depth + 1 }, '', hash);
+  sync();
   window.scrollTo({ top: 0 });
 }
 

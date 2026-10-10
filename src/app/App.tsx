@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useMemo } from 'react';
+import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { Nav } from './Nav';
 import { navigate, useRoute } from './router';
@@ -47,6 +47,9 @@ function isImmersive(segments: string[]): boolean {
 function Screen() {
   const route = useRoute();
   const [a, b, c] = route.segments;
+  // Session screens build their exercises once; a new query (e.g. ?mode=quick → ?mode=extra)
+  // must start a new session. Other screens are remounted per path by the error boundary.
+  const queryKey = route.query.toString();
   switch (a) {
     case undefined:
       return <HomeScreen />;
@@ -57,9 +60,9 @@ function Screen() {
     case 'lesson':
       return <LessonScreen lessonId={b} />;
     case 'review':
-      return b === 'session' ? <ReviewSessionScreen query={route.query} /> : <ReviewScreen />;
+      return b === 'session' ? <ReviewSessionScreen key={queryKey} query={route.query} /> : <ReviewScreen />;
     case 'audio':
-      return b ? <AudioSessionScreen mode={b} query={route.query} /> : <AudioQuestScreen />;
+      return b ? <AudioSessionScreen key={queryKey} mode={b} query={route.query} /> : <AudioQuestScreen />;
     case 'progress':
       return <ProgressScreen />;
     case 'settings':
@@ -120,7 +123,13 @@ function Shell() {
   const { settings } = useSettings();
   const immersive = isImmersive(route.segments);
   const cards = useLiveQuery(() => db.cards.where('courseId').equals(settings.activeCourse).toArray(), [settings.activeCourse]);
-  const due = useMemo(() => (cards ? cards.filter((c) => isDue(c, Date.now())).length : 0), [cards]);
+  // Cards become due with time (e.g. 10 minutes after a lesson), not only when the table changes.
+  const [minute, setMinute] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setMinute((m) => m + 1), 60_000);
+    return () => clearInterval(id);
+  }, []);
+  const due = useMemo(() => (cards ? cards.filter((c) => isDue(c, Date.now())).length : 0), [cards, minute]); // eslint-disable-line react-hooks/exhaustive-deps
   useBackgroundTasks();
 
   useEffect(() => {

@@ -49,8 +49,11 @@ test.describe('learning loop', () => {
     await expect(lessonsDone(page, 1)).toBeVisible();
     await page.getByRole('navigation').getByRole('link', { name: 'Powtórki' }).click();
     await expect(page.getByRole('heading', { name: 'Wszystkie elementy' })).toBeVisible();
-    // An extra-practice review runs end to end and returns to a summary.
-    await page.goto('./#/review/session?mode=extra');
+    // Right after the lesson nothing is due yet; the empty state offers extra practice,
+    // which must start a session (only the query changes, so the screen has to restart).
+    await page.goto('./#/review/session?mode=standard');
+    await page.getByRole('button', { name: 'Dodatkowa praktyka' }).click();
+    await expect(page.locator('.session')).toBeVisible();
     await playSession(page);
     await expect(page.getByText('Powtórka zakończona')).toBeVisible();
   });
