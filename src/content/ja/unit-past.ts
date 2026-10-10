@@ -1,0 +1,763 @@
+import type { Item, Unit } from '../types';
+import { contentHelpers } from '../helpers';
+import { kanji } from './kanji';
+
+const { sentence: s } = contentHelpers('ja');
+
+/** Word or phrase. Items written with kanji pass their kana `reading` explicitly. */
+const p = (id: string, text: string, pl: string, extra: Partial<Item> = {}): Item => ({
+  id: `ja.${id}`,
+  kind: 'phrase',
+  text,
+  reading: text.replace(/[〜~]/g, ''),
+  pl,
+  ...extra,
+});
+
+export const unitPast: Unit = {
+  id: 'ja.u5',
+  title: 'Przeszłość i liczenie',
+  description: 'Czas przeszły czasowników i przymiotników, opowiadanie o weekendzie, liczenie rzeczy i osób — z kolejnymi kanji.',
+  level: 'A2',
+  lessons: [
+    {
+      id: 'ja.l19',
+      title: 'Co robiłeś wczoraj?',
+      subtitle: 'きのう なにを しましたか',
+      objective: 'Opowiesz, co robiłeś / robiłaś wczoraj, w zeszłym tygodniu i w zeszłym roku, i zapytasz o to rozmówcę — formami 〜ました i 〜ませんでした.',
+      level: 'A2 (JF) / N5',
+      minutes: 11,
+      items: [
+        kanji('ima', '今', 'teraz; obecny', 'いま・こん', ['コン'], ['いま'], [
+          { text: '{今|いま}', pl: 'teraz' },
+          { text: '{今日|きょう}', pl: 'dziś' },
+          { text: '{今週|こんしゅう}', pl: 'ten tydzień; w tym tygodniu' },
+        ], { plAlts: ['teraz', 'obecny', 'bieżący'], note: 'Czytania nieregularne: 今日 = きょう, 今年 = ことし.' }),
+        kanji('toshi', '年', 'rok', 'ねん・とし', ['ネン'], ['とし'], [
+          { text: '{今年|ことし}', pl: 'ten rok; w tym roku' },
+          { text: '{来年|らいねん}', pl: 'przyszły rok; w przyszłym roku' },
+          { text: '{去年|きょねん}', pl: 'zeszły rok; w zeszłym roku' },
+        ]),
+        kanji('saki', '先', 'poprzedni; wcześniejszy', 'せん・さき', ['セン'], ['さき'], [
+          { text: '{先週|せんしゅう}', pl: 'zeszły tydzień; w zeszłym tygodniu' },
+          { text: '{先月|せんげつ}', pl: 'zeszły miesiąc; w zeszłym miesiącu' },
+          { text: '{先生|せんせい}', pl: 'nauczyciel (dosł. „urodzony wcześniej”)' },
+        ], { plAlts: ['poprzedni', 'wcześniejszy', 'wcześniej', 'naprzód'] }),
+        kanji('shuu', '週', 'tydzień', 'しゅう', ['シュウ'], [], [
+          { text: '{来週|らいしゅう}', pl: 'przyszły tydzień; w przyszłym tygodniu' },
+          { text: '{毎週|まいしゅう}', pl: 'co tydzień' },
+          { text: '{週末|しゅうまつ}', pl: 'weekend' },
+        ]),
+        kanji('rai', '来', 'przychodzić; następny', 'らい・く', ['ライ'], ['く(る)', 'き(ます)', 'こ(ない)'], [
+          { text: '{来|き}ます', pl: 'przychodzić; przyjeżdżać' },
+          { text: '{来週|らいしゅう}', pl: 'przyszły tydzień' },
+          { text: '{来年|らいねん}', pl: 'przyszły rok' },
+        ], { plAlts: ['przychodzić', 'przyjść', 'następny', 'przyszły'], note: 'Od teraz czasownik きます (przychodzić) zapisujemy 来ます.' }),
+        kanji('mai', '毎', 'każdy; co (dzień, tydzień)', 'まい', ['マイ'], [], [
+          { text: '{毎日|まいにち}', pl: 'codziennie' },
+          { text: '{毎週|まいしゅう}', pl: 'co tydzień' },
+          { text: '{毎朝|まいあさ}', pl: 'co rano' },
+        ], { plAlts: ['każdy'] }),
+        p('kinou', 'きのう', 'wczoraj'),
+        p('kesa', 'けさ', 'dziś rano', {
+          plAlts: ['dzisiaj rano', 'tego ranka'],
+          note: 'W kanji 今朝 — czytanie nieregularne, dlatego na razie piszemy kaną.',
+        }),
+        p('senshuu', '{先週|せんしゅう}', 'w zeszłym tygodniu', { reading: 'せんしゅう', plAlts: ['zeszły tydzień', 'w ubiegłym tygodniu', 'ubiegły tydzień'] }),
+        p('kyonen', 'きょねん', 'w zeszłym roku', {
+          plAlts: ['zeszły rok', 'ubiegły rok', 'w ubiegłym roku'],
+          note: 'Ten rok: 今年 (ことし), przyszły rok: 来年 (らいねん).',
+        }),
+        p('shimasu', 'します', 'robić', {
+          plAlts: ['robię', 'zrobić', 'uprawiać (sport)'],
+          note: 'Przeszłość: しました, przeczenie: しませんでした. Z nazwą czynności: テニスを します — gram w tenisa.',
+        }),
+        p('eiga', 'えいが', 'film', { plAlts: ['kino'], note: 'えいがを みます — oglądać film.' }),
+        p('nanimo', 'なにも', 'nic (z przeczeniem)', {
+          plAlts: ['nic'],
+          note: 'Zawsze z czasownikiem przeczącym: なにも しませんでした — nic nie robiłem / nie robiłam.',
+        }),
+      ],
+      sentences: [
+        s('19-1', 'きのう なにを しましたか。', 'Co robiłeś / robiłaś wczoraj?', {
+          romaji: 'kinou nani o shimashita ka.',
+          plAlts: ['Co robiłeś wczoraj?', 'Co robiłaś wczoraj?', 'Co pan robił wczoraj?', 'Co pani robiła wczoraj?'],
+          tokens: ['きのう', 'なに', 'を', 'しましたか'],
+        }),
+        s('19-2', 'ともだちと えいがを みました。', 'Obejrzałem / obejrzałam film z przyjacielem.', {
+          romaji: 'tomodachi to eiga o mimashita.',
+          plAlts: ['Obejrzałem film z przyjacielem.', 'Obejrzałam film z przyjaciółką.', 'Oglądałem film z kolegą.', 'Oglądałam film z koleżanką.'],
+          note: 'と = z (kimś)',
+          tokens: ['ともだち', 'と', 'えいが', 'を', 'みました'],
+        }),
+        s('19-3', 'けさは コーヒーを のみませんでした。', 'Dziś rano nie piłem / nie piłam kawy.', {
+          romaji: 'kesa wa koohii o nomimasen deshita.',
+          plAlts: ['Dziś rano nie piłem kawy.', 'Dziś rano nie piłam kawy.'],
+          tokens: ['けさ', 'は', 'コーヒー', 'を', 'のみませんでした'],
+        }),
+        s('19-4', '{先週|せんしゅう}の {土曜日|どようび}に きょうとへ いきました。', 'W zeszłą sobotę pojechałem / pojechałam do Kioto.', {
+          romaji: 'senshuu no doyoubi ni kyouto e ikimashita.',
+          plAlts: ['W zeszłą sobotę pojechałem do Kioto.', 'W zeszłą sobotę pojechałam do Kioto.', 'W ubiegłą sobotę byłem w Kioto.', 'W ubiegłą sobotę byłam w Kioto.'],
+          tokens: ['{先週|せんしゅう}', 'の', '{土曜日|どようび}', 'に', 'きょうと', 'へ', 'いきました'],
+        }),
+        s('19-5', 'きょねん とうきょうで にほんごを べんきょうしました。', 'W zeszłym roku uczyłem / uczyłam się japońskiego w Tokio.', {
+          romaji: 'kyonen toukyou de nihongo o benkyou shimashita.',
+          plAlts: ['W zeszłym roku uczyłem się japońskiego w Tokio.', 'W zeszłym roku uczyłam się japońskiego w Tokio.'],
+          tokens: ['きょねん', 'とうきょう', 'で', 'にほんご', 'を', 'べんきょうしました'],
+        }),
+        s('19-6', 'きのうは なにも しませんでした。', 'Wczoraj nic nie robiłem / nie robiłam.', {
+          romaji: 'kinou wa nani mo shimasen deshita.',
+          plAlts: ['Wczoraj nic nie robiłem.', 'Wczoraj nic nie robiłam.'],
+          tokens: ['きのう', 'は', 'なにも', 'しませんでした'],
+        }),
+        s('19-7', '{毎週|まいしゅう} {日曜日|にちようび}に テニスを します。', 'W każdą niedzielę gram w tenisa.', {
+          romaji: 'maishuu nichiyoubi ni tenisu o shimasu.',
+          plAlts: ['Co niedzielę gram w tenisa.', 'Co tydzień w niedzielę gram w tenisa.'],
+          tokens: ['{毎週|まいしゅう}', '{日曜日|にちようび}', 'に', 'テニス', 'を', 'します'],
+        }),
+        s('19-8', '{来週|らいしゅう} また {来|き}ます。', 'Przyjdę znowu w przyszłym tygodniu.', {
+          romaji: 'raishuu mata kimasu.',
+          plAlts: ['Przyjdę jeszcze raz w przyszłym tygodniu.', 'Przyjadę znowu w przyszłym tygodniu.'],
+          tts: 'らいしゅう また きます。',
+          tokens: ['{来週|らいしゅう}', 'また', '{来|き}ます'],
+        }),
+      ],
+      grammar: [
+        {
+          id: 'ja.g.past-masu',
+          title: 'Przeszłość: 〜ました i 〜ませんでした',
+          body: [
+            'Czas przeszły tworzymy, zamieniając [[ます]] na [[ました]]: [[みます]] → [[みました]] (oglądałem / obejrzałem). Przeczenie w przeszłości: [[ません]] → [[ませんでした]]: [[みませんでした]] (nie oglądałem).',
+            'Pytamy jak zawsze — z [[か]] na końcu: [[きのう なにを しましたか。]] Odpowiadamy tym samym czasownikiem: [[えいがを みました。]] albo [[いいえ、みませんでした。]]',
+            'Tak samo odmieniają się wszystkie czasowniki, także [[あります]] → [[ありました]], [[います]] → [[いました]] i [[べんきょうします]] → [[べんきょうしました]].',
+            'Z przeczeniem: [[なにも]] — nic, [[どこも]] — nigdzie: [[きのうは なにも しませんでした。]] — Wczoraj nic nie robiłem.',
+          ],
+          table: {
+            head: ['', 'teraz / przyszłość', 'przeszłość'],
+            rows: [
+              ['twierdząco', 'のみます', 'のみました'],
+              ['przecząco', 'のみません', 'のみませんでした'],
+              ['pytanie', 'のみますか', 'のみましたか'],
+            ],
+          },
+          contrast: 'Po polsku czas przeszły zmienia się przez rodzaj i osobę („piłem”, „piłaś”, „pili”), a do tego wybieramy aspekt („piłem” czy „wypiłem”). Japońskie のみました jest jedno dla wszystkich: kto pił i czy skończył, wynika z kontekstu.',
+        },
+        {
+          id: 'ja.g.time-words',
+          title: 'Słowa czasu: きのう, 先週, きょねん…',
+          body: [
+            'Słowa czasu stoją zwykle na początku zdania albo zaraz po temacie: [[きのう えいがを みました。]]',
+            'Określenia względne — [[きのう]], [[けさ]], [[{先週|せんしゅう}]], [[きょねん]], [[{来週|らいしゅう}]], [[{毎日|まいにち}]] — występują **bez に**. Konkretny punkt w czasie (godzina, dzień tygodnia, data) dostaje **に**: [[{日曜日|にちようび}に]], [[{七|しち}じに]].',
+            'Z [[は]] słowo czasu staje się tematem albo kontrastem: [[きのうは なにも しませんでした。]] — Wczoraj (akurat) nic nie robiłem.',
+            'Kanji porządkują całe rodziny słów: **先** — poprzedni, **今** — obecny, **来** — następny.',
+          ],
+          table: {
+            head: ['', 'poprzedni', 'obecny', 'następny'],
+            rows: [
+              ['dzień', 'きのう', '今日 (きょう)', 'あした'],
+              ['tydzień', '先週 (せんしゅう)', '今週 (こんしゅう)', '来週 (らいしゅう)'],
+              ['miesiąc', '先月 (せんげつ)', '今月 (こんげつ)', '来月 (らいげつ)'],
+              ['rok', 'きょねん', '今年 (ことし)', '来年 (らいねん)'],
+            ],
+          },
+          contrast: 'Po polsku mówimy „w zeszłym tygodniu”, „w tym roku” — z przyimkiem. Japońskie odpowiedniki stoją same, bez partykuły: ✗ 先週に → ✓ 先週. に dodajemy dopiero przy konkretnym punkcie w czasie: 日曜日に, 七じに.',
+        },
+      ],
+      exercises: [
+        {
+          type: 'gap',
+          id: 'ja.x.19-1',
+          concept: 'ja.g.past-masu',
+          sentence: 'きのう テレビを ___。',
+          pl: 'Wczoraj nie oglądałem / nie oglądałam telewizji.',
+          options: ['みません', 'みました', 'みませんでした'],
+          answer: 'みませんでした',
+          explanation: 'Przeszłość przecząca: 〜ませんでした. みません to „nie oglądam”, a みました — „oglądałem / oglądałam”.',
+        },
+        {
+          type: 'choice',
+          id: 'ja.x.19-2',
+          concept: 'ja.g.time-words',
+          prompt: 'Które zdanie jest poprawne?',
+          options: ['{先週|せんしゅう}に えいがを みました。', '{先週|せんしゅう} えいがを みました。', '{先週|せんしゅう}で えいがを みました。'],
+          answer: 1,
+          explanation: 'Względne słowa czasu (きのう, 先週, きょねん) występują bez partykuły: 先週 えいがを みました. に dodajemy przy dniach tygodnia i godzinach.',
+        },
+        {
+          type: 'gap',
+          id: 'ja.x.19-3',
+          concept: 'ja.g.past-masu',
+          sentence: 'けさ なんじに ___か。',
+          pl: 'O której wstałeś / wstałaś dziś rano?',
+          options: ['おきました', 'おきます', 'おきませんでした'],
+          answer: 'おきました',
+          explanation: 'Pytanie o przeszłość: 〜ましたか — おきましたか (o której wstałeś / wstałaś?).',
+        },
+        {
+          type: 'choice',
+          id: 'ja.x.19-4',
+          concept: 'ja.g.past-masu',
+          prompt: 'Kolega pyta: きのう なにを しましたか. Cały dzień byłeś / byłaś w domu i nic nie robiłeś / robiłaś. Co odpowiesz?',
+          target: 'きのう なにを しましたか。',
+          options: ['なにを しましたか。', 'なにも しません。', 'なにも しませんでした。'],
+          answer: 2,
+          explanation: 'Przeszłość przecząca z なにも: なにも しませんでした — nic nie robiłem / nie robiłam. なにも しません mówi o teraźniejszości lub przyszłości.',
+        },
+      ],
+      dialogue: {
+        id: 'ja.d.19',
+        title: 'Poniedziałek w biurze',
+        context: 'W poniedziałek rano Marta rozmawia w biurze z kolegą, Shōtą.',
+        speakers: {
+          S: { name: 'Shōta', voice: 'b', accent: 'ja-JP' },
+          M: { name: 'Marta', voice: 'a', accent: 'ja-JP' },
+        },
+        lines: [
+          {
+            speaker: 'S',
+            text: 'マルタさん、おはよう ございます。{土曜日|どようび}は なにを しましたか。',
+            pl: 'Dzień dobry, Marto. Co robiłaś w sobotę?',
+            romaji: 'maruta-san, ohayou gozaimasu. doyoubi wa nani o shimashita ka.',
+          },
+          {
+            speaker: 'M',
+            text: 'ともだちと きょうとへ いきました。おてらを みました。',
+            pl: 'Pojechałam z przyjaciółką do Kioto. Oglądałyśmy świątynie.',
+            romaji: 'tomodachi to kyouto e ikimashita. otera o mimashita.',
+          },
+          {
+            speaker: 'S',
+            text: 'いいですね。{日曜日|にちようび}も きょうとに いましたか。',
+            pl: 'Super. W niedzielę też byłaś w Kioto?',
+            romaji: 'ii desu ne. nichiyoubi mo kyouto ni imashita ka.',
+          },
+          {
+            speaker: 'M',
+            text: 'いいえ、{日曜日|にちようび}の あさ かえりました。しょうたさんは?',
+            pl: 'Nie, wróciłam w niedzielę rano. A ty?',
+            romaji: 'iie, nichiyoubi no asa kaerimashita. shouta-san wa?',
+          },
+          {
+            speaker: 'S',
+            text: 'わたしは どこも いきませんでした。うちで えいがを みました。',
+            pl: 'Ja nigdzie nie pojechałem. Obejrzałem w domu film.',
+            romaji: 'watashi wa doko mo ikimasen deshita. uchi de eiga o mimashita.',
+          },
+          {
+            speaker: 'M',
+            text: 'そうですか。わたしは {来週|らいしゅう} また きょうとへ いきます!',
+            pl: 'Ach tak. A ja w przyszłym tygodniu znowu jadę do Kioto!',
+            romaji: 'sou desu ka. watashi wa raishuu mata kyouto e ikimasu!',
+          },
+        ],
+        questions: [
+          {
+            id: 'ja.d.19-q1',
+            prompt: 'Dokąd Marta pojechała w sobotę?',
+            options: ['Do Tokio', 'Do Kioto', 'Nigdzie'],
+            answer: 1,
+            explanation: 'ともだちと きょうとへ いきました — pojechałam z przyjaciółką do Kioto.',
+          },
+          {
+            id: 'ja.d.19-q2',
+            prompt: 'Co robił Shōta w weekend?',
+            options: ['Też był w Kioto', 'Grał w tenisa', 'Obejrzał w domu film'],
+            answer: 2,
+            explanation: 'どこも いきませんでした。うちで えいがを みました — nigdzie nie pojechałem, obejrzałem w domu film.',
+          },
+        ],
+      },
+      summary: [
+        'Przeszłość: 〜ます → 〜ました, 〜ません → 〜ませんでした; pytanie: 〜ましたか.',
+        'Słowa czasu: きのう, けさ, 先週, きょねん, 今年, 来週 — bez に; dni tygodnia i godziny — z に.',
+        'なにも / どこも + przeczenie: なにも しませんでした — nic nie robiłem / nie robiłam.',
+        'Kanji: 今 年 先 週 来 毎 — 今日, 今年, 先週, 来週, 毎日; 来ます.',
+      ],
+    },
+    {
+      id: 'ja.l20',
+      title: 'Jak było?',
+      subtitle: 'どうでしたか',
+      objective: 'Opowiesz, jak było — ocenisz weekend, wycieczkę, hotel czy film przymiotnikami w czasie przeszłym.',
+      level: 'A2 (JF) / N5',
+      minutes: 12,
+      items: [
+        kanji('taka', '高', 'wysoki; drogi', 'たか・こう', ['コウ'], ['たか(い)'], [
+          { text: '{高|たか}い', pl: 'wysoki; drogi' },
+          { text: '{高校|こうこう}', pl: 'liceum' },
+        ], { plAlts: ['wysoki', 'drogi'] }),
+        kanji('yasu', '安', 'tani; bezpieczny', 'やす・あん', ['アン'], ['やす(い)'], [
+          { text: '{安|やす}い', pl: 'tani' },
+          { text: '{安心|あんしん}', pl: 'spokój; ulga' },
+        ], { plAlts: ['tani', 'bezpieczny'] }),
+        kanji('atara', '新', 'nowy', 'あたら・しん', ['シン'], ['あたら(しい)'], [
+          { text: '{新|あたら}しい', pl: 'nowy' },
+          { text: '{新聞|しんぶん}', pl: 'gazeta' },
+        ]),
+        kanji('furu', '古', 'stary (o rzeczach)', 'ふる・こ', ['コ'], ['ふる(い)'], [
+          { text: '{古|ふる}い', pl: 'stary (o rzeczach)' },
+          { text: '{中古|ちゅうこ}', pl: 'używany (z drugiej ręki)' },
+        ], { plAlts: ['stary', 'dawny'], note: 'Tylko o rzeczach i miejscach: ふるい ホテル. O wieku ludzi ふるい nie mówimy.' }),
+        kanji('naga', '長', 'długi; szef', 'なが・ちょう', ['チョウ'], ['なが(い)'], [
+          { text: '{長|なが}い', pl: 'długi' },
+          { text: '{社長|しゃちょう}', pl: 'prezes (firmy)' },
+        ], { plAlts: ['długi', 'szef', 'kierownik'] }),
+        p('shuumatsu', 'しゅうまつ', 'weekend', { note: 'W kanji: 週末 (週 już znasz).' }),
+        p('ii', 'いい', 'dobry', {
+          plAlts: ['dobre', 'dobra', 'dobrze'],
+          note: 'Nieregularny: przeszłość よかったです, przeczenie よくないです (od starszej formy よい).',
+        }),
+        p('tanoshii', 'たのしい', 'przyjemny; fajny', {
+          plAlts: ['przyjemny', 'fajny', 'zabawny', 'udany'],
+          note: 'O tym, co sami przeżywamy: たのしかったです — było fajnie.',
+        }),
+        p('shizuka', 'しずか', 'cichy; spokojny', { plAlts: ['cichy', 'spokojny'], note: 'Przymiotnik na な: しずかな まち — ciche miasto.' }),
+        p('nigiyaka', 'にぎやか', 'gwarny; tętniący życiem', {
+          plAlts: ['gwarny', 'ruchliwy', 'ożywiony', 'tętniący życiem'],
+          note: 'Przymiotnik na な: にぎやかな まち — gwarne miasto.',
+        }),
+        p('kirei', 'きれい', 'ładny; czysty', {
+          plAlts: ['ładny', 'piękny', 'czysty'],
+          note: 'Kończy się na -い, ale to przymiotnik na な: きれいな はな, きれいでした.',
+        }),
+        p('yuumei', 'ゆうめい', 'sławny; znany', { plAlts: ['sławny', 'znany', 'słynny'], note: 'Przymiotnik na な: ゆうめいな おてら — słynna świątynia.' }),
+        p('hima', 'ひま', 'wolny (mający czas)', {
+          plAlts: ['wolny', 'mający czas', 'mam czas'],
+          note: 'Przymiotnik na な: ひまな 日 — wolny dzień. Przeciwieństwo: いそがしい (zajęty).',
+        }),
+      ],
+      sentences: [
+        s('20-1', 'しゅうまつは どうでしたか。', 'Jak minął weekend?', {
+          romaji: 'shuumatsu wa dou deshita ka.',
+          plAlts: ['Jak było w weekend?', 'Jak tam weekend?'],
+          tokens: ['しゅうまつ', 'は', 'どう', 'でしたか'],
+        }),
+        s('20-2', 'きょうとは とても たのしかったです。', 'W Kioto było bardzo fajnie.', {
+          romaji: 'kyouto wa totemo tanoshikatta desu.',
+          plAlts: ['W Kioto było bardzo przyjemnie.', 'Wyjazd do Kioto był bardzo udany.'],
+          tokens: ['きょうと', 'は', 'とても', 'たのしかったです'],
+        }),
+        s('20-3', '{新|あたら}しい ホテルは {高|たか}かったです。', 'Nowy hotel był drogi.', {
+          romaji: 'atarashii hoteru wa takakatta desu.',
+          tokens: ['{新|あたら}しい', 'ホテル', 'は', '{高|たか}かったです'],
+        }),
+        s('20-4', 'えいがは ちょっと {長|なが}かったです。', 'Film był trochę za długi.', {
+          romaji: 'eiga wa chotto nagakatta desu.',
+          plAlts: ['Film był trochę długi.', 'Film był nieco za długi.'],
+          tokens: ['えいが', 'は', 'ちょっと', '{長|なが}かったです'],
+        }),
+        s('20-5', 'しゅうまつは あまり よくなかったです。', 'Weekend nie był zbyt udany.', {
+          romaji: 'shuumatsu wa amari yoku nakatta desu.',
+          plAlts: ['Weekend nie był zbyt dobry.', 'Weekend był niezbyt udany.'],
+          tokens: ['しゅうまつ', 'は', 'あまり', 'よくなかったです'],
+        }),
+        s('20-6', 'きょうとの {古|ふる}い おてらは しずかでした。', 'Stara świątynia w Kioto była cicha.', {
+          romaji: 'kyouto no furui otera wa shizuka deshita.',
+          plAlts: ['Stara świątynia w Kioto była spokojna.', 'W starej świątyni w Kioto było cicho.'],
+          tokens: ['きょうと', 'の', '{古|ふる}い', 'おてら', 'は', 'しずかでした'],
+        }),
+        s('20-7', 'きのうは ひまじゃなかったです。', 'Wczoraj nie miałem / nie miałam wolnego czasu.', {
+          romaji: 'kinou wa hima janakatta desu.',
+          plAlts: ['Wczoraj nie miałem wolnego czasu.', 'Wczoraj nie miałam wolnego czasu.', 'Wczoraj nie miałem czasu.', 'Wczoraj nie miałam czasu.'],
+          tokens: ['きのう', 'は', 'ひま', 'じゃなかったです'],
+        }),
+        s('20-8', 'ゆうめいな レストランで すしを たべました。', 'Zjadłem / zjadłam sushi w słynnej restauracji.', {
+          romaji: 'yuumei na resutoran de sushi o tabemashita.',
+          plAlts: ['Zjadłem sushi w słynnej restauracji.', 'Zjadłam sushi w słynnej restauracji.', 'Jadłem sushi w znanej restauracji.', 'Jadłam sushi w znanej restauracji.'],
+          tokens: ['ゆうめいな', 'レストラン', 'で', 'すし', 'を', 'たべました'],
+        }),
+      ],
+      grammar: [
+        {
+          id: 'ja.g.i-adj-past',
+          title: 'Przymiotniki na -い w przeszłości',
+          body: [
+            'Przymiotnik na -い sam niesie czas przeszły: końcówkę -い zamieniamy na [[かった]], a [[です]] zostaje bez zmian: [[たのしい]] → [[たのしかったです]] — było fajnie.',
+            'Przeczenie w przeszłości: -い → [[くなかった]]: [[{高|たか}い]] → [[{高|たか}くなかったです]] — nie był drogi.',
+            'Wyjątek: [[いい]] odmienia się od starszej formy よい: [[よかったです]] (było dobrze), [[よくなかったです]] (nie było dobrze).',
+            'O wrażenia pytamy: [[どうでしたか。]] — Jak było?',
+          ],
+          table: {
+            head: ['', 'teraz', 'przeszłość'],
+            rows: [
+              ['+', 'たかいです', 'たかかったです'],
+              ['−', 'たかくないです', 'たかくなかったです'],
+              ['いい +', 'いいです', 'よかったです'],
+              ['いい −', 'よくないです', 'よくなかったです'],
+            ],
+          },
+          contrast: 'Po polsku czas niesie czasownik „być”: „był drogi”, „było fajnie”. Po japońsku przeszłość niesie sam przymiotnik, a です się nie zmienia. Typowy błąd: ✗ たのしいでした → ✓ たのしかったです.',
+        },
+        {
+          id: 'ja.g.na-adj-past',
+          title: 'Przymiotniki na な i rzeczowniki w przeszłości',
+          body: [
+            'Druga grupa przymiotników dostaje [[な]] przed rzeczownikiem: [[しずかな まち]] — ciche miasto, [[ゆうめいな レストラン]] — słynna restauracja.',
+            'Na końcu zdania zachowują się jak rzeczowniki — czas niesie [[です]]: [[しずかです]] → [[しずかでした]], przeczenie: [[しずかじゃなかったです]] (oficjalniej: じゃありませんでした).',
+            'Tak samo rzeczowniki: [[がくせいでした]] — byłem studentem / byłam studentką, [[{日曜日|にちようび}じゃなかったです]] — to nie była niedziela.',
+            'Uwaga na [[きれい]] i [[ゆうめい]]: kończą się na -い, a jednak to przymiotniki na な: ✓ きれいでした, ✗ きれかったです. Do tej grupy należą też znane ci [[すき]] i [[きらい]]: [[すきでした]].',
+          ],
+          table: {
+            head: ['', 'teraz', 'przeszłość'],
+            rows: [
+              ['+', 'しずかです', 'しずかでした'],
+              ['−', 'しずかじゃないです', 'しずかじゃなかったです'],
+              ['rzeczownik +', 'がくせいです', 'がくせいでした'],
+              ['rzeczownik −', 'がくせいじゃないです', 'がくせいじゃなかったです'],
+            ],
+          },
+          contrast: 'Polski nie dzieli przymiotników na takie grupy. Po japońsku od grupy zależy cała odmiana, dlatego najlepiej uczyć się przymiotników od razu z rzeczownikiem: しずかな まち, たかい ホテル.',
+        },
+      ],
+      exercises: [
+        {
+          type: 'gap',
+          id: 'ja.x.20-1',
+          concept: 'ja.g.i-adj-past',
+          sentence: 'しゅうまつは とても たのし___。',
+          pl: 'Weekend był bardzo udany.',
+          options: ['いでした', 'かったです', 'くなかったです'],
+          answer: 'かったです',
+          explanation: 'Przymiotnik na -い w przeszłości: たのしい → たのしかったです. Forma ✗ たのしいでした jest błędna.',
+        },
+        {
+          type: 'gap',
+          id: 'ja.x.20-2',
+          concept: 'ja.g.na-adj-past',
+          sentence: 'おてらは とても しずか___。',
+          pl: 'Świątynia była bardzo cicha.',
+          options: ['でした', 'かったです', 'じゃないです'],
+          answer: 'でした',
+          explanation: 'しずか to przymiotnik na な — przeszłość niesie です: しずかでした. じゃないです to przeczenie w czasie teraźniejszym.',
+        },
+        {
+          type: 'choice',
+          id: 'ja.x.20-3',
+          concept: 'ja.g.i-adj-past',
+          prompt: 'Jak powiesz „Film był dobry”?',
+          options: ['えいがは いかったです。', 'えいがは いいでした。', 'えいがは よかったです。'],
+          answer: 2,
+          explanation: 'いい ma nieregularną przeszłość: よかったです. Formy いかったです i いいでした są błędne.',
+        },
+        {
+          type: 'choice',
+          id: 'ja.x.20-4',
+          concept: 'ja.g.na-adj-past',
+          prompt: 'Jak powiesz „Kwiaty były piękne”?',
+          options: ['はなは きれかったです。', 'はなは きれいでした。', 'はなは きれいかったです。'],
+          answer: 1,
+          explanation: 'きれい to przymiotnik na な (mimo -い na końcu), więc przeszłość to きれいでした.',
+        },
+      ],
+      dialogue: {
+        id: 'ja.d.20',
+        title: 'Weekend w Kamakurze',
+        context: 'Naomi pyta kolegę z uczelni, Kubę, o jego wycieczkę.',
+        speakers: {
+          N: { name: 'Naomi', voice: 'a', accent: 'ja-JP' },
+          K: { name: 'Kuba', voice: 'b', accent: 'ja-JP' },
+        },
+        lines: [
+          { speaker: 'N', text: 'クバさん、しゅうまつは どうでしたか。', pl: 'Kuba, jak minął weekend?', romaji: 'kuba-san, shuumatsu wa dou deshita ka.' },
+          {
+            speaker: 'K',
+            text: 'かまくらへ いきました。とても たのしかったです。',
+            pl: 'Pojechałem do Kamakury. Było bardzo fajnie.',
+            romaji: 'kamakura e ikimashita. totemo tanoshikatta desu.',
+          },
+          { speaker: 'N', text: 'いいですね。かまくらは にぎやかでしたか。', pl: 'Super. W Kamakurze było gwarno?', romaji: 'ii desu ne. kamakura wa nigiyaka deshita ka.' },
+          {
+            speaker: 'K',
+            text: 'えきの まえは とても にぎやかでした。{古|ふる}い おてらは しずかでした。',
+            pl: 'Przed stacją było bardzo gwarno. A w starej świątyni — cicho.',
+            romaji: 'eki no mae wa totemo nigiyaka deshita. furui otera wa shizuka deshita.',
+          },
+          { speaker: 'N', text: 'ホテルは {高|たか}かったですか。', pl: 'Hotel był drogi?', romaji: 'hoteru wa takakatta desu ka.' },
+          {
+            speaker: 'K',
+            text: 'いいえ、あまり {高|たか}くなかったです。ごはんも おいしかったです。',
+            pl: 'Nie, nie był zbyt drogi. Jedzenie też było smaczne.',
+            romaji: 'iie, amari takaku nakatta desu. gohan mo oishikatta desu.',
+          },
+          { speaker: 'N', text: 'いいですね! わたしも {来月|らいげつ} いきます。', pl: 'Super! Ja też pojadę w przyszłym miesiącu.', romaji: 'ii desu ne! watashi mo raigetsu ikimasu.' },
+        ],
+        questions: [
+          {
+            id: 'ja.d.20-q1',
+            prompt: 'Jak było w starej świątyni?',
+            options: ['Gwarno', 'Cicho', 'Zimno'],
+            answer: 1,
+            explanation: '古い おてらは しずかでした — w starej świątyni było cicho.',
+          },
+          {
+            id: 'ja.d.20-q2',
+            prompt: 'Czy hotel był drogi?',
+            options: ['Nie, niezbyt', 'Tak, bardzo', 'Kuba nie spał w hotelu'],
+            answer: 0,
+            explanation: 'いいえ、あまり 高くなかったです — nie, nie był zbyt drogi.',
+          },
+        ],
+      },
+      summary: [
+        'Przymiotniki na -い: たのしい → たのしかったです; przeczenie: たかくなかったです.',
+        'Wyjątek: いい → よかったです / よくなかったです.',
+        'Przymiotniki na な i rzeczowniki: しずかでした, ひまじゃなかったです, がくせいでした.',
+        'Przed rzeczownikiem: しずかな まち, ゆうめいな レストラン; きれい i ゆうめい to przymiotniki na な.',
+        'Kanji: 高 安 新 古 長 — 高い, 安い, 新しい, 古い, 長い.',
+      ],
+    },
+    {
+      id: 'ja.l21',
+      title: 'Ile?',
+      subtitle: 'いくつですか',
+      objective: 'Policzysz rzeczy i osoby właściwymi licznikami (〜つ, 〜人, 〜まい, 〜本), zapytasz „ile?” i zamówisz kilka sztuk.',
+      level: 'A2 (JF) / N5',
+      minutes: 12,
+      items: [
+        kanji('nani', '何', 'co', 'なに・なん', [], ['なに', 'なん'], [
+          { text: '{何|なん}ですか', pl: 'co to jest?' },
+          { text: '{何|なに}を {食|た}べますか', pl: 'co zjesz?' },
+          { text: '{何本|なんぼん}', pl: 'ile (długich rzeczy)?' },
+        ], { note: 'Czytamy なに (なにを) albo なん — przed です i przed licznikami: なんですか, なんにん (ile osób?).' }),
+        kanji('hon', '本', 'książka; początek', 'ほん', ['ホン'], ['もと'], [
+          { text: '{本|ほん}', pl: 'książka' },
+          { text: '{日本|にほん}', pl: 'Japonia' },
+          { text: '{一本|いっぽん}', pl: 'jedna (długa rzecz)' },
+        ], { plAlts: ['książka', 'początek', 'źródło'], note: 'Też licznik długich przedmiotów: 〜本 (ほん / ぼん / ぽん).' }),
+        kanji('han', '半', 'pół', 'はん', ['ハン'], ['なか(ば)'], [
+          { text: '{半分|はんぶん}', pl: 'połowa' },
+          { text: '{三時半|さんじはん}', pl: '3:30' },
+        ], { plAlts: ['wpół'] }),
+        kanji('fun', '分', 'minuta; część', 'ふん・ぶん', ['フン', 'ブン'], ['わ(かる)', 'わ(ける)'], [
+          { text: '{五分|ごふん}', pl: 'pięć minut' },
+          { text: '{半分|はんぶん}', pl: 'połowa' },
+          { text: '{分|わ}かります', pl: 'rozumiem' },
+        ], {
+          plAlts: ['minuta', 'część', 'rozumieć'],
+          note: 'Minuty: ごふん, にふん, ale いっぷん, さんぷん, よんぷん, ろっぷん, じゅっぷん.',
+        }),
+        p('tsu', '〜つ', 'licznik ogólny (sztuki)', {
+          tts: 'みっつ',
+          alts: ['みっつ'],
+          note: 'ひとつ, ふたつ, みっつ, よっつ, いつつ, むっつ, ななつ, やっつ, ここのつ, とお (10). Od 11 — zwykłe liczby.',
+        }),
+        p('ikutsu', 'いくつ', 'ile (sztuk)?', {
+          plAlts: ['ile sztuk'],
+          note: 'Pytanie do licznika 〜つ. Grzecznie także o wiek: おいくつですか — ile ma pan / pani lat?',
+        }),
+        p('hitori', '{一人|ひとり}', 'jedna osoba; sam', {
+          reading: 'ひとり',
+          tts: 'ひとり',
+          plAlts: ['jedna osoba', 'sam', 'sama', 'w pojedynkę'],
+          note: 'Nieregularne! ひとりで — samemu, w pojedynkę.',
+        }),
+        p('futari', '{二人|ふたり}', 'dwie osoby; we dwoje', {
+          reading: 'ふたり',
+          tts: 'ふたり',
+          plAlts: ['dwie osoby', 'we dwoje', 'dwoje'],
+          note: 'Nieregularne. Od trzech osób: さんにん, よにん (!), ごにん…',
+        }),
+        p('nin', '〜{人|にん}', 'licznik osób (od trzech)', {
+          reading: 'にん',
+          tts: 'さんにん',
+          alts: ['{三人|さんにん}'],
+          note: 'さんにん, よにん, ごにん, ろくにん, ななにん (też しちにん), はちにん, きゅうにん, じゅうにん. Ile osób? — なんにん.',
+        }),
+        p('mai', '〜まい', 'licznik płaskich przedmiotów', {
+          tts: 'にまい',
+          alts: ['にまい'],
+          note: 'Bilety, znaczki, zdjęcia, kartki, koszule: いちまい, にまい, さんまい… W kanji: 枚.',
+        }),
+        p('hon-counter', '〜{本|ほん}', 'licznik długich przedmiotów', {
+          reading: 'ほん',
+          tts: 'いっぽん',
+          alts: ['ぼん', 'ぽん', '{一本|いっぽん}'],
+          note: 'Butelki, ołówki, parasole: いっぽん, にほん, さんぼん, よんほん, ごほん, ろっぽん, ななほん, はっぽん, きゅうほん, じゅっぽん.',
+        }),
+        p('ringo', 'りんご', 'jabłko'),
+        p('kippu', 'きっぷ', 'bilet', { note: 'Bilety liczymy na 〜まい: きっぷを にまい.' }),
+      ],
+      sentences: [
+        s('21-1', 'りんごを {三|みっ}つ ください。', 'Poproszę trzy jabłka.', {
+          romaji: 'ringo o mittsu kudasai.',
+          tts: 'りんごを みっつ ください。',
+          tokens: ['りんご', 'を', '{三|みっ}つ', 'ください'],
+        }),
+        s('21-2', 'きっぷを {二|に}まい ください。', 'Poproszę dwa bilety.', {
+          romaji: 'kippu o nimai kudasai.',
+          tts: 'きっぷを にまい ください。',
+          tokens: ['きっぷ', 'を', '{二|に}まい', 'ください'],
+        }),
+        s('21-3', 'ともだちが {二人|ふたり} {来|き}ました。', 'Przyszło dwoje przyjaciół.', {
+          romaji: 'tomodachi ga futari kimashita.',
+          plAlts: ['Przyszło dwóch przyjaciół.', 'Przyszły dwie przyjaciółki.', 'Przyszli dwaj koledzy.'],
+          tts: 'ともだちが ふたり きました。',
+          tokens: ['ともだち', 'が', '{二人|ふたり}', '{来|き}ました'],
+        }),
+        s('21-4', 'こうえんに こどもが {何人|なんにん} いますか。', 'Ile dzieci jest w parku?', {
+          romaji: 'kouen ni kodomo ga nannin imasu ka.',
+          tts: 'こうえんに こどもが なんにん いますか。',
+          tokens: ['こうえん', 'に', 'こども', 'が', '{何人|なんにん}', 'いますか'],
+        }),
+        s('21-5', 'みずを {二本|にほん} ください。', 'Poproszę dwie butelki wody.', {
+          romaji: 'mizu o nihon kudasai.',
+          tts: 'みずを にほん ください。',
+          tokens: ['みず', 'を', '{二本|にほん}', 'ください'],
+        }),
+        s('21-6', 'えんぴつは {何本|なんぼん} ありますか。', 'Ile jest ołówków?', {
+          romaji: 'enpitsu wa nanbon arimasu ka.',
+          plAlts: ['Ile masz ołówków?', 'Ile tu jest ołówków?'],
+          tts: 'えんぴつは なんぼん ありますか。',
+          tokens: ['えんぴつ', 'は', '{何本|なんぼん}', 'ありますか'],
+        }),
+        s('21-7', 'ケーキを {半分|はんぶん} たべました。', 'Zjadłem / zjadłam połowę ciasta.', {
+          romaji: 'keeki o hanbun tabemashita.',
+          plAlts: ['Zjadłem połowę ciasta.', 'Zjadłam połowę ciasta.', 'Zjadłem pół tortu.', 'Zjadłam pół tortu.'],
+          tokens: ['ケーキ', 'を', '{半分|はんぶん}', 'たべました'],
+        }),
+        s('21-8', '{今|いま} {三|さん}じ {十五分|じゅうごふん}です。', 'Jest teraz 3:15.', {
+          romaji: 'ima sanji juugofun desu.',
+          plAlts: ['Jest teraz piętnaście po trzeciej.', 'Teraz jest trzecia piętnaście.'],
+          tts: 'いま さんじ じゅうごふんです。',
+          tokens: ['{今|いま}', '{三|さん}じ', '{十五分|じゅうごふん}', 'です'],
+        }),
+      ],
+      grammar: [
+        {
+          id: 'ja.g.counters',
+          title: 'Liczniki: 〜つ, 〜人, 〜まい, 〜本',
+          body: [
+            'Licząc rzeczy, do liczby dodajemy **licznik** — trochę jak po polsku „trzy sztuki”, „dwie butelki”, „pięć kartek”. Wybór licznika zależy od rodzaju albo kształtu rzeczy.',
+            '**〜つ** — licznik ogólny dla rzeczy bez szczególnego kształtu (jabłka, ciastka, zamówienia), tylko do 10, z rodzimymi liczebnikami: [[ひとつ]], [[ふたつ]], [[みっつ]]…',
+            '**〜まい** — rzeczy płaskie: bilety, znaczki, zdjęcia, kartki. **〜本** (ほん) — długie i cienkie: butelki, ołówki, parasole. **〜人** (にん) — ludzie, ale 1 i 2 to wyjątki: [[ひとり]], [[ふたり]].',
+            'Pytamy [[いくつ]] (zamiast 〜つ) albo なん + licznik: [[なんにん]], [[なんまい]], [[なんぼん]].',
+          ],
+          table: {
+            head: ['', '〜つ', '〜人', '〜まい', '〜本'],
+            rows: [
+              ['1', 'ひとつ', 'ひとり', 'いちまい', 'いっぽん'],
+              ['2', 'ふたつ', 'ふたり', 'にまい', 'にほん'],
+              ['3', 'みっつ', 'さんにん', 'さんまい', 'さんぼん'],
+              ['4', 'よっつ', 'よにん', 'よんまい', 'よんほん'],
+              ['5', 'いつつ', 'ごにん', 'ごまい', 'ごほん'],
+              ['6', 'むっつ', 'ろくにん', 'ろくまい', 'ろっぽん'],
+              ['7', 'ななつ', 'ななにん', 'ななまい', 'ななほん'],
+              ['8', 'やっつ', 'はちにん', 'はちまい', 'はっぽん'],
+              ['9', 'ここのつ', 'きゅうにん', 'きゅうまい', 'きゅうほん'],
+              ['10', 'とお', 'じゅうにん', 'じゅうまい', 'じゅっぽん'],
+              ['?', 'いくつ', 'なんにん', 'なんまい', 'なんぼん'],
+            ],
+          },
+          contrast: 'Polski też ma coś podobnego: „dwie sztuki”, „trzy butelki”, a nawet osobne liczebniki dla grup ludzi („dwoje dzieci”, „troje przyjaciół”). Po japońsku licznik jest jednak obowiązkowy i zrasta się z liczbą, czasem zmieniając jej brzmienie: いっぽん, さんぼん, ろっぽん.',
+        },
+        {
+          id: 'ja.g.quantity',
+          title: 'Gdzie stoi liczba? りんごを みっつ ください',
+          body: [
+            'Liczba z licznikiem stoi zwykle **po** rzeczowniku i jego partykule, tuż przed czasownikiem: [[りんごを みっつ ください。]] — Poproszę trzy jabłka. [[ともだちが ふたり きました。]] — Przyszło dwoje przyjaciół.',
+            'Po samej liczbie nie dodajemy partykuły: ✗ みっつを → ✓ りんごを みっつ.',
+            'Tak samo mówimy o połowie: [[ケーキを はんぶん たべました。]] — Zjadłem / zjadłam połowę ciasta.',
+            'Przy minutach (分) brzmienie też się zmienia: [[ごふん]], ale [[いっぷん]], [[さんぷん]], [[じゅっぷん]]. Wpół do: [[{三|さん}じ{半|はん}]] — 3:30.',
+          ],
+          contrast: 'Po polsku liczba stoi przed rzeczownikiem: „trzy jabłka”. Po japońsku zwykle za nim — jak w zamówieniu „jabłka, trzy sztuki”: りんごを みっつ.',
+        },
+      ],
+      exercises: [
+        {
+          type: 'gap',
+          id: 'ja.x.21-1',
+          concept: 'ja.g.counters',
+          sentence: 'きっぷを {二|に}___ ください。',
+          pl: 'Poproszę dwa bilety.',
+          options: ['ほん', 'まい', 'にん'],
+          answer: 'まい',
+          explanation: 'Bilety są płaskie → licznik 〜まい: にまい.',
+        },
+        {
+          type: 'gap',
+          id: 'ja.x.21-2',
+          concept: 'ja.g.counters',
+          sentence: 'えんぴつを ___ ください。',
+          pl: 'Poproszę jeden ołówek.',
+          options: ['いっぽん', 'ひとり', 'いちほん'],
+          answer: 'いっぽん',
+          explanation: 'Ołówek jest długi → licznik 〜本. Przy 1 brzmienie się zmienia: いっぽん (nie ✗ いちほん). ひとり liczy ludzi.',
+        },
+        {
+          type: 'choice',
+          id: 'ja.x.21-3',
+          concept: 'ja.g.counters',
+          prompt: 'Kelner pyta, ile was jest. Jesteście we dwoje. Co odpowiesz?',
+          options: ['ふたつです。', 'ににんです。', 'ふたりです。'],
+          answer: 2,
+          explanation: 'Dwie osoby to ふたり — wyjątek. ✗ ににん nie istnieje, a ふたつ liczy rzeczy.',
+        },
+        {
+          type: 'choice',
+          id: 'ja.x.21-4',
+          concept: 'ja.g.quantity',
+          prompt: 'Jak poprosisz o trzy jabłka?',
+          options: ['みっつを りんご ください。', 'りんごを みっつ ください。', 'りんごを みっつを ください。'],
+          answer: 1,
+          explanation: 'Najpierw rzeczownik z partykułą, potem liczba z licznikiem (bez partykuły): りんごを みっつ ください.',
+        },
+      ],
+      dialogue: {
+        id: 'ja.d.21',
+        title: 'W kawiarni',
+        context: 'Piotr przychodzi z koleżankami do kawiarni i zamawia.',
+        speakers: {
+          T: { name: 'Kelnerka', voice: 'a', accent: 'ja-JP' },
+          P: { name: 'Piotr', voice: 'b', accent: 'ja-JP' },
+        },
+        lines: [
+          { speaker: 'T', text: 'いらっしゃいませ。なんめいさまですか。', pl: 'Witamy! Ile osób?', romaji: 'irasshaimase. nanmei-sama desu ka.' },
+          { speaker: 'P', text: '{三人|さんにん}です。', pl: 'Trzy osoby.', romaji: 'sannin desu.' },
+          { speaker: 'T', text: 'こちらへ どうぞ。', pl: 'Proszę tędy.', romaji: 'kochira e douzo.' },
+          {
+            speaker: 'P',
+            text: 'コーヒーを {三|みっ}つと ケーキを {二|ふた}つ ください。',
+            pl: 'Poproszę trzy kawy i dwa ciastka.',
+            romaji: 'koohii o mittsu to keeki o futatsu kudasai.',
+          },
+          {
+            speaker: 'T',
+            text: 'コーヒー {三|みっ}つと ケーキ {二|ふた}つですね。',
+            pl: 'Trzy kawy i dwa ciastka, tak?',
+            romaji: 'koohii mittsu to keeki futatsu desu ne.',
+          },
+          {
+            speaker: 'P',
+            text: 'あ、すみません。ケーキも {三|みっ}つ ください。',
+            pl: 'Ach, przepraszam. Ciastek też poproszę trzy.',
+            romaji: 'a, sumimasen. keeki mo mittsu kudasai.',
+          },
+          { speaker: 'T', text: 'はい、{分|わ}かりました。', pl: 'Dobrze, rozumiem.', romaji: 'hai, wakarimashita.' },
+        ],
+        questions: [
+          {
+            id: 'ja.d.21-q1',
+            prompt: 'Ile osób przyszło do kawiarni?',
+            options: ['Dwie', 'Trzy', 'Cztery'],
+            answer: 1,
+            explanation: '三人です — trzy osoby.',
+          },
+          {
+            id: 'ja.d.21-q2',
+            prompt: 'Ile ciastek zamówił w końcu Piotr?',
+            options: ['Trzy', 'Dwa', 'Jedno'],
+            answer: 0,
+            explanation: 'Najpierw dwa (二つ), potem się poprawił: ケーキも 三つ ください — ciastek też trzy.',
+          },
+        ],
+      },
+      summary: [
+        'Liczniki: 〜つ (rzeczy, do 10), 〜人 (ludzie: ひとり, ふたり, さんにん, よにん), 〜まい (rzeczy płaskie), 〜本 (długie).',
+        'Zmiany brzmienia: いっぽん, さんぼん, ろっぽん, はっぽん, じゅっぽん; minuty: いっぷん, さんぷん.',
+        'Pytania: いくつ, 何人, なんまい, 何本.',
+        'Szyk: りんごを みっつ ください — liczba po rzeczowniku z partykułą.',
+        'Kanji: 何 本 半 分 — 半分 (połowa), 三じ半, 十五分.',
+      ],
+    },
+  ],
+};

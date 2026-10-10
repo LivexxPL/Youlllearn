@@ -709,7 +709,7 @@ export const unitDaily: Unit = {
         'Środek transportu: でんしゃで, バスで.',
         'Kanji: 人 山 川 口 大 小 上 下 中.',
       ],
-      followUp: 'Gratulacje — to koniec kursu podstawowego! Ćwicz pisanie znaków, rób powtórki i słuchaj historii w Audio Quest.',
+      followUp: 'Gratulacje — masz za sobą poziom A1! Dalej czeka A2: czas przeszły, liczenie, forma て i kolejne kanji. Zrób krótką powtórkę i przejdź do działu „Przeszłość i liczenie”.',
     },
   ],
 };

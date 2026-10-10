@@ -449,7 +449,7 @@ export const unit4: Unit = {
         'Imiesłów: -ar → -ado, -er/-ir → -ido.',
         'Ya (już), todavía no (jeszcze nie), ayer (wczoraj).',
       ],
-      followUp: 'Gratulacje — to koniec kursu podstawowego! Wracaj do powtórek i słuchaj historii w Audio Quest, by utrwalić materiał.',
+      followUp: 'Gratulacje — masz za sobą poziom A1! Dalej czeka A2: plan dnia, zakupy, pogoda i wizyta u lekarza. Zrób krótką powtórkę i przejdź do działu „Dzień po dniu”.',
     },
   ],
 };

@@ -10,7 +10,7 @@ src/
   config/       brand.ts: name, ids, colours (single place to rebrand)
   content/      Courses (es, de, ja): typed data + registry with lookup tables
   engine/       Pure, unit-tested logic: SRS, answer checking, kana/romaji, exercise and
-                session builders, gamification, recommendations, audio playlists
+                session builders, gamification, recommendations, levels, audio playlists
   features/     Screens: home, learn, lesson, session player (14 step types), review,
                 audio (Audio Quest), progress, settings/about, writing (pad, kana chart, notes)
   i18n/         Message catalogue (Polish) + t(), plural rules, formatting
@@ -25,11 +25,12 @@ android/        Capacitor Android project
 
 ## Data flow
 
-1. **Content** (`src/content/<lang>/`) is plain typed data: units → lessons → items,
-   sentences, grammar notes, authored exercises, dialogue, summary. `registry.ts` builds
-   lookup maps (id → item / lesson) once per course. Content validation tests check ids,
-   references, dialogue questions, tile rebuilds and Japanese specifics, and guard against
-   placeholder text.
+1. **Content** (`src/content/<lang>/`) is plain typed data: units (each with a level label:
+   Kana, A1, A2) → lessons → items, sentences, grammar notes, authored exercises, dialogue,
+   summary. `registry.ts` builds lookup maps (id → item / lesson) once per course. Content
+   validation tests check ids, references, dialogue questions, tile rebuilds, that no word or
+   sentence is introduced twice, Japanese specifics (romaji, readings, kanji written with
+   furigana and only after they are taught), and guard against placeholder text.
 2. **Engine** functions turn content + the learner's cards into concrete exercise lists
    (`buildLessonSession`, `buildReviewSession`, Audio Quest builders). They are
    deterministic for a given seed, which makes them testable.
@@ -107,14 +108,17 @@ plural categories via `Intl.PluralRules` (Polish one/few/many/other). Copy is ge
 Add `src/content/<id>/` with units, lessons, stories and an `index.ts` `CourseDefinition`,
 then register it in `registry.ts` and `COURSE_ORDER`. The content tests run on every course
 automatically. Each lesson needs an objective, items, sentences, ≥ 3 graded exercise types
-(the session builder guarantees variety), a summary and, ideally, a dialogue.
+(the session builder guarantees variety), a summary and, ideally, a dialogue. Give every
+unit a `level` (shown on the learning path, used for progress per level and the "start at
+this level" shortcut). New Japanese unit files are picked up by `npm run strokes`
+automatically.
 
 ## Testing
 
 | Layer | Tool | What |
 | --- | --- | --- |
 | Engine, content, services | Vitest (`npm test`) | SRS math, answer checking (accents, typos, ß/umlauts, romaji→kana), kana conversion, session builders for **every** lesson, gamification, recommendations, audio playlists, backup round-trip, stroke hints, brand/config sync, content integrity |
-| App | Playwright (`npm run test:e2e`) | Phone (Pixel 7) and tablet (1180×820): onboarding, full lesson → progress, resume, review, audio flashcards and hands-free player, kana chart, writing practice with autosave, lesson notes, export → reset → import |
+| App | Playwright (`npm run test:e2e`) | Phone (Pixel 7) and tablet (1180×820): onboarding, full lesson → progress, starting at A2 and continuing from there, resume, review, audio flashcards and hands-free player, kana chart, writing practice with autosave, lesson notes, export → reset → import |
 | Visual QA | `SCREENSHOTS=1 npm run test:e2e -- visual` | Screenshot tour on phone (light and dark), tablet and desktop |
 
 ## Performance notes

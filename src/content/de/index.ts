@@ -3,6 +3,8 @@ import { unit1 } from './unit1';
 import { unit2 } from './unit2';
 import { unit3 } from './unit3';
 import { unit4 } from './unit4';
+import { unit5 } from './unit5';
+import { unit6 } from './unit6';
 import { stories } from './stories';
 
 export const german: CourseDefinition = {
@@ -16,8 +18,8 @@ export const german: CourseDefinition = {
   ],
   color: 'var(--lang-de)',
   emblem: 'DE',
-  description: 'Od powitań i rodzajników po czasowniki modalne, celownik i czas Perfekt — krok po kroku, bez tabel na start.',
-  framework: 'CEFR A1 → wstęp do A2',
-  units: [unit1, unit2, unit3, unit4],
+  description: 'Od powitań i rodzajników po czasy przeszłe, zdania podrzędne i porównania — krok po kroku od A1 do A2, bez tabel na start.',
+  framework: 'CEFR A1 → A2',
+  units: [unit1, unit2, unit3, unit4, unit5, unit6],
   stories,
 };

@@ -524,7 +524,7 @@ export const unit4: Unit = {
         'Nieregularne: gegessen, gefahren, gegangen.',
         'Sein przy ruchu: ich bin gefahren, er ist gegangen.',
       ],
-      followUp: 'Gratulacje — to koniec kursu podstawowego! Regularne powtórki i słuchanie historii w Audio Quest pomogą utrwalić materiał.',
+      followUp: 'Gratulacje — masz za sobą poziom A1! Dalej czeka A2: plan dnia, zakupy, pogoda i wizyta u lekarza. Zrób krótką powtórkę i przejdź do działu „Tag für Tag”.',
     },
   ],
 };

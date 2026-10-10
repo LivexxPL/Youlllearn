@@ -1,5 +1,8 @@
-import { expect, test } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
 import { drawStroke, onboard, playSession, playStep } from './helpers';
+
+/** The home screen's "lessons done" tile, e.g. 1/23 (independent of the course length). */
+const lessonsDone = (page: Page, done: number) => page.locator('.stat__value').filter({ hasText: new RegExp(`^${done}/\\d+$`) });
 
 test.describe('first run', () => {
   test('onboarding sets up the course and the home screen answers "what now?"', async ({ page }) => {
@@ -43,13 +46,30 @@ test.describe('learning loop', () => {
     await expect(page.getByText('Lekcja ukończona!')).toBeVisible();
     await page.getByTestId('summary-home').click();
 
-    await expect(page.getByText('1/14')).toBeVisible();
+    await expect(lessonsDone(page, 1)).toBeVisible();
     await page.getByRole('navigation').getByRole('link', { name: 'Powtórki' }).click();
     await expect(page.getByRole('heading', { name: 'Wszystkie elementy' })).toBeVisible();
     // An extra-practice review runs end to end and returns to a summary.
     await page.goto('./#/review/session?mode=extra');
     await playSession(page);
     await expect(page.getByText('Powtórka zakończona')).toBeVisible();
+  });
+
+  test('a learner who knows A1 can start at A2 and keeps going from there', async ({ page }) => {
+    await onboard(page, { courses: ['es'] });
+    await page.getByRole('navigation').getByRole('link', { name: 'Nauka' }).click();
+    await expect(page.locator('.unit__level', { hasText: 'A2' }).first()).toBeVisible();
+    await page.getByTestId('level-jump-A2').click();
+    // The preview says earlier lessons are assumed; the first A2 lesson starts anyway.
+    await expect(page.getByText('Ta lekcja zakłada znajomość poprzednich')).toBeVisible();
+    await page.getByTestId('start-lesson').click();
+    await expect(page).toHaveURL(/#\/lesson\/es\.l15/);
+    await playSession(page);
+    await expect(page.getByText('Lekcja ukończona!')).toBeVisible();
+    await page.getByTestId('summary-home').click();
+    // "Continue" now points at the next A2 lesson, not back at lesson 1.
+    await page.getByTestId('continue').click();
+    await expect(page).toHaveURL(/#\/lesson\/es\.l16/);
   });
 
   test('an interrupted lesson can be resumed', async ({ page }) => {
@@ -133,7 +153,7 @@ test.describe('data safety', () => {
     await page.goto('./#/lesson/es.l01');
     await playSession(page);
     await page.getByTestId('summary-home').click();
-    await expect(page.getByText('1/14')).toBeVisible();
+    await expect(lessonsDone(page, 1)).toBeVisible();
 
     await page.goto('./#/settings');
     const download = page.waitForEvent('download');
@@ -151,12 +171,12 @@ test.describe('data safety', () => {
     await expect(page).toHaveURL(/#\/onboarding/);
 
     await onboard(page, { courses: ['es'] });
-    await expect(page.getByText('0/14')).toBeVisible();
+    await expect(lessonsDone(page, 0)).toBeVisible();
     await page.goto('./#/settings');
     page.once('dialog', (d) => d.accept());
     await page.getByTestId('import-input').setInputFiles(path);
     await expect(page.getByText('Import zakończony.')).toBeVisible();
     await page.getByRole('navigation').getByRole('link', { name: 'Start' }).click();
-    await expect(page.getByText('1/14')).toBeVisible();
+    await expect(lessonsDone(page, 1)).toBeVisible();
   });
 });
