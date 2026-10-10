@@ -117,31 +117,53 @@ export function IntroStep({ ex, courseId, locked, showRomaji, onContinue }: Step
 
 function Table({ table, courseId }: { table: GrammarTable; courseId: CourseId }) {
   const lang = getCourse(courseId).speechLang;
+  const wrap = useRef<HTMLDivElement>(null);
+  // On phones wide tables scroll sideways; say so, or the last columns look missing.
+  const [overflow, setOverflow] = useState(false);
+  useEffect(() => {
+    const el = wrap.current;
+    if (!el) return;
+    const check = () => setOverflow(el.scrollWidth > el.clientWidth + 1);
+    check();
+    if (typeof ResizeObserver === 'undefined') return;
+    const observer = new ResizeObserver(check);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [table]);
   return (
-    <div className="table-wrap">
-      <table className="grammar-table">
-        {table.caption && <caption>{table.caption}</caption>}
-        <thead>
-          <tr>
-            {table.head.map((h, i) => (
-              <th key={i} scope="col">
-                {h}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {table.rows.map((row, r) => (
-            <tr key={r}>
-              {row.map((cell, c) => (
-                <td key={c} lang={c > 0 ? lang : undefined} className={courseId === 'ja' ? 'ja' : undefined}>
-                  {cell}
-                </td>
+    <div className="table-block">
+      <div
+        ref={wrap}
+        className={`table-wrap${overflow ? ' is-scrollable' : ''}`}
+        tabIndex={overflow ? 0 : undefined}
+        role={overflow ? 'region' : undefined}
+        aria-label={overflow ? t('lesson.tableScrollLabel') : undefined}
+      >
+        <table className="grammar-table">
+          {table.caption && <caption>{table.caption}</caption>}
+          <thead>
+            <tr>
+              {table.head.map((h, i) => (
+                <th key={i} scope="col">
+                  {h}
+                </th>
               ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {table.rows.map((row, r) => (
+              <tr key={r}>
+                {row.map((cell, c) => (
+                  <td key={c} lang={c > 0 ? lang : undefined} className={courseId === 'ja' ? 'ja' : undefined}>
+                    {cell}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {overflow && <p className="subtle table-hint">{t('lesson.tableScrollHint')}</p>}
     </div>
   );
 }

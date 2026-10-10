@@ -793,6 +793,41 @@
   border-bottom: none;
 }
 
+/* Wide tables on phones: tighter cells, the first column stays visible while scrolling. */
+@media (max-width: 520px) {
+  .grammar-table {
+    font-size: var(--fs-s);
+  }
+
+  .grammar-table th,
+  .grammar-table td {
+    padding: var(--sp-2);
+  }
+}
+
+.table-wrap.is-scrollable .grammar-table th:first-child,
+.table-wrap.is-scrollable .grammar-table td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: var(--bg);
+  box-shadow: 1px 0 0 var(--border);
+}
+
+.table-wrap.is-scrollable .grammar-table th:first-child {
+  background: var(--surface-2);
+}
+
+.table-wrap:focus-visible {
+  outline: 3px solid var(--focus, var(--primary));
+  outline-offset: 2px;
+}
+
+.table-hint {
+  margin-top: var(--sp-1);
+  font-size: var(--fs-s);
+}
+
 .contrast {
   padding: var(--sp-3) var(--sp-4);
   border-left: 4px solid var(--primary);

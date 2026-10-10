@@ -198,6 +198,8 @@ export const pl = {
   'lesson.examplesTitle': 'W kontekście',
   'lesson.examplesHint': 'Dotknij zdania, aby je usłyszeć.',
   'lesson.grammarTitle': 'Jak to działa',
+  'lesson.tableScrollHint': 'Przesuń tabelę w bok, aby zobaczyć wszystkie kolumny →',
+  'lesson.tableScrollLabel': 'Tabela przewijana w poziomie',
   'lesson.polishContrast': 'Po polsku',
   'lesson.dialogueTitle': 'Dialog',
   'lesson.dialogueHint': 'Najpierw posłuchaj całości. Tekst możesz odsłonić w każdej chwili.',
