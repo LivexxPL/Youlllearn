@@ -20,6 +20,12 @@ an Android app (Capacitor). No account, no ads, no paid APIs: progress stays on 
   <img src="docs/screenshots/writing.jpg" width="200" alt="Hiragana tracing with stroke order">
 </p>
 
+<p>
+  <img src="docs/screenshots/themes-picker.jpg" width="200" alt="Colour theme picker with the classic and seven pastel themes">
+  <img src="docs/screenshots/themes-strawberry-light.jpg" width="200" alt="Home screen in the strawberry theme with a heart motif">
+  <img src="docs/screenshots/themes-mint-dark.jpg" width="200" alt="Home screen in the mint theme, dark mode">
+</p>
+
 ## Status
 
 | Area | State |

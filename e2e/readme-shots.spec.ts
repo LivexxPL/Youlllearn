@@ -33,3 +33,28 @@ test('readme screenshots', async ({ page }) => {
   await page.waitForTimeout(600);
   await shot('audio-quest-dark');
 });
+
+test('readme screenshots: colour themes', async ({ page }) => {
+  const shot = (name: string) => page.screenshot({ path: `docs/screenshots/${name}.jpg`, type: 'jpeg', quality: 82 });
+  await onboard(page, { courses: ['es', 'de'] });
+  const pick = async (palette: string, scheme: 'light' | 'dark') => {
+    await page.emulateMedia({ colorScheme: scheme });
+    await page.goto('./#/settings');
+    await page.getByTestId(`palette-${palette}`).click();
+  };
+  await pick('candy', 'light');
+  await page.getByTestId('palette-picker').scrollIntoViewIfNeeded();
+  await page.evaluate(() => window.scrollBy(0, -120));
+  await page.waitForTimeout(400);
+  await shot('themes-picker');
+  for (const [palette, scheme] of [
+    ['strawberry', 'light'],
+    ['mint', 'dark'],
+  ] as const) {
+    await pick(palette, scheme);
+    await page.goto('./#/');
+    await page.getByTestId('continue').waitFor();
+    await page.waitForTimeout(500);
+    await shot(`themes-${palette}-${scheme}`);
+  }
+});
