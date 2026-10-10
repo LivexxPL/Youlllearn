@@ -3,6 +3,7 @@ import type { CourseId } from '../../content/types';
 import type { AnswerIssue } from '../../engine/answer';
 import type { SelfRating } from '../../engine/srs';
 import type { Exercise } from '../../engine/exercises';
+import type { Speakable } from '../../components/AudioButton';
 
 export interface ExerciseResult {
   correct: boolean;
@@ -11,8 +12,8 @@ export interface ExerciseResult {
   selfRating?: SelfRating;
   /** Correct answer to display in the feedback panel. */
   expected?: ReactNode;
-  /** Target-language text to play from the feedback panel. */
-  expectedSpeak?: string;
+  /** Target-language content to play from the feedback panel (honours `tts` and kanji readings). */
+  expectedSpeak?: Speakable | string;
   issues?: AnswerIssue[];
   explanation?: string;
   /** Number of wrong attempts (match exercise). */

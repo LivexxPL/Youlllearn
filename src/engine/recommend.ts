@@ -20,8 +20,17 @@ export function reviewMinutes(count: number): number {
   return Math.max(1, Math.round((count * SECONDS_PER_REVIEW) / 60));
 }
 
+/**
+ * The lesson to continue with: the first unfinished lesson after the furthest
+ * completed one (so a learner who starts at a higher level keeps moving
+ * forward), otherwise the first unfinished lesson of the course.
+ */
 export function nextLesson(course: Course, completed: ReadonlySet<string>): Lesson | undefined {
-  return course.lessons.find((l) => !completed.has(l.id));
+  let furthest = -1;
+  course.lessons.forEach((l, i) => {
+    if (completed.has(l.id)) furthest = i;
+  });
+  return course.lessons.slice(furthest + 1).find((l) => !completed.has(l.id)) ?? course.lessons.find((l) => !completed.has(l.id));
 }
 
 export function recommend(input: { course: Course; completed: ReadonlySet<string>; dueCount: number; goalMet: boolean }): Recommendation {

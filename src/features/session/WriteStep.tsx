@@ -97,14 +97,14 @@ export function WriteStep({ ex, courseId, locked, onResult }: StepProps<Exercise
         ) : (
           <>
             <p className="action-bar__label">{t('write.selfAssess')}</p>
-            <div className="row">
-              <button type="button" className="btn btn--outline grow" onClick={() => rate('again')}>
+            <div className="self-assess">
+              <button type="button" className="btn btn--outline" onClick={() => rate('again')}>
                 {t('write.selfAgain')}
               </button>
-              <button type="button" className="btn btn--outline grow" onClick={() => rate('hard')}>
+              <button type="button" className="btn btn--outline" onClick={() => rate('hard')}>
                 {t('write.selfOk')}
               </button>
-              <button type="button" className="btn btn--primary grow" onClick={() => rate('good')} data-testid="write-good">
+              <button type="button" className="btn btn--primary" onClick={() => rate('good')} data-testid="write-good">
                 {t('write.selfGood')}
               </button>
             </div>

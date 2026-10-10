@@ -50,7 +50,7 @@ export function TypeStep({ ex, courseId, locked, onResult }: StepProps<ExerciseO
         almost: r.verdict === 'almost',
         issues: r.issues.filter((i) => i !== 'empty'),
         expected: <TargetText text={ex.display} courseId={courseId} romaji={ex.romaji} showRomaji={isJa} reading={ex.item?.reading} />,
-        expectedSpeak: plainTarget(ex.display),
+        expectedSpeak: ex.item ?? (ex.sentence ? { text: ex.sentence.text, tts: ex.sentence.tts } : plainTarget(ex.display)),
         explanation: r.verdict === 'correct' ? undefined : ex.item?.note ?? ex.sentence?.note,
       });
     },
@@ -160,7 +160,7 @@ export function OrderStep({ ex, courseId, locked, onResult }: StepProps<Exercise
     onResult({
       correct,
       expected: <TargetText text={s.text} courseId={courseId} romaji={s.romaji} showRomaji={isJa} />,
-      expectedSpeak: plainTarget(s.text),
+      expectedSpeak: { text: s.text, tts: s.tts },
       explanation: correct ? undefined : s.note,
     });
     speak({ text: s.text, tts: s.tts });

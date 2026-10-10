@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { BookOpen, Check, Clock, Grid3x3, NotebookPen, PenLine, Play, Star } from 'lucide-react';
 import { useSettings } from '../../state/settings';
 import { getCourse } from '../../content/registry';
-import { useCompletedSet, useLessonProgress, useShowRomaji } from '../../state/hooks';
+import { useCompleted, useLessonProgress, useShowRomaji } from '../../state/hooks';
 import { navigate } from '../../app/router';
 import { t, formatPercent } from '../../i18n';
 import { Banner, PageHeader, Sheet } from '../../components/ui';
@@ -69,9 +69,10 @@ function LessonPreview({ lesson, onClose, ahead }: { lesson: Lesson; onClose: ()
 export function LearnScreen() {
   const { settings } = useSettings();
   const course = getCourse(settings.activeCourse);
-  const completed = useCompletedSet(course.id);
+  const completedState = useCompleted(course.id);
   const progress = useLessonProgress();
   const [preview, setPreview] = useState<Lesson | null>(null);
+  const completed = completedState ?? new Set<string>();
   const next = nextLesson(course, completed);
   const nextIndex = next ? course.lessonIndex.get(next.id)! : course.lessons.length;
 
@@ -95,10 +96,19 @@ export function LearnScreen() {
         </div>
       )}
 
-      {course.units.map((unit) => (
+      {/* The path is drawn once progress is loaded, so "next" never points at the wrong lesson. */}
+      {completedState && course.units.map((unit) => (
         <section key={unit.id} className="unit" aria-labelledby={`${unit.id}-title`}>
           <div className="unit__header">
-            <h2 id={`${unit.id}-title`}>{unit.title}</h2>
+            <div className="unit__title-row">
+              <h2 id={`${unit.id}-title`}>{unit.title}</h2>
+              {unit.level && (
+                <span className="chip unit__level">
+                  <span className="visually-hidden">{t('learn.unitLevel')} </span>
+                  {unit.level}
+                </span>
+              )}
+            </div>
             <p className="subtle">{unit.description}</p>
           </div>
           <ol className="trail">

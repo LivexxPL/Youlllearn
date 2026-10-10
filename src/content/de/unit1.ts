@@ -7,6 +7,7 @@ export const unit1: Unit = {
   id: 'de.u1',
   title: 'Erste Schritte',
   description: 'Powitania, przedstawianie się i niemiecka wymowa.',
+  level: 'A1',
   lessons: [
     {
       id: 'de.l01',

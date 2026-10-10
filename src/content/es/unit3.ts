@@ -7,6 +7,7 @@ export const unit3: Unit = {
   id: 'es.u3',
   title: 'Codzienność',
   description: 'Czasowniki, pytania, jedzenie, godziny i dni tygodnia.',
+  level: 'A1',
   lessons: [
     {
       id: 'es.l07',

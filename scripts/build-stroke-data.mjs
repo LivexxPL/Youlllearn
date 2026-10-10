@@ -11,7 +11,7 @@
  *
  * Usage: npm run strokes
  */
-import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { readFileSync, readdirSync, writeFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
@@ -25,8 +25,11 @@ if (!existsSync(kvgDir)) {
 const hira = 'ぁあぃいぅうぇえぉおかがきぎくぐけげこごさざしじすずせぜそぞただちぢっつづてでとどなにぬねのはばぱひびぴふぶぷへべぺほぼぽまみむめもゃやゅゆょよらりるれろわをん';
 const kata = 'ァアィイゥウェエォオカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトドナニヌネノハバパヒビピフブプヘベペホボポマミムメモャヤュユョヨラリルレロワヲンー';
 
-// Kanji used anywhere in the course content (scan the source files).
-const contentFiles = ['unit-conversation.ts', 'unit-daily.ts', 'stories.ts', 'unit-hiragana.ts', 'unit-katakana.ts'];
+// Kanji used anywhere in the course content: every .ts source file in
+// src/content/ja except the generated index (which would keep stale characters).
+const contentFiles = readdirSync(join(root, 'src/content/ja'))
+  .filter((f) => f.endsWith('.ts') && f !== 'strokes-index.ts' && !f.endsWith('.test.ts'))
+  .sort();
 const kanjiSet = new Set();
 for (const f of contentFiles) {
   const src = readFileSync(join(root, 'src/content/ja', f), 'utf8');

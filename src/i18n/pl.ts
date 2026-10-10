@@ -164,6 +164,7 @@ export const pl = {
   // Learn
   'learn.title': 'Ścieżka nauki',
   'learn.framework': 'Odniesienie: {framework}',
+  'learn.unitLevel': 'Poziom',
   'learn.lessonDone': 'Ukończona',
   'learn.lessonNext': 'Następna',
   'learn.lessonOpen': 'Otwórz lekcję',
@@ -359,7 +360,6 @@ export const pl = {
     'Odtwarzanie przy wyłączonym ekranie nie jest gwarantowane — przeglądarki i Android mogą wstrzymać syntezę mowy w tle. Tryb kieszonkowy jest najpewniejszy.',
   'aq.nowPlaying': 'Teraz',
   'aq.repeatHard': 'Trudne — powtórz 3×',
-  'aq.markHard': 'Oznacz jako trudne',
   'aq.markedHard': 'Oznaczone — wróci w powtórkach',
   'aq.sessionDone': 'Sesja zakończona',
   'aq.sessionStats': '{items} · {min}',

@@ -14,12 +14,21 @@ export function useLessonProgress(): Map<string, LessonProgress> | undefined {
   return useMemo(() => (list ? new Map(list.map((p) => [p.id, p])) : undefined), [list]);
 }
 
-export function useCompletedSet(courseId?: CourseId): Set<string> {
+/** Completed lesson ids (of one course, or all); `undefined` while the database is loading. */
+export function useCompleted(courseId?: CourseId): ReadonlySet<string> | undefined {
   const progress = useLessonProgress();
   return useMemo(() => {
-    const ids = [...(progress?.values() ?? [])].filter((p) => !courseId || p.courseId === courseId).map((p) => p.id);
+    if (!progress) return undefined;
+    const ids = [...progress.values()].filter((p) => !courseId || p.courseId === courseId).map((p) => p.id);
     return new Set(ids);
   }, [progress, courseId]);
+}
+
+const NONE: ReadonlySet<string> = new Set();
+
+/** Like useCompleted, but empty while loading (for screens where that cannot mislead). */
+export function useCompletedSet(courseId?: CourseId): ReadonlySet<string> {
+  return useCompleted(courseId) ?? NONE;
 }
 
 export function useCards(courseId?: CourseId): Card[] | undefined {

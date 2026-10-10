@@ -7,6 +7,7 @@ export const unit2: Unit = {
   id: 'es.u2',
   title: 'Ludzie i rzeczy',
   description: 'Rodzaj i liczba, liczby, wiek i rodzina.',
+  level: 'A1',
   lessons: [
     {
       id: 'es.l04',

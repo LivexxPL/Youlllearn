@@ -192,6 +192,8 @@ export interface Unit {
   id: string;
   title: string;
   description: string;
+  /** Level label shown on the learning path (e.g. "A1", "A2", "Kana"). */
+  level?: string;
   lessons: Lesson[];
 }
 

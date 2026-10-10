@@ -47,7 +47,3 @@ export async function allowScreenOff() {
   await sentinel?.release().catch(() => {});
   sentinel = null;
 }
-
-export function wakeLockSupported(): boolean {
-  return isNative() || (typeof navigator !== 'undefined' && 'wakeLock' in navigator);
-}

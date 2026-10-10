@@ -7,6 +7,7 @@ export const unit2: Unit = {
   id: 'de.u2',
   title: 'Menschen und Dinge',
   description: 'Rodzajniki der, die, das, liczby, wiek i rodzina.',
+  level: 'A1',
   lessons: [
     {
       id: 'de.l04',

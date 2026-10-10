@@ -3,7 +3,7 @@ import { useLiveQuery } from 'dexie-react-hooks';
 import { ChevronDown, Clock, Flame, Headphones, Play, RotateCcw, Shield, Sparkles, Timer, Trophy, Zap } from 'lucide-react';
 import { useSettings } from '../../state/settings';
 import { getCourse, allCourses } from '../../content/registry';
-import { useAllStats, useCards, useCompletedSet, useDayKey, useToday } from '../../state/hooks';
+import { useAllStats, useCards, useCompleted, useDayKey, useToday } from '../../state/hooks';
 import { recommend, reviewMinutes } from '../../engine/recommend';
 import { countDue } from '../../engine/srs';
 import { evaluateStreak, initialStreak, isActiveDay, type StreakState } from '../../engine/gamification';
@@ -119,8 +119,11 @@ function QuestList({ quests, allClaimed }: { quests: QuestStatus[]; allClaimed: 
 export function HomeScreen() {
   const { settings } = useSettings();
   const course = getCourse(settings.activeCourse);
-  const completed = useCompletedSet(course.id);
+  const completedState = useCompleted(course.id);
   const cards = useCards(course.id);
+  // Until progress is loaded the recommendation would wrongly point at lesson 1.
+  const loaded = completedState !== undefined && cards !== undefined;
+  const completed = completedState ?? new Set<string>();
   const today = useToday();
   const allStats = useAllStats();
   const dayKey = useDayKey();
@@ -152,6 +155,7 @@ export function HomeScreen() {
   const resumeValue = resume?.value as { lessonId: string; index: number; total: number } | undefined;
 
   const startRecommended = () => {
+    if (!loaded) return;
     if (rec.kind === 'lesson' && rec.lesson) navigate(`/lesson/${rec.lesson.id}`);
     else if (rec.kind === 'review') navigate('/review/session?mode=standard');
     else if (rec.kind === 'audio') navigate('/audio');
@@ -159,7 +163,8 @@ export function HomeScreen() {
   };
 
   const quick = () => {
-    if (cards && cards.length) navigate('/review/session?mode=quick');
+    if (!loaded) return;
+    if (cards.length) navigate('/review/session?mode=quick');
     else if (rec.lesson) navigate(`/lesson/${rec.lesson.id}`);
   };
 
@@ -194,19 +199,19 @@ export function HomeScreen() {
 
       <div className="dash">
         <div className="stack stack--l">
-          <section className="card card--hero hero" aria-labelledby="rec-title">
+          <section className="card card--hero hero" aria-labelledby="rec-title" aria-busy={!loaded}>
             <div className="hero__meta">
               <span className="chip hero__chip">
-                <Clock size={14} /> {t('common.minutesApprox', { count: rec.minutes })}
+                <Clock size={14} /> {loaded ? t('common.minutesApprox', { count: rec.minutes }) : '…'}
               </span>
               <LangBadge courseId={course.id} size={36} />
             </div>
-            <p className="eyebrow hero__eyebrow">{recTitle}</p>
+            <p className="eyebrow hero__eyebrow">{loaded ? recTitle : t('common.loading')}</p>
             <h2 id="rec-title" className="hero__title">
-              {recDesc}
+              {loaded ? recDesc : course.name}
             </h2>
-            <p className="muted hero__why">{t(rec.reasonKey)}</p>
-            <button type="button" className="btn btn--lg btn--accent btn--block" onClick={startRecommended} data-testid="continue">
+            {loaded && <p className="muted hero__why">{t(rec.reasonKey)}</p>}
+            <button type="button" className="btn btn--lg btn--accent btn--block" onClick={startRecommended} disabled={!loaded} data-testid="continue">
               <Play size={20} /> {t('home.continue')}
             </button>
             {resumeValue && (

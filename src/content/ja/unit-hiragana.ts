@@ -25,6 +25,7 @@ export const unitHiragana: Unit = {
   id: 'ja.u1',
   title: 'Hiragana',
   description: 'Podstawowe pismo japońskie, dźwięki i rytm mor.',
+  level: 'Kana',
   lessons: [
     {
       id: 'ja.l01',

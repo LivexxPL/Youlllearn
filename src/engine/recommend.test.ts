@@ -23,6 +23,17 @@ describe('recommendation', () => {
     expect(r.kind).toBe('audio');
   });
 
+  it('continues after the furthest completed lesson', () => {
+    const [l1, l2, l3, l4, l5] = es.lessons;
+    // Sequential progress: the next lesson in order.
+    expect(nextLesson(es, new Set([l1.id, l2.id]))?.id).toBe(l3.id);
+    // A learner who started further on is not sent back to lesson 1.
+    expect(nextLesson(es, new Set([l4.id]))?.id).toBe(l5.id);
+    // Only gaps are left after the last lesson: go back to the first gap.
+    const allButSecond = new Set(es.lessons.filter((l) => l.id !== l2.id).map((l) => l.id));
+    expect(nextLesson(es, allButSecond)?.id).toBe(l2.id);
+  });
+
   it('handles a finished course', () => {
     const all = new Set(es.lessons.map((l) => l.id));
     expect(nextLesson(es, all)).toBeUndefined();

@@ -5,7 +5,7 @@ import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '../../services/db';
 import { useSettings } from '../../state/settings';
 import { getCourse } from '../../content/registry';
-import { useAudioStatus, useCards, useCompletedSet, useListeningStage } from '../../state/hooks';
+import { useAudioStatus, useCards, useCompleted, useListeningStage } from '../../state/hooks';
 import { navigate } from '../../app/router';
 import { t } from '../../i18n';
 import { Banner, EmptyState, PageHeader, Segmented, Switch } from '../../components/ui';
@@ -29,7 +29,7 @@ export default function AudioQuestScreen() {
   const { settings, update } = useSettings();
   const course = getCourse(settings.activeCourse);
   const cards = useCards(course.id);
-  const completed = useCompletedSet(course.id);
+  const completed = useCompleted(course.id);
   const autoStage = useListeningStage(course.id);
   const status = useAudioStatus(course.speechLang);
   const [minutes, setMinutes] = useState(10);
@@ -60,7 +60,7 @@ export default function AudioQuestScreen() {
         </Banner>
       )}
 
-      {!hasMaterial ? (
+      {cards === undefined ? null : !hasMaterial ? (
         <EmptyState
           icon={<Headphones size={40} />}
           title={t('aq.title')}
@@ -141,8 +141,8 @@ export default function AudioQuestScreen() {
           </span>
         </h2>
         <p className="subtle">{t('aq.dialoguesDesc')}</p>
-        <ul className="list">
-          {course.stories.map((st) => {
+        <ul className="list" aria-busy={!completed}>
+          {completed && course.stories.map((st) => {
             const unlocked = completed.has(st.afterLesson);
             const lesson = course.lessons[course.lessonIndex.get(st.afterLesson) ?? 0];
             const done = storyDone.get(st.id);

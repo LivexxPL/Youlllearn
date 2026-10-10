@@ -26,27 +26,27 @@ jobs:
     env:
       VERSION_CODE: ${{ github.run_number }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: 22
           cache: npm
 
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: 21
 
-      # Explicit packages: the action's default list includes the obsolete "tools"
-      # package, which current cmdline-tools no longer provide. The Android Gradle
-      # Plugin downloads the build-tools version it needs.
-      - uses: android-actions/setup-android@v3
+      # Explicit, minimal packages (v3 of this action defaulted to the obsolete
+      # "tools" package, which current cmdline-tools no longer provide). The
+      # Android Gradle Plugin downloads the build-tools version it needs.
+      - uses: android-actions/setup-android@v4
         with:
           packages: platform-tools platforms;android-36
           log-accepted-android-sdk-licenses: false
 
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v5
 
       - run: npm ci
 
@@ -87,13 +87,13 @@ jobs:
       - name: List outputs
         run: find android/app/build/outputs -name '*.apk' -o -name '*.aab' | xargs ls -l
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: polyglot-quest-debug-apk
           path: android/app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: polyglot-quest-release
           path: |

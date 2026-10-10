@@ -6,7 +6,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Eye, Play, Settings2, SkipForward, Volume2 } from 'lucide-react';
 import { useSettings } from '../../state/settings';
-import { db, type Stroke } from '../../services/db';
+import { db, type Drawing, type Stroke } from '../../services/db';
 import { activity } from '../../services/activity';
 import { addStats, applyOutcome } from '../../services/progress';
 import { audio } from '../../services/audio';
@@ -27,12 +27,12 @@ type Mode = 'trace' | 'recall' | 'free';
 
 export default function WritingPractice({ set, char }: { set: string; char: string }) {
   const info = isWriteSet(set) ? findChar(set, char) : undefined;
-  const [initial, setInitial] = useState<Stroke[] | null>(null);
+  const [initial, setInitial] = useState<Pick<Drawing, 'strokes' | 'practisedAt'> | null>(null);
 
   useEffect(() => {
     let alive = true;
     setInitial(null);
-    db.drawings.get(practiceId(char)).then((d) => alive && setInitial(d?.strokes ?? []));
+    db.drawings.get(practiceId(char)).then((d) => alive && setInitial({ strokes: d?.strokes ?? [], practisedAt: d?.practisedAt }));
     return () => {
       alive = false;
     };
@@ -48,10 +48,10 @@ export default function WritingPractice({ set, char }: { set: string; char: stri
   }
   if (!initial) return <div className="page"><p className="muted">{t('common.loading')}</p></div>;
   // Re-mount the pad per character so its undo history starts fresh.
-  return <Practice key={char} set={set} char={char} initial={initial} />;
+  return <Practice key={char} set={set} char={char} initial={initial.strokes} practisedAt={initial.practisedAt} />;
 }
 
-function Practice({ set, char, initial }: { set: 'hiragana' | 'katakana' | 'kanji'; char: string; initial: Stroke[] }) {
+function Practice({ set, char, initial, practisedAt }: { set: 'hiragana' | 'katakana' | 'kanji'; char: string; initial: Stroke[]; practisedAt?: number }) {
   const { settings, update } = useSettings();
   const toast = useToast();
   const info = findChar(set, char)!;
@@ -64,6 +64,9 @@ function Practice({ set, char, initial }: { set: 'hiragana' | 'katakana' | 'kanj
   const [compared, setCompared] = useState<{ hints: StrokeHint[]; countOk: boolean; expected: number } | null>(null);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  /** Strokes waiting for the debounced save (flushed on unmount so nothing is lost). */
+  const pending = useRef<Stroke[] | null>(null);
+  const practised = useRef(practisedAt);
 
   const say = useCallback(() => {
     activity.ping();
@@ -82,20 +85,25 @@ function Practice({ set, char, initial }: { set: 'hiragana' | 'katakana' | 'kanj
   }, [say]);
 
   // Autosave (debounced) so practice can be resumed.
+  const flush = useCallback(() => {
+    if (saveTimer.current) clearTimeout(saveTimer.current);
+    saveTimer.current = null;
+    const next = pending.current;
+    if (!next) return;
+    pending.current = null;
+    db.drawings
+      .put({ id: practiceId(char), kind: 'practice', strokes: next, updatedAt: Date.now(), title: char, practisedAt: practised.current })
+      .catch(() => toast(t('error.storage')));
+  }, [char, toast]);
   const onChange = (next: Stroke[]) => {
     setStrokes(next);
     setCompared(null);
+    pending.current = next;
     if (saveTimer.current) clearTimeout(saveTimer.current);
-    saveTimer.current = setTimeout(() => {
-      db.drawings.put({ id: practiceId(char), kind: 'practice', strokes: next, updatedAt: Date.now(), title: char }).catch(() => toast(t('error.storage')));
-    }, 600);
+    saveTimer.current = setTimeout(flush, 600);
   };
-  useEffect(
-    () => () => {
-      if (saveTimer.current) clearTimeout(saveTimer.current);
-    },
-    [],
-  );
+  // Leaving the screen (back, next character) must not drop the last strokes.
+  useEffect(() => flush, [flush]);
 
   const compare = async () => {
     const model = await getStrokes(char);
@@ -107,7 +115,11 @@ function Practice({ set, char, initial }: { set: 'hiragana' | 'katakana' | 'kanj
     await addStats({ writing: 1, exercises: 1, correct: r === 'again' ? 0 : 1, xp: r === 'again' ? 0 : XP.correctRetry }, 'ja');
     if (info.item) await applyOutcome('ja', info.item.id, { correct: r !== 'again', skill: 'writing', selfRating: r });
     toast(r === 'again' ? t('write.ratedAgain') : t('write.rated'), r === 'again' ? 'default' : 'success');
+    practised.current = Date.now();
     pad.current?.clear();
+    // Save the cleared pad together with the practice timestamp.
+    pending.current = [];
+    flush();
     setCompared(null);
   };
 

@@ -7,6 +7,7 @@ export const unit4: Unit = {
   id: 'es.u4',
   title: 'W świecie',
   description: 'Podróże, studia, plany i pierwsze kroki w czasie przeszłym.',
+  level: 'A1–A2',
   lessons: [
     {
       id: 'es.l12',

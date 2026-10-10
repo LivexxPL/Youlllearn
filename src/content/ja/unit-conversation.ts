@@ -17,6 +17,7 @@ export const unitConversation: Unit = {
   id: 'ja.u3',
   title: 'Pierwsze rozmowy',
   description: 'Powitania, przedstawianie się, pytania i zakupy z pierwszymi kanji.',
+  level: 'A1',
   lessons: [
     {
       id: 'ja.l11',

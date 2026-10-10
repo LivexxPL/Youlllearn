@@ -177,14 +177,14 @@ export function SpeakStep({ ex, courseId, locked, showRomaji, onResult }: StepPr
 
       <ActionBar hidden={locked}>
         <p className="action-bar__label">{t('speak.selfAssess')}</p>
-        <div className="row">
-          <button type="button" className="btn btn--outline grow" onClick={() => rate('again')}>
+        <div className="self-assess">
+          <button type="button" className="btn btn--outline" onClick={() => rate('again')}>
             {t('speak.selfAgain')}
           </button>
-          <button type="button" className="btn btn--outline grow" onClick={() => rate('hard')}>
+          <button type="button" className="btn btn--outline" onClick={() => rate('hard')}>
             {t('speak.selfOk')}
           </button>
-          <button type="button" className="btn btn--primary grow" onClick={() => rate('good')} data-testid="speak-good">
+          <button type="button" className="btn btn--primary" onClick={() => rate('good')} data-testid="speak-good">
             {t('speak.selfGood')}
           </button>
         </div>

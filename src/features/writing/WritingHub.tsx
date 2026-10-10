@@ -18,9 +18,10 @@ export default function WritingHub() {
   const completed = useCompletedSet(course.id);
   const [set, setSet] = useState<WriteSet>('hiragana');
   const [settingsOpen, setSettingsOpen] = useState(false);
-  const practised = useLiveQuery(() => db.drawings.where('kind').equals('practice').primaryKeys(), []);
+  const practice = useLiveQuery(() => db.drawings.where('kind').equals('practice').toArray(), []);
   const notes = useLiveQuery(() => db.drawings.where('kind').equals('note').toArray(), []);
-  const done = new Set((practised ?? []).map(String));
+  // Practised = self-assessed at least once, or something is drawn (an emptied pad does not count).
+  const done = new Set((practice ?? []).filter((d) => d.practisedAt || d.strokes.length > 0).map((d) => d.id));
   const chars = charsFor(set);
   const current = nextLesson(course, completed) ?? course.lessons.at(-1)!;
   const sortedNotes = [...(notes ?? [])].filter((n) => n.strokes.length > 0).sort((a, b) => b.updatedAt - a.updatedAt);

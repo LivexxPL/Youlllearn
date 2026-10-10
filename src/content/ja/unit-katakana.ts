@@ -21,6 +21,7 @@ export const unitKatakana: Unit = {
   id: 'ja.u2',
   title: 'Katakana',
   description: 'Drugie pismo sylabiczne — do słów zapożyczonych i nazw obcych.',
+  level: 'Kana',
   lessons: [
     {
       id: 'ja.l08',

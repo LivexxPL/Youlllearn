@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { X, Zap } from 'lucide-react';
 import type { CourseId, Lesson } from '../../content/types';
-import type { Exercise } from '../../engine/exercises';
+import { isGraded, type Exercise } from '../../engine/exercises';
 import type { Outcome } from '../../engine/srs';
 import { XP } from '../../engine/gamification';
 import type { SessionOutcomes } from '../../services/progress';
@@ -31,10 +31,6 @@ export interface SessionPlayerProps {
   onFinish: (outcomes: SessionOutcomes, seconds: number) => Promise<SummaryData>;
   onExit: () => void;
   onProgress?: (index: number, total: number) => void;
-}
-
-function isGraded(ex: Exercise): boolean {
-  return ex.refs.length > 0 || ex.kind === 'authored' || ex.kind === 'question' || ex.kind === 'match';
 }
 
 function StepView(props: StepProps & { ex: Exercise }) {
@@ -108,6 +104,15 @@ export function SessionPlayer({ courseId, steps, mode, lesson, showRomaji, start
     outcomes.current.byRef.set(ref, list);
   };
 
+  const advance = useCallback(() => {
+    audio.stop();
+    setResult(null);
+    const next = Math.min(index + 1, queue.length - 1);
+    setIndex(next);
+    onProgress?.(next, queue.length);
+    window.scrollTo({ top: 0 });
+  }, [index, queue.length, onProgress]);
+
   const onResult = useCallback(
     (r: ExerciseResult) => {
       if (!ex) return;
@@ -157,18 +162,8 @@ export function SessionPlayer({ courseId, steps, mode, lesson, showRomaji, start
       if (r.silent) advance();
       else setResult(r);
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [ex, index, mode],
+    [ex, index, mode, advance],
   );
-
-  const advance = useCallback(() => {
-    audio.stop();
-    setResult(null);
-    const next = Math.min(index + 1, queue.length - 1);
-    setIndex(next);
-    onProgress?.(next, queue.length);
-    window.scrollTo({ top: 0 });
-  }, [index, queue.length, onProgress]);
 
   // Finalise when the summary step is reached.
   useEffect(() => {

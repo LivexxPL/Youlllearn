@@ -7,6 +7,7 @@ export const unit3: Unit = {
   id: 'de.u3',
   title: 'Alltag',
   description: 'Czas teraźniejszy, szyk zdania, pytania, jedzenie, godziny i tydzień.',
+  level: 'A1',
   lessons: [
     {
       id: 'de.l07',

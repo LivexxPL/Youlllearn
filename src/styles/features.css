@@ -125,6 +125,27 @@
   text-align: center;
 }
 
+/* Three equal self-assessment buttons that fit a 360 px phone without ragged wrapping. */
+.self-assess {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sp-2);
+}
+
+.self-assess .btn {
+  min-width: 0;
+  padding-inline: var(--sp-2);
+  font-size: var(--fs-s);
+  hyphens: auto;
+}
+
+@media (min-width: 520px) {
+  .self-assess .btn {
+    padding-inline: var(--sp-4);
+    font-size: var(--fs-m);
+  }
+}
+
 /* Feedback panel */
 .feedback {
   position: fixed;
@@ -1464,6 +1485,22 @@
   flex-direction: column;
   gap: 2px;
   padding-top: var(--sp-2);
+}
+
+.unit__title-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--sp-2) var(--sp-3);
+}
+
+.unit__title-row h2 {
+  margin: 0;
+}
+
+.unit__level {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
 }
 
 .trail {

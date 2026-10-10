@@ -114,6 +114,8 @@ export interface Drawing {
   updatedAt: number;
   /** Optional free-text title for notes. */
   title?: string;
+  /** Practice only: last self-assessment (the pad is cleared after rating). */
+  practisedAt?: number;
 }
 
 export interface MetaRecord {

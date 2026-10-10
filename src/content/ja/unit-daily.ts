@@ -17,6 +17,7 @@ export const unitDaily: Unit = {
   id: 'ja.u4',
   title: 'Codzienność',
   description: 'Czas i dni tygodnia, czasowniki, jedzenie i podróże — z kolejnymi kanji.',
+  level: 'A1',
   lessons: [
     {
       id: 'ja.l15',

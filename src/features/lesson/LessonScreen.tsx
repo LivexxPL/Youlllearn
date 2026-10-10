@@ -23,7 +23,8 @@ interface ResumeState {
 }
 
 export default function LessonScreen({ lessonId }: { lessonId?: string }) {
-  const found = lessonId ? findLesson(lessonId) : null;
+  // Stable across renders, so the effects and callbacks below do not re-run needlessly.
+  const found = useMemo(() => (lessonId ? findLesson(lessonId) : null), [lessonId]);
   const { settings } = useSettings();
   const cards = useCards(found?.course.id);
   const showRomaji = useShowRomaji(lessonId);

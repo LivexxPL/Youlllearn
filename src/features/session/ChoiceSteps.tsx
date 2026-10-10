@@ -143,7 +143,7 @@ export function ChoiceStep({ ex, courseId, locked, showRomaji, onResult }: StepP
       correct,
       usedHint,
       expected: right.lang === 'pl' ? right.label : <TargetText text={right.label} courseId={right.lang} />,
-      expectedSpeak: item?.text ?? ex.sentence?.text,
+      expectedSpeak: item ?? (ex.sentence ? { text: ex.sentence.text, tts: ex.sentence.tts } : undefined),
       explanation: correct ? undefined : (ex.explanation ?? (item?.tip ? item.tip : undefined)),
     });
   }, [selected, ex, onResult, usedHint, item]);
