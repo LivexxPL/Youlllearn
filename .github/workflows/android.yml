@@ -38,7 +38,13 @@ jobs:
           distribution: temurin
           java-version: 21
 
+      # Explicit packages: the action's default list includes the obsolete "tools"
+      # package, which current cmdline-tools no longer provide. The Android Gradle
+      # Plugin downloads the build-tools version it needs.
       - uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools platforms;android-36
+          log-accepted-android-sdk-licenses: false
 
       - uses: gradle/actions/setup-gradle@v4
 
