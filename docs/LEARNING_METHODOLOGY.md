@@ -31,22 +31,28 @@ the original papers before relying on finer details.
 
 ## 2. Level frameworks
 
-- **Spanish and German** are aligned with **CEFR A1 → early A2**. The CEFR defines six levels
+- **Spanish and German** are aligned with **CEFR A1 → A2**. The CEFR defines six levels
   (A1–C2). Its A1 global descriptor is about understanding and using familiar everyday
   expressions and very basic phrases for concrete needs, and exchanging basic personal details.
-  Lesson objectives are written as can-do statements in that spirit. The units cover the
+  Lesson objectives are written as can-do statements in that spirit. The A1 units cover the
   topics the spec asks for: pronunciation, greetings, gender and number, articles, present
   tense, questions and negation, numbers, time, food, travel and university. German adds
-  modal and separable verbs and progressive case introduction. Both courses give a first
-  look at past and future constructions. See docs/CURRICULUM.md.
+  modal and separable verbs and progressive case introduction. The A2 units (labelled A2 on
+  the learning path) move to routine tasks and simple descriptions of past events: daily
+  routine, shopping, weather, health, holidays, home, opinions and comparisons, with the
+  past tenses (Spanish *indefinido* and *imperfecto*; German *Präteritum* of *sein/haben* and
+  the modal verbs, and *Perfekt*). See docs/CURRICULUM.md.
 - **Japanese** has its own curriculum: kana first (with mora timing), then conversation
-  patterns, particles, です/ます forms and 29 introductory kanji. It is designed with the
-  **JF Standard for Japanese-Language Education** (Japan Foundation) in mind. JF Standard is
-  task-based: levels are defined by what you can do, on the same six A1–C2 levels as the
-  CEFR. **JLPT N5** is mentioned only as an orientation. JLPT is a separate test with its own
-  scale, and CEFR/JF levels and JLPT levels are **not** equivalent.
-- The courses cover roughly 2–3 hours of lessons per language plus open-ended reviews and
-  listening. That is a start towards A1, not a complete A1 course.
+  patterns, particles, です/ます forms and introductory kanji, then (A2) the polite past,
+  counters, the て-form (requests, actions in progress, permission), wishes and invitations
+  and the ない-form, with 62 kanji in total. It is designed with the **JF Standard for
+  Japanese-Language Education** (Japan Foundation) in mind. JF Standard is task-based:
+  levels are defined by what you can do, on the same six A1–C2 levels as the CEFR. **JLPT
+  N5/N4** is mentioned only as an orientation. JLPT is a separate test with its own scale,
+  and CEFR/JF levels and JLPT levels are **not** equivalent.
+- The courses now have roughly 3.5–4.5 hours of lessons per language plus open-ended reviews
+  and listening. A1 is covered and A2 is well under way, but A2 is **not complete** yet (see
+  the list of missing topics in docs/CURRICULUM.md).
 
 ## 3. What is a hypothesis and should be tested
 

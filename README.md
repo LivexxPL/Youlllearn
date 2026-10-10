@@ -1,7 +1,7 @@
 # Polyglot Quest
 
 Mobile-first, audio-first language learning for Polish speakers: **Spanish, German and
-Japanese from zero**. One codebase runs in the browser (installable PWA, works offline) and as
+Japanese from zero to A2**. One codebase runs in the browser (installable PWA, works offline) and as
 an Android app (Capacitor). No account, no ads, no paid APIs: progress stays on the device.
 
 <p>
@@ -16,15 +16,17 @@ an Android app (Capacitor). No account, no ads, no paid APIs: progress stays on 
 | Area | State |
 | --- | --- |
 | Web app / PWA | ✅ Builds, runs offline, tested on phone/tablet/desktop viewports (light and dark) |
-| Courses | ✅ 14 Spanish, 15 German, 18 Japanese lessons with real content; ⚠️ not yet proofread by native speakers |
-| Android project | ✅ Capacitor project, icons, signing config, CI workflow. ⚠️ **No APK was built in the development sandbox**, because the Android SDK host (`dl.google.com`) is blocked there. Build locally or with GitHub Actions; see [docs/ANDROID_BUILD.md](docs/ANDROID_BUILD.md). |
+| Courses | ✅ 23 Spanish, 24 German, 25 Japanese lessons: A1 and a large part of A2 (CEFR / JF Standard), with real content, checked in a separate proofreading pass; ⚠️ not yet proofread by native speakers, A2 not complete yet |
+| Android project | ✅ Capacitor project, icons, signing config, CI workflow. GitHub Actions builds an installable debug APK (and an unsigned release APK) on every push. ⚠️ Not built in the development sandbox (the Android SDK host is blocked there) and not yet tried on a physical device; see [docs/ANDROID_BUILD.md](docs/ANDROID_BUILD.md). |
 | Audio | ✅ Device text-to-speech with graceful fallbacks; ⚠️ voice quality not evaluated by ear (no audio in the sandbox), see [docs/AUDIO.md](docs/AUDIO.md) |
-| Tests | ✅ 182 unit tests, 14 E2E tests (phone + tablet), lint and type check clean |
+| Tests | ✅ 237 unit tests, 16 E2E tests (phone + tablet), lint and type check clean |
 
 ## Features
 
 **Learning**
-- Lesson path per language: objective → warm-up → new words in small chunks with audio →
+- Lesson path per language, grouped by level (Kana, A1, A2). Learners who already know a
+  level can start the next one directly; "continue" then moves on from there.
+- Each lesson: objective → warm-up → new words in small chunks with audio →
   grammar with Polish contrasts → examples → dialogue with questions → speaking → (Japanese)
   writing → retrieval test without hints → summary and follow-up suggestion.
 - Exercise types:
@@ -48,7 +50,7 @@ an Android app (Capacitor). No account, no ads, no paid APIs: progress stays on 
 
 **Motivation** ([docs/MOTIVATION.md](docs/MOTIVATION.md))
 - Daily goal of 5/10/20/30 active minutes (active time is counted separately from app-open
-  time), daily quests, weekly challenge, XP and levels, 24 badges, personal bests.
+  time), daily quests, weekly challenge, XP and levels, 26 badges, personal bests.
 - Forgiving streak with shields. A broken streak never resets learning progress.
 - Configurable reminders: real local notifications on Android; in-app only on the web, and
   the app says so.
@@ -129,8 +131,8 @@ attribution.
 - Native-speaker proofreading of all three courses; recorded human audio for core phrases,
   using openly licensed recordings with per-file attribution.
 - Reliable screen-off listening on Android: a foreground audio service with pre-rendered TTS.
-- More lessons towards complete A1/A2; additional interface languages (the catalogue
-  architecture is ready).
+- Complete A2 (the missing topics are listed in docs/CURRICULUM.md), then B1; additional
+  interface languages (the catalogue architecture is ready).
 - FSRS-style scheduler parameters fitted to each learner's review history.
 - Optional on-device speech recognition (Whisper-compatible), still without pretending to
   score pronunciation or pitch accent.
