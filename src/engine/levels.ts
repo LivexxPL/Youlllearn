@@ -30,6 +30,16 @@ export function levelProgress(course: Course, completed: ReadonlySet<string>): L
 }
 
 /**
+ * How far along the course the learner is, in lessons: the number of completed lessons, or
+ * the position of the furthest completed one if the learner started at a higher level.
+ */
+export function coveredLessons(course: Course, completed: ReadonlySet<string>): number {
+  let furthest = -1;
+  for (const id of completed) furthest = Math.max(furthest, course.lessonIndex.get(id) ?? -1);
+  return Math.max(completed.size, furthest + 1);
+}
+
+/**
  * Levels the learner could jump to: not the first level, not started yet,
  * and further along than the lesson they would continue with.
  */

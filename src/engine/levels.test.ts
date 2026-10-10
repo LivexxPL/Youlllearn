@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { buildCourse } from '../content/registry';
 import type { CourseDefinition, Lesson, Unit } from '../content/types';
-import { jumpTargets, levelProgress } from './levels';
+import { coveredLessons, jumpTargets, levelProgress } from './levels';
 
 function lesson(id: string): Lesson {
   return { id, title: id, objective: 'objective of the lesson', level: 'A1', minutes: 5, items: [], sentences: [], summary: [] };
@@ -32,6 +32,13 @@ describe('levels', () => {
       ['A1', 1, 3, 'es.l1'],
       ['A2', 1, 2, 'es.l4'],
     ]);
+  });
+
+  it('measures progress by the furthest completed lesson', () => {
+    expect(coveredLessons(course, new Set())).toBe(0);
+    expect(coveredLessons(course, new Set(['es.l1', 'es.l2']))).toBe(2);
+    // Started at A2 (lesson 4 of 5).
+    expect(coveredLessons(course, new Set(['es.l4']))).toBe(4);
   });
 
   it('offers a jump only to later levels that were not started', () => {

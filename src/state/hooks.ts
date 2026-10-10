@@ -8,6 +8,7 @@ import { useSettings } from './settings';
 import { HIRAGANA_LESSONS } from '../content/ja';
 import { audio, type ListeningStage } from '../services/audio';
 import { getCourse } from '../content/registry';
+import { coveredLessons } from '../engine/levels';
 
 export function useLessonProgress(): Map<string, LessonProgress> | undefined {
   const list = useLiveQuery(() => db.lessonProgress.toArray(), []);
@@ -78,7 +79,9 @@ export function stageForProgress(completedCount: number, totalLessons: number): 
 
 export function useListeningStage(courseId: CourseId): ListeningStage {
   const completed = useCompletedSet(courseId);
-  return stageForProgress(completed.size, getCourse(courseId).lessons.length);
+  const course = getCourse(courseId);
+  // A learner who started at A2 gets A2-appropriate speed, not the beginner default.
+  return stageForProgress(coveredLessons(course, completed), course.lessons.length);
 }
 
 /** Re-renders when voices change; returns the TTS status for a language tag. */
