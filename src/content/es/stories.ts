@@ -296,4 +296,51 @@ export const stories: Story[] = [
       },
     ],
   },
+  {
+    id: 'es.st.9',
+    title: 'Przyjęcie dla babci',
+    afterLesson: 'es.l28',
+    stage: 2,
+    context: 'Nuria z Walencji opowiada, jak jej rodzina szykuje babci urodzinową niespodziankę.',
+    lines: [
+      { text: 'Mañana es el cumpleaños de mi abuela Carmen. ¡Tendrá ochenta años!', pl: 'Jutro są urodziny mojej babci Carmen. Skończy osiemdziesiąt lat!' },
+      {
+        text: 'Toda la familia está preparando una fiesta en casa de mis padres, pero ella no sabe nada.',
+        pl: 'Cała rodzina przygotowuje przyjęcie u moich rodziców, ale ona o niczym nie wie.',
+      },
+      { text: 'Ahora mismo mi madre está cocinando y mi padre está poniendo la mesa.', pl: 'W tej chwili mama gotuje, a tata nakrywa do stołu.' },
+      { text: '¿Y yo? Yo estoy escribiendo una carta para la abuela.', pl: 'A ja? Ja piszę list do babci.' },
+      { text: 'Mis padres le van a regalar un viaje a Sevilla, porque le encanta Andalucía.', pl: 'Rodzice dadzą jej w prezencie wycieczkę do Sewilli, bo uwielbia Andaluzję.' },
+      {
+        text: 'A las siete la llamaré y le diré: «Abuela, ven, por favor. Necesito tu ayuda».',
+        pl: 'O siódmej do niej zadzwonię i powiem: „Babciu, przyjdź, proszę. Potrzebuję twojej pomocy”.',
+      },
+      { text: 'Seguramente vendrá dentro de diez minutos. ¡Le va a encantar!', pl: 'Pewnie przyjdzie za dziesięć minut. Będzie zachwycona!' },
+      { text: 'Pero hay un problema: mi hermano menor, Pablo, la está llamando ahora mismo…', pl: 'Ale jest problem: mój młodszy brat, Pablo, właśnie do niej dzwoni…' },
+      { text: '¡Pablo, no se lo digas! ¡Dame el teléfono!', pl: 'Pablo, nie mów jej! Daj mi telefon!' },
+    ],
+    questions: [
+      {
+        id: 'es.st.9-q1',
+        prompt: 'Ile lat skończy babcia Carmen?',
+        options: ['Siedemdziesiąt', 'Osiemdziesiąt', 'Dziewięćdziesiąt'],
+        answer: 1,
+        explanation: '„¡Tendrá ochenta años!” — tendrá to czas przyszły od tener: będzie miała osiemdziesiąt lat.',
+      },
+      {
+        id: 'es.st.9-q2',
+        prompt: 'Co robi Nuria w tej chwili?',
+        options: ['Gotuje z mamą', 'Pisze list do babci', 'Nakrywa do stołu'],
+        answer: 1,
+        explanation: '„Yo estoy escribiendo una carta para la abuela.” Mama gotuje, a tata nakrywa do stołu.',
+      },
+      {
+        id: 'es.st.9-q3',
+        prompt: 'Jaki problem pojawia się na końcu?',
+        options: ['Babcia nie odbiera telefonu', 'Młodszy brat dzwoni do babci i może zdradzić niespodziankę', 'Mama nie zdążyła ugotować obiadu'],
+        answer: 1,
+        explanation: '„Mi hermano menor, Pablo, la está llamando ahora mismo…” — dlatego Nuria woła: „¡Pablo, no se lo digas!”',
+      },
+    ],
+  },
 ];
