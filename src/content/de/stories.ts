@@ -306,4 +306,61 @@ export const stories: Story[] = [
       },
     ],
   },
+  {
+    id: 'de.st.9',
+    title: 'Sąsiedzi z kamienicy',
+    afterLesson: 'de.l29',
+    stage: 2,
+    context: 'Kasia od niedawna studiuje w Lipsku. Opowiada o ludziach, którzy mieszkają w jej kamienicy.',
+    lines: [
+      { speaker: 'Kasia', text: 'Ich wohne jetzt in Leipzig, in einem alten Haus in einer ruhigen Straße.', pl: 'Mieszkam teraz w Lipsku, w starej kamienicy przy spokojnej ulicy.' },
+      { speaker: 'Kasia', text: 'Die Leute, die hier wohnen, sind sehr nett.', pl: 'Ludzie, którzy tu mieszkają, są bardzo mili.' },
+      {
+        speaker: 'Kasia',
+        text: 'Die Frau, die unter mir wohnt, ist Ärztin. Wenn ich krank bin, hilft sie mir.',
+        pl: 'Kobieta, która mieszka pode mną, jest lekarką. Kiedy jestem chora, pomaga mi.',
+      },
+      { speaker: 'Kasia', text: 'Herr Wolf, der über mir wohnt, ist schon sehr alt.', pl: 'Pan Wolf, który mieszka nade mną, jest już bardzo stary.' },
+      { speaker: 'Kasia', text: 'Er ist in diesem Haus aufgewachsen und kennt jeden Nachbarn.', pl: 'Dorastał w tej kamienicy i zna każdego sąsiada.' },
+      {
+        speaker: 'Kasia',
+        text: 'Gestern hat er mir das Zimmer gezeigt, in dem er als Kind geschlafen hat.',
+        pl: 'Wczoraj pokazał mi pokój, w którym spał jako dziecko.',
+      },
+      {
+        speaker: 'Kasia',
+        text: 'Tim, der Student, mit dem ich jeden Abend Deutsch lerne, wohnt nebenan.',
+        pl: 'Tim, student, z którym co wieczór uczę się niemieckiego, mieszka obok.',
+      },
+      { speaker: 'Kasia', text: 'Ich vermisse meine Familie in Krakau.', pl: 'Tęsknię za rodziną w Krakowie.' },
+      {
+        speaker: 'Kasia',
+        text: 'Aber die Nachbarn, die ich hier kennengelernt habe, sind jetzt auch ein bisschen meine Familie.',
+        pl: 'Ale sąsiedzi, których tu poznałam, są teraz trochę także moją rodziną.',
+      },
+    ],
+    questions: [
+      {
+        id: 'de.st.9-q1',
+        prompt: 'Kim jest kobieta, która mieszka pod Kasią?',
+        options: ['Lekarką', 'Nauczycielką', 'Studentką'],
+        answer: 0,
+        explanation: '„Die Frau, die unter mir wohnt, ist Ärztin.”',
+      },
+      {
+        id: 'de.st.9-q2',
+        prompt: 'Co pan Wolf pokazał wczoraj Kasi?',
+        options: ['Kawiarnię, w której poznał żonę', 'Pokój, w którym spał jako dziecko', 'Ogród za domem'],
+        answer: 1,
+        explanation: '„Gestern hat er mir das Zimmer gezeigt, in dem er als Kind geschlafen hat.”',
+      },
+      {
+        id: 'de.st.9-q3',
+        prompt: 'Z kim Kasia co wieczór uczy się niemieckiego?',
+        options: ['Z panem Wolfem', 'Z sąsiadką, która jest lekarką', 'Z Timem, studentem zza ściany'],
+        answer: 2,
+        explanation: '„Tim, der Student, mit dem ich jeden Abend Deutsch lerne, wohnt nebenan.”',
+      },
+    ],
+  },
 ];
