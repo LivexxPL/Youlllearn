@@ -1048,5 +1048,335 @@ export const unit7: Unit = {
       followUp:
         'Rozejrzyj się wokół i nazwij na głos trzy rzeczy, które należą do kogoś z rodziny: das Handy meiner Schwester, der Schlüssel meines Vaters… Za około 10 minut zrób krótką powtórkę.',
     },
+    {
+      id: 'de.l29',
+      title: 'Ludzie i miejsca, które znam',
+      subtitle: 'Die Stadt, in der ich wohne',
+      objective: 'Opiszesz ludzi i miejsca zdaniem względnym — der Mann, der nebenan wohnt; die Stadt, in der ich aufgewachsen bin — także z przyimkiem i ze słówkiem wo.',
+      level: 'A2+',
+      minutes: 13,
+      items: [
+        verb('kennen', 'kennen', 'znać', {
+          plAlts: ['znać kogoś', 'znać coś'],
+          note: 'Znać osobę, miejsce, film: Kennst du Graz? Ich kenne ihn gut. Wiedzieć (fakt, informację) to wissen: Ich weiß, wo er wohnt.',
+        }),
+        verb('kennenlernen', 'kennenlernen', 'poznawać; poznać', {
+          alts: ['kennen lernen'],
+          plAlts: ['poznać', 'poznawać', 'zapoznać się'],
+          note: 'Rozdzielny: Heute lernst du meine Eltern kennen. Perfekt: Wir haben uns in Wien kennengelernt. — Poznaliśmy się w Wiedniu.',
+        }),
+        noun('die-leute', 'die Leute', 'ludzie', 'pl', {
+          note: 'Tylko liczba mnoga: Die Leute hier sind nett. Celownik: mit den Leuten. Bardziej oficjalnie: die Menschen.',
+        }),
+        noun('der-kollege', 'der Kollege / die Kollegin', 'kolega / koleżanka z pracy', 'm', {
+          tts: 'der Kollege, die Kollegin',
+          alts: ['der Kollege', 'die Kollegin'],
+          plural: 'die Kollegen',
+          plAlts: ['kolega z pracy', 'koleżanka z pracy', 'kolega', 'koleżanka', 'współpracownik', 'współpracowniczka'],
+          note: 'Ktoś, z kim pracujesz albo studiujesz — nie przyjaciel (der Freund). Odmienia się jak der Student: den / dem Kollegen. L. mn.: die Kolleginnen.',
+        }),
+        noun('der-lehrer', 'der Lehrer / die Lehrerin', 'nauczyciel / nauczycielka', 'm', {
+          tts: 'der Lehrer, die Lehrerin',
+          alts: ['der Lehrer', 'die Lehrerin'],
+          plural: 'die Lehrer',
+          plAlts: ['nauczyciel', 'nauczycielka'],
+          note: 'Zawód bez rodzajnika: Sie ist Lehrerin. — Jest nauczycielką. L. mn.: die Lehrer, die Lehrerinnen.',
+        }),
+        noun('das-dorf', 'das Dorf', 'wieś; wioska', 'n', {
+          plural: 'die Dörfer',
+          plAlts: ['wieś', 'wioska'],
+          note: 'Konkretna miejscowość: in einem kleinen Dorf. Uwaga: das Dorf jest nijakie, choć „wieś” jest po polsku żeńska.',
+        }),
+        noun('das-cafe', 'das Café', 'kawiarnia', 'n', {
+          plural: 'die Cafés',
+          note: 'Akcent na ostatnią sylabę: ka-FE. Nie myl z der Kaffee (kawa). Tradycyjna wiedeńska kawiarnia to das Kaffeehaus.',
+        }),
+        noun('der-ort', 'der Ort', 'miejsce; miejscowość', 'm', {
+          plural: 'die Orte',
+          plAlts: ['miejsce', 'miejscowość'],
+          note: 'Miejsce na mapie albo mała miejscowość: ein ruhiger Ort. W zdaniu względnym: der Ort, an dem… albo der Ort, wo…',
+        }),
+        noun('die-kindheit', 'die Kindheit', 'dzieciństwo', 'f', {
+          note: 'In meiner Kindheit… — w dzieciństwie… Od das Kind + końcówka -heit (zawsze rodzaj żeński). Por. als Kind — jako dziecko.',
+        }),
+        verb('aufwachsen', 'aufwachsen', 'dorastać; wychowywać się', {
+          plAlts: ['dorastać', 'wychowywać się', 'dorosnąć', 'wychować się'],
+          note: 'Rozdzielny, Perfekt z sein: Ich bin in Krakau aufgewachsen. — Dorastałem / dorastałam w Krakowie. Odmiana: du wächst auf, er wächst auf.',
+        }),
+        verb('vermissen', 'vermissen', 'tęsknić (za kimś, za czymś)', {
+          plAlts: ['tęsknić', 'brakować'],
+          note: 'Z biernikiem, bez przyimka: Ich vermisse dich. — Tęsknię za tobą. Często tłumaczymy też „brakuje mi”: Ich vermisse den Garten. — Brakuje mi ogrodu.',
+        }),
+        verb('sich-erinnern-an', 'sich erinnern an + Akk.', 'pamiętać; przypominać sobie', {
+          tts: 'Ich erinnere mich an meine Kindheit.',
+          alts: ['sich erinnern an', 'erinnern an', 'Ich erinnere mich an meine Kindheit.'],
+          plAlts: ['pamiętać', 'przypominać sobie', 'przypomnieć sobie', 'wspominać'],
+          note: 'Zwrotny, z an + biernik: Erinnerst du dich an mich? — Pamiętasz mnie? Ich erinnere mich gern an meine Kindheit. — Miło wspominam dzieciństwo.',
+        }),
+        word('nebenan', 'nebenan', 'obok; po sąsiedzku', {
+          pos: 'adv',
+          plAlts: ['obok', 'za ścianą', 'po sąsiedzku'],
+          note: 'W sąsiednim mieszkaniu albo domu: Er wohnt nebenan. — Mieszka obok. Die Leute von nebenan — sąsiedzi zza ściany.',
+        }),
+        verb('zeigen', 'zeigen', 'pokazywać; pokazać', {
+          plAlts: ['pokazywać', 'pokazać'],
+          note: 'Komu? — celownik, co? — biernik: Ich zeige dir die Stadt. — Pokażę ci miasto. Zeig mal! — Pokaż!',
+        }),
+      ],
+      sentences: [
+        s('29-1', 'Der Mann, der nebenan wohnt, ist mein Lehrer.', 'Mężczyzna, który mieszka obok, jest moim nauczycielem.', {
+          plAlts: [
+            'Pan, który mieszka obok, jest moim nauczycielem.',
+            'Mężczyzna, który mieszka obok, to mój nauczyciel.',
+            'Ten pan, który mieszka obok, to mój nauczyciel.',
+          ],
+        }),
+        s('29-2', 'Das ist die Frau, die ich gestern kennengelernt habe.', 'To jest kobieta, którą wczoraj poznałem.', {
+          plAlts: [
+            'To jest kobieta, którą wczoraj poznałam.',
+            'To kobieta, którą wczoraj poznałem.',
+            'To kobieta, którą wczoraj poznałam.',
+            'To jest ta pani, którą wczoraj poznałem.',
+            'To jest ta pani, którą wczoraj poznałam.',
+          ],
+        }),
+        s('29-3', 'Der Film, den wir am Samstag gesehen haben, war sehr lustig.', 'Film, który widzieliśmy w sobotę, był bardzo zabawny.', {
+          plAlts: [
+            'Film, który oglądaliśmy w sobotę, był bardzo zabawny.',
+            'Film, który obejrzeliśmy w sobotę, był bardzo zabawny.',
+            'Film, który widzieliśmy w sobotę, był bardzo śmieszny.',
+            'Ten film, który widzieliśmy w sobotę, był bardzo zabawny.',
+          ],
+          note: 'Den, bo film jest dopełnieniem: widzieliśmy (kogo? co?) film — biernik rodzaju męskiego.',
+        }),
+        s('29-4', 'Das ist das Kaffeehaus, in dem wir uns kennengelernt haben.', 'To jest kawiarnia, w której się poznaliśmy.', {
+          alts: ['Das ist das Kaffeehaus, wo wir uns kennengelernt haben.'],
+          plAlts: [
+            'To kawiarnia, w której się poznaliśmy.',
+            'To jest ta kawiarnia, w której się poznaliśmy.',
+            'To jest kawiarnia, w której poznaliśmy się.',
+            'To jest kawiarnia, gdzie się poznaliśmy.',
+          ],
+          note: 'Kaffeehaus — tradycyjna wiedeńska kawiarnia. Das Kaffeehaus jest nijakie, więc in dem — choć po polsku „w której”.',
+          accent: 'de-AT',
+        }),
+        s('29-5', 'Die Kollegen, mit denen ich arbeite, sind sehr nett.', 'Koledzy, z którymi pracuję, są bardzo mili.', {
+          plAlts: ['Koledzy, z którymi pracuję, są bardzo sympatyczni.', 'Współpracownicy, z którymi pracuję, są bardzo mili.'],
+          note: 'Denen — celownik liczby mnogiej zaimka względnego (po mit). Nie den!',
+        }),
+        s('29-6', 'Ich vermisse die Stadt, in der ich aufgewachsen bin.', 'Tęsknię za miastem, w którym dorastałem.', {
+          alts: ['Ich vermisse die Stadt, wo ich aufgewachsen bin.'],
+          plAlts: [
+            'Tęsknię za miastem, w którym dorastałam.',
+            'Tęsknię za miastem, w którym się wychowałem.',
+            'Tęsknię za miastem, w którym się wychowałam.',
+            'Brakuje mi miasta, w którym dorastałem.',
+            'Brakuje mi miasta, w którym dorastałam.',
+          ],
+          note: 'Die Stadt jest rodzaju żeńskiego, więc in der — choć po polsku „w którym”.',
+        }),
+        s('29-7', 'Erinnerst du dich an die Nachbarin, die so gut gekocht hat?', 'Pamiętasz tę sąsiadkę, która tak dobrze gotowała?', {
+          plAlts: [
+            'Pamiętasz sąsiadkę, która tak dobrze gotowała?',
+            'Czy pamiętasz tę sąsiadkę, która tak dobrze gotowała?',
+            'Przypominasz sobie tę sąsiadkę, która tak dobrze gotowała?',
+          ],
+        }),
+        s('29-8', 'Im Jänner zeige ich dir das Dorf, wo meine Oma wohnt.', 'W styczniu pokażę ci wieś, w której mieszka moja babcia.', {
+          alts: [
+            'Im Jänner zeige ich dir das Dorf, in dem meine Oma wohnt.',
+            'Im Januar zeige ich dir das Dorf, wo meine Oma wohnt.',
+            'Ich zeige dir im Jänner das Dorf, wo meine Oma wohnt.',
+          ],
+          plAlts: [
+            'W styczniu pokażę ci wioskę, w której mieszka moja babcia.',
+            'W styczniu pokażę ci wieś, gdzie mieszka moja babcia.',
+            'W styczniu pokażę ci wieś, w której mieszka babcia.',
+          ],
+          note: 'Jänner — austriacka nazwa stycznia (w Niemczech: Januar). Wo przy nazwach miejsc brzmi w Austrii bardzo naturalnie.',
+          accent: 'de-AT',
+        }),
+        s('29-9', 'Kennst du den Mann, dem das Café gehört?', 'Znasz tego mężczyznę, do którego należy ta kawiarnia?', {
+          plAlts: [
+            'Znasz mężczyznę, do którego należy ta kawiarnia?',
+            'Czy znasz tego mężczyznę, do którego należy ta kawiarnia?',
+            'Znasz tego pana, do którego należy ta kawiarnia?',
+          ],
+          note: 'Gehören łączy się z celownikiem (wem?), więc dem — choć po polsku „do którego”.',
+        }),
+      ],
+      grammar: [
+        {
+          id: 'de.g.relativsatz',
+          title: 'Zdanie względne: der, die, das + czasownik na końcu',
+          body: [
+            'Zdanie względne (**Relativsatz**) dopowiada coś o osobie albo rzeczy — jak polskie „który, która, które”: [[Der Mann, der nebenan wohnt, ist mein Lehrer.]] Zaimek względny wygląda prawie jak rodzajnik: **der, die, das**, a w liczbie mnogiej **die**.',
+            '**Rodzaj i liczbę** zaimek bierze od rzeczownika, który opisuje, a **przypadek** — od swojej roli w zdaniu względnym: [[der Film, der lustig war]] (film był — mianownik), [[der Film, den wir gesehen haben]] (widzieliśmy film — biernik), [[der Kollege, dem ich helfe]] (pomagam koledze — celownik).',
+            'Zdanie względne oddzielamy **przecinkiem**, a odmieniony czasownik stoi **na samym końcu** — tak jak po dass i weil: [[die Frau, die ich gestern kennengelernt habe]]. Gdy zdanie względne wchodzi w środek zdania, zamyka je drugi przecinek: [[Die Leute, die hier wohnen, sind nett.]]',
+            'Tylko jedna forma różni się od rodzajnika: celownik liczby mnogiej to **denen**: [[die Kollegen, denen ich helfe]]. Uważaj też na pisownię: zaimek [[das]] (które) piszemy przez jedno s, a spójnik [[dass]] (że) — przez dwa.',
+          ],
+          table: {
+            caption: 'Zaimek względny = rodzajnik określony, z wyjątkiem denen',
+            head: ['', 'm.', 'ż.', 'n.', 'l. mn.'],
+            rows: [
+              ['mianownik', 'der', 'die', 'das', 'die'],
+              ['biernik', 'den', 'die', 'das', 'die'],
+              ['celownik', 'dem', 'der', 'dem', 'denen'],
+            ],
+          },
+          contrast:
+            'Pułapka: po polsku mówimy „film, który widzieliśmy” — „który” wygląda jak mianownik, choć to biernik. Po niemiecku biernik rodzaju męskiego zawsze widać: der Film, den wir gesehen haben. Druga różnica: po polsku szyk po „który” jest swobodny, a po niemiecku odmieniony czasownik zawsze stoi na końcu zdania względnego.',
+        },
+        {
+          id: 'de.g.relativ-praep',
+          title: 'Przyimek + zaimek względny; wo przy miejscach',
+          body: [
+            'Gdy czasownik łączy się z przyimkiem, przyimek stoi na początku zdania względnego, **przed zaimkiem** — tak jak po polsku „z którym”, „w której”: [[die Kollegen, mit denen ich arbeite]], [[das Café, in dem wir uns kennengelernt haben]].',
+            'Przypadek wyznacza przyimek: po **mit, bei, von, zu** — celownik ([[der Freund, mit dem ich Deutsch lerne]]), po **für** — biernik ([[die Leute, für die ich koche]]). Czasownik z przyimkiem zabiera go do zdania względnego: sich erinnern an + biernik → [[der Lehrer, an den ich mich gern erinnere]].',
+            'O **miejscach** w mowie często mówimy krócej: [[wo]] zamiast in dem / in der: [[die Stadt, wo ich wohne]] = [[die Stadt, in der ich wohne]]. Po nazwach miast i krajów zostaje tylko wo: [[Ich studiere in Wien, wo meine Schwester wohnt.]] O ludziach nigdy nie mówimy wo.',
+          ],
+          table: {
+            head: ['Przyimek', 'Przykład', 'Po polsku'],
+            rows: [
+              ['mit + celownik', 'die Leute, mit denen ich arbeite', 'ludzie, z którymi pracuję'],
+              ['in + celownik', 'die Stadt, in der ich wohne', 'miasto, w którym mieszkam'],
+              ['an + biernik', 'der Lehrer, an den ich mich erinnere', 'nauczyciel, którego pamiętam'],
+              ['wo (miejsca)', 'das Dorf, wo ich aufgewachsen bin', 'wieś, w której dorastałem'],
+            ],
+          },
+          contrast:
+            'Po polsku przyimek też stoi przed „którym”: z którym, w której. Pułapką jest rodzaj: miasto jest po polsku nijakie, a die Stadt — żeńska, więc in der, nie in dem. I odwrotnie: kawiarnia i wieś są po polsku żeńskie, a das Café i das Dorf — nijakie, więc in dem. Dobierając zaimek, myśl o niemieckim rodzajniku, nie o polskim.',
+        },
+      ],
+      exercises: [
+        {
+          type: 'gap',
+          id: 'de.x.29-1',
+          concept: 'de.g.relativsatz',
+          sentence: 'Der Film, ___ wir gesehen haben, war langweilig.',
+          pl: 'Film, który widzieliśmy, był nudny.',
+          options: ['der', 'den', 'dem'],
+          answer: 'den',
+          explanation: 'Widzieliśmy (kogo? co?) film — to biernik rodzaju męskiego: den. Po polsku „który” wygląda tu jak mianownik, ale po niemiecku biernik widać.',
+        },
+        {
+          type: 'gap',
+          id: 'de.x.29-2',
+          concept: 'de.g.relativsatz',
+          sentence: 'Das ist der Kollege, ___ ich jeden Tag helfe.',
+          pl: 'To kolega, któremu codziennie pomagam.',
+          options: ['der', 'den', 'dem'],
+          answer: 'dem',
+          explanation: 'Helfen łączy się z celownikiem (pomagam komu?), więc w rodzaju męskim: dem — jak po polsku „któremu”.',
+        },
+        {
+          type: 'gap',
+          id: 'de.x.29-3',
+          concept: 'de.g.relativsatz',
+          sentence: 'Das Kleid, ___ ich gekauft habe, ist grün.',
+          pl: 'Sukienka, którą kupiłem / kupiłam, jest zielona.',
+          options: ['das', 'dass', 'die'],
+          answer: 'das',
+          explanation: 'Das Kleid jest nijakie, więc zaimek względny to das — przez jedno s. Dass (że) to spójnik i nie odnosi się do rzeczownika. Die pasowałoby do polskiej „sukienki”, ale liczy się niemiecki rodzaj.',
+        },
+        {
+          type: 'choice',
+          id: 'de.x.29-4',
+          concept: 'de.g.relativsatz',
+          prompt: 'Które zdanie jest poprawne?',
+          options: [
+            'Das ist der Freund, den ich in Wien kennengelernt habe.',
+            'Das ist der Freund, den ich habe in Wien kennengelernt.',
+            'Das ist der Freund, der ich in Wien kennengelernt habe.',
+          ],
+          answer: 0,
+          explanation: 'W zdaniu względnym odmieniony czasownik (habe) stoi na samym końcu, a zaimek jest w bierniku (poznałem go) — den. Der byłby mianownikiem.',
+        },
+        {
+          type: 'gap',
+          id: 'de.x.29-5',
+          concept: 'de.g.relativ-praep',
+          sentence: 'Die Leute, mit ___ ich arbeite, sind nett.',
+          pl: 'Ludzie, z którymi pracuję, są mili.',
+          options: ['die', 'den', 'denen'],
+          answer: 'denen',
+          explanation: 'Mit wymaga celownika, a celownik liczby mnogiej zaimka względnego to denen — nie den, jak przy rodzajniku.',
+        },
+        {
+          type: 'gap',
+          id: 'de.x.29-6',
+          concept: 'de.g.relativ-praep',
+          sentence: 'Wien ist die Stadt, in ___ ich studiere.',
+          pl: 'Wiedeń to miasto, w którym studiuję.',
+          options: ['dem', 'der', 'die'],
+          answer: 'der',
+          explanation: 'Die Stadt jest rodzaju żeńskiego, a in (gdzie?) wymaga celownika: in der. Po polsku „w którym”, bo miasto jest nijakie — ale liczy się niemiecki rodzaj.',
+        },
+        {
+          type: 'choice',
+          id: 'de.x.29-7',
+          concept: 'de.g.relativ-praep',
+          prompt: 'Jak powiesz: „To jest wieś, w której dorastałem”?',
+          options: ['Das ist das Dorf, wo ich aufgewachsen bin.', 'Das ist das Dorf, wo ich bin aufgewachsen.', 'Das ist das Dorf, das ich aufgewachsen bin.'],
+          answer: 0,
+          explanation: 'O miejscach można powiedzieć wo (albo in dem), a odmieniony czasownik bin idzie na koniec. W trzecim zdaniu brakuje przyimka — dorasta się w jakimś miejscu.',
+        },
+      ],
+      dialogue: {
+        id: 'de.d.29',
+        title: 'Tu dorastałam',
+        context: 'Sophie pokazuje koledze z pracy, Michałowi, dzielnicę Grazu, w której spędziła dzieciństwo.',
+        speakers: {
+          S: { name: 'Sophie', voice: 'a', accent: 'de-AT' },
+          M: { name: 'Michał', voice: 'b', accent: 'de-AT' },
+        },
+        lines: [
+          { speaker: 'S', text: 'Schau, Michał! Das ist das Haus, in dem ich aufgewachsen bin.', pl: 'Zobacz, Michał! To dom, w którym dorastałam.' },
+          { speaker: 'M', text: 'Schön! Und wer ist die Frau, die dort im Garten steht?', pl: 'Ładny! A kim jest ta kobieta, która stoi tam w ogrodzie?' },
+          { speaker: 'S', text: 'Das ist Frau Huber, unsere alte Nachbarin. Sie war auch meine Lehrerin.', pl: 'To pani Huber, nasza dawna sąsiadka. Była też moją nauczycielką.' },
+          { speaker: 'M', text: 'Ist das die Lehrerin, an die du dich so gern erinnerst?', pl: 'Czy to ta nauczycielka, którą tak miło wspominasz?' },
+          {
+            speaker: 'S',
+            text: 'Ja, das ist sie! Und dort ist das Café, wo ich nach der Schule meine Freunde getroffen habe.',
+            pl: 'Tak, to ona! A tam jest kawiarnia, w której po szkole spotykałam się z przyjaciółmi.',
+          },
+          { speaker: 'M', text: 'Vermisst du deine Kindheit?', pl: 'Tęsknisz za dzieciństwem?' },
+          { speaker: 'S', text: 'Ein bisschen. Aber viele Leute, die hier wohnen, kenne ich noch.', pl: 'Trochę. Ale wciąż znam wielu ludzi, którzy tu mieszkają.' },
+          { speaker: 'M', text: 'Und ich kenne in Graz nur meine Kollegen!', pl: 'A ja w Grazu znam tylko kolegów z pracy!' },
+          { speaker: 'S', text: 'Dann komm mit! Heute lernst du meine Nachbarn kennen.', pl: 'To chodź ze mną! Dziś poznasz moich sąsiadów.' },
+        ],
+        questions: [
+          {
+            id: 'de.d.29-q1',
+            prompt: 'Co Sophie pokazuje Michałowi na początku?',
+            options: ['Dom, w którym dorastała', 'Szkołę, do której chodziła', 'Kawiarnię swoich rodziców'],
+            answer: 0,
+            explanation: '„Das ist das Haus, in dem ich aufgewachsen bin.”',
+          },
+          {
+            id: 'de.d.29-q2',
+            prompt: 'Kim jest pani Huber?',
+            options: ['Mamą Sophie', 'Właścicielką kawiarni', 'Dawną sąsiadką i nauczycielką Sophie'],
+            answer: 2,
+            explanation: '„Das ist Frau Huber, unsere alte Nachbarin. Sie war auch meine Lehrerin.” Alt znaczy tu „dawny”, a nie „stary”.',
+          },
+          {
+            id: 'de.d.29-q3',
+            prompt: 'Kogo Michał zna w Grazu?',
+            options: ['Tylko kolegów z pracy', 'Wszystkich sąsiadów Sophie', 'Tylko panią Huber'],
+            answer: 0,
+            explanation: '„Und ich kenne in Graz nur meine Kollegen!” — dlatego Sophie chce, żeby poznał jej sąsiadów.',
+          },
+        ],
+      },
+      summary: [
+        'Zdanie względne: przecinek + der / die / das… + czasownik na końcu: der Mann, der nebenan wohnt.',
+        'Rodzaj od rzeczownika, przypadek od roli w zdaniu: der Film, den wir gesehen haben; der Kollege, dem ich helfe.',
+        'Celownik liczby mnogiej to denen: die Leute, mit denen ich arbeite.',
+        'Przyimek przed zaimkiem: die Stadt, in der ich wohne; przy miejscach także wo: das Dorf, wo ich aufgewachsen bin.',
+      ],
+      followUp:
+        'Opisz na głos trzy osoby i jedno miejsce, które dobrze znasz — każde jednym zdaniem względnym: Das ist meine Freundin, die in Graz wohnt. Za około 10 minut zrób krótką powtórkę.',
+    },
   ],
 };
