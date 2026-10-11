@@ -1215,5 +1215,304 @@ export const unit8: Unit = {
       followUp:
         'Za kilka minut powtórz osiem nieregularnych imiesłowów: hecho, dicho, visto, escrito, puesto, vuelto, roto, abierto. W ostatniej lekcji działu powiesz, co by było, gdyby…: si tuviera tiempo, viajaría.',
     },
+    {
+      id: 'es.l33',
+      title: 'Co by było, gdyby…?',
+      subtitle: 'Si tuviera tiempo, viajaría',
+      objective:
+        'Powiesz, co zrobisz pod jakimś warunkiem (si llueve, me quedo en casa), i opowiesz o marzeniach i sytuacjach nierealnych (si tuviera dinero, viajaría) — utworzysz imperfecto de subjuntivo od formy „ellos” czasu indefinido.',
+      level: 'B1',
+      minutes: 13,
+      items: [
+        phrase('si-quieres', 'si quieres', 'jeśli chcesz', {
+          plAlts: ['jak chcesz', 'jeżeli chcesz', 'jeśli masz ochotę'],
+          note: 'Si (bez kreski) — jeśli; sí (z kreską) — tak. Si quieres, te ayudo. — Jeśli chcesz, pomogę ci. Po si w znaczeniu „jeśli” nie stawiamy czasu przyszłego: si mañana llueve, a nie „si mañana lloverá”.',
+        }),
+        word('tuviera', 'tuviera', '(gdybym) miał / miała', {
+          pos: 'verb',
+          plAlts: ['gdybym miał', 'gdybym miała', 'gdyby miał', 'gdyby miała'],
+          note: 'Imperfecto de subjuntivo od tener: tuvieron → tuvie- + -ra. Si tuviera tiempo, te ayudaría. — Gdybym miał / miała czas, pomógłbym / pomogłabym ci.',
+        }),
+        word('fuera', 'fuera', '(gdybym) był / była; (gdybym) poszedł / poszła', {
+          pos: 'verb',
+          plAlts: ['gdybym był', 'gdybym była', 'gdyby był', 'gdyby była', 'gdybym poszedł', 'gdybym poszła'],
+          note: 'Od ser i od ir — tak jak fui, fue, fueron: Si fuera más joven… — Gdybym był młodszy / była młodsza… Si fuera a México… — Gdybym pojechał / pojechała do Meksyku… Fuera to także „na zewnątrz”.',
+        }),
+        word('pudiera', 'pudiera', '(gdybym) mógł / mogła', {
+          pos: 'verb',
+          plAlts: ['gdybym mógł', 'gdybym mogła', 'gdyby mógł', 'gdyby mogła'],
+          note: 'Od poder: pudieron → pudie- + -ra. Si pudiera, viviría cerca del mar. — Gdybym mógł / mogła, mieszkałbym / mieszkałabym nad morzem.',
+        }),
+        word('viviera', 'viviera', '(gdybym) mieszkał / mieszkała', {
+          pos: 'verb',
+          plAlts: ['gdybym mieszkał', 'gdybym mieszkała', 'gdyby mieszkał', 'gdyby mieszkała', 'gdybym żył', 'gdybym żyła'],
+          note: 'Od vivir: vivieron → vivie- + -ra. Czasowniki regularne działają tak samo: hablaron → hablara, comieron → comiera.',
+        }),
+        word('hiciera', 'hiciera', '(gdybym) zrobił / zrobiła', {
+          pos: 'verb',
+          plAlts: ['gdybym zrobił', 'gdybym zrobiła', 'gdyby zrobił', 'gdyby zrobiła'],
+          note: 'Od hacer: hicieron → hicie- + -ra. O pogodzie: Si hiciera buen tiempo… — Gdyby była ładna pogoda…',
+        }),
+        word('viajaria', 'viajaría', 'podróżowałbym / podróżowałabym', {
+          pos: 'verb',
+          plAlts: ['podróżowałbym', 'podróżowałabym', 'pojechałbym', 'pojechałabym', 'podróżowałby', 'podróżowałaby'],
+          note: 'Condicional od viajar — typowa druga część zdania z si: Si tuviera dinero, viajaría. — Gdybym miał / miała pieniądze, podróżowałbym / podróżowałabym.',
+        }),
+        noun('el-dinero', 'el dinero', 'pieniądze', 'm', {
+          note: 'Po hiszpańsku w liczbie pojedynczej: El dinero no es lo más importante. — Pieniądze nie są najważniejsze. Tengo poco dinero. — Mam mało pieniędzy. W Meksyku potocznie: la lana.',
+        }),
+        noun('el-mundo', 'el mundo', 'świat', 'm', {
+          note: 'Por todo el mundo — po całym świecie. Todo el mundo znaczy też „wszyscy”: Todo el mundo lo sabe. — Wszyscy to wiedzą.',
+        }),
+        phrase('si-yo-fuera-tu', 'si yo fuera tú', 'gdybym był / była tobą', {
+          plAlts: ['gdybym był tobą', 'gdybym była tobą', 'na twoim miejscu', 'ja na twoim miejscu'],
+          note: 'To samo co yo que tú, ale pełnym zdaniem z si: Si yo fuera tú, no lo haría. — Na twoim miejscu nie robiłbym / nie robiłabym tego.',
+        }),
+        verb('quedarse', 'quedarse', 'zostawać; zostać', {
+          plAlts: ['zostać', 'pozostać', 'pozostawać'],
+          note: 'Si llueve, me quedo en casa. — Jeśli będzie padać, zostanę w domu. Quedarse en casa de alguien — zatrzymać się u kogoś. W Hiszpanii quedar (bez se) znaczy też „umówić się”: ¿Quedamos a las ocho?',
+        }),
+        phrase('que-harias', '¿qué harías?', 'co byś zrobił / zrobiła?', {
+          plAlts: ['co byś zrobił?', 'co byś zrobiła?', 'co zrobiłbyś?', 'co zrobiłabyś?'],
+          note: 'Klasyczne pytanie o sytuację wyobrażoną: ¿Qué harías si tuvieras un mes libre? — Co byś zrobił / zrobiła, gdybyś miał / miała wolny miesiąc?',
+        }),
+        verb('ganar', 'ganar', 'wygrywać; zarabiać', {
+          plAlts: ['wygrać', 'zarobić', 'zarabiać'],
+          note: 'Dwa znaczenia: ganar un partido — wygrać mecz, ganar dinero — zarabiać pieniądze. Ganar la lotería — wygrać na loterii.',
+        }),
+      ],
+      sentences: [
+        s('33-1', 'Si llueve, me quedo en casa.', 'Jeśli będzie padać, zostanę w domu.', {
+          plAlts: ['Jeśli pada, zostaję w domu.', 'Jeżeli będzie padać, zostanę w domu.', 'Jak będzie padać, zostanę w domu.', 'Jeśli będzie padał deszcz, zostanę w domu.'],
+        }),
+        s('33-2', 'Si quieres, te ayudo con los deberes.', 'Jeśli chcesz, pomogę ci w lekcjach.', {
+          plAlts: ['Jeśli chcesz, pomogę ci z lekcjami.', 'Jak chcesz, pomogę ci w lekcjach.', 'Jeśli chcesz, pomogę ci odrobić lekcje.', 'Jeśli chcesz, pomogę ci w zadaniu domowym.'],
+        }),
+        s('33-3', 'Si tuviera más tiempo, aprendería alemán.', 'Gdybym miał / miała więcej czasu, uczyłbym / uczyłabym się niemieckiego.', {
+          plAlts: [
+            'Gdybym miał więcej czasu, uczyłbym się niemieckiego.',
+            'Gdybym miała więcej czasu, uczyłabym się niemieckiego.',
+            'Gdybym miał więcej czasu, nauczyłbym się niemieckiego.',
+            'Gdybym miała więcej czasu, nauczyłabym się niemieckiego.',
+          ],
+        }),
+        s('33-4', 'Si pudiera, viajaría por todo el mundo.', 'Gdybym mógł / mogła, podróżowałbym / podróżowałabym po całym świecie.', {
+          plAlts: [
+            'Gdybym mógł, podróżowałbym po całym świecie.',
+            'Gdybym mogła, podróżowałabym po całym świecie.',
+            'Gdybym tylko mógł, podróżowałbym po całym świecie.',
+            'Gdybym tylko mogła, podróżowałabym po całym świecie.',
+          ],
+          accent: 'es-MX',
+        }),
+        s('33-5', 'Si yo fuera tú, hablaría con ella.', 'Gdybym był / była tobą, porozmawiałbym / porozmawiałabym z nią.', {
+          plAlts: [
+            'Na twoim miejscu porozmawiałbym z nią.',
+            'Na twoim miejscu porozmawiałabym z nią.',
+            'Gdybym był tobą, porozmawiałbym z nią.',
+            'Gdybym była tobą, porozmawiałabym z nią.',
+          ],
+          accent: 'es-MX',
+        }),
+        s('33-6', 'Si viviera cerca del mar, iría a la playa todos los días.', 'Gdybym mieszkał / mieszkała blisko morza, chodziłbym / chodziłabym codziennie na plażę.', {
+          plAlts: [
+            'Gdybym mieszkał blisko morza, chodziłbym codziennie na plażę.',
+            'Gdybym mieszkała blisko morza, chodziłabym codziennie na plażę.',
+            'Gdybym mieszkał nad morzem, chodziłbym codziennie na plażę.',
+            'Gdybym mieszkała nad morzem, chodziłabym codziennie na plażę.',
+          ],
+        }),
+        s('33-7', 'Si hiciera buen tiempo, iríamos a la montaña.', 'Gdyby była ładna pogoda, pojechalibyśmy w góry.', {
+          plAlts: ['Gdyby była dobra pogoda, pojechalibyśmy w góry.', 'Gdyby była ładna pogoda, pojechałybyśmy w góry.', 'Gdyby była ładna pogoda, poszlibyśmy w góry.'],
+        }),
+        s('33-8', '¿Qué harías si ganaras la lotería?', 'Co byś zrobił / zrobiła, gdybyś wygrał / wygrała na loterii?', {
+          plAlts: [
+            'Co byś zrobił, gdybyś wygrał na loterii?',
+            'Co byś zrobiła, gdybyś wygrała na loterii?',
+            'Co zrobiłbyś, gdybyś wygrał na loterii?',
+            'Co zrobiłabyś, gdybyś wygrała na loterii?',
+          ],
+          note: 'Ganaras — od ganaron. W Hiszpanii częściej usłyszysz si te tocara la lotería (tocar — tu: „trafić się komuś”).',
+          accent: 'es-MX',
+        }),
+        s('33-9', 'Si ustedes pudieran venir, sería genial.', 'Gdybyście mogli przyjść, byłoby świetnie.', {
+          plAlts: ['Gdyby państwo mogli przyjść, byłoby świetnie.', 'Gdybyście mogli przyjść, byłoby super.', 'Gdybyście mogły przyjść, byłoby świetnie.', 'Gdybyście mogli przyjechać, byłoby świetnie.'],
+          note: 'W Meksyku ustedes to i „wy”, i „państwo”; pudieran pochodzi od pudieron.',
+          accent: 'es-MX',
+        }),
+      ],
+      grammar: [
+        {
+          id: 'es.g.imperfecto-subjuntivo',
+          title: 'Imperfecto de subjuntivo: tuviera, fuera, pudiera',
+          body: [
+            'Do zdań typu „gdybym miał…” potrzebna jest nowa forma: **imperfecto de subjuntivo**. Na szczęście tworzy się ją z formy, którą już znasz — z **„ellos” w czasie indefinido**: odcinamy **-ron** i dodajemy **-ra, -ras, -ra, -ramos, -rais, -ran**.',
+            'Regularne: hablaron → [[hablara]], comieron → [[comiera]], vivieron → [[viviera]]. Nieregularne zachowują nieregularny temat z indefinido: tuvieron → [[tuviera]], pudieron → [[pudiera]], hicieron → [[hiciera]], estuvieron → [[estuviera]], vinieron → [[viniera]], dijeron → [[dijera]]. Ser i ir mają wspólną formę: fueron → [[fuera]].',
+            'Forma „nosotros” ma kreskę: [[tuviéramos]], [[fuéramos]], [[habláramos]]. Formy „yo” i „él / ella / usted” są takie same: [[si yo tuviera]], [[si ella tuviera]].',
+            'Istnieje też wariant na -se ([[tuviese]], [[fuese]]), spotykany głównie w Hiszpanii i w tekstach pisanych. Znaczy to samo — wystarczy, że go rozpoznasz.',
+          ],
+          table: {
+            head: ['indefinido (ellos)', 'yo / él / usted', 'tú', 'nosotros', 'ellos / ustedes'],
+            rows: [
+              ['hablaron', 'hablara', 'hablaras', 'habláramos', 'hablaran'],
+              ['comieron', 'comiera', 'comieras', 'comiéramos', 'comieran'],
+              ['vivieron', 'viviera', 'vivieras', 'viviéramos', 'vivieran'],
+              ['tuvieron', 'tuviera', 'tuvieras', 'tuviéramos', 'tuvieran'],
+              ['pudieron', 'pudiera', 'pudieras', 'pudiéramos', 'pudieran'],
+              ['hicieron', 'hiciera', 'hicieras', 'hiciéramos', 'hicieran'],
+              ['fueron (ser, ir)', 'fuera', 'fueras', 'fuéramos', 'fueran'],
+            ],
+          },
+          contrast:
+            'Polski ma jedno uniwersalne „gdyby” + formę przeszłą: gdybym miał, gdybyś mógł. Hiszpański potrzebuje do tego osobnej formy czasownika (tuviera, pudiera), a polskie „-bym, -byś” z drugiej części zdania (miałbym, pojechałbym) oddaje condicional: tendría, viajaría. Rodzaj znów nie ma znaczenia: si tuviera to i „gdybym miał”, i „gdybym miała”.',
+        },
+        {
+          id: 'es.g.condicionales',
+          title: 'Si llueve… / Si tuviera…: warunek realny i nierealny',
+          body: [
+            '**Warunek realny** — coś naprawdę może się zdarzyć: si + **czas teraźniejszy**, a w drugiej części czas teraźniejszy, przyszły albo rozkaz: [[Si llueve, me quedo en casa.]], [[Si vienes, cocinaré para ti.]], [[Si tienes tiempo, llámame.]]',
+            'Po si w znaczeniu „jeśli” nigdy nie stawiamy czasu przyszłego ani presente de subjuntivo: [[Si mañana hace sol, vamos a la playa.]] — a nie „si mañana hará sol”.',
+            '**Warunek nierealny albo mało prawdopodobny** — marzenia, rady, wyobrażone sytuacje: si + **imperfecto de subjuntivo**, a w drugiej części **condicional**: [[Si tuviera dinero, viajaría.]] — Gdybym miał / miała pieniądze, podróżowałbym / podróżowałabym. [[Si yo fuera tú, hablaría con ella.]]',
+            'Kolejność części jest dowolna: [[Viajaría si tuviera dinero.]] Przecinek stawiamy wtedy, gdy zdanie zaczyna się od si.',
+          ],
+          table: {
+            head: ['Warunek', 'Po si', 'Druga część', 'Przykład'],
+            rows: [
+              ['realny', 'presente', 'presente', 'Si llueve, me quedo en casa.'],
+              ['realny', 'presente', 'futuro', 'Si vienes, cocinaré para ti.'],
+              ['realny', 'presente', 'rozkaz', 'Si tienes tiempo, llámame.'],
+              ['nierealny', 'imperfecto de subjuntivo', 'condicional', 'Si tuviera tiempo, viajaría.'],
+            ],
+          },
+          contrast:
+            'Po polsku po „jeśli” często stawiamy czas przyszły: „jeśli będzie padać, zostanę w domu”. Po hiszpańsku po si stoi czas teraźniejszy: si llueve, me quedo en casa. Przy warunku nierealnym polskie „gdyby” podpowiada imperfecto de subjuntivo, a „-bym, -byś” w drugiej części — condicional. Typowy błąd: „si tendría” — po si nigdy nie stoi condicional.',
+        },
+      ],
+      exercises: [
+        {
+          type: 'gap',
+          id: 'es.x.33-1',
+          concept: 'es.g.condicionales',
+          sentence: 'Si ___ tiempo mañana, te llamo.',
+          pl: 'Jeśli jutro będę mieć czas, zadzwonię do ciebie.',
+          options: ['tengo', 'tendré', 'tenga'],
+          answer: 'tengo',
+          explanation: 'Warunek realny: po si stoi czas teraźniejszy — tengo, choć po polsku mówimy „będę mieć”. Ani futuro (tendré), ani presente de subjuntivo (tenga) po si nie pasują.',
+        },
+        {
+          type: 'gap',
+          id: 'es.x.33-2',
+          concept: 'es.g.imperfecto-subjuntivo',
+          sentence: 'Si ___ más dinero, viajaría a México.',
+          pl: 'Gdybym miała więcej pieniędzy, pojechałabym do Meksyku.',
+          options: ['tendría', 'tuviera', 'tengo'],
+          answer: 'tuviera',
+          explanation: 'Warunek nierealny → si + imperfecto de subjuntivo: tuviera (tuvieron → tuvie- + -ra). Condicional tendría stoi w drugiej części zdania, nigdy po si.',
+        },
+        {
+          type: 'gap',
+          id: 'es.x.33-3',
+          concept: 'es.g.imperfecto-subjuntivo',
+          sentence: 'Si ___ en Madrid, iría al cine todos los días.',
+          pl: 'Gdybym mieszkał w Madrycie, codziennie chodziłbym do kina.',
+          options: ['viviera', 'vivía', 'viviría'],
+          answer: 'viviera',
+          explanation: 'Po si (warunek nierealny) → viviera, od vivieron. Vivía to imperfecto (mieszkałem), a viviría — condicional (mieszkałbym), który pasuje do drugiej części zdania.',
+        },
+        {
+          type: 'gap',
+          id: 'es.x.33-4',
+          concept: 'es.g.condicionales',
+          sentence: 'Si yo fuera tú, no ___ nada.',
+          pl: 'Na twoim miejscu nic bym nie powiedziała.',
+          options: ['diría', 'dijera', 'digo'],
+          answer: 'diría',
+          explanation: 'Druga część zdania nierealnego → condicional: diría (od decir, temat dir-). Dijera pojawia się po si: si dijera…',
+        },
+        {
+          type: 'gap',
+          id: 'es.x.33-5',
+          concept: 'es.g.imperfecto-subjuntivo',
+          sentence: 'Si ___ buen tiempo, iríamos a la playa.',
+          pl: 'Gdyby była ładna pogoda, poszlibyśmy na plażę.',
+          options: ['hiciera', 'hacía', 'haría'],
+          answer: 'hiciera',
+          explanation: 'Hacer → hicieron → hiciera. O pogodzie mówimy z hacer: hace buen tiempo → si hiciera buen tiempo. Hacía to imperfecto, a haría — condicional.',
+        },
+        {
+          type: 'choice',
+          id: 'es.x.33-6',
+          concept: 'es.g.condicionales',
+          optionsLang: 'pl',
+          prompt: 'Co znaczy „Si tengo tiempo, te ayudo”?',
+          options: ['Jeśli będę mieć czas, pomogę ci.', 'Gdybym miał czas, pomógłbym ci.', 'Kiedy miałem czas, pomagałem ci.'],
+          answer: 0,
+          explanation: 'Si + czas teraźniejszy to warunek realny: „jeśli będę mieć czas”. „Gdybym miał czas, pomógłbym ci” to si tuviera tiempo, te ayudaría.',
+        },
+        {
+          type: 'choice',
+          id: 'es.x.33-7',
+          concept: 'es.g.imperfecto-subjuntivo',
+          prompt: 'Jak powiesz: „Gdybyśmy mogli, zostalibyśmy dłużej”?',
+          options: ['Si pudiéramos, nos quedaríamos más tiempo.', 'Si podríamos, nos quedaríamos más tiempo.', 'Si podemos, nos quedaremos más tiempo.'],
+          answer: 0,
+          explanation: 'Warunek nierealny (gdybyśmy) → si + pudiéramos (z kreską w formie „my”) i condicional nos quedaríamos. „Si podríamos” to błąd, a „si podemos, nos quedaremos” znaczy „jeśli będziemy mogli, zostaniemy”.',
+        },
+      ],
+      dialogue: {
+        id: 'es.d.33',
+        title: 'Gdybyś wygrała na loterii…',
+        context: 'Kasia i Andrés z Oaxaki studiują w Madrycie. Po zajęciach piją kawę i bawią się w „co by było, gdyby…”.',
+        speakers: {
+          A: { name: 'Andrés', voice: 'b', accent: 'es-MX' },
+          K: { name: 'Kasia', voice: 'a', accent: 'es-ES' },
+        },
+        lines: [
+          { speaker: 'A', text: 'Kasia, ¿qué harías si ganaras la lotería?', pl: 'Kasia, co byś zrobiła, gdybyś wygrała na loterii?' },
+          { speaker: 'K', text: 'Primero, viajaría por todo el mundo. ¿Y tú?', pl: 'Najpierw podróżowałabym po całym świecie. A ty?' },
+          {
+            speaker: 'A',
+            text: 'Yo compraría una casa en la playa, en Oaxaca. Si viviera allí, no trabajaría nunca.',
+            pl: 'Ja kupiłbym dom na plaży, w Oaxace. Gdybym tam mieszkał, nigdy bym nie pracował.',
+          },
+          { speaker: 'K', text: '¿Nunca? Yo no podría vivir sin trabajar.', pl: 'Nigdy? Ja nie mogłabym żyć bez pracy.' },
+          { speaker: 'A', text: 'Bueno, si tuviera mucho dinero, trabajaría solo por la mañana.', pl: 'No dobra, gdybym miał dużo pieniędzy, pracowałbym tylko rano.' },
+          { speaker: 'K', text: 'Pues yo, si pudiera, viviría un año en Japón y otro en México.', pl: 'A ja, gdybym mogła, mieszkałabym rok w Japonii i rok w Meksyku.' },
+          { speaker: 'A', text: '¿En México? ¡Si vienes, puedes quedarte en casa de mis padres!', pl: 'W Meksyku? Jeśli przyjedziesz, możesz zatrzymać się u moich rodziców!' },
+          { speaker: 'K', text: '¿De verdad? ¡Entonces no necesito ganar la lotería!', pl: 'Naprawdę? To nie muszę wygrywać na loterii!' },
+        ],
+        questions: [
+          {
+            id: 'es.d.33-q1',
+            prompt: 'Co Kasia zrobiłaby najpierw po wygranej?',
+            options: ['Kupiłaby dom', 'Podróżowałaby po całym świecie', 'Przestałaby pracować'],
+            answer: 1,
+            explanation: '„Primero, viajaría por todo el mundo.” — condicional od viajar.',
+          },
+          {
+            id: 'es.d.33-q2',
+            prompt: 'Gdzie Andrés kupiłby dom?',
+            options: ['W Madrycie', 'Na plaży w Oaxace', 'W Japonii'],
+            answer: 1,
+            explanation: '„Yo compraría una casa en la playa, en Oaxaca.”',
+          },
+          {
+            id: 'es.d.33-q3',
+            prompt: 'Co proponuje Andrés na końcu?',
+            options: ['Że Kasia może zatrzymać się u jego rodziców', 'Że razem kupią los na loterię', 'Że razem pojadą do Japonii'],
+            answer: 0,
+            explanation: '„Si vienes, puedes quedarte en casa de mis padres.” — warunek realny: si + presente.',
+          },
+        ],
+      },
+      summary: [
+        'Warunek realny: si + presente → presente, futuro albo rozkaz: Si llueve, me quedo en casa.',
+        'Warunek nierealny: si + imperfecto de subjuntivo → condicional: Si tuviera dinero, viajaría.',
+        'Imperfecto de subjuntivo: „ellos” z indefinido bez -ron + -ra — tuviera, fuera, pudiera, hiciera, viviera; nosotros z kreską: tuviéramos.',
+        'Po si nigdy nie stoi futuro ani condicional: si tengo (nie „si tendré”), si tuviera (nie „si tendría”).',
+      ],
+      followUp:
+        'Gratulacje — masz za sobą pierwsze kroki na poziomie B1! W Audio Quest czeka historia „Pociąg, który odjechał”. Wracaj do powtórek subjuntivo: quiero que vengas, no creo que sea, si tuviera…',
+    },
   ],
 };
