@@ -908,5 +908,312 @@ export const unit8: Unit = {
       followUp:
         'Za kilka minut powtórz łączniki: además, por eso, sin embargo, en cambio, aunque. W Audio Quest czeka nowa historia: „Góry czy morze?”. W następnej lekcji opowiesz, co wydarzyło się wcześniej: el tren ya había salido.',
     },
+    {
+      id: 'es.l32',
+      title: 'Opowiadamy historię',
+      subtitle: 'El tren ya había salido',
+      objective:
+        'Opowiesz historię z przeszłości i zaznaczysz, co wydarzyło się wcześniej (cuando llegué, el tren ya había salido), a zdania połączysz słowami que, donde, lo que i quien.',
+      level: 'B1',
+      minutes: 13,
+      items: [
+        word('habia', 'había', 'było; był / była (od hay)', {
+          pos: 'verb',
+          plAlts: ['był', 'była', 'były', 'byli', 'było tam'],
+          note: 'Imperfecto od hay: Había mucha gente. — Było dużo ludzi. Z imiesłowem tworzy czas zaprzeszły: había comido — zjadłem / zjadłam (już wcześniej).',
+        }),
+        word('hecho', 'hecho', 'zrobiony; fakt', {
+          pos: 'verb',
+          plAlts: ['zrobione', 'zrobiona', 'wykonany'],
+          note: 'Nieregularny imiesłów od hacer: he hecho, había hecho. Jako rzeczownik el hecho — fakt. W rozmowie ¡Hecho! — Załatwione! Umowa stoi!',
+        }),
+        word('dicho', 'dicho', 'powiedziany; powiedzenie', {
+          pos: 'verb',
+          plAlts: ['powiedziane', 'przysłowie'],
+          note: 'Nieregularny imiesłów od decir: Me había dicho la verdad. — Powiedział / powiedziała mi (wcześniej) prawdę. El dicho — powiedzenie, przysłowie.',
+        }),
+        word('escrito', 'escrito', 'napisany; pisemny', {
+          pos: 'verb',
+          plAlts: ['napisane', 'napisana'],
+          note: 'Nieregularny imiesłów od escribir: Había escrito una carta. Por escrito — na piśmie. Un examen escrito — egzamin pisemny.',
+        }),
+        word('roto', 'roto / rota', 'zepsuty / zepsuta; stłuczony / stłuczona', {
+          pos: 'adj',
+          tts: 'roto, rota',
+          alts: ['roto', 'rota'],
+          plAlts: ['zepsuty', 'zepsuta', 'stłuczony', 'stłuczona', 'rozbity', 'rozbita'],
+          note: 'Nieregularny imiesłów od romper (psuć, tłuc): había roto. Z estar jako przymiotnik: El teléfono está roto. — Telefon jest zepsuty.',
+        }),
+        word('abierto', 'abierto / abierta', 'otwarty / otwarta', {
+          pos: 'adj',
+          tts: 'abierto, abierta',
+          alts: ['abierto', 'abierta'],
+          plAlts: ['otwarty', 'otwarta', 'otwarte'],
+          note: 'Nieregularny imiesłów od abrir (otwierać): había abierto. Z estar: La farmacia está abierta hasta las diez. — Apteka jest otwarta do dziesiątej.',
+        }),
+        verb('perder', 'perder', 'gubić; tracić; spóźnić się (na)', {
+          plAlts: ['zgubić', 'stracić', 'przegrać', 'spóźnić się na'],
+          note: 'e → ie: pierdo, pierdes. Perder el tren — spóźnić się na pociąg (dosłownie „stracić pociąg”). Perder las llaves — zgubić klucze. Perderse algo — przegapić coś: Me perdí la fiesta.',
+        }),
+        verb('olvidar', 'olvidar', 'zapominać', {
+          plAlts: ['zapomnieć'],
+          note: 'Olvidar algo — zapomnieć czegoś albo o czymś: Había olvidado tu número. — Zapomniałem / zapomniałam twojego numeru. Potocznie: Se me olvidó. — Zapomniało mi się.',
+        }),
+        noun('la-llave', 'la llave', 'klucz', 'f', {
+          plAlts: ['kluczyk'],
+          note: 'Las llaves de casa — klucze do domu. Cerrar con llave — zamknąć na klucz. Klucz do zagadki to la clave.',
+        }),
+        phrase('darse-cuenta', 'darse cuenta', 'zorientować się; zdać sobie sprawę', {
+          plAlts: ['zauważyć', 'uświadomić sobie', 'połapać się'],
+          note: 'Po darse cuenta stoi de que: Me di cuenta de que había perdido las llaves. — Zorientowałem / zorientowałam się, że zgubiłem / zgubiłam klucze. Odmieniamy dar: me doy cuenta, te diste cuenta.',
+        }),
+        phrase('lo-que', 'lo que', 'to, co; co', {
+          plAlts: ['co', 'to co'],
+          note: 'Odnosi się do całej rzeczy albo sytuacji: Lo que dices es verdad. — To, co mówisz, jest prawdą. No sé lo que quieres. — Nie wiem, czego chcesz.',
+        }),
+        phrase('con-quien', 'con quien', 'z którym; z którą', {
+          plAlts: ['z którym', 'z którą', 'z którymi', 'z kim'],
+          note: 'Quien (bez kreski) zastępuje osobę po przyimku: el chico con quien vivo — chłopak, z którym mieszkam. Kreskę ma tylko pytanie: ¿Con quién vives? — Z kim mieszkasz?',
+        }),
+        phrase('donde-naci', 'donde nací', 'gdzie się urodziłem / urodziłam', {
+          plAlts: ['gdzie się urodziłem', 'gdzie się urodziłam', 'w którym się urodziłem', 'w którym się urodziłam'],
+          note: 'Donde (bez kreski) łączy zdanie z miejscem: el pueblo donde nací — miasteczko, w którym się urodziłem / urodziłam. Nacer to „urodzić się” — po hiszpańsku bez „się”: nací, naciste, nació.',
+        }),
+      ],
+      sentences: [
+        s('32-1', 'Cuando llegué a la estación, el tren ya había salido.', 'Kiedy dotarłem / dotarłam na dworzec, pociąg już odjechał.', {
+          plAlts: [
+            'Kiedy dotarłem na dworzec, pociąg już odjechał.',
+            'Kiedy dotarłam na dworzec, pociąg już odjechał.',
+            'Kiedy przyszedłem na dworzec, pociąg już odjechał.',
+            'Kiedy przyszłam na dworzec, pociąg już odjechał.',
+            'Gdy dotarłem na dworzec, pociąg już odjechał.',
+            'Gdy dotarłam na dworzec, pociąg już odjechał.',
+          ],
+        }),
+        s('32-2', 'Nunca había visto el mar.', 'Nigdy wcześniej nie widziałem / nie widziałam morza.', {
+          plAlts: ['Nigdy wcześniej nie widziałem morza.', 'Nigdy wcześniej nie widziałam morza.', 'Nigdy nie widziałem morza.', 'Nigdy nie widziałam morza.'],
+          note: 'Nunca había… — nigdy wcześniej (do tamtej chwili) nie… Typowy początek opowieści o pierwszym razie.',
+          accent: 'es-MX',
+        }),
+        s('32-3', 'Me di cuenta de que había perdido las llaves.', 'Zorientowałem / zorientowałam się, że zgubiłem / zgubiłam klucze.', {
+          plAlts: [
+            'Zorientowałem się, że zgubiłem klucze.',
+            'Zorientowałam się, że zgubiłam klucze.',
+            'Zdałem sobie sprawę, że zgubiłem klucze.',
+            'Zdałam sobie sprawę, że zgubiłam klucze.',
+            'Zauważyłem, że zgubiłem klucze.',
+            'Zauważyłam, że zgubiłam klucze.',
+          ],
+        }),
+        s('32-4', 'Mi madre ya había hecho la cena.', 'Mama już zrobiła kolację.', {
+          plAlts: ['Moja mama już zrobiła kolację.', 'Mama zdążyła już zrobić kolację.', 'Mama już przygotowała kolację.', 'Moja mama już przygotowała kolację.'],
+        }),
+        s('32-5', 'Ana no me había dicho nada.', 'Ana nic mi nie powiedziała.', {
+          plAlts: ['Ana nic mi wcześniej nie powiedziała.', 'Ana niczego mi nie powiedziała.', 'Ana mi nic nie powiedziała.'],
+          accent: 'es-MX',
+        }),
+        s('32-6', 'Este es el pueblo donde nació mi abuelo.', 'To jest miasteczko, w którym urodził się mój dziadek.', {
+          plAlts: [
+            'To miasteczko, w którym urodził się mój dziadek.',
+            'To jest wieś, w której urodził się mój dziadek.',
+            'To jest miasteczko, gdzie urodził się mój dziadek.',
+            'To jest miasteczko, w którym urodził się dziadek.',
+          ],
+        }),
+        s('32-7', 'El chico con quien vivo es de México.', 'Chłopak, z którym mieszkam, jest z Meksyku.', {
+          plAlts: ['Chłopak, z którym mieszkam, pochodzi z Meksyku.', 'Facet, z którym mieszkam, jest z Meksyku.'],
+        }),
+        s('32-8', 'No entiendo lo que dices.', 'Nie rozumiem, co mówisz.', {
+          plAlts: ['Nie rozumiem tego, co mówisz.', 'Nie rozumiem, co ty mówisz.'],
+          accent: 'es-MX',
+        }),
+        s('32-9', 'La película que vimos anoche era muy buena.', 'Film, który obejrzeliśmy wczoraj wieczorem, był bardzo dobry.', {
+          plAlts: [
+            'Film, który widzieliśmy wczoraj wieczorem, był bardzo dobry.',
+            'Film, który oglądaliśmy wczoraj wieczorem, był bardzo dobry.',
+            'Film, który obejrzałyśmy wczoraj wieczorem, był bardzo dobry.',
+            'Film, który widziałyśmy wczoraj wieczorem, był bardzo dobry.',
+          ],
+          accent: 'es-MX',
+        }),
+      ],
+      grammar: [
+        {
+          id: 'es.g.pluscuamperfecto',
+          title: 'Pluscuamperfecto: había salido',
+          body: [
+            'Czas zaprzeszły (**pluscuamperfecto**) mówi o czymś, co wydarzyło się **wcześniej niż inne zdarzenie w przeszłości**: [[Cuando llegué a la estación, el tren ya había salido.]] Najpierw odjechał pociąg, a dopiero potem ja dotarłem / dotarłam na dworzec.',
+            'Tworzymy go z imperfecto czasownika haber — [[había]], [[habías]], [[había]], [[habíamos]], [[habíais]], [[habían]] — i imiesłowu, tak jak pretérito perfecto (he comido): [[había comido]], [[habías terminado]], [[habían vivido]]. Imiesłów się nie zmienia: [[ella había salido]], [[nosotras habíamos salido]].',
+            'Nieregularne imiesłowy trzeba zapamiętać: hacer → [[hecho]], decir → [[dicho]], ver → [[visto]], escribir → [[escrito]], poner → [[puesto]], volver → [[vuelto]], romper → [[roto]], abrir → [[abierto]].',
+            'Często towarzyszą mu [[ya]] (już) i [[nunca]] (nigdy wcześniej): [[Ya había cenado.]] — Zjadłem / zjadłam już kolację. [[Nunca había estado en México.]] — Nigdy wcześniej nie byłem / byłam w Meksyku.',
+          ],
+          table: {
+            head: ['Bezokolicznik', 'Imiesłów', 'Przykład'],
+            rows: [
+              ['hacer', 'hecho', 'Ya había hecho los deberes.'],
+              ['decir', 'dicho', 'Nadie me había dicho nada.'],
+              ['ver', 'visto', 'Ya había visto la película.'],
+              ['escribir', 'escrito', 'Había escrito una carta.'],
+              ['poner', 'puesto', 'Ya habían puesto la mesa.'],
+              ['volver', 'vuelto', 'Todavía no había vuelto.'],
+              ['romper', 'roto', 'Alguien había roto el teléfono.'],
+              ['abrir', 'abierto', 'Ya habían abierto la farmacia.'],
+            ],
+          },
+          contrast:
+            'Polski prawie nie używa czasu zaprzeszłego (dawne „byłem poszedł”) — kolejność zdarzeń pokazujemy słowami „już”, „wcześniej” albo samym kontekstem: „kiedy przyszedłem, pociąg już odjechał”. Hiszpański w takich zdaniach wymaga había + imiesłów. Zdanie „cuando llegué, el tren salió” znaczyłoby, że pociąg odjechał dopiero wtedy, gdy przyszedłeś / przyszłaś.',
+        },
+        {
+          id: 'es.g.relativos',
+          title: 'Que, donde, lo que, quien: zdania względne',
+          body: [
+            '[[que]] to najczęstszy zaimek względny — odpowiada polskim „który, która, które” i odnosi się do osób i rzeczy: [[el libro que leo]] — książka, którą czytam; [[la chica que vive aquí]] — dziewczyna, która tu mieszka. Que się nie odmienia.',
+            '[[donde]] zastępuje „w którym / w której” przy miejscach: [[el pueblo donde nací]] — miasteczko, w którym się urodziłem / urodziłam. Piszemy je bez kreski — kreskę ma tylko pytanie [[¿dónde?]].',
+            '[[lo que]] znaczy „to, co” i odnosi się do całej sytuacji albo rzeczy bez nazwy: [[Lo que dices es verdad.]] — To, co mówisz, jest prawdą. [[No entiendo lo que pasa.]] — Nie rozumiem, co się dzieje.',
+            'Po przyimku o osobach używamy [[quien]] (w liczbie mnogiej [[quienes]]): [[la amiga con quien viajo]] — przyjaciółka, z którą podróżuję. Bez przyimka wystarczy que: [[la amiga que viaja conmigo]].',
+          ],
+          table: {
+            head: ['Zaimek', 'Po polsku', 'Przykład'],
+            rows: [
+              ['que', 'który, która, które', 'El libro que leo es muy bueno.'],
+              ['donde', 'w którym, gdzie', 'Esta es la casa donde vivía.'],
+              ['lo que', 'to, co', 'Lo que dices es verdad.'],
+              ['con quien', 'z którym, z którą', 'Es la amiga con quien viajé.'],
+              ['a quien', 'któremu, której', 'Es el chico a quien le di el libro.'],
+            ],
+          },
+          contrast:
+            'Polski „który” odmienia się przez rodzaje i przypadki: który, którą, któremu, z którym. Hiszpańskie que się nie zmienia: el chico que veo, la chica que me llama, los libros que leo. Pułapka: polskie „to, co” to lo que, a nie samo que — „no entiendo que dices” jest błędem.',
+        },
+      ],
+      exercises: [
+        {
+          type: 'gap',
+          id: 'es.x.32-1',
+          concept: 'es.g.pluscuamperfecto',
+          sentence: 'Cuando llegué a casa, mis padres ya ___ cenado.',
+          pl: 'Kiedy wróciłem do domu, rodzice już zjedli kolację.',
+          options: ['habían', 'había', 'han'],
+          answer: 'habían',
+          explanation: 'Wcześniejsza czynność w przeszłości → pluscuamperfecto. Mis padres (oni) → habían cenado. Han cenado to pretérito perfecto — „zjedli” z perspektywy teraźniejszości.',
+        },
+        {
+          type: 'gap',
+          id: 'es.x.32-2',
+          concept: 'es.g.pluscuamperfecto',
+          sentence: 'Nunca había ___ una carta en español.',
+          pl: 'Nigdy wcześniej nie pisałam listu po hiszpańsku.',
+          options: ['escribido', 'escrito', 'escribiendo'],
+          answer: 'escrito',
+          explanation: 'Escribir ma nieregularny imiesłów: escrito. „Escribido” nie istnieje, a escribiendo to gerundio (pisząc).',
+        },
+        {
+          type: 'gap',
+          id: 'es.x.32-3',
+          concept: 'es.g.pluscuamperfecto',
+          sentence: 'Pablo ya me había ___ la verdad.',
+          pl: 'Pablo już wcześniej powiedział mi prawdę.',
+          options: ['decido', 'dicho', 'diciendo'],
+          answer: 'dicho',
+          explanation: 'Decir → dicho (nieregularny). Diciendo to gerundio, a decido znaczy „decyduję” (od decidir).',
+        },
+        {
+          type: 'gap',
+          id: 'es.x.32-4',
+          concept: 'es.g.pluscuamperfecto',
+          sentence: 'Cuando llegaron, ya habíamos ___ la mesa.',
+          pl: 'Kiedy przyszli, już nakryliśmy do stołu.',
+          options: ['ponido', 'puesto', 'poniendo'],
+          answer: 'puesto',
+          explanation: 'Poner → puesto. Poner la mesa — nakrywać do stołu. „Ponido” nie istnieje, a poniendo to gerundio.',
+        },
+        {
+          type: 'gap',
+          id: 'es.x.32-5',
+          concept: 'es.g.relativos',
+          sentence: 'Me gusta mucho ___ cocinas.',
+          pl: 'Bardzo lubię to, co gotujesz.',
+          options: ['lo que', 'que', 'qué'],
+          answer: 'lo que',
+          explanation: '„To, co” → lo que. Samo que potrzebuje rzeczownika przed sobą (la comida que cocinas), a qué z kreską pojawia się w pytaniach.',
+        },
+        {
+          type: 'gap',
+          id: 'es.x.32-6',
+          concept: 'es.g.relativos',
+          sentence: 'Esta es la ciudad ___ vivía de niño.',
+          pl: 'To jest miasto, w którym mieszkałem jako dziecko.',
+          options: ['donde', 'dónde', 'que'],
+          answer: 'donde',
+          explanation: 'Miejsce → donde, bez kreski, bo to nie pytanie. Samo que tu nie pasuje — trzeba by powiedzieć en la que.',
+        },
+        {
+          type: 'choice',
+          id: 'es.x.32-7',
+          concept: 'es.g.relativos',
+          prompt: 'Jak powiesz: „Dziewczyna, z którą podróżuję, jest z Meksyku”?',
+          options: ['La chica con quien viajo es de México.', 'La chica quien viajo es de México.', 'La chica con qué viajo es de México.'],
+          answer: 0,
+          explanation: 'Po przyimku o osobie → con quien (bez kreski). Bez przyimka zdanie traci sens, a qué z kreską to zaimek pytający.',
+        },
+      ],
+      dialogue: {
+        id: 'es.d.32',
+        title: 'Zgubione klucze',
+        context: 'Rodrigo z Meksyku mieszka w Barcelonie. Pyta koleżankę Natalię, która dojeżdża do miasta pociągiem, dlaczego nie przyszła wczoraj na jego urodziny.',
+        speakers: {
+          R: { name: 'Rodrigo', voice: 'b', accent: 'es-MX' },
+          N: { name: 'Natalia', voice: 'a', accent: 'es-ES' },
+        },
+        lines: [
+          { speaker: 'R', text: 'Natalia, ¿qué te pasó ayer? No viniste a mi fiesta.', pl: 'Natalia, co ci się wczoraj stało? Nie przyszłaś na moją imprezę.' },
+          { speaker: 'N', text: '¡Uf, qué día! Cuando llegué a la estación, el tren ya había salido.', pl: 'Uff, co za dzień! Kiedy dotarłam na dworzec, pociąg już odjechał.' },
+          { speaker: 'R', text: '¿Y qué hiciste?', pl: 'I co zrobiłaś?' },
+          { speaker: 'N', text: 'Volví a casa, pero me di cuenta de que había perdido las llaves.', pl: 'Wróciłam do domu, ale zorientowałam się, że zgubiłam klucze.' },
+          { speaker: 'R', text: '¡No puede ser! ¿Y dónde estaban?', pl: 'Niemożliwe! A gdzie były?' },
+          { speaker: 'N', text: 'En la cafetería donde había desayunado.', pl: 'W kawiarni, w której jadłam śniadanie.' },
+          { speaker: 'R', text: 'Entonces volviste a la cafetería, ¿no?', pl: 'To wróciłaś do kawiarni, tak?' },
+          { speaker: 'N', text: 'Sí, pero era muy tarde y ya no estaba abierta.', pl: 'Tak, ale było bardzo późno i nie była już otwarta.' },
+          { speaker: 'R', text: '¿Y dónde dormiste?', pl: 'I gdzie spałaś?' },
+          {
+            speaker: 'N',
+            text: 'En casa de mi hermana. Lo que más me molesta es que me perdí tu fiesta.',
+            pl: 'U siostry. A najbardziej denerwuje mnie to, że ominęła mnie twoja impreza.',
+          },
+        ],
+        questions: [
+          {
+            id: 'es.d.32-q1',
+            prompt: 'Dlaczego Natalia nie pojechała pociągiem?',
+            options: ['Bo pociąg już odjechał', 'Bo zgubiła bilet', 'Bo była chora'],
+            answer: 0,
+            explanation: '„Cuando llegué a la estación, el tren ya había salido.” — pociąg odjechał, zanim Natalia dotarła na dworzec.',
+          },
+          {
+            id: 'es.d.32-q2',
+            prompt: 'Gdzie były klucze Natalii?',
+            options: ['W pociągu', 'W kawiarni, w której jadła śniadanie', 'U jej siostry'],
+            answer: 1,
+            explanation: '„En la cafetería donde había desayunado.”',
+          },
+          {
+            id: 'es.d.32-q3',
+            prompt: 'Co najbardziej denerwuje Natalię?',
+            options: ['Że ominęła ją impreza Rodriga', 'Że musiała spać u siostry', 'Że kawiarnia była zamknięta'],
+            answer: 0,
+            explanation: '„Lo que más me molesta es que me perdí tu fiesta.”',
+          },
+        ],
+      },
+      summary: [
+        'Pluscuamperfecto: había, habías, había, habíamos, habíais, habían + imiesłów — había comido, habían salido.',
+        'Mówi o tym, co stało się wcześniej niż inne zdarzenie w przeszłości: Cuando llegué, el tren ya había salido.',
+        'Nieregularne imiesłowy: hecho, dicho, visto, escrito, puesto, vuelto, roto, abierto.',
+        'Zdania względne: que (który), donde (w którym), lo que (to, co), con quien (z którym).',
+      ],
+      followUp:
+        'Za kilka minut powtórz osiem nieregularnych imiesłowów: hecho, dicho, visto, escrito, puesto, vuelto, roto, abierto. W ostatniej lekcji działu powiesz, co by było, gdyby…: si tuviera tiempo, viajaría.',
+    },
   ],
 };
