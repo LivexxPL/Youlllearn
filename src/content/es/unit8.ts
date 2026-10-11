@@ -145,7 +145,7 @@ export const unit8: Unit = {
               ['estar', 'estoy', 'esté', 'estés', 'estemos', 'estén'],
               ['dar', 'doy', 'dé', 'des', 'demos', 'den'],
               ['saber', 'sé', 'sepa', 'sepas', 'sepamos', 'sepan'],
-              ['haber (hay)', 'hay', 'haya', 'hayas', 'hayamos', 'hayan'],
+              ['haber (hay)', 'he', 'haya', 'hayas', 'hayamos', 'hayan'],
             ],
           },
           contrast:
@@ -259,14 +259,14 @@ export const unit8: Unit = {
           { speaker: 'D', text: 'Tranquila, estudiaste mucho. Espero que duermas bien esta noche.', pl: 'Spokojnie, dużo się uczyłaś. Mam nadzieję, że dziś w nocy dobrze się wyśpisz.' },
           {
             speaker: 'W',
-            text: 'Ojalá. Pero la profesora quiere que hablemos diez minutos de nuestra familia.',
-            pl: 'Oby. Ale nauczycielka chce, żebyśmy przez dziesięć minut mówili o swojej rodzinie.',
+            text: 'Ojalá. Pero la profesora quiere que hablemos diez minutos de la familia.',
+            pl: 'Oby. Ale nauczycielka chce, żebyśmy przez dziesięć minut mówili o rodzinie.',
           },
           { speaker: 'D', text: '¡Eso es fácil para ti! Hablas muy bien.', pl: 'To dla ciebie łatwe! Świetnie mówisz.' },
           { speaker: 'W', text: 'Gracias. ¿Y tú? ¿No tienes clase mañana?', pl: 'Dzięki. A ty? Nie masz jutro zajęć?' },
           { speaker: 'D', text: 'No, mañana voy a la playa con mis hermanos. ¡Ojalá haga sol!', pl: 'Nie, jutro jadę z rodzeństwem na plażę. Oby świeciło słońce!' },
           { speaker: 'W', text: 'Entonces, ¡que lo pases bien!', pl: 'W takim razie baw się dobrze!' },
-          { speaker: 'D', text: 'Y tú, ¡que tengas mucha suerte! Llámame después del examen.', pl: 'A tobie życzę powodzenia! Zadzwoń do mnie po egzaminie.' },
+          { speaker: 'D', text: 'Y tú, ¡que tengas mucha suerte! Llámame después.', pl: 'A tobie życzę powodzenia! Zadzwoń do mnie potem.' },
         ],
         questions: [
           {
@@ -281,7 +281,7 @@ export const unit8: Unit = {
             prompt: 'Czego chce nauczycielka?',
             options: ['Żeby studenci przyszli wcześniej', 'Żeby studenci przez dziesięć minut mówili o rodzinie', 'Żeby studenci napisali list'],
             answer: 1,
-            explanation: '„La profesora quiere que hablemos diez minutos de nuestra familia.” — quiere que + subjuntivo (hablemos).',
+            explanation: '„La profesora quiere que hablemos diez minutos de la familia.” — quiere que + subjuntivo (hablemos).',
           },
           {
             id: 'es.d.29-q3',
@@ -630,7 +630,7 @@ export const unit8: Unit = {
         word('depende', 'depende', 'to zależy', {
           pos: 'verb',
           plAlts: ['zależy', 'zależy od'],
-          note: 'Od depender (zależeć). Często jako cała odpowiedź: —¿Vienes a la playa? —Depende. Zależy od czegoś — depende de: Depende del tiempo. — Zależy od pogody.',
+          note: 'Od depender (zależeć). Często jako cała odpowiedź: —¿Vienes a la playa? —Depende. Zależy od czegoś — depende de: Depende del tiempo. — Zależy od pogody (de + el łączy się w del, tak jak a + el w al).',
         }),
         phrase('tener-razon', 'tener razón', 'mieć rację', {
           plAlts: ['mieć słuszność'],
@@ -1062,7 +1062,7 @@ export const unit8: Unit = {
             ],
           },
           contrast:
-            'Polski prawie nie używa czasu zaprzeszłego (dawne „byłem poszedł”) — kolejność zdarzeń pokazujemy słowami „już”, „wcześniej” albo samym kontekstem: „kiedy przyszedłem, pociąg już odjechał”. Hiszpański w takich zdaniach wymaga había + imiesłów. Zdanie „cuando llegué, el tren salió” znaczyłoby, że pociąg odjechał dopiero wtedy, gdy przyszedłeś / przyszłaś.',
+            'Polski prawie nie używa czasu zaprzeszłego (dawne „poszedł był”) — kolejność zdarzeń pokazujemy słowami „już”, „wcześniej” albo samym kontekstem: „kiedy przyszedłem, pociąg już odjechał”. Hiszpański w takich zdaniach wymaga había + imiesłów. Zdanie „cuando llegué, el tren salió” znaczyłoby, że pociąg odjechał dopiero wtedy, gdy przyszedłeś / przyszłaś.',
         },
         {
           id: 'es.g.relativos',
