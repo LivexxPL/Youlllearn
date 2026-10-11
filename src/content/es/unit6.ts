@@ -982,7 +982,7 @@ export const unit6: Unit = {
         'Cuando era niña, vivía en un pueblo. Un día, mis padres compraron un perro.',
       ],
       followUp:
-        'Gratulacje — to na razie ostatnia lekcja kursu! Utrwalaj czasy przeszłe w powtórkach, a w Audio Quest posłuchaj historii o wakacjach w Meksyku i o dzieciństwie w Andaluzji.',
+        'Gratulacje — czasy przeszłe masz za sobą! Utrwalaj je w powtórkach, a w Audio Quest posłuchaj historii o wakacjach w Meksyku i o dzieciństwie w Andaluzji. Dalej czeka dział „Plany, prośby i polecenia” (A2+): czas przyszły, tryb warunkowy i tryb rozkazujący.',
     },
   ],
 };
