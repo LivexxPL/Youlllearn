@@ -1299,5 +1299,324 @@ export const unit8: Unit = {
       followUp:
         'Opowiedz na głos krótką historię z dzieciństwa w pięciu zdaniach — zacznij od „Als ich ein Kind war, …” i użyj przynajmniej raz nachdem. Za około 10 minut zrób krótką powtórkę.',
     },
+    {
+      id: 'de.l34',
+      title: 'Co by było, gdyby…?',
+      subtitle: 'Wenn ich mehr Zeit hätte…',
+      objective: 'Powiesz, co by było, gdyby… (Wenn ich mehr Zeit hätte, würde ich reisen), wyrazisz życzenie z Ich wünschte… i zapytasz uprzejmie pośrednio: Weißt du, ob…? Können Sie mir sagen, wo…?',
+      level: 'B1',
+      minutes: 13,
+      items: [
+        phrase('wenn-ich-du-waere', 'Wenn ich du wäre, …', 'gdybym był tobą…; na twoim miejscu…', {
+          tts: 'Wenn ich du wäre',
+          plAlts: ['gdybym był tobą', 'gdybym była tobą', 'na twoim miejscu'],
+          note: 'Rada, podobnie jak an deiner Stelle: Wenn ich du wäre, würde ich zum Arzt gehen. — Na twoim miejscu poszedłbym / poszłabym do lekarza.',
+        }),
+        phrase('was-waere-wenn', 'Was wäre, wenn…?', 'co by było, gdyby…?', {
+          tts: 'Was wäre, wenn',
+          note: 'Fantazja o innej rzeczywistości: Was wäre, wenn wir in Wien wohnen würden? — Co by było, gdybyśmy mieszkali w Wiedniu?',
+        }),
+        phrase('ich-wuenschte', 'ich wünschte, …', 'szkoda, że nie…; chciałbym, żeby…', {
+          tts: 'Ich wünschte, ich hätte mehr Zeit.',
+          plAlts: ['szkoda, że nie', 'chciałbym, żeby', 'chciałabym, żeby'],
+          note: 'Życzenie, które się nie spełnia, + Konjunktiv II: Ich wünschte, ich hätte mehr Zeit. — Szkoda, że nie mam więcej czasu.',
+        }),
+        word('ob', 'ob', 'czy (w pytaniu pośrednim)', {
+          pos: 'conj',
+          plAlts: ['czy'],
+          note: 'Pytanie tak / nie ukryte w zdaniu, czasownik na końcu: Weißt du, ob er kommt? — Wiesz, czy on przyjdzie? Nie myl z wenn (jeśli).',
+        }),
+        verb('wissen', 'wissen', 'wiedzieć', {
+          note: 'Nieregularny: ich weiß, du weißt, er weiß, wir wissen. Wissen — fakty i informacje, kennen — osoby i miejsca: Ich weiß, wo er wohnt, aber ich kenne ihn nicht.',
+        }),
+        verb('fragen', 'fragen', 'pytać; zapytać', {
+          plAlts: ['zapytać', 'pytać', 'spytać'],
+          note: 'O coś: nach + celownik — Er fragt nach dem Weg. — Pyta o drogę. Ich frage mich, ob… — Zastanawiam się, czy…',
+        }),
+        phrase('koennen-sie-mir-sagen', 'Können Sie mir sagen, …?', 'czy może mi pan / pani powiedzieć…?', {
+          tts: 'Können Sie mir sagen, wo der Bahnhof ist?',
+          plAlts: ['może mi pan powiedzieć', 'może mi pani powiedzieć', 'czy może mi pan powiedzieć', 'czy może mi pani powiedzieć'],
+          note: 'Grzeczny wstęp do pytania pośredniego — czasownik idzie na koniec: Können Sie mir sagen, wann der Zug fährt?',
+        }),
+        noun('die-welt', 'die Welt', 'świat', 'f', {
+          plural: 'die Welten',
+          note: 'eine Reise um die Welt — podróż dookoła świata; auf der ganzen Welt — na całym świecie.',
+        }),
+        verb('reisen', 'reisen', 'podróżować', {
+          plAlts: ['jeździć po świecie', 'wyjeżdżać'],
+          note: 'Perfekt z sein: Wir sind viel gereist. Rzeczownik: die Reise — podróż. Gute Reise! — Szczęśliwej podróży!',
+        }),
+        word('reich', 'reich', 'bogaty', {
+          pos: 'adj',
+          plAlts: ['bogata', 'bogate', 'zamożny'],
+          note: 'Przeciwieństwo: arm (biedny). Wenn ich reich wäre… — Gdybym był bogaty / była bogata…',
+        }),
+        verb('gewinnen', 'gewinnen', 'wygrywać; wygrać', {
+          plAlts: ['wygrać', 'wygrywać', 'zwyciężyć'],
+          note: 'Nieregularny: gewann, hat gewonnen. Im Lotto gewinnen — wygrać w lotto.',
+        }),
+        word('allein', 'allein', 'sam; sama; samotnie', {
+          pos: 'adv',
+          plAlts: ['sam', 'sama', 'samotnie', 'w pojedynkę'],
+          note: 'Nie odmienia się: Ich wohne allein. — Mieszkam sam / sama.',
+        }),
+        noun('die-insel', 'die Insel', 'wyspa', 'f', {
+          plural: 'die Inseln',
+          note: 'auf einer Insel — na wyspie. Mallorca ist eine Insel.',
+        }),
+        word('genug', 'genug', 'dość; wystarczająco', {
+          pos: 'adv',
+          plAlts: ['dosyć', 'wystarczająco', 'wystarczająco dużo'],
+          note: 'Zwykle przed rzeczownikiem: genug Zeit, genug Geld. Genug jetzt! — Dość tego!',
+        }),
+      ],
+      sentences: [
+        s('34-1', 'Wenn ich mehr Zeit hätte, würde ich mehr reisen.', 'Gdybym miał więcej czasu, więcej bym podróżował.', {
+          alts: ['Ich würde mehr reisen, wenn ich mehr Zeit hätte.'],
+          plAlts: [
+            'Gdybym miała więcej czasu, więcej bym podróżowała.',
+            'Gdybym miał więcej czasu, podróżowałbym więcej.',
+            'Gdybym miała więcej czasu, podróżowałabym więcej.',
+            'Jakbym miał więcej czasu, więcej bym podróżował.',
+            'Jakbym miała więcej czasu, więcej bym podróżowała.',
+          ],
+        }),
+        s('34-2', 'Wenn ich reich wäre, würde ich ein Haus mit Garten kaufen.', 'Gdybym był bogaty, kupiłbym dom z ogrodem.', {
+          alts: ['Ich würde ein Haus mit Garten kaufen, wenn ich reich wäre.'],
+          plAlts: ['Gdybym była bogata, kupiłabym dom z ogrodem.', 'Gdybym był bogaty, kupiłbym sobie dom z ogrodem.', 'Gdybym była bogata, kupiłabym sobie dom z ogrodem.'],
+        }),
+        s('34-3', 'Wenn ich du wäre, würde ich nicht so viel arbeiten.', 'Na twoim miejscu nie pracowałbym tak dużo.', {
+          alts: ['An deiner Stelle würde ich nicht so viel arbeiten.'],
+          plAlts: [
+            'Na twoim miejscu nie pracowałabym tak dużo.',
+            'Gdybym był tobą, nie pracowałbym tak dużo.',
+            'Gdybym była tobą, nie pracowałabym tak dużo.',
+            'Na twoim miejscu nie pracowałbym tyle.',
+            'Na twoim miejscu nie pracowałabym tyle.',
+          ],
+        }),
+        s('34-4', 'Ich wünschte, ich hätte genug Geld für eine Reise um die Welt.', 'Szkoda, że nie mam dość pieniędzy na podróż dookoła świata.', {
+          plAlts: [
+            'Szkoda, że nie mam wystarczająco pieniędzy na podróż dookoła świata.',
+            'Chciałbym mieć dość pieniędzy na podróż dookoła świata.',
+            'Chciałabym mieć dość pieniędzy na podróż dookoła świata.',
+            'Chciałbym mieć wystarczająco dużo pieniędzy na podróż dookoła świata.',
+            'Chciałabym mieć wystarczająco dużo pieniędzy na podróż dookoła świata.',
+          ],
+          note: 'die Reise — podróż (od reisen). Ich wünschte + Konjunktiv II: życzenie, które się nie spełnia.',
+        }),
+        s('34-5', 'Was würdest du machen, wenn du im Lotto gewinnen würdest?', 'Co byś zrobił, gdybyś wygrał w lotto?', {
+          alts: ['Was würdest du tun, wenn du im Lotto gewinnen würdest?'],
+          plAlts: [
+            'Co byś zrobiła, gdybyś wygrała w lotto?',
+            'Co zrobiłbyś, gdybyś wygrał w lotto?',
+            'Co zrobiłabyś, gdybyś wygrała w lotto?',
+            'Co byś zrobił, jakbyś wygrał w lotto?',
+            'Co byś zrobiła, jakbyś wygrała w lotto?',
+          ],
+          note: 'W mowie würde często stoi w obu częściach zdania — przy gewinnen to zupełnie naturalne.',
+        }),
+        s('34-6', 'Weißt du, ob Anna heute ins Kaffeehaus kommt?', 'Wiesz, czy Anna przyjdzie dziś do kawiarni?', {
+          plAlts: ['Czy wiesz, czy Anna przyjdzie dziś do kawiarni?', 'Wiesz, czy Anna przyjdzie dzisiaj do kawiarni?', 'Wiesz, czy Anna dziś przychodzi do kawiarni?'],
+          note: 'Pytanie tak / nie w zdaniu podrzędnym: ob + czasownik na końcu (kommt).',
+          accent: 'de-AT',
+        }),
+        s('34-7', 'Können Sie mir sagen, wo der Bahnhof ist?', 'Czy może mi pan powiedzieć, gdzie jest dworzec?', {
+          plAlts: [
+            'Czy może mi pani powiedzieć, gdzie jest dworzec?',
+            'Może mi pan powiedzieć, gdzie jest dworzec?',
+            'Może mi pani powiedzieć, gdzie jest dworzec?',
+            'Czy mogliby mi państwo powiedzieć, gdzie jest dworzec?',
+          ],
+        }),
+        s('34-8', 'Ich frage mich, warum er nicht angerufen hat.', 'Zastanawiam się, dlaczego nie zadzwonił.', {
+          plAlts: ['Zastanawiam się, czemu nie zadzwonił.', 'Zastanawiam się, dlaczego on nie zadzwonił.', 'Ciekawe, dlaczego nie zadzwonił.'],
+        }),
+        s('34-9', 'Wenn ich heuer mehr Urlaub hätte, würde ich nach Kroatien fahren.', 'Gdybym miał w tym roku więcej urlopu, pojechałbym do Chorwacji.', {
+          alts: [
+            'Wenn ich dieses Jahr mehr Urlaub hätte, würde ich nach Kroatien fahren.',
+            'Ich würde nach Kroatien fahren, wenn ich heuer mehr Urlaub hätte.',
+          ],
+          plAlts: [
+            'Gdybym miała w tym roku więcej urlopu, pojechałabym do Chorwacji.',
+            'Gdybym w tym roku miał więcej urlopu, pojechałbym do Chorwacji.',
+            'Gdybym w tym roku miała więcej urlopu, pojechałabym do Chorwacji.',
+          ],
+          note: 'heuer — austriackie „w tym roku”. Chorwacja to ulubiony kierunek wakacyjny Austriaków.',
+          accent: 'de-AT',
+        }),
+      ],
+      grammar: [
+        {
+          id: 'de.g.konjunktiv-irreal',
+          title: 'Gdyby…: Wenn ich mehr Zeit hätte, würde ich…',
+          body: [
+            'Zdania warunkowe **nierealne** („gdybym…”) mówią o tym, czego nie ma — i co by wtedy było. W obu częściach używamy **Konjunktiv II**, który znasz już z uprzejmych próśb: [[Wenn ich mehr Zeit hätte, würde ich mehr reisen.]] (Ale czasu nie mam.)',
+            'W zdaniu z [[wenn]] czasownik stoi **na końcu**. Zdanie z wenn często idzie pierwsze — wtedy zdanie główne zaczyna się od czasownika: [[Wenn ich reich wäre, würde ich ein Haus kaufen.]] Można też odwrotnie: [[Ich würde ein Haus kaufen, wenn ich reich wäre.]]',
+            'Przy sein, haben, wissen i czasownikach modalnych używamy krótkich form: [[wäre]], [[hätte]], [[wüsste]], [[könnte]], [[müsste]]. Przy pozostałych — **würde + bezokolicznik**: [[würde reisen]], [[würde kaufen]]. Życzenie nierealne: [[Ich wünschte, ich hätte mehr Zeit.]] Rada: [[Wenn ich du wäre, würde ich zum Arzt gehen.]]',
+          ],
+          table: {
+            head: ['Rzeczywistość', 'Gdyby…', 'Po polsku'],
+            rows: [
+              ['Ich habe keine Zeit.', 'Wenn ich Zeit hätte, …', 'Gdybym miał / miała czas…'],
+              ['Ich bin nicht reich.', 'Wenn ich reich wäre, …', 'Gdybym był bogaty / była bogata…'],
+              ['Ich kann nicht kommen.', 'Wenn ich kommen könnte, …', 'Gdybym mógł / mogła przyjść…'],
+              ['Ich reise wenig.', '…, würde ich mehr reisen.', '…więcej bym podróżował / podróżowała.'],
+            ],
+          },
+          contrast:
+            'Po polsku „gdyby” łączy się z formą przeszłą i cząstką -by: gdybym miał, kupiłbym. Po niemiecku obie części mają Konjunktiv II, a wenn wysyła czasownik na koniec: Wenn ich Geld hätte, würde ich… Uwaga: warunek realny (Wenn es regnet, bleibe ich zu Hause — jeśli pada, zostaję) to zwykły czas teraźniejszy. Konjunktiv jest tylko dla fantazji i rzeczy nierealnych.',
+        },
+        {
+          id: 'de.g.indirekte-frage',
+          title: 'Pytania pośrednie: ob i słowa pytające',
+          body: [
+            '**Pytanie pośrednie** to pytanie ukryte w zdaniu: „Wiesz, czy…?”, „Nie wiem, gdzie…”. Po niemiecku jest zdaniem podrzędnym — odmieniony czasownik idzie **na koniec**: [[Wo ist der Bahnhof?]] → [[Können Sie mir sagen, wo der Bahnhof ist?]]',
+            'Gdy pytanie zaczyna się od słowa pytającego (wo, wann, warum, wer, wie…), to słowo zostaje: [[Ich frage mich, warum er nicht angerufen hat.]] Gdy to pytanie typu tak / nie, wstawiamy [[ob]] (czy): [[Kommt Anna?]] → [[Weißt du, ob Anna kommt?]]',
+            'Pytania pośrednie brzmią **uprzejmiej** niż bezpośrednie — dlatego tak często słychać je w sklepie, na dworcu i w urzędzie: [[Wissen Sie, wann der Zug fährt?]] [[Darf ich fragen, wie viel das kostet?]] Pamiętaj: „czy” to zawsze ob, a „jeśli” — wenn.',
+          ],
+          table: {
+            head: ['Pytanie', 'Pytanie pośrednie'],
+            rows: [
+              ['Wo ist der Bahnhof?', 'Können Sie mir sagen, wo der Bahnhof ist?'],
+              ['Wann kommt der Bus?', 'Wissen Sie, wann der Bus kommt?'],
+              ['Warum hat er nicht angerufen?', 'Ich frage mich, warum er nicht angerufen hat.'],
+              ['Kommt Anna heute?', 'Weißt du, ob Anna heute kommt?'],
+            ],
+          },
+          contrast:
+            'Po polsku „czy” stoi i w pytaniu bezpośrednim (Czy Anna przyjdzie?), i w pośrednim (Wiesz, czy Anna przyjdzie?), a szyk się nie zmienia. Po niemiecku pytanie bezpośrednie zaczyna się od czasownika (Kommt Anna?), a pośrednie — od ob, z czasownikiem na końcu (…, ob Anna kommt). Tego „czy” nigdy nie tłumacz jako wenn!',
+        },
+      ],
+      exercises: [
+        {
+          type: 'gap',
+          id: 'de.x.34-1',
+          concept: 'de.g.konjunktiv-irreal',
+          sentence: 'Wenn ich mehr Zeit ___, würde ich mehr lesen.',
+          pl: 'Gdybym miał / miała więcej czasu, więcej bym czytał / czytała.',
+          options: ['habe', 'hätte', 'hatte'],
+          answer: 'hätte',
+          explanation: 'Warunek nierealny (czasu nie mam) → Konjunktiv II: hätte. Hatte bez przegłosu to czas przeszły („miałem”).',
+        },
+        {
+          type: 'gap',
+          id: 'de.x.34-2',
+          concept: 'de.g.konjunktiv-irreal',
+          sentence: 'Wenn ich du ___, würde ich zum Arzt gehen.',
+          pl: 'Na twoim miejscu poszedłbym / poszłabym do lekarza.',
+          options: ['bin', 'war', 'wäre'],
+          answer: 'wäre',
+          explanation: 'Wenn ich du wäre — gdybym był tobą. Wäre to Konjunktiv II od sein, a war — zwykły czas przeszły.',
+        },
+        {
+          type: 'gap',
+          id: 'de.x.34-3',
+          concept: 'de.g.konjunktiv-irreal',
+          sentence: 'Wenn ich reich wäre, ___ ich ein Haus kaufen.',
+          pl: 'Gdybym był bogaty / była bogata, kupiłbym / kupiłabym dom.',
+          options: ['werde', 'würde', 'wurde'],
+          answer: 'würde',
+          explanation: 'W zdaniu głównym: würde + bezokolicznik na końcu. Werde tworzy czas przyszły, a wurde to Präteritum od werden.',
+        },
+        {
+          type: 'choice',
+          id: 'de.x.34-4',
+          concept: 'de.g.konjunktiv-irreal',
+          prompt: 'Które zdanie ma poprawny szyk?',
+          options: [
+            'Wenn ich hätte mehr Geld, würde ich reisen.',
+            'Wenn ich mehr Geld hätte, würde ich reisen.',
+            'Wenn ich mehr Geld hätte, ich würde reisen.',
+          ],
+          answer: 1,
+          explanation: 'Po wenn czasownik idzie na koniec (Geld hätte), a zdanie główne zaczyna się od czasownika (würde ich), bo zdanie z wenn zajmuje 1. miejsce.',
+        },
+        {
+          type: 'gap',
+          id: 'de.x.34-5',
+          concept: 'de.g.indirekte-frage',
+          sentence: 'Weißt du, ___ Paul heute Zeit hat?',
+          pl: 'Wiesz, czy Paul ma dziś czas?',
+          options: ['ob', 'wenn', 'dass'],
+          answer: 'ob',
+          explanation: 'Pytanie tak / nie (Hat Paul Zeit?) ukryte w zdaniu wprowadza ob — „czy”. Wenn znaczy „jeśli” albo „kiedy”.',
+        },
+        {
+          type: 'choice',
+          id: 'de.x.34-6',
+          concept: 'de.g.indirekte-frage',
+          prompt: 'Jak uprzejmie zapytasz: „Czy wie pan, kiedy odjeżdża pociąg?”',
+          options: ['Wissen Sie, wann fährt der Zug?', 'Wissen Sie, wann der Zug fährt?', 'Wissen Sie, ob wann der Zug fährt?'],
+          answer: 1,
+          explanation: 'W pytaniu pośrednim czasownik idzie na koniec: …, wann der Zug fährt. Ob dodajemy tylko wtedy, gdy nie ma słowa pytającego.',
+        },
+        {
+          type: 'gap',
+          id: 'de.x.34-7',
+          concept: 'de.g.indirekte-frage',
+          sentence: 'Kannst du mir sagen, wie spät ___?',
+          pl: 'Możesz mi powiedzieć, która jest godzina?',
+          options: ['es ist', 'ist es', 'es sein'],
+          answer: 'es ist',
+          explanation: 'Wie spät ist es? w pytaniu pośrednim zmienia szyk: …, wie spät es ist — odmieniony czasownik na koniec.',
+        },
+      ],
+      dialogue: {
+        id: 'de.d.34',
+        title: 'Gdybyśmy wygrali…',
+        context: 'Przerwa w pracy w Wiedniu. Tomek i jego koleżanka Julia kupili razem los na loterię i zaczynają marzyć.',
+        speakers: {
+          J: { name: 'Julia', voice: 'a', accent: 'de-AT' },
+          T: { name: 'Tomek', voice: 'b', accent: 'de-AT' },
+        },
+        lines: [
+          { speaker: 'J', text: 'Tomek, was würdest du machen, wenn wir im Lotto gewinnen würden?', pl: 'Tomek, co byś zrobił, gdybyśmy wygrali w lotto?' },
+          { speaker: 'T', text: 'Ich würde nicht mehr arbeiten! Und du?', pl: 'Przestałbym pracować! A ty?' },
+          {
+            speaker: 'J',
+            text: 'Ich würde eine Reise um die Welt machen. Wenn ich genug Geld hätte, würde ich zuerst nach Japan reisen.',
+            pl: 'Wybrałabym się w podróż dookoła świata. Gdybym miała dość pieniędzy, najpierw pojechałabym do Japonii.',
+          },
+          { speaker: 'T', text: 'Und ich würde auf einer Insel wohnen — ganz allein!', pl: 'A ja zamieszkałbym na wyspie — zupełnie sam!' },
+          { speaker: 'J', text: 'Allein? Wäre das nicht langweilig?', pl: 'Sam? Czy to nie byłoby nudne?' },
+          { speaker: 'T', text: 'Vielleicht. Weißt du, ob es dort Internet gibt?', pl: 'Może. Wiesz, czy jest tam internet?' },
+          { speaker: 'J', text: 'Ich weiß es nicht. Aber zuerst müssen wir gewinnen!', pl: 'Nie wiem. Ale najpierw musimy wygrać!' },
+          { speaker: 'T', text: 'Stimmt. Ich frage mich, ob wir heute gewinnen.', pl: 'Racja. Ciekawe, czy dziś wygramy.' },
+          { speaker: 'J', text: 'Ich wünschte, ich wüsste es!', pl: 'Chciałabym to wiedzieć!' },
+        ],
+        questions: [
+          {
+            id: 'de.d.34-q1',
+            prompt: 'Co zrobiłby Tomek po wygranej?',
+            options: ['Kupiłby samochód', 'Przestałby pracować i zamieszkał na wyspie', 'Pojechałby do Japonii'],
+            answer: 1,
+            explanation: '„Ich würde nicht mehr arbeiten!” i „Ich würde auf einer Insel wohnen — ganz allein!”',
+          },
+          {
+            id: 'de.d.34-q2',
+            prompt: 'Dokąd Julia pojechałaby najpierw?',
+            options: ['Do Japonii', 'Na wyspę', 'Do Polski'],
+            answer: 0,
+            explanation: '„Wenn ich genug Geld hätte, würde ich zuerst nach Japan reisen.”',
+          },
+          {
+            id: 'de.d.34-q3',
+            prompt: 'O co Tomek pyta Julię?',
+            options: ['Czy na wyspie jest internet', 'Kiedy jest losowanie', 'Ile kosztował los'],
+            answer: 0,
+            explanation: '„Weißt du, ob es dort Internet gibt?” — pytanie pośrednie z ob i czasownikiem na końcu.',
+          },
+        ],
+      },
+      summary: [
+        'Gdyby…: wenn + Konjunktiv II (czasownik na końcu), potem würde + bezokolicznik: Wenn ich mehr Zeit hätte, würde ich mehr reisen.',
+        'Krótkie formy: wäre, hätte, wüsste, könnte. Rada: Wenn ich du wäre, … Życzenie: Ich wünschte, ich hätte…',
+        'Pytanie pośrednie: czasownik na końcu — Können Sie mir sagen, wo der Bahnhof ist?',
+        'Bez słowa pytającego: ob (czy) — Weißt du, ob Anna kommt? Nie myl ob z wenn.',
+      ],
+      followUp:
+        'Dokończ na głos trzy zdania: Wenn ich reich wäre, … Wenn ich mehr Zeit hätte, … Ich wünschte, … Potem zadaj w myślach komuś pytanie pośrednie: Weißt du, ob…? Za około 10 minut zrób krótką powtórkę.',
+    },
   ],
 };
