@@ -1,7 +1,7 @@
 import type { Unit } from '../types';
 import { contentHelpers } from '../helpers';
 
-const { word, verb, phrase, sentence: s } = contentHelpers('es');
+const { word, noun, verb, phrase, sentence: s } = contentHelpers('es');
 
 export const unit8: Unit = {
   id: 'es.u8',
@@ -601,6 +601,312 @@ export const unit8: Unit = {
       ],
       followUp:
         'Za kilka minut powtórz pary: quiero ir / quiero que vayas, me alegra verte / me alegra que vengas. W następnej lekcji wyrazisz opinię i nauczysz się dyskutować: creo que…, no creo que…',
+    },
+    {
+      id: 'es.l31',
+      title: 'Opinie i dyskusja',
+      subtitle: 'No creo que sea tan fácil',
+      objective:
+        'Wyrazisz i uzasadnisz opinię, zgodzisz się albo nie zgodzisz z rozmówcą i połączysz argumenty słowami además, por eso, sin embargo, en cambio i aunque; będziesz wiedzieć, kiedy po creo que stoi zwykły czas, a kiedy subjuntivo.',
+      level: 'B1',
+      minutes: 13,
+      items: [
+        verb('creer', 'creer', 'sądzić; wierzyć', {
+          plAlts: ['myśleć', 'uważać', 'uwierzyć'],
+          note: 'Creo que… — myślę, że…, sądzę, że… Wierzyć komuś: Te creo. — Wierzę ci. W indefinido i zmienia się w y: creyó, creyeron.',
+        }),
+        verb('pensar', 'pensar', 'myśleć; sądzić', {
+          plAlts: ['uważać', 'pomyśleć', 'zamierzać'],
+          note: 'e → ie: pienso, piensas. Pienso que… = creo que… Pensar en algo — myśleć o czymś: Pienso en ti. Pensar + bezokolicznik — zamierzać: Pienso viajar en agosto.',
+        }),
+        phrase('en-mi-opinion', 'en mi opinión', 'moim zdaniem', {
+          plAlts: ['według mnie', 'w mojej opinii', 'jak dla mnie'],
+          note: 'Bez que: En mi opinión, es caro. Krócej: para mí… — dla mnie… Pytanie o zdanie: ¿Qué opinas? albo ¿Qué piensas? — Co o tym sądzisz?',
+        }),
+        phrase('estoy-de-acuerdo', 'estoy de acuerdo', 'zgadzam się', {
+          plAlts: ['zgoda', 'jestem tego samego zdania'],
+          note: 'Zawsze z estar: Estoy de acuerdo contigo. — Zgadzam się z tobą (contigo — z tobą, conmigo — ze mną). No estoy de acuerdo — nie zgadzam się. ¿De acuerdo? — Zgoda? Pułapka: me acuerdo znaczy „pamiętam”.',
+        }),
+        word('depende', 'depende', 'to zależy', {
+          pos: 'verb',
+          plAlts: ['zależy', 'zależy od'],
+          note: 'Od depender (zależeć). Często jako cała odpowiedź: —¿Vienes a la playa? —Depende. Zależy od czegoś — depende de: Depende del tiempo. — Zależy od pogody.',
+        }),
+        phrase('tener-razon', 'tener razón', 'mieć rację', {
+          plAlts: ['mieć słuszność'],
+          note: 'Tienes razón. — Masz rację. No tienes razón. — Nie masz racji. La razón to także „powód”: por esa razón — z tego powodu.',
+        }),
+        word('aunque', 'aunque', 'chociaż; mimo że', {
+          pos: 'conj',
+          plAlts: ['choć', 'pomimo że', 'nawet jeśli'],
+          note: 'Aunque es caro, me gusta. — Chociaż jest drogi, podoba mi się. Z subjuntivo znaczy „nawet jeśli”: Aunque llueva, iré. — Nawet jeśli będzie padać, pójdę.',
+        }),
+        phrase('sin-embargo', 'sin embargo', 'jednak; jednakże', {
+          plAlts: ['mimo to', 'niemniej'],
+          note: 'Łączy dwa zdania o przeciwnej wymowie, zwykle po kropce albo średniku i z przecinkiem: Es caro. Sin embargo, lo compro. W mowie potocznej częściej słychać po prostu pero.',
+        }),
+        phrase('por-eso', 'por eso', 'dlatego', {
+          plAlts: ['z tego powodu', 'więc', 'przez to'],
+          note: 'Wprowadza skutek: Estoy cansado; por eso no salgo. — Jestem zmęczony, dlatego nie wychodzę. Nie myl z ¿por qué? (dlaczego?) i porque (bo, ponieważ).',
+        }),
+        word('ademas', 'además', 'poza tym; ponadto', {
+          pos: 'adv',
+          plAlts: ['oprócz tego', 'w dodatku', 'na dodatek'],
+          note: 'Dorzuca kolejny argument: Es barato y, además, está cerca. — Jest tani, a poza tym blisko. Además de — oprócz: además de español, hablo inglés.',
+        }),
+        phrase('en-cambio', 'en cambio', 'natomiast; za to', {
+          plAlts: ['z kolei', 'zaś', 'a z kolei'],
+          note: 'Przeciwstawia dwie osoby albo rzeczy: Yo trabajo mucho; mi hermano, en cambio, no. — Ja dużo pracuję, natomiast mój brat nie.',
+        }),
+        noun('la-gente', 'la gente', 'ludzie', 'f', {
+          note: 'Pułapka: la gente to rzeczownik żeński w liczbie pojedynczej, więc czasownik też stoi w liczbie pojedynczej: La gente dice que… — Ludzie mówią, że… Mucha gente — wiele osób, dużo ludzi.',
+        }),
+        phrase('creo-que-si', 'creo que sí', 'chyba tak; myślę, że tak', {
+          plAlts: ['sądzę, że tak', 'raczej tak', 'tak mi się wydaje'],
+          note: 'Krótka odpowiedź bez czasownika: —¿Viene Ana? —Creo que sí. Przeczenie: creo que no — chyba nie.',
+        }),
+      ],
+      sentences: [
+        s('31-1', 'Mucha gente piensa que el español es fácil.', 'Wiele osób uważa, że hiszpański jest łatwy.', {
+          plAlts: [
+            'Wielu ludzi uważa, że hiszpański jest łatwy.',
+            'Dużo ludzi myśli, że hiszpański jest łatwy.',
+            'Dużo ludzi uważa, że hiszpański jest łatwy.',
+            'Wiele osób myśli, że hiszpański jest łatwy.',
+          ],
+        }),
+        s('31-2', 'No creo que sea tan difícil.', 'Nie sądzę, żeby to było takie trudne.', {
+          plAlts: [
+            'Nie wydaje mi się, żeby to było takie trudne.',
+            'Nie sądzę, żeby to było aż tak trudne.',
+            'Nie sądzę, żeby to było tak trudne.',
+            'Nie myślę, żeby to było takie trudne.',
+          ],
+          accent: 'es-MX',
+        }),
+        s('31-3', 'En mi opinión, el tren es mejor y, además, es más barato.', 'Moim zdaniem pociąg jest lepszy, a poza tym tańszy.', {
+          plAlts: [
+            'Według mnie pociąg jest lepszy, a poza tym jest tańszy.',
+            'Moim zdaniem pociąg jest lepszy i do tego tańszy.',
+            'Moim zdaniem pociąg jest lepszy, a w dodatku tańszy.',
+            'Moim zdaniem pociąg jest lepszy, a poza tym jest tańszy.',
+          ],
+        }),
+        s('31-4', 'No estoy de acuerdo contigo.', 'Nie zgadzam się z tobą.', {
+          plAlts: ['Ja się z tobą nie zgadzam.', 'Nie jestem tego samego zdania co ty.'],
+          accent: 'es-MX',
+        }),
+        s('31-5', 'Tienes razón, es mejor esperar.', 'Masz rację, lepiej poczekać.', {
+          plAlts: ['Masz rację: lepiej poczekać.', 'Masz rację, lepiej zaczekać.', 'Masz rację, lepiej jest poczekać.'],
+          accent: 'es-MX',
+        }),
+        s('31-6', 'Aunque llueve, vamos a la playa.', 'Chociaż pada, idziemy na plażę.', {
+          plAlts: ['Mimo że pada, idziemy na plażę.', 'Chociaż pada deszcz, idziemy na plażę.', 'Choć pada, idziemy na plażę.', 'Chociaż pada, jedziemy na plażę.'],
+          note: 'Llueve w trybie oznajmującym, bo deszcz to fakt — właśnie pada. Aunque llueva znaczyłoby „nawet jeśli będzie padać”.',
+        }),
+        s('31-7', 'Estoy cansada; por eso no salgo esta noche.', 'Jestem zmęczona, dlatego dziś wieczorem nie wychodzę.', {
+          plAlts: [
+            'Jestem zmęczona; dlatego dziś wieczorem nie wychodzę.',
+            'Jestem zmęczona, więc dziś wieczorem nie wychodzę.',
+            'Jestem zmęczona, dlatego nie wychodzę dziś wieczorem.',
+          ],
+        }),
+        s('31-8', 'El hotel es caro; sin embargo, está muy cerca de la estación.', 'Hotel jest drogi, jednak jest bardzo blisko dworca.', {
+          plAlts: ['Hotel jest drogi; jednak jest bardzo blisko dworca.', 'Hotel jest drogi, ale za to jest bardzo blisko dworca.', 'Hotel jest drogi, jednakże jest bardzo blisko dworca.'],
+        }),
+        s('31-9', 'Mi hermano vive en la ciudad; yo, en cambio, prefiero el pueblo.', 'Mój brat mieszka w mieście, ja natomiast wolę wieś.', {
+          plAlts: [
+            'Mój brat mieszka w mieście, a ja wolę wieś.',
+            'Mój brat mieszka w mieście, natomiast ja wolę wieś.',
+            'Mój brat mieszka w mieście, ja za to wolę miasteczko.',
+            'Mój brat mieszka w mieście, a ja wolę miasteczko.',
+          ],
+          accent: 'es-MX',
+        }),
+      ],
+      grammar: [
+        {
+          id: 'es.g.creo-que',
+          title: 'Creo que es… / No creo que sea…',
+          body: [
+            'Gdy **twierdzimy**, że coś jest prawdą, po [[creo que]] i [[pienso que]] stoi zwykły tryb oznajmujący: [[Creo que tienes razón.]] — Myślę, że masz rację. [[Pienso que es caro.]] — Uważam, że to drogie.',
+            'Gdy **zaprzeczamy** albo wątpimy, pojawia się subjuntivo: [[No creo que tengas razón.]] — Nie sądzę, żebyś miał / miała rację. [[No pienso que sea caro.]] — Nie uważam, żeby to było drogie.',
+            'Krótkie odpowiedzi nie mają czasownika: [[creo que sí]] (chyba tak), [[creo que no]] (chyba nie). Opinię bez que wprowadzają [[en mi opinión]] i [[para mí]]: [[En mi opinión, es caro.]]',
+            'Zgoda i niezgoda: [[Estoy de acuerdo.]], [[No estoy de acuerdo contigo.]], [[Tienes razón.]], a gdy odpowiedź nie jest prosta — [[Depende.]]',
+          ],
+          table: {
+            head: ['Twierdzę → oznajmujący', 'Zaprzeczam → subjuntivo'],
+            rows: [
+              ['Creo que es fácil.', 'No creo que sea fácil.'],
+              ['Pienso que viene.', 'No pienso que venga.'],
+              ['Creo que tienes razón.', 'No creo que tengas razón.'],
+              ['Creo que hay tiempo.', 'No creo que haya tiempo.'],
+            ],
+          },
+          contrast:
+            'Polski robi to samo słowem „żeby”: „myślę, że przyjdzie”, ale „nie sądzę, żeby przyszedł”. Gdzie po polsku po „nie sądzę” albo „nie wydaje mi się” pasuje „żeby”, tam po hiszpańsku stoi subjuntivo. Polskie „zgadzam się” to estoy de acuerdo — z estar i bez żadnego „się”.',
+        },
+        {
+          id: 'es.g.conectores',
+          title: 'Además, por eso, sin embargo, en cambio, aunque',
+          body: [
+            'Łączniki porządkują wypowiedź — bez nich trudno o dobrą dyskusję. [[además]] dodaje argument: [[Es barato y, además, está cerca.]] [[por eso]] wprowadza skutek: [[Llueve; por eso no salgo.]]',
+            '[[sin embargo]] (jednak) i [[en cambio]] (natomiast) przeciwstawiają. Sin embargo znaczy „mimo to”: [[Es caro; sin embargo, lo compro.]] En cambio porównuje dwie osoby albo rzeczy: [[Yo trabajo mucho; mi hermano, en cambio, no.]]',
+            '[[aunque]] (chociaż) ze zwykłym czasem mówi o fakcie: [[Aunque llueve, salgo.]] — Chociaż pada, wychodzę. Z subjuntivo — o tym, co możliwe: [[Aunque llueva, saldré.]] — Nawet jeśli będzie padać, wyjdę.',
+            'Sin embargo, además i en cambio zwykle oddzielamy przecinkami, a przed sin embargo i por eso często stawiamy kropkę albo średnik.',
+          ],
+          table: {
+            head: ['Łącznik', 'Po polsku', 'Funkcja', 'Przykład'],
+            rows: [
+              ['además', 'poza tym', 'dodaje argument', 'Es barato y, además, está cerca.'],
+              ['por eso', 'dlatego', 'skutek', 'Llueve; por eso no salgo.'],
+              ['sin embargo', 'jednak', 'kontrast', 'Es caro; sin embargo, lo compro.'],
+              ['en cambio', 'natomiast', 'porównanie', 'Yo trabajo; él, en cambio, no.'],
+              ['aunque', 'chociaż', 'ustępstwo', 'Aunque llueve, salgo.'],
+            ],
+          },
+          contrast:
+            'Polskie „chociaż” łączy się ze zwykłym czasem, a „nawet jeśli” — często z przyszłym. Hiszpańskie aunque rozróżnia te znaczenia trybem: aunque llueve (pada — to fakt) i aunque llueva (nawet jeśli będzie padać). Por eso to dosłownie „przez to”, ale znaczy po prostu „dlatego”.',
+        },
+      ],
+      exercises: [
+        {
+          type: 'gap',
+          id: 'es.x.31-1',
+          concept: 'es.g.creo-que',
+          sentence: 'Creo que Pablo ___ razón.',
+          pl: 'Myślę, że Pablo ma rację.',
+          options: ['tiene', 'tenga', 'tener'],
+          answer: 'tiene',
+          explanation: 'Creo que (twierdzenie) → zwykły tryb oznajmujący: tiene. Tenga pojawiłoby się po no creo que.',
+        },
+        {
+          type: 'gap',
+          id: 'es.x.31-2',
+          concept: 'es.g.creo-que',
+          sentence: 'No creo que ___ tan caro.',
+          pl: 'Nie sądzę, żeby to było aż tak drogie.',
+          options: ['es', 'sea', 'está'],
+          answer: 'sea',
+          explanation: 'No creo que → subjuntivo: sea. Podpowiedź: po polsku mówimy „nie sądzę, żeby…”.',
+        },
+        {
+          type: 'gap',
+          id: 'es.x.31-3',
+          concept: 'es.g.creo-que',
+          sentence: 'No ___ de acuerdo contigo.',
+          pl: 'Nie zgadzam się z tobą.',
+          options: ['soy', 'estoy', 'tengo'],
+          answer: 'estoy',
+          explanation: 'Zgadzać się to estar de acuerdo — zawsze z estar.',
+        },
+        {
+          type: 'gap',
+          id: 'es.x.31-4',
+          concept: 'es.g.conectores',
+          sentence: 'Estoy enfermo; ___ no voy a clase.',
+          pl: 'Jestem chory, dlatego nie idę na zajęcia.',
+          options: ['por eso', 'aunque', 'en cambio'],
+          answer: 'por eso',
+          explanation: 'Skutek → por eso (dlatego). Aunque znaczy „chociaż”, a en cambio — „natomiast”.',
+        },
+        {
+          type: 'gap',
+          id: 'es.x.31-5',
+          concept: 'es.g.conectores',
+          sentence: '___ estoy cansada, voy a ir a la fiesta.',
+          pl: 'Chociaż jestem zmęczona, pójdę na imprezę.',
+          options: ['Aunque', 'Por eso', 'Además'],
+          answer: 'Aunque',
+          explanation: 'Ustępstwo („chociaż”) → aunque. Zmęczenie to fakt, więc stoi zwykły czas: estoy.',
+        },
+        {
+          type: 'choice',
+          id: 'es.x.31-6',
+          concept: 'es.g.conectores',
+          prompt: 'Jak powiesz: „Ja lubię morze, moja siostra natomiast woli góry”?',
+          options: [
+            'A mí me gusta el mar; mi hermana, en cambio, prefiere la montaña.',
+            'A mí me gusta el mar; por eso mi hermana prefiere la montaña.',
+            'A mí me gusta el mar; además, mi hermana prefiere la montaña.',
+          ],
+          answer: 0,
+          explanation: 'Porównujemy dwie osoby → en cambio (natomiast). Por eso znaczyłoby, że siostra woli góry, bo ja lubię morze, a además tylko dorzuca informację.',
+        },
+        {
+          type: 'choice',
+          id: 'es.x.31-7',
+          concept: 'es.g.creo-que',
+          optionsLang: 'pl',
+          prompt: 'Co znaczy „No creo que venga”?',
+          options: ['Nie sądzę, żeby przyszedł.', 'Wiem, że nie przyjdzie.', 'Nie wierzę, że przyszedł.'],
+          answer: 0,
+          explanation: 'No creo que + subjuntivo (venga) wyraża wątpliwość: „nie sądzę, żeby przyszedł / przyszła”. Venga może dotyczyć teraźniejszości albo przyszłości.',
+        },
+      ],
+      dialogue: {
+        id: 'es.d.31',
+        title: 'Miasto czy wieś?',
+        context: 'Sara z Madrytu postanowiła przeprowadzić się do małej miejscowości w górach. Jej kolega Óscar z Meksyku nie jest przekonany.',
+        speakers: {
+          O: { name: 'Óscar', voice: 'b', accent: 'es-MX' },
+          S: { name: 'Sara', voice: 'a', accent: 'es-ES' },
+        },
+        lines: [
+          { speaker: 'O', text: 'Sara, ¿es verdad que te vas a vivir a un pueblo?', pl: 'Sara, to prawda, że przeprowadzasz się na wieś?' },
+          {
+            speaker: 'S',
+            text: 'Sí. En mi opinión, en la ciudad todo es muy caro. Además, hay mucha gente.',
+            pl: 'Tak. Moim zdaniem w mieście wszystko jest bardzo drogie. Poza tym jest dużo ludzi.',
+          },
+          { speaker: 'O', text: 'No estoy de acuerdo. En la ciudad hay cines, restaurantes, conciertos…', pl: 'Nie zgadzam się. W mieście są kina, restauracje, koncerty…' },
+          {
+            speaker: 'S',
+            text: 'Tienes razón, pero yo no voy mucho al cine. En cambio, me encanta la montaña.',
+            pl: 'Masz rację, ale ja rzadko chodzę do kina. Za to uwielbiam góry.',
+          },
+          { speaker: 'O', text: '¿Y el trabajo? No creo que haya mucho trabajo en un pueblo.', pl: 'A praca? Nie sądzę, żeby na wsi było dużo pracy.' },
+          { speaker: 'S', text: 'Depende. Yo trabajo en casa; por eso no necesito vivir en la ciudad.', pl: 'To zależy. Ja pracuję w domu, dlatego nie muszę mieszkać w mieście.' },
+          {
+            speaker: 'O',
+            text: 'Bueno… Aunque no estoy de acuerdo, creo que vas a estar muy contenta.',
+            pl: 'No dobrze… Chociaż się nie zgadzam, myślę, że będziesz bardzo zadowolona.',
+          },
+          { speaker: 'S', text: '¡Gracias! Espero que vengas a visitarme.', pl: 'Dzięki! Mam nadzieję, że przyjedziesz mnie odwiedzić.' },
+          { speaker: 'O', text: 'Claro que sí. ¡Pero no pienso vivir allí!', pl: 'Jasne. Ale mieszkać tam nie zamierzam!' },
+        ],
+        questions: [
+          {
+            id: 'es.d.31-q1',
+            prompt: 'Dlaczego Sara chce mieszkać na wsi?',
+            options: ['Bo w mieście wszystko jest drogie i jest dużo ludzi', 'Bo dostała tam pracę', 'Bo tam mieszka jej rodzina'],
+            answer: 0,
+            explanation: '„En la ciudad todo es muy caro. Además, hay mucha gente.”',
+          },
+          {
+            id: 'es.d.31-q2',
+            prompt: 'Czego obawia się Óscar?',
+            options: ['Że na wsi nie ma kin', 'Że na wsi nie ma dużo pracy', 'Że Sara nie będzie go odwiedzać'],
+            answer: 1,
+            explanation: '„No creo que haya mucho trabajo en un pueblo.” — no creo que + subjuntivo (haya).',
+          },
+          {
+            id: 'es.d.31-q3',
+            prompt: 'Dlaczego Sara nie musi mieszkać w mieście?',
+            options: ['Bo pracuje w domu', 'Bo nie lubi kina', 'Bo ma samochód'],
+            answer: 0,
+            explanation: '„Yo trabajo en casa; por eso no necesito vivir en la ciudad.”',
+          },
+        ],
+      },
+      summary: [
+        'Creo que / pienso que + tryb oznajmujący: Creo que tienes razón.',
+        'No creo que / no pienso que + subjuntivo: No creo que sea fácil.',
+        'Dyskusja: en mi opinión, (no) estoy de acuerdo, tienes razón, depende, creo que sí / creo que no.',
+        'Łączniki: además (poza tym), por eso (dlatego), sin embargo (jednak), en cambio (natomiast), aunque (chociaż).',
+      ],
+      followUp:
+        'Za kilka minut powtórz łączniki: además, por eso, sin embargo, en cambio, aunque. W Audio Quest czeka nowa historia: „Góry czy morze?”. W następnej lekcji opowiesz, co wydarzyło się wcześniej: el tren ya había salido.',
     },
   ],
 };
