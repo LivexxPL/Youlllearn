@@ -6,6 +6,7 @@ import { unitDaily } from './unit-daily';
 import { unitPast } from './unit-past';
 import { unitRequests } from './unit-requests';
 import { unitCasual } from './unit-casual';
+import { unitB1 } from './unit-b1';
 import { stories } from './stories';
 
 /** Lessons whose completion switches romaji off in "auto" mode. */
@@ -23,6 +24,6 @@ export const japanese: CourseDefinition = {
   description:
     'Osobny program dla japońskiego: hiragana i katakana z pisaniem, rytm mor, partykuły, formy です / ます, czas przeszły, liczniki, forma て i 62 kanji z czytaniami.',
   framework: 'Kana + JF Standard A1 → A2 (orientacyjnie JLPT N5 → N4)',
-  units: [unitHiragana, unitKatakana, unitConversation, unitDaily, unitPast, unitRequests, unitCasual],
+  units: [unitHiragana, unitKatakana, unitConversation, unitDaily, unitPast, unitRequests, unitCasual, unitB1],
   stories,
 };
