@@ -20,8 +20,9 @@ export const spanish: CourseDefinition = {
   ],
   color: 'var(--lang-es)',
   emblem: 'ES',
-  description: 'Od powitań po opowieści o przeszłości: plan dnia, zakupy, pogoda, zdrowie, wakacje i porównania. Słuchanie z akcentem z Hiszpanii i Meksyku.',
-  framework: 'CEFR A1 → A2',
+  description:
+    'Od powitań po opowieści, plany i opinie: plan dnia, zakupy, pogoda, zdrowie, wakacje, prośby i polecenia. Pełny materiał A1–A2, a z poziomu B1 na razie tylko pierwszy dział (tryb łączący, czas zaprzeszły, zdania warunkowe). Słuchanie z akcentem z Hiszpanii i Meksyku.',
+  framework: 'CEFR A1 → B1 (B1: pierwsze kroki)',
   units: [unit1, unit2, unit3, unit4, unit5, unit6, unit7, unit8],
   stories,
 };
