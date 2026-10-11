@@ -343,4 +343,54 @@ export const stories: Story[] = [
       },
     ],
   },
+  {
+    id: 'es.st.10',
+    title: 'Góry czy morze?',
+    afterLesson: 'es.l31',
+    stage: 3,
+    context: 'Valeria z Guadalajary opowiada, jak jej rodzina co roku nie może się zdecydować, dokąd pojechać na wakacje.',
+    lines: [
+      {
+        text: 'Todos los veranos hay un problema en mi familia: ¿vamos al mar o a la montaña?',
+        pl: 'Co roku latem w mojej rodzinie pojawia się problem: jedziemy nad morze czy w góry?',
+      },
+      { text: 'Mi padre quiere que vayamos a la playa, porque le encanta el calor.', pl: 'Tata chce, żebyśmy pojechali na plażę, bo uwielbia upał.' },
+      {
+        text: 'Mi madre, en cambio, prefiere la montaña: dice que en la playa hay mucha gente.',
+        pl: 'Mama natomiast woli góry: mówi, że na plaży jest dużo ludzi.',
+      },
+      {
+        text: 'Mi hermano mayor no está de acuerdo con nadie: él quiere estar en la ciudad con sus amigos.',
+        pl: 'Mój starszy brat nie zgadza się z nikim: chce zostać w mieście ze swoimi znajomymi.',
+      },
+      { text: 'Pero mis padres no creen que sea una buena idea.', pl: 'Ale rodzice nie sądzą, żeby to był dobry pomysł.' },
+      { text: 'En mi opinión, es muy fácil: una semana en el mar y otra en la montaña.', pl: 'Moim zdaniem to bardzo proste: tydzień nad morzem i tydzień w górach.' },
+      { text: 'Es más caro, es verdad; sin embargo, todos van a estar contentos.', pl: 'To droższe, to prawda, ale za to wszyscy będą zadowoleni.' },
+      { text: 'Además, mi hermano puede venir con un amigo.', pl: 'Poza tym brat może pojechać z kolegą.' },
+      { text: 'Mis padres dicen que lo van a pensar. ¡Ojalá digan que sí!', pl: 'Rodzice mówią, że to przemyślą. Oby powiedzieli „tak”!' },
+    ],
+    questions: [
+      {
+        id: 'es.st.10-q1',
+        prompt: 'Dlaczego tata chce jechać na plażę?',
+        options: ['Bo uwielbia upał', 'Bo nie lubi gór', 'Bo tam mieszka babcia'],
+        answer: 0,
+        explanation: '„Mi padre quiere que vayamos a la playa, porque le encanta el calor.” — quiere que + subjuntivo (vayamos).',
+      },
+      {
+        id: 'es.st.10-q2',
+        prompt: 'Co mama mówi o plaży?',
+        options: ['Że jest za droga', 'Że jest tam dużo ludzi', 'Że jest za daleko'],
+        answer: 1,
+        explanation: '„Dice que en la playa hay mucha gente.” Dlatego mama woli góry.',
+      },
+      {
+        id: 'es.st.10-q3',
+        prompt: 'Co proponuje Valeria?',
+        options: ['Zostać z bratem w mieście', 'Tydzień nad morzem i tydzień w górach', 'Pojechać tylko w góry'],
+        answer: 1,
+        explanation: '„Una semana en el mar y otra en la montaña.” To droższe, ale wszyscy będą zadowoleni.',
+      },
+    ],
+  },
 ];
