@@ -47,7 +47,7 @@ export const unit8: Unit = {
         }),
         phrase('um-zu', 'um … zu', 'żeby; aby (+ bezokolicznik)', {
           tts: 'um Deutsch zu lernen',
-          alts: ['um zu', 'um Deutsch zu lernen'],
+          alts: ['um Deutsch zu lernen'],
           plAlts: ['żeby', 'aby', 'w celu'],
           note: 'Cel, gdy podmiot jest ten sam: Ich lerne Deutsch, um in Wien zu arbeiten. — Uczę się niemieckiego, żeby pracować w Wiedniu.',
         }),
@@ -356,12 +356,11 @@ export const unit8: Unit = {
         }),
         phrase('einerseits-andererseits', 'einerseits … andererseits', 'z jednej strony…, z drugiej strony…', {
           tts: 'einerseits, andererseits',
-          plAlts: ['z jednej strony, z drugiej strony'],
           note: 'Oba słowa zajmują 1. miejsce, więc czasownik stoi zaraz po nich: Einerseits ist es ruhig, andererseits ist es langweilig.',
         }),
         phrase('zwar-aber', 'zwar … aber', 'wprawdzie…, ale', {
           tts: 'zwar klein, aber gemütlich',
-          plAlts: ['co prawda…, ale', 'wprawdzie, ale', 'co prawda, ale'],
+          plAlts: ['co prawda…, ale'],
           note: 'Najpierw przyznajemy coś, potem dodajemy kontrast: Die Wohnung ist zwar klein, aber gemütlich. — Mieszkanie jest wprawdzie małe, ale przytulne.',
         }),
         noun('der-vorteil', 'der Vorteil', 'zaleta; korzyść', 'm', {
@@ -1013,7 +1012,7 @@ export const unit8: Unit = {
         }),
         word('nachdem', 'nachdem', 'po tym, jak', {
           pos: 'conj',
-          plAlts: ['po tym jak', 'kiedy już', 'gdy już'],
+          plAlts: ['kiedy już', 'gdy już'],
           note: 'Czasownik na końcu, zwykle z Plusquamperfekt: Nachdem ich gegessen hatte, ging ich ins Kino. — Kiedy już zjadłem / zjadłam, poszedłem / poszłam do kina.',
         }),
         word('bevor', 'bevor', 'zanim', {
