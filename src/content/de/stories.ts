@@ -416,4 +416,57 @@ export const stories: Story[] = [
       },
     ],
   },
+  {
+    id: 'de.st.11',
+    title: 'Ostatni wieczór w Grazu',
+    afterLesson: 'de.l34',
+    stage: 3,
+    context: 'Marek kończy roczne stypendium Erasmusa w Grazu. Ostatniego wieczoru nagrywa wiadomość głosową dla przyjaciół.',
+    lines: [
+      {
+        speaker: 'Marek',
+        text: 'Morgen ist mein letzter Tag in Graz. Dann fahre ich nach Hause, nach Krakau.',
+        pl: 'Jutro jest mój ostatni dzień w Grazu. Potem wracam do domu, do Krakowa.',
+      },
+      { speaker: 'Marek', text: 'Wenn ich könnte, würde ich noch ein Jahr hier bleiben.', pl: 'Gdybym mógł, zostałbym tu jeszcze rok.' },
+      { speaker: 'Marek', text: 'Ich habe hier so viele nette Leute kennengelernt.', pl: 'Poznałem tu tylu miłych ludzi.' },
+      { speaker: 'Marek', text: 'Meine Mutter fragt jeden Tag, wann ich nach Hause komme.', pl: 'Mama codziennie pyta, kiedy wrócę do domu.' },
+      {
+        speaker: 'Marek',
+        text: 'Ich freue mich auf meine Familie. Trotzdem frage ich mich, wie das Leben in Krakau jetzt sein wird.',
+        pl: 'Cieszę się na spotkanie z rodziną. Mimo to zastanawiam się, jak teraz będzie wyglądać życie w Krakowie.',
+      },
+      { speaker: 'Marek', text: 'Ich wünschte, Krakau wäre näher an Graz.', pl: 'Szkoda, że Kraków nie leży bliżej Grazu.' },
+      { speaker: 'Marek', text: 'Wenn ich reich wäre, würde ich jedes Wochenende nach Graz fahren.', pl: 'Gdybym był bogaty, co weekend jeździłbym do Grazu.' },
+      {
+        speaker: 'Marek',
+        text: 'Aber vielleicht komme ich bald wieder: Meine Professorin hat mich gefragt, ob ich nächstes Jahr hier arbeiten möchte.',
+        pl: 'Ale może niedługo tu wrócę: moja pani profesor zapytała mnie, czy chciałbym w przyszłym roku tu pracować.',
+      },
+      { speaker: 'Marek', text: 'Was würdet ihr an meiner Stelle machen?', pl: 'A co wy zrobilibyście na moim miejscu?' },
+    ],
+    questions: [
+      {
+        id: 'de.st.11-q1',
+        prompt: 'Co zrobiłby Marek, gdyby mógł?',
+        options: ['Zostałby w Grazu jeszcze rok', 'Od razu wróciłby do Krakowa', 'Pojechałby w podróż dookoła świata'],
+        answer: 0,
+        explanation: '„Wenn ich könnte, würde ich noch ein Jahr hier bleiben.”',
+      },
+      {
+        id: 'de.st.11-q2',
+        prompt: 'O co codziennie pyta mama Marka?',
+        options: ['Czy ma dość pieniędzy', 'Kiedy wróci do domu', 'Czy dużo się uczy'],
+        answer: 1,
+        explanation: '„Meine Mutter fragt jeden Tag, wann ich nach Hause komme.” — pytanie pośrednie z wann.',
+      },
+      {
+        id: 'de.st.11-q3',
+        prompt: 'O co zapytała Marka pani profesor?',
+        options: ['Czy zostanie w Grazu na weekend', 'Czy chciałby w przyszłym roku pracować w Grazu', 'Czy będzie uczył niemieckiego w Krakowie'],
+        answer: 1,
+        explanation: '„Meine Professorin hat mich gefragt, ob ich nächstes Jahr hier arbeiten möchte.” — pytanie pośrednie z ob.',
+      },
+    ],
+  },
 ];
