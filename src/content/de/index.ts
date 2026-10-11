@@ -20,8 +20,9 @@ export const german: CourseDefinition = {
   ],
   color: 'var(--lang-de)',
   emblem: 'DE',
-  description: 'Od powitań i rodzajników po czasy przeszłe, zdania podrzędne i porównania — krok po kroku od A1 do A2, bez tabel na start.',
-  framework: 'CEFR A1 → A2',
+  description:
+    'Od powitań i rodzajników po czasy przeszłe, zdania podrzędne i porównania — krok po kroku od A1 do A2, bez tabel na start. Ostatni dział to dopiero początek B1: cele, argumenty, strona bierna, opowiadanie i zdania „co by było, gdyby…”.',
+  framework: 'CEFR A1 → B1 (B1: pierwsze kroki)',
   units: [unit1, unit2, unit3, unit4, unit5, unit6, unit7, unit8],
   stories,
 };
