@@ -1695,5 +1695,357 @@ export const unitCasual: Unit = {
       followUp:
         'Wypisz pięć rzeczy, które umiesz, i pięć, których (jeszcze) nie umiesz — każdą formą potencjalną. Jedną z nich powiedz też oficjalnie z 〜ことが できます.',
     },
+    {
+      id: 'ja.l31',
+      title: 'Prezenty',
+      subtitle: 'あげる・もらう・くれる',
+      objective:
+        'Powiesz, kto komu co dał (あげる, くれる) i od kogo co dostałeś / dostałaś (もらう) — z partykułami に i から oraz z japońskim podziałem na „swoich” i „obcych”.',
+      level: 'A2 (JF) / N4',
+      minutes: 12,
+      items: [
+        kanji('chichi', '父', 'ojciec; tata', 'ちち・ふ', ['フ'], ['ちち'], [
+          { text: '{父|ちち}', pl: 'mój tata; ojciec' },
+          { text: 'お{父|とう}さん', pl: 'tata; czyjś ojciec' },
+          { text: '{父母|ふぼ}', pl: 'rodzice (oficjalnie)' },
+        ], {
+          plAlts: ['ojciec', 'tata', 'tato'],
+          note: 'O własnym ojcu mówimy wobec obcych 父, o cudzym — お父さん. お父さん to też „tato!”, gdy zwracamy się do własnego ojca.',
+        }),
+        kanji('haha', '母', 'matka; mama', 'はは・ぼ', ['ボ'], ['はは'], [
+          { text: '{母|はは}', pl: 'moja mama; matka' },
+          { text: 'お{母|かあ}さん', pl: 'mama; czyjaś matka' },
+          { text: '{父母|ふぼ}', pl: 'rodzice (oficjalnie)' },
+        ], {
+          plAlts: ['matka', 'mama', 'mamo'],
+          note: 'Od teraz おかあさん piszemy お母さん. O własnej mamie wobec obcych: 母; o cudzej: お母さん.',
+        }),
+        kanji('hana', '花', 'kwiat', 'はな・か', ['カ'], ['はな'], [
+          { text: '{花|はな}', pl: 'kwiat' },
+          { text: '{花火|はなび}', pl: 'fajerwerki; sztuczne ognie' },
+          { text: '{花見|はなみ}', pl: 'podziwianie kwitnących wiśni' },
+        ], {
+          plAlts: ['kwiatek', 'kwiaty'],
+          note: 'Od teraz はな (kwiat) piszemy 花. 花見 to wiosenne pikniki pod kwitnącymi wiśniami, a 花火 — dosł. „ogniste kwiaty”.',
+        }),
+        kanji('mono', '物', 'rzecz; przedmiot', 'もの・ぶつ', ['ブツ', 'モツ'], ['もの'], [
+          { text: '{食|た}べ{物|もの}', pl: 'jedzenie' },
+          { text: '{飲|の}み{物|もの}', pl: 'napój' },
+          { text: '{買|か}い{物|もの}', pl: 'zakupy' },
+        ], {
+          plAlts: ['rzecz', 'przedmiot'],
+          note: 'Od teraz かいもの piszemy 買い物. Z czasownikiem tworzy rzeczowniki: 食べ物 — rzecz do jedzenia, 飲み物 — do picia.',
+        }),
+        p('ageru', 'あげる', 'dawać (komuś)', {
+          alts: ['あげます'],
+          plAlts: ['dać', 'podarować', 'dawać komuś'],
+          note: 'Gr. 2: あげます, あげて, あげた. Ja (albo ktoś) daję komuś innemu; komu — に: 友だちに 花を あげました. Nigdy w stronę mówiącego!',
+        }),
+        p('morau', 'もらう', 'dostawać; otrzymywać', {
+          alts: ['もらいます'],
+          plAlts: ['dostać', 'otrzymać', 'otrzymywać'],
+          note: 'Gr. 1: もらいます, もらって, もらった. Od kogo — に albo から: 父に / 父から とけいを もらいました.',
+        }),
+        p('kureru', 'くれる', 'dawać (mnie, nam)', {
+          alts: ['くれます'],
+          plAlts: ['dać mi', 'dać nam', 'podarować mi'],
+          note: 'Gr. 2: くれます, くれて, くれた. Ktoś daje mnie albo komuś z „moich”: 友だちが 本を くれました — kolega dał mi książkę.',
+        }),
+        p('purezento', 'プレゼント', 'prezent', {
+          plAlts: ['upominek', 'podarunek'],
+          note: 'プレゼントを あげる / もらう. Także czasownik: プレゼントする — podarować.',
+        }),
+        p('tanjoubi', 'たんじょうび', 'urodziny', {
+          plAlts: ['dzień urodzin'],
+          note: 'たんじょうびは いつですか — kiedy masz urodziny? „Na urodziny” — たんじょうびに.',
+        }),
+        p('omedetou', 'おめでとう ございます', 'gratulacje; wszystkiego najlepszego', {
+          romaji: 'omedetou gozaimasu',
+          plAlts: ['gratuluję', 'najlepsze życzenia', 'wszystkiego dobrego'],
+          note: 'たんじょうび おめでとう ございます — wszystkiego najlepszego z okazji urodzin. Swobodnie: おめでとう!',
+        }),
+        p('omiyage', 'おみやげ', 'pamiątka; upominek z podróży', {
+          plAlts: ['pamiątka', 'upominek', 'suwenir'],
+          note: 'Z każdej podróży Japończycy przywożą おみやげ — zwykle pudełko słodyczy dla rodziny i kolegów z pracy.',
+        }),
+        p('okashi', 'おかし', 'słodycze; przekąski', {
+          plAlts: ['łakocie', 'ciastka', 'cukierki'],
+          note: 'Ciastka, cukierki, chrupki — wszystko, co się podjada między posiłkami.',
+        }),
+        p('imouto', 'いもうと', 'młodsza siostra', {
+          plAlts: ['siostra', 'siostrzyczka'],
+          note: 'O własnej siostrze. O cudzej: いもうとさん. Starsza siostra to あね (cudza: おねえさん).',
+        }),
+        p('otousan', 'お{父|とう}さん', 'tata; ojciec (czyjś)', {
+          reading: 'おとうさん',
+          plAlts: ['tata', 'tato', 'ojciec', 'twój tata'],
+          note: 'O cudzym ojcu i do własnego taty: お父さん. O swoim wobec obcych — 父.',
+        }),
+        p('kazoku', 'かぞく', 'rodzina', {
+          plAlts: ['najbliżsi', 'bliscy'],
+          note: 'O własnej rodzinie: かぞく, o cudzej grzecznie: ごかぞく. Rodzina to w Japonii najważniejsza grupa „swoich”.',
+        }),
+      ],
+      sentences: [
+        s('31-1', 'わたしは {友|とも}だちに {花|はな}を あげました。', 'Dałem / dałam przyjacielowi kwiaty.', {
+          romaji: 'watashi wa tomodachi ni hana o agemashita.',
+          plAlts: [
+            'Dałem przyjacielowi kwiaty.',
+            'Dałam przyjacielowi kwiaty.',
+            'Dałem przyjaciółce kwiaty.',
+            'Dałam przyjaciółce kwiaty.',
+            'Dałem koleżance kwiaty.',
+            'Dałam koleżance kwiaty.',
+          ],
+          tokens: ['わたし', 'は', '{友|とも}だち', 'に', '{花|はな}', 'を', 'あげました'],
+        }),
+        s('31-2', 'たんじょうびに {父|ちち}から とけいを もらいました。', 'Na urodziny dostałem / dostałam od taty zegarek.', {
+          romaji: 'tanjoubi ni chichi kara tokei o moraimashita.',
+          plAlts: [
+            'Na urodziny dostałem od taty zegarek.',
+            'Na urodziny dostałam od taty zegarek.',
+            'Na urodziny dostałem od ojca zegarek.',
+            'Na urodziny dostałam od ojca zegarek.',
+          ],
+          tokens: ['たんじょうび', 'に', '{父|ちち}', 'から', 'とけい', 'を', 'もらいました'],
+        }),
+        s('31-3', '{友|とも}だちが わたしに {本|ほん}を くれました。', 'Przyjaciel dał mi książkę.', {
+          romaji: 'tomodachi ga watashi ni hon o kuremashita.',
+          plAlts: ['Przyjaciółka dała mi książkę.', 'Kolega dał mi książkę.', 'Koleżanka dała mi książkę.'],
+          tokens: ['{友|とも}だち', 'が', 'わたし', 'に', '{本|ほん}', 'を', 'くれました'],
+        }),
+        s('31-4', 'これは {母|はは}が くれた かばんです。', 'To torba, którą dała mi mama.', {
+          romaji: 'kore wa haha ga kureta kaban desu.',
+          plAlts: ['To torba od mamy.', 'Tę torbę dała mi mama.', 'To torba, którą dostałem od mamy.', 'To torba, którą dostałam od mamy.'],
+          note: 'Zdanie w formie zwykłej może określać rzeczownik: 母が くれた かばん — torba, którą dała mi mama.',
+          tokens: ['これ', 'は', '{母|はは}', 'が', 'くれた', 'かばん', 'です'],
+        }),
+        s('31-5', 'いもうとに おかしを あげました。', 'Dałem / dałam młodszej siostrze słodycze.', {
+          romaji: 'imouto ni okashi o agemashita.',
+          plAlts: [
+            'Dałem młodszej siostrze słodycze.',
+            'Dałam młodszej siostrze słodycze.',
+            'Dałem siostrze słodycze.',
+            'Dałam siostrze słodycze.',
+            'Dałem siostrze cukierki.',
+            'Dałam siostrze cukierki.',
+          ],
+          tokens: ['いもうと', 'に', 'おかし', 'を', 'あげました'],
+        }),
+        s('31-6', 'かぞくに りょこうの おみやげを あげました。', 'Dałem / dałam rodzinie pamiątki z podróży.', {
+          romaji: 'kazoku ni ryokou no omiyage o agemashita.',
+          plAlts: [
+            'Dałem rodzinie pamiątki z podróży.',
+            'Dałam rodzinie pamiątki z podróży.',
+            'Dałem rodzinie upominki z wycieczki.',
+            'Dałam rodzinie upominki z wycieczki.',
+          ],
+          tokens: ['かぞく', 'に', 'りょこう', 'の', 'おみやげ', 'を', 'あげました'],
+        }),
+        s('31-7', 'この プレゼント、だれが くれたんですか。', 'Kto ci dał ten prezent?', {
+          romaji: 'kono purezento, dare ga kureta n desu ka.',
+          plAlts: ['Od kogo jest ten prezent?', 'Kto dał ci ten prezent?', 'Od kogo dostałeś ten prezent?', 'Od kogo dostałaś ten prezent?'],
+          tokens: ['この', 'プレゼント', 'だれ', 'が', 'くれた', 'んですか'],
+        }),
+        s('31-8', 'お{父|とう}さんに {何|なに}を もらいましたか。', 'Co dostałeś / dostałaś od taty?', {
+          romaji: 'otousan ni nani o moraimashita ka.',
+          plAlts: ['Co dostałeś od taty?', 'Co dostałaś od taty?', 'Co dał ci tata?', 'Co pan dostał od ojca?', 'Co pani dostała od ojca?'],
+          tokens: ['お{父|とう}さん', 'に', '{何|なに}', 'を', 'もらいましたか'],
+        }),
+        s('31-9', 'たんじょうび おめでとう ございます!', 'Wszystkiego najlepszego z okazji urodzin!', {
+          romaji: 'tanjoubi omedetou gozaimasu!',
+          plAlts: ['Wszystkiego najlepszego!', 'Sto lat!', 'Najlepsze życzenia urodzinowe!'],
+          tokens: ['たんじょうび', 'おめでとう', 'ございます'],
+        }),
+      ],
+      grammar: [
+        {
+          id: 'ja.g.ageru-morau',
+          title: 'あげる i もらう — dawać i dostawać',
+          body: [
+            '[[あげる]] — dawać komuś. Dający jest tematem (は) albo podmiotem (が), a odbiorca dostaje **に**: [[わたしは {友|とも}だちに {花|はな}を あげました。]] — Dałem przyjacielowi kwiaty. Tak samo mówimy o innych osobach: [[ケンさんは アンナさんに {花|はな}を あげました。]]',
+            '[[もらう]] — dostawać. Tematem jest ten, kto dostaje, a dający dostaje **に** albo **から**: [[{父|ちち}に とけいを もらいました。]] = [[{父|ちち}から とけいを もらいました。]] — Dostałem od taty zegarek. Gdy daje instytucja (szkoła, firma), używamy tylko から.',
+            'Tę samą sytuację można opisać z dwóch stron: [[ケンさんは アンナさんに {花|はな}を あげました。]] — Ken dał Annie kwiaty. [[アンナさんは ケンさんに {花|はな}を もらいました。]] — Anna dostała od Kena kwiaty.',
+            'Uwaga: あげる nie działa w stronę mówiącego! „Kolega dał mi książkę” to nie ✗ 友だちが わたしに 本を あげました — tu potrzebne くれる (następna notatka).',
+          ],
+          table: {
+            head: ['czasownik', 'kierunek', 'przykład'],
+            rows: [
+              ['あげる', 'ja / ktoś → ktoś inny', 'ともだちに はなを あげました'],
+              ['もらう', 'ja / ktoś ← od kogoś (に / から)', 'ちちに とけいを もらいました'],
+              ['くれる', 'ktoś → mnie / „moim”', 'ともだちが ほんを くれました'],
+            ],
+          },
+          contrast:
+            'Po polsku „dać” działa w każdą stronę: „dałem mu”, „dał mi”. Po japońsku kierunek zmienia czasownik: od siebie — あげる, do siebie — くれる. Polskie „dostać od kogoś” to もらう, a „od kogo” oznaczamy に albo から: 父に もらいました — dostałem od taty.',
+        },
+        {
+          id: 'ja.g.kureru',
+          title: 'くれる i „swoi”: z czyjej perspektywy?',
+          body: [
+            'Gdy ktoś daje **mnie** albo komuś z mojej grupy, używamy [[くれる]]: [[{友|とも}だちが わたしに {本|ほん}を くれました。]] — Kolega dał mi książkę. わたしに zwykle się pomija: [[{母|はは}が くれました。]] — Dała mi to mama.',
+            'Japończycy dzielą ludzi na **swoich** (ja, rodzina, bliscy, w pracy — własna firma) i **obcych**. Dar od obcych dla swoich — くれる: [[{先生|せんせい}が いもうとに おかしを くれました。]] — Nauczyciel dał mojej siostrze słodycze. Od swoich dla obcych — あげる: [[いもうとが {先生|せんせい}に {花|はな}を あげました。]]',
+            'Ten podział słychać też w nazwach członków rodziny. O swoich mówimy wobec obcych skromnie: [[{父|ちち}]] (mój tata), [[{母|はは}]] (moja mama), [[いもうと]]. O cudzych — grzecznie: [[お{父|とう}さん]], [[お{母|かあ}さん]], [[いもうとさん]]. Do własnych rodziców zwracamy się jednak お父さん, お母さん.',
+            'Pytanie „od kogo?” zadamy na dwa sposoby: [[だれに もらったんですか。]] (od kogo dostałeś?) albo [[だれが くれたんですか。]] (kto ci dał?).',
+          ],
+          table: {
+            head: ['', 'swoi (moja rodzina)', 'obcy (cudza rodzina)'],
+            rows: [
+              ['ojciec', 'ちち', 'おとうさん'],
+              ['matka', 'はは', 'おかあさん'],
+              ['młodsza siostra', 'いもうと', 'いもうとさん'],
+              ['rodzina', 'かぞく', 'ごかぞく'],
+            ],
+          },
+          contrast:
+            'Po polsku „mój tata” i „twój tata” to ten sam wyraz — wystarcza zaimek. Po japońsku zaimków się unika, a to, czyj jest tata, słychać w samym słowie: 父 to mój ojciec (gdy mówię do obcych), お父さん — twój albo czyjś. Kierunek daru też zdradza czasownik: くれました — dał mnie albo komuś „mojemu”.',
+        },
+      ],
+      exercises: [
+        {
+          type: 'gap',
+          id: 'ja.x.31-1',
+          concept: 'ja.g.ageru-morau',
+          sentence: 'わたしは {友|とも}だち___ プレゼントを あげました。',
+          pl: 'Dałem / dałam przyjacielowi prezent.',
+          options: ['に', 'を', 'が'],
+          answer: 'に',
+          explanation: 'Odbiorcę oznacza に: 友だちに あげました. を stoi przy tym, co dajemy: プレゼントを.',
+        },
+        {
+          type: 'gap',
+          id: 'ja.x.31-2',
+          concept: 'ja.g.kureru',
+          sentence: '{友|とも}だちが わたしに {花|はな}を ___。',
+          pl: 'Przyjaciel dał mi kwiaty.',
+          options: ['くれました', 'あげました', 'もらいました'],
+          answer: 'くれました',
+          explanation: 'Ktoś daje mnie — くれる. あげる działa tylko od mówiącego albo między innymi osobami, a もらう znaczy „dostać”.',
+        },
+        {
+          type: 'gap',
+          id: 'ja.x.31-3',
+          concept: 'ja.g.ageru-morau',
+          sentence: 'たんじょうびに {母|はは}___ プレゼントを もらいました。',
+          pl: 'Na urodziny dostałem / dostałam od mamy prezent.',
+          options: ['から', 'へ', 'で'],
+          answer: 'から',
+          explanation: 'Od kogo dostajemy — に albo から: 母から もらいました. へ oznacza kierunek ruchu, a で — miejsce albo narzędzie.',
+        },
+        {
+          type: 'choice',
+          id: 'ja.x.31-4',
+          concept: 'ja.g.kureru',
+          prompt: 'Rozmawiasz z nowym kolegą z pracy. Jak powiesz „mój tata”?',
+          options: ['{父|ちち}', 'お{父|とう}さん', '{父|ちち}さん'],
+          answer: 0,
+          explanation: 'O własnej rodzinie wobec obcych mówimy skromnie: 父, 母. お父さん to czyjś tata (albo zwrot do własnego), a formy ✗ ちちさん nie ma.',
+        },
+        {
+          type: 'choice',
+          id: 'ja.x.31-5',
+          concept: 'ja.g.ageru-morau',
+          prompt: 'Ken dał Annie kwiaty. Które zdanie opisuje to samo z perspektywy Anny?',
+          options: [
+            'アンナさんは ケンさんに {花|はな}を もらいました。',
+            'アンナさんは ケンさんに {花|はな}を あげました。',
+            'アンナさんは ケンさんに {花|はな}を くれました。',
+          ],
+          answer: 0,
+          explanation: 'Z perspektywy odbiorcy: もらう — アンナさんは ケンさんに 花を もらいました (Anna dostała od Kena kwiaty). Pozostałe zdania mówią, że to Anna coś dała.',
+        },
+        {
+          type: 'choice',
+          id: 'ja.x.31-6',
+          concept: 'ja.g.kureru',
+          prompt: 'Koleżanka pyta: その とけい、だれに もらったんですか. Dostałeś / dostałaś go od mamy. Co odpowiesz?',
+          target: 'その とけい、だれに もらったんですか。',
+          options: ['{母|はは}が くれたんです。', '{母|はは}に あげたんです。', 'お{母|かあ}さんが あげたんです。'],
+          answer: 0,
+          explanation: 'Mama dała mnie — くれる: 母が くれたんです. O swojej mamie wobec innych mówimy 母, a あげる znaczy „dać komuś innemu”.',
+        },
+      ],
+      dialogue: {
+        id: 'ja.d.31',
+        title: 'Urodziny Oli',
+        context: 'Ola ma urodziny. Kenta, kolega z kursu, przychodzi z prezentem.',
+        speakers: {
+          K: { name: 'Kenta', voice: 'b', accent: 'ja-JP' },
+          O: { name: 'Ola', voice: 'a', accent: 'ja-JP' },
+        },
+        lines: [
+          {
+            speaker: 'K',
+            text: 'オラさん、たんじょうび おめでとう ございます! これ、プレゼントです。',
+            pl: 'Olu, wszystkiego najlepszego z okazji urodzin! To dla ciebie.',
+            romaji: 'ora-san, tanjoubi omedetou gozaimasu! kore, purezento desu.',
+          },
+          { speaker: 'O', text: 'わあ、ありがとう ございます! {何|なん}ですか。', pl: 'Och, dziękuję bardzo! Co to jest?', romaji: 'waa, arigatou gozaimasu! nan desu ka.' },
+          {
+            speaker: 'K',
+            text: 'きょうとの おかしです。{先月|せんげつ} {日本|にほん}へ {行|い}ったので、{買|か}いました。',
+            pl: 'Słodycze z Kioto. W zeszłym miesiącu byłem w Japonii, więc je kupiłem.',
+            romaji: 'kyouto no okashi desu. sengetsu nihon e itta node, kaimashita.',
+          },
+          {
+            speaker: 'O',
+            text: 'きのうは {父|ちち}と {母|はは}も プレゼントを くれました。',
+            pl: 'Wczoraj tata i mama też dali mi prezenty.',
+            romaji: 'kinou wa chichi to haha mo purezento o kuremashita.',
+          },
+          { speaker: 'K', text: '{何|なに}を もらったんですか。', pl: 'A co dostałaś?', romaji: 'nani o moratta n desu ka.' },
+          {
+            speaker: 'O',
+            text: '{父|ちち}は {本|ほん}を くれました。{母|はは}には とけいを もらいました。',
+            pl: 'Tata dał mi książkę, a od mamy dostałam zegarek.',
+            romaji: 'chichi wa hon o kuremashita. haha ni wa tokei o moraimashita.',
+          },
+          {
+            speaker: 'K',
+            text: 'いいですね。わたしも {来月|らいげつ}、{母|はは}に プレゼントを あげたいです。',
+            pl: 'Super. Ja też chciałbym w przyszłym miesiącu dać mamie prezent.',
+            romaji: 'ii desu ne. watashi mo raigetsu, haha ni purezento o agetai desu.',
+          },
+          { speaker: 'O', text: 'じゃあ、ポーランドの おかしは どうですか。', pl: 'To może polskie słodycze?', romaji: 'jaa, poorando no okashi wa dou desu ka.' },
+          {
+            speaker: 'K',
+            text: 'それは いいですね! {母|はは}は おかしが {大好|だいす}きなんです。',
+            pl: 'Świetny pomysł! Mama uwielbia słodycze.',
+            romaji: 'sore wa ii desu ne! haha wa okashi ga daisuki na n desu.',
+          },
+        ],
+        questions: [
+          {
+            id: 'ja.d.31-q1',
+            prompt: 'Co Kenta daje Oli?',
+            options: ['Kwiaty', 'Słodycze z Kioto', 'Książkę'],
+            answer: 1,
+            explanation: 'きょうとの おかしです — to słodycze z Kioto.',
+          },
+          {
+            id: 'ja.d.31-q2',
+            prompt: 'Co Ola dostała od mamy?',
+            options: ['Zegarek', 'Książkę', 'Kwiaty'],
+            answer: 0,
+            explanation: '母には とけいを もらいました — od mamy dostałam zegarek. Książkę dał jej tata.',
+          },
+          {
+            id: 'ja.d.31-q3',
+            prompt: 'Dlaczego Ola mówi 父 i 母, a nie お父さん i お母さん?',
+            options: ['Bo mówi o własnych rodzicach do kogoś spoza rodziny', 'Bo jest zła na rodziców', 'Bo tak mówią tylko dzieci'],
+            answer: 0,
+            explanation: 'O własnej rodzinie wobec innych mówimy skromnie: 父, 母. お父さん i お母さん — o cudzych rodzicach albo zwracając się do własnych.',
+          },
+        ],
+      },
+      summary: [
+        'あげる — dawać komuś (odbiorca + に); もらう — dostawać (od kogo: に / から).',
+        'くれる — ktoś daje mnie albo „moim”: 友だちが 本を くれました. ✗ 友だちが わたしに あげました.',
+        'Swoi i obcy: 父 / 母 (moi rodzice wobec obcych) — お父さん / お母さん (czyjś); prezenty: プレゼント, おみやげ, たんじょうび おめでとう ございます!',
+        'Kanji: 父 母 花 物 — 父, お母さん, 花, 買い物, 食べ物.',
+      ],
+      followUp:
+        'Przypomnij sobie trzy ostatnie prezenty: co dałeś / dałaś, co dostałeś / dostałaś i od kogo. Opisz je po japońsku z あげる, もらう i くれる — a o swojej rodzinie mów 父 i 母.',
+    },
   ],
 };
