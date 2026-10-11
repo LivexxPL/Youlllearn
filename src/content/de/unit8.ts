@@ -971,5 +971,333 @@ export const unit8: Unit = {
       followUp:
         'Pomyśl o swoim mieście: kiedy zbudowano najstarszy kościół albo założono uniwersytet? Powiedz to po niemiecku z wurde … gebaut / gegründet. Za około 10 minut zrób krótką powtórkę.',
     },
+    {
+      id: 'de.l33',
+      title: 'Opowiadamy historię',
+      subtitle: 'Es war einmal…',
+      objective: 'Opowiesz historię w czasie Präteritum (ging, kam, sah, fand, sagte) i pokażesz, co wydarzyło się wcześniej — z Plusquamperfekt oraz spójnikami nachdem, als i bevor.',
+      level: 'B1',
+      minutes: 13,
+      items: [
+        phrase('es-war-einmal', 'Es war einmal…', 'Był sobie…; Dawno, dawno temu…', {
+          plAlts: ['Był sobie', 'Dawno, dawno temu', 'Pewnego razu', 'Dawno temu'],
+          note: 'Tradycyjny początek baśni: Es war einmal ein König… — Był sobie król…',
+        }),
+        verb('ich-ging', 'ich ging', 'szedłem / szłam; poszedłem / poszłam', {
+          plAlts: ['szedłem', 'szłam', 'poszedłem', 'poszłam'],
+          note: 'Präteritum od gehen: ich ging, du gingst, er ging, wir gingen. W opowiadaniu zamiast ich bin gegangen.',
+        }),
+        verb('ich-kam', 'ich kam', 'przyszedłem / przyszłam; przyjechałem / przyjechałam', {
+          plAlts: ['przyszedłem', 'przyszłam', 'przyjechałem', 'przyjechałam'],
+          note: 'Präteritum od kommen: ich kam, du kamst, er kam, wir kamen. Er kam spät nach Hause. — Wrócił późno do domu.',
+        }),
+        verb('ich-sah', 'ich sah', 'widziałem / widziałam; zobaczyłem / zobaczyłam', {
+          plAlts: ['widziałem', 'widziałam', 'zobaczyłem', 'zobaczyłam'],
+          note: 'Präteritum od sehen: ich sah, du sahst, er sah, wir sahen.',
+        }),
+        verb('ich-fand', 'ich fand', 'znalazłem / znalazłam', {
+          plAlts: ['znalazłem', 'znalazłam', 'uznałem', 'uznałam'],
+          note: 'Präteritum od finden: ich fand, er fand, wir fanden. Także „uważałem”, jak w ich finde: Ich fand den Film gut. — Film mi się podobał.',
+        }),
+        verb('ich-sagte', 'ich sagte', 'powiedziałem / powiedziałam', {
+          plAlts: ['powiedziałem', 'powiedziałam', 'mówiłem', 'mówiłam'],
+          note: 'Präteritum regularne: rdzeń + -te. Sagen → sagte, machen → machte, wohnen → wohnte.',
+        }),
+        verb('ich-wusste', 'ich wusste', 'wiedziałem / wiedziałam', {
+          plAlts: ['wiedziałem', 'wiedziałam'],
+          note: 'Präteritum od wissen (wiedzieć): ich wusste, du wusstest, er wusste. Das wusste ich nicht! — Nie wiedziałem / nie wiedziałam!',
+        }),
+        phrase('es-gab', 'es gab', 'był; była; było (istniał)', {
+          plAlts: ['było', 'był', 'była', 'były', 'istniał', 'istniało'],
+          note: 'Präteritum od es gibt (jest, istnieje) + biernik: Damals gab es kein Handy. — Wtedy nie było komórek.',
+        }),
+        word('nachdem', 'nachdem', 'po tym, jak', {
+          pos: 'conj',
+          plAlts: ['po tym jak', 'kiedy już', 'gdy już'],
+          note: 'Czasownik na końcu, zwykle z Plusquamperfekt: Nachdem ich gegessen hatte, ging ich ins Kino. — Kiedy już zjadłem / zjadłam, poszedłem / poszłam do kina.',
+        }),
+        word('bevor', 'bevor', 'zanim', {
+          pos: 'conj',
+          plAlts: ['nim', 'przed tym, jak'],
+          note: 'Czasownik na końcu: Bevor ich ins Bett gehe, lese ich. — Zanim pójdę spać, czytam.',
+        }),
+        word('ploetzlich', 'plötzlich', 'nagle', {
+          pos: 'adv',
+          plAlts: ['naraz', 'niespodziewanie', 'znienacka'],
+          note: 'Ulubione słowo opowieści: Plötzlich sah ich… — Nagle zobaczyłem…',
+        }),
+        verb('erzaehlen', 'erzählen', 'opowiadać; opowiedzieć', {
+          plAlts: ['opowiedzieć', 'opowiadać'],
+          note: 'Komu? — celownik: Erzähl mir alles! — Opowiedz mi wszystko! O czym? — von + celownik: Er erzählt von seiner Kindheit.',
+        }),
+        noun('die-geschichte', 'die Geschichte', 'historia; opowieść', 'f', {
+          plural: 'die Geschichten',
+          plAlts: ['opowieść', 'historia', 'historyjka', 'dzieje'],
+          note: 'Opowieść, ale też historia jako przedmiot: Geschichte studieren — studiować historię.',
+        }),
+        verb('passieren', 'passieren', 'zdarzyć się; stać się', {
+          plAlts: ['wydarzyć się', 'stać się', 'dziać się', 'zdarzać się'],
+          note: 'Perfekt z sein, imiesłów bez ge-: Was ist passiert? — Co się stało?',
+        }),
+      ],
+      sentences: [
+        s('33-1', 'Es war einmal ein Mädchen, das in einem kleinen Dorf wohnte.', 'Była sobie dziewczynka, która mieszkała w małej wiosce.', {
+          plAlts: [
+            'Była sobie dziewczynka, która mieszkała w małej wsi.',
+            'Dawno, dawno temu była sobie dziewczynka, która mieszkała w małej wiosce.',
+            'Dawno temu żyła dziewczynka, która mieszkała w małej wiosce.',
+            'Była raz dziewczynka, która mieszkała w małej wiosce.',
+          ],
+          note: 'Das Mädchen jest nijakie, więc zaimek względny to das. Wohnte — Präteritum regularne (wohn- + -te).',
+        }),
+        s('33-2', 'Gestern ging ich nach der Arbeit in ein Café.', 'Wczoraj po pracy poszedłem do kawiarni.', {
+          alts: ['Nach der Arbeit ging ich gestern in ein Café.', 'Gestern bin ich nach der Arbeit in ein Café gegangen.'],
+          plAlts: [
+            'Wczoraj po pracy poszłam do kawiarni.',
+            'Po pracy poszedłem wczoraj do kawiarni.',
+            'Po pracy poszłam wczoraj do kawiarni.',
+            'Wczoraj po pracy poszedłem do jakiejś kawiarni.',
+            'Wczoraj po pracy poszłam do jakiejś kawiarni.',
+          ],
+        }),
+        s('33-3', 'Plötzlich sah ich meinen alten Lehrer.', 'Nagle zobaczyłem mojego dawnego nauczyciela.', {
+          plAlts: [
+            'Nagle zobaczyłam mojego dawnego nauczyciela.',
+            'Nagle zobaczyłem swojego dawnego nauczyciela.',
+            'Nagle zobaczyłam swojego dawnego nauczyciela.',
+            'Nagle zobaczyłem mojego starego nauczyciela.',
+            'Nagle zobaczyłam mojego starego nauczyciela.',
+          ],
+        }),
+        s('33-4', 'Er kam an meinen Tisch und wir sprachen lange.', 'Podszedł do mojego stolika i długo rozmawialiśmy.', {
+          plAlts: [
+            'Podszedł do mojego stolika i rozmawialiśmy długo.',
+            'Przyszedł do mojego stolika i długo rozmawialiśmy.',
+            'Podszedł do mojego stolika i długo ze sobą rozmawialiśmy.',
+          ],
+          note: 'Kam — od kommen, sprachen — od sprechen. Nieregularne formy Präteritum trzeba zapamiętać.',
+        }),
+        s('33-5', 'Als ich ein Kind war, bin ich jeden Sommer zu meiner Oma gefahren.', 'Kiedy byłem dzieckiem, co lato jeździłem do babci.', {
+          alts: ['Als ich ein Kind war, fuhr ich jeden Sommer zu meiner Oma.', 'Als ich klein war, bin ich jeden Sommer zu meiner Oma gefahren.'],
+          plAlts: [
+            'Kiedy byłam dzieckiem, co lato jeździłam do babci.',
+            'Gdy byłem dzieckiem, każdego lata jeździłem do babci.',
+            'Gdy byłam dzieckiem, każdego lata jeździłam do babci.',
+            'Jako dziecko co lato jeździłem do babci.',
+            'Jako dziecko co lato jeździłam do babci.',
+          ],
+          note: 'W Austrii i na południu Niemiec w rozmowie opowiada się raczej w Perfekcie (bin gefahren); Präteritum zostaje głównie dla war, hatte i czasowników modalnych.',
+          accent: 'de-AT',
+        }),
+        s('33-6', 'Nachdem wir gegessen hatten, gingen wir ins Kino.', 'Po tym, jak zjedliśmy, poszliśmy do kina.', {
+          alts: ['Wir gingen ins Kino, nachdem wir gegessen hatten.'],
+          plAlts: ['Kiedy już zjedliśmy, poszliśmy do kina.', 'Gdy już zjedliśmy, poszliśmy do kina.', 'Po jedzeniu poszliśmy do kina.', 'Zjedliśmy, a potem poszliśmy do kina.'],
+          note: 'Najpierw jedzenie — Plusquamperfekt (hatten gegessen), potem kino — Präteritum (gingen).',
+        }),
+        s('33-7', 'Bevor ich nach Graz kam, konnte ich kein Deutsch.', 'Zanim przyjechałem do Grazu, nie znałem niemieckiego.', {
+          alts: ['Ich konnte kein Deutsch, bevor ich nach Graz kam.'],
+          plAlts: [
+            'Zanim przyjechałam do Grazu, nie znałam niemieckiego.',
+            'Zanim przyjechałem do Grazu, nie mówiłem po niemiecku.',
+            'Zanim przyjechałam do Grazu, nie mówiłam po niemiecku.',
+            'Zanim przyjechałem do Grazu, w ogóle nie znałem niemieckiego.',
+            'Zanim przyjechałam do Grazu, w ogóle nie znałam niemieckiego.',
+          ],
+          note: 'Kein Deutsch können — nie znać niemieckiego (ani trochę).',
+          accent: 'de-AT',
+        }),
+        s('33-8', 'Dann fand ich den Schlüssel unter dem Sofa.', 'Potem znalazłem klucz pod kanapą.', {
+          alts: ['Dann fand ich unter dem Sofa den Schlüssel.'],
+          plAlts: ['Potem znalazłam klucz pod kanapą.', 'Wtedy znalazłem klucz pod kanapą.', 'Wtedy znalazłam klucz pod kanapą.', 'Potem znalazłem klucz pod sofą.', 'Potem znalazłam klucz pod sofą.'],
+        }),
+        s('33-9', 'Was ist passiert? Erzähl mir die ganze Geschichte!', 'Co się stało? Opowiedz mi całą historię!', {
+          plAlts: ['Co się wydarzyło? Opowiedz mi całą historię!', 'Co się stało? Opowiedz mi całą tę historię!'],
+        }),
+      ],
+      grammar: [
+        {
+          id: 'de.g.praeteritum-erzaehlen',
+          title: 'Präteritum w opowiadaniu: sagte, ging, kam',
+          body: [
+            'W opowiadaniach, baśniach, książkach i artykułach o przeszłości używamy czasu **Präteritum**: [[Es war einmal ein Mädchen…]] [[Plötzlich sah ich meinen alten Lehrer.]] W rozmowie zwykle wystarcza Perfekt — ale sein, haben i czasowniki modalne (war, hatte, konnte, wollte) mają i tam najczęściej formę Präteritum.',
+            'Czasowniki **regularne**: rdzeń + **-te**: sagen → [[sagte]], wohnen → [[wohnte]], machen → [[machte]], arbeiten → [[arbeitete]] (po -t wstawiamy -e-). Końcówki: ich sagte, du sagtest, er sagte, wir sagten, ihr sagtet, sie sagten.',
+            'Czasowniki **nieregularne** zmieniają samogłoskę, a w 1. i 3. osobie liczby pojedynczej nie mają końcówki: gehen → [[ging]], kommen → [[kam]], sehen → [[sah]], finden → [[fand]], sprechen → [[sprach]], nehmen → [[nahm]]. Ucz się ich trójkami: gehen — ging — gegangen.',
+          ],
+          table: {
+            head: ['Bezokolicznik', 'Präteritum (ich / er)', 'Perfekt'],
+            rows: [
+              ['sagen', 'sagte', 'hat gesagt'],
+              ['wohnen', 'wohnte', 'hat gewohnt'],
+              ['gehen', 'ging', 'ist gegangen'],
+              ['kommen', 'kam', 'ist gekommen'],
+              ['sehen', 'sah', 'hat gesehen'],
+              ['finden', 'fand', 'hat gefunden'],
+              ['wissen', 'wusste', 'hat gewusst'],
+              ['es gibt', 'es gab', 'es hat gegeben'],
+            ],
+          },
+          contrast:
+            'Po polsku mamy jeden czas przeszły, za to z aspektem: szedłem (niedokonany) i poszedłem (dokonany). Niemiecki aspektu nie ma — ich ging znaczy i „szedłem”, i „poszedłem”. Wybór między Präteritum a Perfektem zależy od stylu (opowieść czy rozmowa), a nie od tego, czy czynność się skończyła.',
+        },
+        {
+          id: 'de.g.plusquamperfekt',
+          title: 'Plusquamperfekt z nachdem; als, wenn, bevor',
+          body: [
+            '**Plusquamperfekt** opisuje to, co wydarzyło się **wcześniej niż** inne zdarzenie w przeszłości. Tworzymy go jak Perfekt, tylko z **hatte / war**: [[Wir hatten gegessen.]] [[Er war schon gegangen.]] (Już wyszedł — zanim przyszedłem.)',
+            'Najczęściej łączy się ze spójnikiem [[nachdem]] (po tym, jak): [[Nachdem wir gegessen hatten, gingen wir ins Kino.]] Najpierw jedzenie (Plusquamperfekt), potem kino (Präteritum). Po [[bevor]] (zanim) wystarcza zwykły czas przeszły: [[Bevor ich nach Graz kam, konnte ich kein Deutsch.]]',
+            '„Kiedy” w przeszłości: dla **jednego** zdarzenia albo okresu — [[als]]: [[Als ich ein Kind war, …]] [[Als er kam, war ich schon weg.]] Dla zdarzeń **powtarzanych** — [[wenn]]: [[Wenn es regnete, blieben wir zu Hause.]] (Za każdym razem, gdy padało…) Po nachdem, als, wenn i bevor czasownik stoi na końcu.',
+          ],
+          table: {
+            head: ['Spójnik', 'Znaczenie', 'Przykład'],
+            rows: [
+              ['nachdem', 'po tym, jak', 'Nachdem er angerufen hatte, kam er zu uns.'],
+              ['als', 'kiedy (raz, jeden okres)', 'Als ich nach Hause kam, schlief mein Bruder schon.'],
+              ['wenn', 'kiedy (za każdym razem)', 'Wenn es regnete, blieben wir zu Hause.'],
+              ['bevor', 'zanim', 'Bevor ich ging, sagte ich Tschüss.'],
+            ],
+          },
+          contrast:
+            'Polski nie ma osobnego czasu zaprzeszłego — kolejność wydarzeń pokazujemy słowami „już”, „wcześniej”, „po tym, jak”. W starannej niemieckiej opowieści to, co było wcześniej, stawiamy w Plusquamperfekt: Nachdem wir gegessen hatten (wcześniej), gingen wir ins Kino (później). Uwaga też na „kiedy”: o jednym zdarzeniu w przeszłości — als, o powtarzanym — wenn.',
+        },
+      ],
+      exercises: [
+        {
+          type: 'gap',
+          id: 'de.x.33-1',
+          concept: 'de.g.praeteritum-erzaehlen',
+          sentence: 'Gestern ___ ich einen alten Freund in der Stadt.',
+          pl: 'Wczoraj zobaczyłem / zobaczyłam w mieście starego przyjaciela.',
+          options: ['sah', 'sehe', 'gesehen'],
+          answer: 'sah',
+          explanation: 'Opowieść o przeszłości (gestern) w Präteritum: sehen → sah. Gesehen to imiesłów — potrzebowałby habe.',
+        },
+        {
+          type: 'gap',
+          id: 'de.x.33-2',
+          concept: 'de.g.praeteritum-erzaehlen',
+          sentence: 'Er ___ zu mir und sagte Hallo.',
+          pl: 'Podszedł do mnie i powiedział „cześć”.',
+          options: ['kommte', 'kam', 'kommt'],
+          answer: 'kam',
+          explanation: 'Kommen jest nieregularny: Präteritum to kam, bez -te. Formy „kommte” nie ma.',
+        },
+        {
+          type: 'gap',
+          id: 'de.x.33-3',
+          concept: 'de.g.praeteritum-erzaehlen',
+          sentence: 'Als Kind ___ ich in einem kleinen Dorf.',
+          pl: 'Jako dziecko mieszkałem / mieszkałam w małej wiosce.',
+          options: ['wohnte', 'wohnt', 'wohnten'],
+          answer: 'wohnte',
+          explanation: 'Czasownik regularny: wohn- + -te. Przy ich nie ma dodatkowej końcówki: ich wohnte (wohnten to forma dla wir i sie).',
+        },
+        {
+          type: 'choice',
+          id: 'de.x.33-4',
+          concept: 'de.g.praeteritum-erzaehlen',
+          prompt: 'Jak powiesz w opowiadaniu: „Ona poszła do domu”?',
+          options: ['Sie ging nach Hause.', 'Sie gehte nach Hause.', 'Sie gang nach Hause.'],
+          answer: 0,
+          explanation: 'Gehen jest nieregularny: gehen — ging — gegangen. Form „gehte” i „gang” nie ma.',
+        },
+        {
+          type: 'gap',
+          id: 'de.x.33-5',
+          concept: 'de.g.plusquamperfekt',
+          sentence: 'Nachdem er angerufen ___, kam er zu uns.',
+          pl: 'Kiedy już zadzwonił, przyszedł do nas.',
+          options: ['hat', 'hatte', 'war'],
+          answer: 'hatte',
+          explanation: 'Po nachdem — Plusquamperfekt: hatte / war + imiesłów. Anrufen tworzy czasy przeszłe z haben, więc er hatte angerufen.',
+        },
+        {
+          type: 'gap',
+          id: 'de.x.33-6',
+          concept: 'de.g.plusquamperfekt',
+          sentence: 'Als ich nach Hause kam, ___ mein Bruder schon gegangen.',
+          pl: 'Kiedy wróciłem / wróciłam do domu, mojego brata już nie było.',
+          options: ['hatte', 'war', 'ist'],
+          answer: 'war',
+          explanation: 'Gehen tworzy czasy przeszłe z sein, więc Plusquamperfekt to war gegangen — brat wyszedł wcześniej, niż ja wróciłem.',
+        },
+        {
+          type: 'choice',
+          id: 'de.x.33-7',
+          concept: 'de.g.plusquamperfekt',
+          prompt: 'Jak powiesz: „Kiedy byłem dzieckiem, mieszkałem w Krakowie”?',
+          options: ['Als ich ein Kind war, wohnte ich in Krakau.', 'Wenn ich ein Kind war, wohnte ich in Krakau.', 'Wann ich ein Kind war, wohnte ich in Krakau.'],
+          answer: 0,
+          explanation: 'Jeden okres w przeszłości → als. Wenn w przeszłości znaczy „za każdym razem, gdy”, a wann to tylko pytanie: kiedy?',
+        },
+      ],
+      dialogue: {
+        id: 'de.d.33',
+        title: 'Opowieść dziadka',
+        context: 'Wieczór w Innsbrucku. Mała Lena prosi dziadka, żeby opowiedział jej jakąś historię.',
+        speakers: {
+          L: { name: 'Lena', voice: 'a', accent: 'de-AT' },
+          O: { name: 'Opa', voice: 'b', accent: 'de-AT' },
+        },
+        lines: [
+          { speaker: 'L', text: 'Opa, erzähl mir eine Geschichte!', pl: 'Dziadku, opowiedz mi jakąś historię!' },
+          {
+            speaker: 'O',
+            text: 'Gut. Es war einmal ein kleiner Bub, der in einem Dorf in Tirol wohnte.',
+            pl: 'Dobrze. Był sobie mały chłopiec, który mieszkał w pewnej wiosce w Tyrolu.',
+          },
+          { speaker: 'L', text: 'Warst du das, Opa?', pl: 'Czy to byłeś ty, dziadku?' },
+          {
+            speaker: 'O',
+            text: 'Vielleicht! Im Winter, als es viel geschneit hatte, ging der Bub zu seiner Oma.',
+            pl: 'Może! Zimą, kiedy spadło dużo śniegu, chłopiec poszedł do babci.',
+          },
+          { speaker: 'O', text: 'Plötzlich sah er im Schnee einen kleinen Hund.', pl: 'Nagle zobaczył w śniegu małego psa.' },
+          { speaker: 'L', text: 'Oh nein! Was ist passiert?', pl: 'O nie! Co się stało?' },
+          {
+            speaker: 'O',
+            text: 'Der Hund war krank und müde, deshalb nahm der Bub ihn mit nach Hause.',
+            pl: 'Pies był chory i zmęczony, więc chłopiec zabrał go do domu.',
+          },
+          { speaker: 'L', text: 'Und dann?', pl: 'I co dalej?' },
+          {
+            speaker: 'O',
+            text: 'Nachdem er warme Milch getrunken hatte, ging es ihm besser. Und dann blieb er zwölf Jahre bei uns!',
+            pl: 'Kiedy już napił się ciepłego mleka, poczuł się lepiej. A potem został u nas dwanaście lat!',
+          },
+          { speaker: 'L', text: 'Bei uns? Dann warst du der Bub, Opa!', pl: 'U nas? To ty byłeś tym chłopcem, dziadku!' },
+        ],
+        questions: [
+          {
+            id: 'de.d.33-q1',
+            prompt: 'Gdzie mieszkał chłopiec z opowieści?',
+            options: ['W Wiedniu', 'W wiosce w Tyrolu', 'W Monachium'],
+            answer: 1,
+            explanation: '„…ein kleiner Bub, der in einem Dorf in Tirol wohnte.” Bub to austriackie (i bawarskie) słowo na chłopca — w Niemczech: der Junge.',
+          },
+          {
+            id: 'de.d.33-q2',
+            prompt: 'Co chłopiec zobaczył w śniegu?',
+            options: ['Małego psa', 'Kota', 'Klucz'],
+            answer: 0,
+            explanation: '„Plötzlich sah er im Schnee einen kleinen Hund.”',
+          },
+          {
+            id: 'de.d.33-q3',
+            prompt: 'Czego Lena domyśla się na końcu?',
+            options: ['Że pies był chory', 'Że chłopcem z opowieści był dziadek', 'Że babcia nie lubiła psów'],
+            answer: 1,
+            explanation: 'Dziadek mówi: „…blieb er zwölf Jahre bei uns!” — „bei uns” go zdradza. Lena: „Dann warst du der Bub, Opa!”',
+          },
+        ],
+      },
+      summary: [
+        'Opowieść i tekst pisany: Präteritum. Regularne: sagen → sagte, wohnen → wohnte (ich i er bez końcówki).',
+        'Nieregularne: ging, kam, sah, fand, nahm, sprach; wissen → wusste; es gibt → es gab.',
+        'Plusquamperfekt = hatte / war + imiesłów: Nachdem wir gegessen hatten, gingen wir ins Kino.',
+        '„Kiedy” w przeszłości: als (raz), wenn (za każdym razem); bevor = zanim. Po nich czasownik na końcu.',
+      ],
+      followUp:
+        'Opowiedz na głos krótką historię z dzieciństwa w pięciu zdaniach — zacznij od „Als ich ein Kind war, …” i użyj przynajmniej raz nachdem. Za około 10 minut zrób krótką powtórkę.',
+    },
   ],
 };
