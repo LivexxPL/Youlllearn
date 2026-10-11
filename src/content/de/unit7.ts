@@ -815,5 +815,238 @@ export const unit7: Unit = {
       followUp:
         'Opisz na głos trzy rzeczy w swoim pokoju: raz z der / die / das (der alte Stuhl), raz z ein / eine (ein alter Stuhl). Za około 10 minut zrób krótką powtórkę.',
     },
+    {
+      id: 'de.l28',
+      title: 'Czyje to jest?',
+      subtitle: 'Das Auto meines Vaters',
+      objective: 'Powiesz, do kogo coś należy (des Mannes, der Frau, Annas Handy), i użyjesz przyimków wegen, während, trotz i statt — a w rozmowie potocznego von.',
+      level: 'A2+',
+      minutes: 12,
+      items: [
+        word('wessen', 'wessen', 'czyj; czyja; czyje', {
+          pos: 'q',
+          plAlts: ['czyj?', 'czyja?', 'czyje?'],
+          note: 'Pytanie o właściciela: Wessen Schlüssel ist das? W mowie częściej: Wem gehört der Schlüssel?',
+        }),
+        verb('gehoeren', 'gehören', 'należeć (do kogoś)', {
+          plAlts: ['należeć'],
+          note: 'Z celownikiem: Das Buch gehört mir. — Ta książka należy do mnie. Wem gehört das? — Do kogo to należy?',
+        }),
+        word('wegen', 'wegen', 'z powodu', {
+          pos: 'prep',
+          plAlts: ['przez', 'ze względu na'],
+          note: 'Z dopełniaczem: wegen des Regens — z powodu deszczu. W mowie często z celownikiem: wegen dem Regen.',
+        }),
+        word('waehrend', 'während', 'podczas; w czasie', { pos: 'prep', plAlts: ['w trakcie'], note: 'Z dopełniaczem: während des Urlaubs — podczas urlopu.' }),
+        word('trotz', 'trotz', 'mimo; pomimo', {
+          pos: 'prep',
+          plAlts: ['wbrew'],
+          note: 'Z dopełniaczem: trotz des Regens — mimo deszczu. Nie myl z trotzdem (mimo to) — to przysłówek.',
+        }),
+        word('statt', 'statt', 'zamiast', { pos: 'prep', alts: ['anstatt'], note: 'Z dopełniaczem: statt des Busses — zamiast autobusu. Dłuższa forma: anstatt.' }),
+        noun('der-regen', 'der Regen', 'deszcz', 'm', { note: 'Dopełniacz: des Regens. Pada deszcz — es regnet.' }),
+        noun('der-schluessel', 'der Schlüssel', 'klucz', 'm', { plural: 'die Schlüssel', note: 'Liczba mnoga bez zmian: die Schlüssel — klucze.' }),
+        noun('die-tasche', 'die Tasche', 'torba; torebka; kieszeń', 'f', { plural: 'die Taschen', plAlts: ['torba', 'torebka', 'kieszeń'] }),
+        noun('das-handy', 'das Handy', 'komórka; telefon komórkowy', 'n', {
+          plural: 'die Handys',
+          plAlts: ['komórka', 'telefon komórkowy', 'telefon', 'smartfon'],
+          note: 'Czytaj „hendi”. Wygląda na angielskie słowo, ale Anglicy go nie używają — to niemiecki wynalazek.',
+        }),
+        noun('die-hauptstadt', 'die Hauptstadt', 'stolica', 'f', { plural: 'die Hauptstädte', note: 'Wien ist die Hauptstadt Österreichs. — Wiedeń jest stolicą Austrii.' }),
+        noun('der-geburtstag', 'der Geburtstag', 'urodziny', 'm', {
+          plural: 'die Geburtstage',
+          note: 'Po niemiecku liczba pojedyncza: der Geburtstag = urodziny. Alles Gute zum Geburtstag! — Wszystkiego najlepszego z okazji urodzin!',
+        }),
+      ],
+      sentences: [
+        s('28-1', 'Das ist das Auto meines Vaters.', 'To jest samochód mojego taty.', {
+          alts: ['Das ist das Auto von meinem Vater.'],
+          plAlts: ['To samochód mojego taty.', 'To jest samochód mojego ojca.', 'To samochód mojego ojca.'],
+        }),
+        s('28-2', 'Wessen Schlüssel ist das?', 'Czyj to klucz?', { alts: ['Wem gehört der Schlüssel?'], plAlts: ['Czyj jest ten klucz?', 'Do kogo należy ten klucz?'] }),
+        s('28-3', 'Das ist Annas Handy.', 'To jest komórka Anny.', {
+          alts: ['Das ist das Handy von Anna.'],
+          plAlts: ['To komórka Anny.', 'To jest telefon Anny.', 'To telefon Anny.'],
+        }),
+        s('28-4', 'Die Tasche gehört meiner Schwester.', 'Ta torba należy do mojej siostry.', {
+          plAlts: ['Torba należy do mojej siostry.', 'Ta torebka należy do mojej siostry.', 'Torebka należy do mojej siostry.'],
+        }),
+        s('28-5', 'Wegen des Regens bleiben wir heute zu Hause.', 'Z powodu deszczu zostajemy dziś w domu.', {
+          alts: ['Wir bleiben heute wegen des Regens zu Hause.', 'Wegen dem Regen bleiben wir heute zu Hause.'],
+          plAlts: ['Przez deszcz zostajemy dziś w domu.', 'Z powodu deszczu zostajemy dzisiaj w domu.', 'Z powodu deszczu zostaniemy dziś w domu.'],
+        }),
+        s('28-6', 'Während des Urlaubs habe ich viel gelesen.', 'Podczas urlopu dużo czytałem.', {
+          alts: ['Ich habe während des Urlaubs viel gelesen.'],
+          plAlts: ['Podczas urlopu dużo czytałam.', 'W czasie urlopu dużo czytałem.', 'W czasie urlopu dużo czytałam.', 'Na urlopie dużo czytałem.', 'Na urlopie dużo czytałam.'],
+        }),
+        s('28-7', 'Trotz des Regens haben wir den Geburtstag meiner Oma im Garten gefeiert.', 'Mimo deszczu świętowaliśmy urodziny babci w ogrodzie.', {
+          alts: ['Wir haben trotz des Regens den Geburtstag meiner Oma im Garten gefeiert.'],
+          plAlts: [
+            'Mimo deszczu świętowaliśmy urodziny mojej babci w ogrodzie.',
+            'Pomimo deszczu świętowaliśmy urodziny babci w ogrodzie.',
+            'Mimo deszczu obchodziliśmy urodziny babci w ogrodzie.',
+            'Mimo deszczu urodziny babci świętowaliśmy w ogrodzie.',
+          ],
+          accent: 'de-AT',
+        }),
+        s('28-8', 'Statt des Busses nehme ich heute die U-Bahn.', 'Zamiast autobusu jadę dziś metrem.', {
+          alts: ['Ich nehme heute statt des Busses die U-Bahn.'],
+          plAlts: ['Dziś zamiast autobusu jadę metrem.', 'Zamiast autobusu wezmę dziś metro.', 'Dziś zamiast autobusem jadę metrem.'],
+        }),
+        s('28-9', 'Wien ist die Hauptstadt Österreichs.', 'Wiedeń jest stolicą Austrii.', { plAlts: ['Wiedeń to stolica Austrii.'], accent: 'de-AT' }),
+      ],
+      grammar: [
+        {
+          id: 'de.g.genitiv',
+          title: 'Dopełniacz: des Mannes, der Frau, Annas',
+          body: [
+            'Dopełniacz (**Genitiv**) odpowiada na pytanie [[wessen?]] (czyj?) i — tak jak po polsku — stoi zwykle **za** rzeczownikiem, który określa: [[das Auto meines Vaters]] (samochód mojego taty), [[die Tasche der Frau]] (torba tej kobiety).',
+            'Rodzajnik: der i das → **des**, die i liczba mnoga → **der**. Rzeczowniki rodzaju męskiego i nijakiego dostają **-s**, a krótkie, jednosylabowe zwykle **-es**: [[des Mannes]], [[des Kindes]], [[meines Vaters]], [[des Urlaubs]]. Rodzaj żeński i liczba mnoga nie zmieniają rzeczownika: [[der Frau]], [[meiner Mutter]], [[der Eltern]].',
+            'Przy **imionach** dodajemy samo **-s** i stawiamy je **przed** rzeczownikiem — bez apostrofu i bez rodzajnika: [[Annas Handy]], [[Peters Wohnung]]. Nazwy krajów i miast też dostają -s, ale zwykle stoją za rzeczownikiem: [[die Hauptstadt Österreichs]].',
+          ],
+          table: {
+            head: ['', 'der (m.)', 'die (ż.)', 'das (n.)', 'l. mn.'],
+            rows: [
+              ['mianownik', 'der Mann', 'die Frau', 'das Kind', 'die Eltern'],
+              ['dopełniacz', 'des Mannes', 'der Frau', 'des Kindes', 'der Eltern'],
+              ['z mein / ein', 'meines Vaters', 'meiner Mutter', 'eines Kindes', 'meiner Eltern'],
+            ],
+          },
+          contrast:
+            'Polski dopełniacz jest wszechobecny: „nie mam czasu”, „szklanka wody”, „dom ojca”. Niemiecki Genitiv jest dużo węższy — to głównie przynależność (das Haus des Vaters) i kilka przyimków. W zdaniach typu „nie mam czasu” czy „szklanka wody” Niemcy go nie używają: Ich habe keine Zeit. Ein Glas Wasser.',
+        },
+        {
+          id: 'de.g.genitiv-praep',
+          title: 'Wegen, während, trotz, statt — i potoczne von',
+          body: [
+            'Cztery częste przyimki łączą się z dopełniaczem: [[wegen]] (z powodu), [[während]] (podczas), [[trotz]] (mimo), [[statt]] (zamiast): [[wegen des Regens]], [[während des Urlaubs]], [[trotz des Regens]], [[statt des Busses]].',
+            'W swobodnej mowie po wegen, trotz i statt często słychać **celownik**: [[wegen dem Regen]]. W piśmie i na egzaminie trzymaj się dopełniacza.',
+            'Zamiast dopełniacza przynależności w mowie bardzo często używa się **von + celownik**: [[das Auto von meinem Vater]], [[das Handy von Anna]]. O właściciela pytamy wtedy: [[Wem gehört das Handy?]] (Do kogo należy ta komórka?) — gehören łączy się z celownikiem.',
+          ],
+          table: {
+            head: ['Przyimek', 'Znaczenie', 'Przykład'],
+            rows: [
+              ['wegen', 'z powodu', 'wegen des Regens'],
+              ['während', 'podczas', 'während des Urlaubs'],
+              ['trotz', 'mimo', 'trotz des Regens'],
+              ['statt', 'zamiast', 'statt des Busses'],
+              ['von + celownik', 'potocznie zamiast dopełniacza', 'das Auto von meinem Vater'],
+            ],
+          },
+          contrast:
+            'Tu Polacy mają łatwo: „z powodu”, „podczas”, „mimo” i „zamiast” też wymagają dopełniacza — z powodu deszczu, podczas urlopu, mimo deszczu, zamiast autobusu. Wystarczy pamiętać niemiecki rodzajnik: des albo der.',
+        },
+      ],
+      exercises: [
+        {
+          type: 'gap',
+          id: 'de.x.28-1',
+          concept: 'de.g.genitiv',
+          sentence: 'Das ist das Auto ___ Vaters.',
+          pl: 'To samochód mojego taty.',
+          options: ['mein', 'meinem', 'meines'],
+          answer: 'meines',
+          explanation: 'Dopełniacz rodzaju męskiego: meines Vaters (zaimek z -es, rzeczownik z -s). Meinem to celownik.',
+        },
+        {
+          type: 'gap',
+          id: 'de.x.28-2',
+          concept: 'de.g.genitiv',
+          sentence: 'Das ist die Tasche ___ Frau.',
+          pl: 'To torba tej kobiety.',
+          options: ['der', 'die', 'des'],
+          answer: 'der',
+          explanation: 'Rodzaj żeński w dopełniaczu: der Frau (rzeczownik bez zmian). Des pasuje do rodzaju męskiego i nijakiego.',
+        },
+        {
+          type: 'choice',
+          id: 'de.x.28-3',
+          concept: 'de.g.genitiv',
+          prompt: 'Jak powiesz: „To jest komórka Anny”?',
+          options: ['Das ist Anna’s Handy.', 'Das ist Annas Handy.', 'Das ist das Handy Anna.'],
+          answer: 1,
+          explanation: 'Imię + -s, bez apostrofu i bez rodzajnika: Annas Handy. Apostrof dostają tylko imiona zakończone na s, x lub z: Max’ Handy.',
+        },
+        {
+          type: 'gap',
+          id: 'de.x.28-4',
+          concept: 'de.g.genitiv-praep',
+          sentence: '___ des Regens bleiben wir zu Hause.',
+          pl: 'Z powodu deszczu zostajemy w domu.',
+          options: ['Wegen', 'Trotz', 'Statt'],
+          answer: 'Wegen',
+          explanation: 'Z powodu = wegen. Trotz znaczy „mimo”, a statt — „zamiast”.',
+        },
+        {
+          type: 'gap',
+          id: 'de.x.28-5',
+          concept: 'de.g.genitiv-praep',
+          sentence: 'Während ___ Urlaubs habe ich viel gelesen.',
+          pl: 'Podczas urlopu dużo czytałem / czytałam.',
+          options: ['der', 'dem', 'des'],
+          answer: 'des',
+          explanation: 'Während łączy się z dopełniaczem: der Urlaub → des Urlaubs.',
+        },
+        {
+          type: 'choice',
+          id: 'de.x.28-6',
+          concept: 'de.g.genitiv-praep',
+          prompt: 'Które zdanie jest potoczne — częstsze w rozmowie niż w piśmie?',
+          options: ['Wegen dem Regen bleiben wir zu Hause.', 'Wegen des Regens bleiben wir zu Hause.', 'Wir bleiben wegen des Regens zu Hause.'],
+          answer: 0,
+          explanation: 'Wegen + celownik (wegen dem Regen) to forma potoczna. W piśmie: wegen des Regens.',
+        },
+      ],
+      dialogue: {
+        id: 'de.d.28',
+        title: 'Czyje to jest?',
+        context: 'Po imprezie urodzinowej w mieszkaniu Jany zostało kilka rzeczy. Jana i jej współlokator Tim sprzątają i zastanawiają się, do kogo należą.',
+        speakers: {
+          T: { name: 'Tim', voice: 'b', accent: 'de-DE' },
+          J: { name: 'Jana', voice: 'a', accent: 'de-DE' },
+        },
+        lines: [
+          { speaker: 'T', text: 'Das war ein schöner Geburtstag! Aber schau mal: Wessen Tasche ist das?', pl: 'To były piękne urodziny! Ale zobacz: czyja to torba?' },
+          { speaker: 'J', text: 'Das ist die Tasche von Lisa, der Schwester meines Freundes.', pl: 'To torba Lisy, siostry mojego chłopaka.' },
+          { speaker: 'T', text: 'Und das Handy hier? Gehört es auch Lisa?', pl: 'A ta komórka? Też należy do Lisy?' },
+          { speaker: 'J', text: 'Nein, das ist Pauls Handy. Ich schreibe seiner Freundin.', pl: 'Nie, to komórka Paula. Napiszę do jego dziewczyny.' },
+          { speaker: 'T', text: 'Und wessen Schlüssel sind das? Sie waren unter dem Sofa.', pl: 'A czyje są te klucze? Były pod kanapą.' },
+          { speaker: 'J', text: 'Oh, das sind meine! Danke, Tim!', pl: 'O, to moje! Dzięki, Tim!' },
+          { speaker: 'T', text: 'Gern. Gehen wir trotz des Regens noch einkaufen?', pl: 'Nie ma sprawy. Idziemy mimo deszczu jeszcze na zakupy?' },
+          { speaker: 'J', text: 'Lieber nicht. Heute essen wir Pizza zu Hause.', pl: 'Lepiej nie. Dziś zjemy pizzę w domu.' },
+        ],
+        questions: [
+          {
+            id: 'de.d.28-q1',
+            prompt: 'Do kogo należy torba?',
+            options: ['Do Jany', 'Do Lisy, siostry chłopaka Jany', 'Do dziewczyny Paula'],
+            answer: 1,
+            explanation: '„Das ist die Tasche von Lisa, der Schwester meines Freundes.”',
+          },
+          {
+            id: 'de.d.28-q2',
+            prompt: 'Gdzie były klucze Jany?',
+            options: ['Pod kanapą', 'W torbie Lisy', 'W kuchni'],
+            answer: 0,
+            explanation: '„Sie waren unter dem Sofa.” — a Jana odpowiada: „Oh, das sind meine!”',
+          },
+          {
+            id: 'de.d.28-q3',
+            prompt: 'Co postanawiają na koniec?',
+            options: ['Iść mimo deszczu na zakupy', 'Oddać komórkę Paulowi', 'Zostać w domu i zjeść pizzę'],
+            answer: 2,
+            explanation: '„Lieber nicht. Heute essen wir Pizza zu Hause.”',
+          },
+        ],
+      },
+      summary: [
+        'Dopełniacz (wessen? — czyj?): des Mannes, des Kindes, der Frau, meines Vaters, meiner Mutter.',
+        'Imiona i kraje: Annas Handy, die Hauptstadt Österreichs.',
+        'Z dopełniaczem: wegen (z powodu), während (podczas), trotz (mimo), statt (zamiast).',
+        'Potocznie: das Auto von meinem Vater, wegen dem Regen; Wem gehört das? + celownik.',
+      ],
+      followUp:
+        'Rozejrzyj się wokół i nazwij na głos trzy rzeczy, które należą do kogoś z rodziny: das Handy meiner Schwester, der Schlüssel meines Vaters… Za około 10 minut zrób krótką powtórkę.',
+    },
   ],
 };
