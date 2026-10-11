@@ -393,4 +393,55 @@ export const stories: Story[] = [
       },
     ],
   },
+  {
+    id: 'es.st.11',
+    title: 'Pociąg, który odjechał',
+    afterLesson: 'es.l33',
+    stage: 3,
+    context: 'Ernesto, który od lat mieszka w Walencji, opowiada, jak czterdzieści lat temu spóźnił się na pociąg — i co z tego wynikło.',
+    lines: [
+      { text: 'Hace cuarenta años, yo vivía en Sevilla y trabajaba en un hotel.', pl: 'Czterdzieści lat temu mieszkałem w Sewilli i pracowałem w hotelu.' },
+      {
+        text: 'Un día de agosto, cuando llegué a la estación, el tren para Madrid ya había salido.',
+        pl: 'Pewnego sierpniowego dnia, kiedy dotarłem na dworzec, pociąg do Madrytu już odjechał.',
+      },
+      { text: 'En la estación había una chica que también había perdido el tren.', pl: 'Na dworcu była dziewczyna, która też spóźniła się na pociąg.' },
+      { text: 'Se llamaba Lucía y era de Valencia. Nunca había estado en Sevilla.', pl: 'Miała na imię Lucía i była z Walencji. Nigdy wcześniej nie była w Sewilli.' },
+      { text: 'Había otro tren a las nueve; por eso fuimos a tomar un café.', pl: 'Następny pociąg był o dziewiątej, więc poszliśmy na kawę.' },
+      {
+        text: 'Hablamos de todo: de libros, de música, de lo que queríamos hacer en el futuro.',
+        pl: 'Rozmawialiśmy o wszystkim: o książkach, o muzyce, o tym, co chcieliśmy robić w przyszłości.',
+      },
+      { text: 'Cuando llegó el tren, yo ya sabía que quería verla otra vez.', pl: 'Kiedy przyjechał pociąg, już wiedziałem, że chcę ją znowu zobaczyć.' },
+      {
+        text: 'Dos años después, Lucía y yo vivíamos en la ciudad donde ella había nacido.',
+        pl: 'Dwa lata później mieszkaliśmy z Lucíą w mieście, w którym się urodziła.',
+      },
+      { text: 'A menudo pienso: ¿qué haría si pudiera volver a ese día?', pl: 'Często myślę: co bym zrobił, gdybym mógł wrócić do tamtego dnia?' },
+      { text: 'Es fácil: perdería el tren otra vez.', pl: 'To proste: znowu spóźniłbym się na pociąg.' },
+    ],
+    questions: [
+      {
+        id: 'es.st.11-q1',
+        prompt: 'Dlaczego Ernesto nie pojechał do Madrytu?',
+        options: ['Bo pociąg już odjechał', 'Bo nie miał biletu', 'Bo musiał pracować w hotelu'],
+        answer: 0,
+        explanation: '„Cuando llegué a la estación, el tren para Madrid ya había salido.” — pluscuamperfecto: pociąg odjechał, zanim Ernesto dotarł na dworzec.',
+      },
+      {
+        id: 'es.st.11-q2',
+        prompt: 'Kim była Lucía?',
+        options: ['Koleżanką z pracy', 'Dziewczyną z Walencji, która też spóźniła się na pociąg', 'Siostrą Ernesta'],
+        answer: 1,
+        explanation: '„En la estación había una chica que también había perdido el tren… Se llamaba Lucía y era de Valencia.”',
+      },
+      {
+        id: 'es.st.11-q3',
+        prompt: 'Co Ernesto zrobiłby, gdyby mógł wrócić do tamtego dnia?',
+        options: ['Przyszedłby wcześniej na dworzec', 'Znowu spóźniłby się na pociąg', 'Pojechałby samochodem'],
+        answer: 1,
+        explanation: '„Perdería el tren otra vez.” — condicional: zrobiłby wszystko tak samo.',
+      },
+    ],
+  },
 ];
