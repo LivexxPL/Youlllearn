@@ -677,5 +677,299 @@ export const unit8: Unit = {
       followUp:
         'Wybierz temat — miasto czy wieś, samochód czy autobus — i podaj na głos dwa argumenty za (weil, außerdem) i jeden przeciw (obwohl albo trotzdem). Za około 10 minut zrób krótką powtórkę.',
     },
+    {
+      id: 'de.l32',
+      title: 'Jak to się robi?',
+      subtitle: 'Wie wird das gemacht?',
+      objective: 'Opiszesz, jak coś się robi i kiedy powstało — stroną bierną (Das Brot wird gebacken, Die Universität wurde 1365 gegründet, Das Handy muss repariert werden) albo krócej z man.',
+      level: 'B1',
+      minutes: 13,
+      items: [
+        verb('bauen', 'bauen', 'budować; zbudować', {
+          plAlts: ['budować', 'zbudować', 'wybudować'],
+          note: 'Das Haus wird gebaut. — Dom jest budowany. Das Haus wurde 1900 gebaut. — Dom zbudowano w 1900 roku.',
+        }),
+        verb('gruenden', 'gründen', 'zakładać; założyć', {
+          plAlts: ['założyć', 'zakładać'],
+          note: 'Firmę, miasto, uniwersytet: Die Firma wurde 1990 gegründet. — Firmę założono w 1990 roku.',
+        }),
+        verb('reparieren', 'reparieren', 'naprawiać; naprawić', {
+          plAlts: ['naprawić', 'naprawiać', 'reperować'],
+          note: 'Imiesłów bez ge- (jak wszystkie czasowniki na -ieren): repariert. Das muss repariert werden. — To trzeba naprawić.',
+        }),
+        verb('herstellen', 'herstellen', 'produkować; wytwarzać', {
+          plAlts: ['wytwarzać', 'produkować', 'wyprodukować'],
+          note: 'Rozdzielny: Die Firma stellt Schuhe her. Strona bierna: Hier werden Schuhe hergestellt. Synonim: produzieren.',
+        }),
+        verb('erfinden', 'erfinden', 'wynaleźć; wymyślić', {
+          plAlts: ['wynaleźć', 'wynajdywać', 'wymyślić'],
+          note: 'Nieregularny, Perfekt: hat erfunden. Das Telefon wurde im 19. Jahrhundert erfunden. — Telefon wynaleziono w XIX wieku.',
+        }),
+        verb('verkaufen', 'verkaufen', 'sprzedawać; sprzedać', {
+          plAlts: ['sprzedać', 'sprzedawać'],
+          note: 'Przeciwieństwo: kaufen (kupować). Das Haus wurde verkauft. — Dom został sprzedany.',
+        }),
+        verb('backen', 'backen', 'piec; upiec', {
+          plAlts: ['upiec', 'piec'],
+          note: 'Odmiana: du bäckst, er bäckt (coraz częściej: backst, backt); Perfekt: hat gebacken. Das Brot wird frisch gebacken.',
+        }),
+        verb('uebersetzen', 'übersetzen', 'tłumaczyć; przetłumaczyć', {
+          plAlts: ['przetłumaczyć', 'tłumaczyć'],
+          note: 'Nierozdzielny, akcent na -setz-: Ich übersetze, ich habe übersetzt. Ins Polnische übersetzen — przetłumaczyć na polski.',
+        }),
+        noun('die-fabrik', 'die Fabrik', 'fabryka', 'f', {
+          plural: 'die Fabriken',
+          note: 'Akcent na ostatnią sylabę: fa-BRIK. In der Fabrik arbeiten — pracować w fabryce.',
+        }),
+        noun('die-firma', 'die Firma', 'firma', 'f', {
+          plural: 'die Firmen',
+          plAlts: ['przedsiębiorstwo'],
+          note: 'Liczba mnoga: die Firmen. Bei einer Firma arbeiten — pracować w firmie.',
+        }),
+        noun('das-jahrhundert', 'das Jahrhundert', 'wiek; stulecie', 'n', {
+          plural: 'die Jahrhunderte',
+          plAlts: ['wiek', 'stulecie'],
+          note: 'im 19. Jahrhundert (czytaj: im neunzehnten Jahrhundert) — w XIX wieku. Niemcy zapisują wiek cyfrą arabską z kropką.',
+        }),
+        noun('die-kirche', 'die Kirche', 'kościół', 'f', {
+          plural: 'die Kirchen',
+          note: 'Uwaga na rodzaj: kościół jest męski, a die Kirche — żeńska. In die Kirche gehen — iść do kościoła.',
+        }),
+        noun('die-bruecke', 'die Brücke', 'most', 'f', {
+          plural: 'die Brücken',
+          note: 'Też żeńska, choć „most” jest męski: über die Brücke gehen — przejść przez most.',
+        }),
+        noun('das-gebaeude', 'das Gebäude', 'budynek', 'n', {
+          plural: 'die Gebäude',
+          note: 'Liczba mnoga bez zmian: die Gebäude. Ein altes Gebäude — stary budynek.',
+        }),
+      ],
+      sentences: [
+        s('32-1', 'Das Brot wird hier jeden Morgen frisch gebacken.', 'Chleb jest tu codziennie rano pieczony na świeżo.', {
+          alts: ['Hier wird das Brot jeden Morgen frisch gebacken.', 'Das Brot wird jeden Morgen hier frisch gebacken.'],
+          plAlts: [
+            'Chleb jest tu pieczony codziennie rano.',
+            'Chleb jest tu pieczony każdego ranka.',
+            'Chleb piecze się tu codziennie rano na świeżo.',
+            'Tutaj chleb jest codziennie rano pieczony na świeżo.',
+          ],
+        }),
+        s('32-2', 'In dieser Fabrik werden Autos hergestellt.', 'W tej fabryce produkuje się samochody.', {
+          alts: ['In dieser Fabrik stellt man Autos her.'],
+          plAlts: ['W tej fabryce produkowane są samochody.', 'W tej fabryce są produkowane samochody.', 'W tej fabryce produkuje się auta.', 'Ta fabryka produkuje samochody.'],
+        }),
+        s('32-3', 'Die Universität Wien wurde 1365 gegründet.', 'Uniwersytet Wiedeński został założony w 1365 roku.', {
+          tts: 'Die Universität Wien wurde dreizehnhundertfünfundsechzig gegründet.',
+          alts: ['Die Uni Wien wurde 1365 gegründet.'],
+          plAlts: [
+            'Uniwersytet Wiedeński założono w 1365 roku.',
+            'Uniwersytet Wiedeński powstał w 1365 roku.',
+            'Uniwersytet w Wiedniu założono w 1365 roku.',
+            'Uniwersytet w Wiedniu został założony w 1365 roku.',
+          ],
+          note: 'Przed rokiem nie ma przyimka: 1365 — w 1365 roku (albo: im Jahr 1365). Rok czytamy w setkach: dreizehnhundertfünfundsechzig.',
+          accent: 'de-AT',
+        }),
+        s('32-4', 'Das Riesenrad im Prater wurde 1897 gebaut.', 'Diabelski młyn na Praterze zbudowano w 1897 roku.', {
+          tts: 'Das Riesenrad im Prater wurde achtzehnhundertsiebenundneunzig gebaut.',
+          plAlts: [
+            'Diabelski młyn w Praterze zbudowano w 1897 roku.',
+            'Diabelski młyn na Praterze został zbudowany w 1897 roku.',
+            'Diabelski młyn w Praterze został zbudowany w 1897 roku.',
+          ],
+          note: 'Das Riesenrad — diabelski młyn w wiedeńskim parku Prater, jeden z symboli Wiednia.',
+          accent: 'de-AT',
+        }),
+        s('32-5', 'Das alte Gebäude wurde an eine Firma verkauft.', 'Ten stary budynek sprzedano firmie.', {
+          plAlts: ['Stary budynek sprzedano firmie.', 'Stary budynek został sprzedany firmie.', 'Ten stary budynek został sprzedany firmie.', 'Stary budynek sprzedano pewnej firmie.'],
+          note: 'verkaufen an + biernik — sprzedać komuś: an eine Firma.',
+        }),
+        s('32-6', 'Mein Handy muss repariert werden.', 'Moją komórkę trzeba naprawić.', {
+          alts: ['Man muss mein Handy reparieren.'],
+          plAlts: ['Moja komórka musi zostać naprawiona.', 'Mój telefon trzeba naprawić.', 'Mój telefon musi zostać naprawiony.', 'Trzeba naprawić moją komórkę.'],
+        }),
+        s('32-7', 'Das Buch wurde ins Polnische übersetzt.', 'Ta książka została przetłumaczona na polski.', {
+          plAlts: [
+            'Książka została przetłumaczona na polski.',
+            'Książkę przetłumaczono na polski.',
+            'Tę książkę przetłumaczono na język polski.',
+            'Ta książka została przetłumaczona na język polski.',
+          ],
+          note: 'ins Polnische, ins Deutsche — na (język) polski, na niemiecki.',
+        }),
+        s('32-8', 'Das Haus wurde von meinem Opa gebaut.', 'Ten dom zbudował mój dziadek.', {
+          plAlts: ['Dom zbudował mój dziadek.', 'Ten dom wybudował mój dziadek.', 'Dom został zbudowany przez mojego dziadka.', 'Ten dom został zbudowany przez mojego dziadka.'],
+          note: 'Wykonawca: von + celownik (von meinem Opa). Po polsku zwykle lepiej brzmi strona czynna: zbudował go mój dziadek.',
+        }),
+        s('32-9', 'Man hat die Brücke im Sommer repariert.', 'Most naprawiono latem.', {
+          alts: ['Die Brücke wurde im Sommer repariert.', 'Im Sommer hat man die Brücke repariert.'],
+          plAlts: ['Latem naprawiono most.', 'Most naprawiono w lecie.', 'Most został naprawiony latem.', 'W lecie naprawiono most.'],
+        }),
+      ],
+      grammar: [
+        {
+          id: 'de.g.passiv',
+          title: 'Strona bierna: wird gebaut, wurde gebaut',
+          body: [
+            'Stroną bierną (**Passiv**) mówimy o tym, **co się dzieje** z rzeczą, a nie kto to robi: [[Das Brot wird gebacken.]] (Chleb jest pieczony.) Tworzymy ją z **werden** i imiesłowu (Partizip II) na końcu zdania.',
+            'W czasie teraźniejszym werden odmieniamy normalnie: [[Das Brot wird jeden Morgen gebacken.]] [[In dieser Fabrik werden Autos hergestellt.]] O przeszłości najczęściej mówimy formą **wurde / wurden** (Präteritum od werden): [[Die Universität Wien wurde 1365 gegründet.]] [[Die Häuser wurden im 19. Jahrhundert gebaut.]]',
+            'Kto to zrobił? Wykonawcę dodajemy przez **von + celownik**: [[Das Haus wurde von meinem Opa gebaut.]] Najczęściej jednak wykonawca jest nieważny albo nieznany — i właśnie dlatego wybieramy stronę bierną: [[Die Kirche wurde im 14. Jahrhundert gebaut.]]',
+          ],
+          table: {
+            head: ['Osoba', 'teraz: werden', 'przeszłość: wurde'],
+            rows: [
+              ['ich', 'werde gefragt', 'wurde gefragt'],
+              ['du', 'wirst gefragt', 'wurdest gefragt'],
+              ['er / sie / es', 'wird gebaut', 'wurde gebaut'],
+              ['wir', 'werden gefragt', 'wurden gefragt'],
+              ['ihr', 'werdet gefragt', 'wurdet gefragt'],
+              ['sie / Sie', 'werden gebaut', 'wurden gebaut'],
+            ],
+          },
+          contrast:
+            'Po polsku stronę bierną tworzymy z „być” albo „zostać”: dom jest budowany, dom został zbudowany. Po niemiecku służy do tego werden — nie sein! Das Haus wird gebaut (jest budowany), das Haus wurde gebaut (został zbudowany). Polskie formy na -no i -to („zbudowano”, „założono”) też zwykle oddamy stroną bierną: Die Universität wurde 1365 gegründet.',
+        },
+        {
+          id: 'de.g.passiv-modal-man',
+          title: 'Muss repariert werden; man zamiast strony biernej',
+          body: [
+            'Z czasownikiem modalnym strona bierna kończy się na **imiesłów + werden**, a modalny stoi na 2. miejscu: [[Mein Handy muss repariert werden.]] (Moją komórkę trzeba naprawić.) [[Das kann nicht gemacht werden.]] (Tego nie da się zrobić.)',
+            'W mowie zamiast strony biernej często wybieramy **man** z czasownikiem w stronie czynnej: [[Man hat die Brücke repariert.]] = [[Die Brücke wurde repariert.]] [[Hier spricht man Deutsch.]] = [[Hier wird Deutsch gesprochen.]]',
+            'Nie myl trzech ról werden: [[Es wird kalt.]] (robi się zimno — werden jako „stawać się”), [[Ich werde arbeiten.]] (czas przyszły: werden + bezokolicznik), [[Die Brücke wird repariert.]] (strona bierna: werden + imiesłów).',
+          ],
+          table: {
+            head: ['', 'Strona bierna', 'Z man'],
+            rows: [
+              ['teraz', 'Hier wird Brot gebacken.', 'Hier backt man Brot.'],
+              ['przeszłość', 'Die Brücke wurde repariert.', 'Man hat die Brücke repariert.'],
+              ['z modalnym', 'Das Handy muss repariert werden.', 'Man muss das Handy reparieren.'],
+            ],
+          },
+          contrast:
+            'Polskie „trzeba naprawić”, „da się zrobić”, „naprawiono” to dokładnie te sytuacje, w których Niemiec powie muss repariert werden, kann gemacht werden albo użyje man: Man hat die Brücke repariert. Szyk jest inny niż po polsku: modalny na 2. miejscu, a na samym końcu imiesłów + werden.',
+        },
+      ],
+      exercises: [
+        {
+          type: 'gap',
+          id: 'de.x.32-1',
+          concept: 'de.g.passiv',
+          sentence: 'Das Brot ___ jeden Morgen gebacken.',
+          pl: 'Chleb jest pieczony codziennie rano.',
+          options: ['wird', 'ist', 'hat'],
+          answer: 'wird',
+          explanation: 'Strona bierna to werden + imiesłów. Po polsku „jest pieczony”, ale po niemiecku nie sein, tylko werden: das Brot wird gebacken.',
+        },
+        {
+          type: 'gap',
+          id: 'de.x.32-2',
+          concept: 'de.g.passiv',
+          sentence: 'Die Universität ___ 1365 gegründet.',
+          pl: 'Uniwersytet założono w 1365 roku.',
+          options: ['wird', 'wurde', 'werden'],
+          answer: 'wurde',
+          explanation: 'Rok 1365 to przeszłość, więc Präteritum od werden: wurde gegründet.',
+        },
+        {
+          type: 'gap',
+          id: 'de.x.32-3',
+          concept: 'de.g.passiv',
+          sentence: 'In dieser Fabrik ___ Autos hergestellt.',
+          pl: 'W tej fabryce produkuje się samochody.',
+          options: ['wird', 'werden', 'wurde'],
+          answer: 'werden',
+          explanation: 'Podmiotem są Autos (liczba mnoga), a mowa o teraźniejszości — więc werden.',
+        },
+        {
+          type: 'choice',
+          id: 'de.x.32-4',
+          concept: 'de.g.passiv',
+          prompt: 'Jak powiesz stroną bierną: „Ten dom zbudował mój dziadek”?',
+          options: ['Das Haus wurde von meinem Opa gebaut.', 'Das Haus wurde mit meinem Opa gebaut.', 'Das Haus hat von meinem Opa gebaut.'],
+          answer: 0,
+          explanation: 'Wykonawcę podajemy przez von + celownik: von meinem Opa. Mit znaczy „razem z”, a strony biernej nie tworzymy z haben.',
+        },
+        {
+          type: 'gap',
+          id: 'de.x.32-5',
+          concept: 'de.g.passiv-modal-man',
+          sentence: 'Mein Handy muss repariert ___.',
+          pl: 'Moją komórkę trzeba naprawić.',
+          options: ['werden', 'wird', 'wurde'],
+          answer: 'werden',
+          explanation: 'Z czasownikiem modalnym na końcu stoi imiesłów + werden w bezokoliczniku: muss repariert werden.',
+        },
+        {
+          type: 'choice',
+          id: 'de.x.32-6',
+          concept: 'de.g.passiv-modal-man',
+          prompt: 'Które zdanie znaczy to samo co „Hier wird Deutsch gesprochen”?',
+          options: ['Hier spricht man Deutsch.', 'Hier spricht Deutsch.', 'Hier wird man Deutsch.'],
+          answer: 0,
+          explanation: 'Man + czasownik w stronie czynnej to częsta alternatywa dla strony biernej: Hier spricht man Deutsch — tu mówi się po niemiecku.',
+        },
+        {
+          type: 'choice',
+          id: 'de.x.32-7',
+          concept: 'de.g.passiv-modal-man',
+          prompt: 'W którym zdaniu werden tworzy stronę bierną?',
+          options: ['Es wird kalt.', 'Ich werde morgen arbeiten.', 'Die Brücke wird repariert.'],
+          answer: 2,
+          explanation: 'Werden + imiesłów (repariert) to strona bierna. Es wird kalt znaczy „robi się zimno”, a werde + bezokolicznik to czas przyszły.',
+        },
+      ],
+      dialogue: {
+        id: 'de.d.32',
+        title: 'W starej piekarni',
+        context: 'Kuba pisze artykuł do gazetki studenckiej o najstarszej piekarni w Salzburgu. Rozmawia z właścicielką, panią Moser.',
+        speakers: {
+          K: { name: 'Kuba', voice: 'b', accent: 'de-AT' },
+          M: { name: 'Frau Moser', voice: 'a', accent: 'de-AT' },
+        },
+        lines: [
+          { speaker: 'K', text: 'Frau Moser, wann wurde Ihre Bäckerei gegründet?', pl: 'Pani Moser, kiedy założono pani piekarnię?' },
+          { speaker: 'M', text: 'Sie wurde 1920 von meinem Opa gegründet.', pl: 'Założył ją mój dziadek w 1920 roku.' },
+          { speaker: 'K', text: 'Und ist das Gebäude auch so alt?', pl: 'A budynek też jest taki stary?' },
+          { speaker: 'M', text: 'Noch älter! Es wurde im 18. Jahrhundert gebaut.', pl: 'Jeszcze starszy! Zbudowano go w XVIII wieku.' },
+          { speaker: 'K', text: 'Und wann wird das Brot gebacken?', pl: 'A kiedy piecze się chleb?' },
+          { speaker: 'M', text: 'Jeden Morgen um drei Uhr. Auch die Semmeln werden hier gebacken.', pl: 'Codziennie o trzeciej rano. Bułki też pieczemy na miejscu.' },
+          { speaker: 'K', text: 'Um drei Uhr? Dann müssen Sie sehr früh aufstehen!', pl: 'O trzeciej? To musi pani bardzo wcześnie wstawać!' },
+          { speaker: 'M', text: 'Ja, das stimmt. Aber deshalb ist unser Brot so frisch!', pl: 'Tak, to prawda. Ale dlatego nasz chleb jest taki świeży!' },
+          { speaker: 'K', text: 'Darf ich ein Foto von Ihnen machen?', pl: 'Czy mogę zrobić pani zdjęcie?' },
+          { speaker: 'M', text: 'Gern! Aber zuerst nehmen Sie eine Semmel. Sie ist noch warm!', pl: 'Chętnie! Ale najpierw niech pan weźmie bułkę. Jest jeszcze ciepła!' },
+        ],
+        questions: [
+          {
+            id: 'de.d.32-q1',
+            prompt: 'Kto założył piekarnię?',
+            options: ['Pani Moser', 'Dziadek pani Moser', 'Jej sąsiad'],
+            answer: 1,
+            explanation: '„Sie wurde 1920 von meinem Opa gegründet.” — von + celownik wskazuje wykonawcę.',
+          },
+          {
+            id: 'de.d.32-q2',
+            prompt: 'Kiedy zbudowano budynek piekarni?',
+            options: ['W 1920 roku', 'W XVIII wieku', 'W XIV wieku'],
+            answer: 1,
+            explanation: '„Es wurde im 18. Jahrhundert gebaut.” — w 1920 roku założono samą piekarnię.',
+          },
+          {
+            id: 'de.d.32-q3',
+            prompt: 'Co pani Moser proponuje Kubie na koniec?',
+            options: ['Kawę', 'Ciepłą bułkę', 'Zdjęcie piekarni'],
+            answer: 1,
+            explanation: '„Nehmen Sie eine Semmel. Sie ist noch warm!” Semmel to austriackie słowo na bułkę (w Niemczech: das Brötchen).',
+          },
+        ],
+      },
+      summary: [
+        'Strona bierna = werden + imiesłów na końcu: Das Brot wird gebacken. (Chleb jest pieczony.)',
+        'Przeszłość: wurde / wurden + imiesłów: Die Universität wurde 1365 gegründet.',
+        'Wykonawca: von + celownik — Das Haus wurde von meinem Opa gebaut.',
+        'Z modalnym: Das Handy muss repariert werden. W mowie często man: Man hat die Brücke repariert.',
+      ],
+      followUp:
+        'Pomyśl o swoim mieście: kiedy zbudowano najstarszy kościół albo założono uniwersytet? Powiedz to po niemiecku z wurde … gebaut / gegründet. Za około 10 minut zrób krótką powtórkę.',
+    },
   ],
 };
