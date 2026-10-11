@@ -363,4 +363,57 @@ export const stories: Story[] = [
       },
     ],
   },
+  {
+    id: 'de.st.10',
+    title: 'Spacer po Wiedniu',
+    afterLesson: 'de.l32',
+    stage: 3,
+    context: 'Elisabeth, przewodniczka z Wiednia, oprowadza po mieście grupę studentów z Polski.',
+    lines: [
+      { speaker: 'Elisabeth', text: 'Willkommen in Wien! Heute zeige ich Ihnen die Stadt.', pl: 'Witamy w Wiedniu! Dziś pokażę państwu miasto.' },
+      {
+        speaker: 'Elisabeth',
+        text: 'Das ist der Stephansdom. Hier wurde schon im 12. Jahrhundert eine Kirche gebaut.',
+        pl: 'To katedra świętego Szczepana. Już w XII wieku zbudowano tu kościół.',
+      },
+      { speaker: 'Elisabeth', text: 'Auch heute muss die Kirche jedes Jahr repariert werden.', pl: 'Także dziś katedrę trzeba co roku remontować.' },
+      { speaker: 'Elisabeth', text: 'Und hier sehen Sie das Hotel Sacher. Es wurde 1876 gegründet.', pl: 'A tu widzą państwo hotel Sacher. Założono go w 1876 roku.' },
+      {
+        speaker: 'Elisabeth',
+        text: 'Die Sachertorte wurde aber schon 1832 von Franz Sacher erfunden.',
+        pl: 'Ale tort Sachera wymyślił Franz Sacher już w 1832 roku.',
+      },
+      { speaker: 'Elisabeth', text: 'Und sie wird bis heute hier in Wien gebacken.', pl: 'I do dziś piecze się go tutaj, w Wiedniu.' },
+      { speaker: 'Elisabeth', text: 'Danach fahren wir mit der U-Bahn zum Prater.', pl: 'Potem pojedziemy metrem na Prater.' },
+      {
+        speaker: 'Elisabeth',
+        text: 'Dort steht das Riesenrad. Es wurde 1897 gebaut und ist bis heute ein Symbol der Stadt.',
+        pl: 'Stoi tam diabelski młyn. Zbudowano go w 1897 roku i do dziś jest symbolem miasta.',
+      },
+      { speaker: 'Elisabeth', text: 'In Wien spricht man Deutsch — aber nicht so wie in Berlin!', pl: 'W Wiedniu mówi się po niemiecku — ale nie tak jak w Berlinie!' },
+    ],
+    questions: [
+      {
+        id: 'de.st.10-q1',
+        prompt: 'Kiedy zbudowano pierwszy kościół w miejscu katedry świętego Szczepana?',
+        options: ['W XII wieku', 'W 1832 roku', 'W 1897 roku'],
+        answer: 0,
+        explanation: '„Hier wurde schon im 12. Jahrhundert eine Kirche gebaut.”',
+      },
+      {
+        id: 'de.st.10-q2',
+        prompt: 'Kto wymyślił tort Sachera?',
+        options: ['Franz Sacher', 'Przewodniczka Elisabeth', 'Pewien piekarz z Salzburga'],
+        answer: 0,
+        explanation: '„Die Sachertorte wurde schon 1832 von Franz Sacher erfunden.” — von + celownik wskazuje wykonawcę.',
+      },
+      {
+        id: 'de.st.10-q3',
+        prompt: 'Czym grupa pojedzie na Prater?',
+        options: ['Autobusem', 'Metrem', 'Tramwajem'],
+        answer: 1,
+        explanation: '„Danach fahren wir mit der U-Bahn zum Prater.”',
+      },
+    ],
+  },
 ];
