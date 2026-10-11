@@ -316,5 +316,366 @@ export const unit8: Unit = {
       followUp:
         'Zapisz trzy swoje cele na ten rok: jeden z „Ich versuche, …”, jeden z „Ich habe vor, …” i jeden z „um … zu”. Za około 10 minut zrób krótką powtórkę.',
     },
+    {
+      id: 'de.l31',
+      title: 'Za i przeciw',
+      subtitle: 'Stadt oder Land?',
+      objective: 'Podasz argumenty za i przeciw — z weil i denn, deshalb, außerdem, obwohl i trotzdem — i postawisz czasownik na właściwym miejscu po każdym z tych słów.',
+      level: 'B1',
+      minutes: 12,
+      items: [
+        word('obwohl', 'obwohl', 'chociaż; mimo że', {
+          pos: 'conj',
+          plAlts: ['chociaż', 'mimo że', 'pomimo że', 'choć'],
+          note: 'Spójnik — czasownik na końcu: Obwohl es regnet, gehe ich spazieren. — Chociaż pada, idę na spacer.',
+        }),
+        word('trotzdem', 'trotzdem', 'mimo to', {
+          pos: 'adv',
+          plAlts: ['pomimo to', 'a jednak', 'jednak', 'i tak'],
+          note: 'Przysłówek — czasownik zaraz po nim: Es regnet. Trotzdem gehe ich spazieren. Nie myl z obwohl (mimo że).',
+        }),
+        word('deshalb', 'deshalb', 'dlatego', {
+          pos: 'adv',
+          plAlts: ['więc', 'z tego powodu', 'zatem'],
+          note: 'Wprowadza skutek; czasownik zaraz po nim: Ich bin müde, deshalb bleibe ich zu Hause.',
+        }),
+        word('deswegen', 'deswegen', 'dlatego (potocznie)', {
+          pos: 'adv',
+          plAlts: ['dlatego', 'więc', 'z tego powodu'],
+          note: 'To samo co deshalb, częstsze w mowie. Szyk ten sam: Deswegen bleibe ich zu Hause.',
+        }),
+        word('denn', 'denn', 'bo; ponieważ', {
+          pos: 'conj',
+          plAlts: ['bo', 'ponieważ', 'gdyż'],
+          note: 'Jak weil, ale bez zmiany szyku: …, denn ich bin müde. W pytaniach denn to częsty ozdobnik: Was machst du denn? — No co ty robisz?',
+        }),
+        word('ausserdem', 'außerdem', 'poza tym; oprócz tego', {
+          pos: 'adv',
+          plAlts: ['poza tym', 'oprócz tego', 'ponadto', 'w dodatku'],
+          note: 'Dodaje kolejny argument; czasownik zaraz po nim: Außerdem ist die Miete teuer.',
+        }),
+        phrase('einerseits-andererseits', 'einerseits … andererseits', 'z jednej strony…, z drugiej strony…', {
+          tts: 'einerseits, andererseits',
+          plAlts: ['z jednej strony, z drugiej strony'],
+          note: 'Oba słowa zajmują 1. miejsce, więc czasownik stoi zaraz po nich: Einerseits ist es ruhig, andererseits ist es langweilig.',
+        }),
+        phrase('zwar-aber', 'zwar … aber', 'wprawdzie…, ale', {
+          tts: 'zwar klein, aber gemütlich',
+          plAlts: ['co prawda…, ale', 'wprawdzie, ale', 'co prawda, ale'],
+          note: 'Najpierw przyznajemy coś, potem dodajemy kontrast: Die Wohnung ist zwar klein, aber gemütlich. — Mieszkanie jest wprawdzie małe, ale przytulne.',
+        }),
+        noun('der-vorteil', 'der Vorteil', 'zaleta; korzyść', 'm', {
+          plural: 'die Vorteile',
+          plAlts: ['zaleta', 'korzyść', 'plus'],
+          note: 'Der Vorteil ist, dass … — Zaletą jest to, że…',
+        }),
+        noun('der-nachteil', 'der Nachteil', 'wada; minus', 'm', {
+          plural: 'die Nachteile',
+          plAlts: ['wada', 'minus', 'słaba strona'],
+          note: 'Przeciwieństwo: der Vorteil. Ein Nachteil ist, dass … — Wadą jest to, że…',
+        }),
+        noun('das-land', 'das Land', 'wieś; kraj', 'n', {
+          plural: 'die Länder',
+          plAlts: ['wieś', 'kraj', 'państwo'],
+          note: 'auf dem Land wohnen — mieszkać na wsi; aufs Land ziehen — przeprowadzić się na wieś. Drugie znaczenie: kraj — Österreich ist ein schönes Land. L. mn. tylko w znaczeniu „kraje”.',
+        }),
+        noun('die-miete', 'die Miete', 'czynsz', 'f', {
+          plural: 'die Mieten',
+          plAlts: ['komorne', 'opłata za wynajem'],
+          note: 'Die Miete ist hoch. — Czynsz jest wysoki. Od mieten — wynajmować (mieszkanie).',
+        }),
+        word('laut', 'laut', 'głośny; głośno', {
+          pos: 'adj',
+          plAlts: ['głośno', 'głośna', 'głośne', 'hałaśliwy'],
+          note: 'Przeciwieństwo: leise (cichy) albo ruhig (spokojny). Die Straße ist sehr laut. — Ulica jest bardzo głośna.',
+        }),
+        noun('die-natur', 'die Natur', 'przyroda; natura', 'f', {
+          plAlts: ['przyroda', 'natura'],
+          note: 'In der Natur — na łonie przyrody. Bez liczby mnogiej.',
+        }),
+      ],
+      sentences: [
+        s('31-1', 'Ich bleibe heute zu Hause, denn ich bin müde.', 'Zostaję dziś w domu, bo jestem zmęczony.', {
+          alts: ['Ich bleibe heute zu Hause, weil ich müde bin.'],
+          plAlts: [
+            'Zostaję dziś w domu, bo jestem zmęczona.',
+            'Zostaję dzisiaj w domu, bo jestem zmęczony.',
+            'Zostaję dzisiaj w domu, bo jestem zmęczona.',
+            'Zostaję dziś w domu, ponieważ jestem zmęczony.',
+            'Zostaję dziś w domu, ponieważ jestem zmęczona.',
+          ],
+          note: 'Po denn szyk się nie zmienia: ich bin müde. Po weil czasownik idzie na koniec: weil ich müde bin.',
+        }),
+        s('31-2', 'Obwohl es kalt ist, gehen wir schwimmen.', 'Chociaż jest zimno, idziemy popływać.', {
+          alts: ['Wir gehen schwimmen, obwohl es kalt ist.'],
+          plAlts: [
+            'Chociaż jest zimno, idziemy pływać.',
+            'Mimo że jest zimno, idziemy popływać.',
+            'Mimo że jest zimno, idziemy pływać.',
+            'Pomimo że jest zimno, idziemy pływać.',
+            'Idziemy popływać, chociaż jest zimno.',
+          ],
+          note: 'Zdanie z obwohl zajmuje 1. miejsce, dlatego dalej najpierw czasownik: gehen wir.',
+        }),
+        s('31-3', 'Die Wohnung ist teuer. Trotzdem nehmen wir sie.', 'Mieszkanie jest drogie. Mimo to je bierzemy.', {
+          alts: ['Die Wohnung ist teuer, aber wir nehmen sie trotzdem.'],
+          plAlts: [
+            'Mieszkanie jest drogie. Mimo to bierzemy je.',
+            'To mieszkanie jest drogie. Mimo to je bierzemy.',
+            'Mieszkanie jest drogie, ale i tak je bierzemy.',
+            'Mieszkanie jest drogie. A jednak je bierzemy.',
+          ],
+        }),
+        s('31-4', 'Die Natur ist uns wichtig, deshalb ziehen wir aufs Land.', 'Przyroda jest dla nas ważna, dlatego przeprowadzamy się na wieś.', {
+          alts: ['Die Natur ist uns wichtig, deswegen ziehen wir aufs Land.'],
+          plAlts: [
+            'Przyroda jest dla nas ważna, więc przeprowadzamy się na wieś.',
+            'Natura jest dla nas ważna, dlatego przeprowadzamy się na wieś.',
+            'Przyroda jest dla nas ważna, dlatego przenosimy się na wieś.',
+          ],
+          note: 'aufs Land ziehen — przeprowadzić się na wieś. Po deshalb od razu czasownik: deshalb ziehen wir.',
+        }),
+        s('31-5', 'Ich habe heuer viel gespart, deswegen fahre ich im Sommer nach Italien.', 'W tym roku dużo zaoszczędziłem, dlatego latem jadę do Włoch.', {
+          alts: [
+            'Ich habe heuer viel gespart, deshalb fahre ich im Sommer nach Italien.',
+            'Ich habe dieses Jahr viel gespart, deswegen fahre ich im Sommer nach Italien.',
+          ],
+          plAlts: [
+            'W tym roku dużo zaoszczędziłam, dlatego latem jadę do Włoch.',
+            'W tym roku sporo zaoszczędziłem, dlatego latem jadę do Włoch.',
+            'W tym roku sporo zaoszczędziłam, dlatego latem jadę do Włoch.',
+            'W tym roku dużo zaoszczędziłem, więc latem pojadę do Włoch.',
+            'W tym roku dużo zaoszczędziłam, więc latem pojadę do Włoch.',
+          ],
+          note: 'heuer — austriackie „w tym roku”.',
+          accent: 'de-AT',
+        }),
+        s('31-6', 'In der Stadt ist es laut. Außerdem ist die Miete sehr teuer.', 'W mieście jest głośno. Poza tym czynsz jest bardzo drogi.', {
+          plAlts: [
+            'W mieście jest głośno. Oprócz tego czynsz jest bardzo drogi.',
+            'W mieście jest głośno, a poza tym czynsz jest bardzo drogi.',
+            'W mieście jest głośno. Poza tym czynsze są bardzo wysokie.',
+          ],
+        }),
+        s('31-7', 'Ein Nachteil ist, dass ich mit dem Bus zur Arbeit fahren muss.', 'Wadą jest to, że do pracy muszę jeździć autobusem.', {
+          plAlts: [
+            'Jedną z wad jest to, że do pracy muszę jeździć autobusem.',
+            'Minusem jest to, że do pracy muszę jeździć autobusem.',
+            'Wadą jest to, że muszę jeździć do pracy autobusem.',
+          ],
+        }),
+        s(
+          '31-8',
+          'Einerseits ist das Leben auf dem Land ruhig, andererseits ist es dort ein bisschen langweilig.',
+          'Z jednej strony życie na wsi jest spokojne, z drugiej strony jest tam trochę nudno.',
+          {
+            plAlts: [
+              'Z jednej strony życie na wsi jest spokojne, z drugiej jest tam trochę nudno.',
+              'Z jednej strony życie na wsi jest spokojne, a z drugiej strony jest tam trochę nudno.',
+              'Z jednej strony na wsi żyje się spokojnie, z drugiej strony jest tam trochę nudno.',
+            ],
+          },
+        ),
+        s('31-9', 'Die Wohnung in Wien ist zwar klein, aber die Öffis sind super.', 'Mieszkanie w Wiedniu jest wprawdzie małe, ale komunikacja miejska jest super.', {
+          plAlts: [
+            'Mieszkanie w Wiedniu jest co prawda małe, ale komunikacja miejska jest super.',
+            'Mieszkanie w Wiedniu jest co prawda małe, ale komunikacja miejska jest świetna.',
+            'Mieszkanie w Wiedniu jest wprawdzie małe, ale komunikacja jest super.',
+          ],
+          note: 'die Öffis — w Austrii potocznie: komunikacja miejska (od öffentliche Verkehrsmittel).',
+          accent: 'de-AT',
+        }),
+      ],
+      grammar: [
+        {
+          id: 'de.g.konnektoren-grund',
+          title: 'Weil czy denn? Deshalb, deswegen, außerdem',
+          body: [
+            'Przyczynę podajemy na dwa sposoby. Po [[weil]] odmieniony czasownik idzie **na koniec**: [[Ich bleibe zu Hause, weil ich müde bin.]] Po [[denn]] szyk się **nie zmienia** — denn stoi przed zdaniem, na „pozycji zero”, jak und i aber: [[Ich bleibe zu Hause, denn ich bin müde.]]',
+            'Zdanie z denn zawsze stoi **po** zdaniu głównym. Zdanie z weil może też stać na początku ([[Weil ich müde bin, bleibe ich zu Hause.]]) albo samo odpowiadać na pytanie: [[Warum bleibst du zu Hause? — Weil ich müde bin.]]',
+            'Skutek wprowadzają [[deshalb]] i [[deswegen]] (dlatego; deswegen częściej w mowie). To przysłówki: zajmują 1. miejsce, więc odmieniony czasownik stoi **zaraz po nich**, a podmiot dopiero za nim: [[Ich bin müde, deshalb bleibe ich zu Hause.]] Tak samo działają [[außerdem]] (poza tym) i para [[einerseits … andererseits]]: [[Einerseits ist es ruhig, andererseits ist es langweilig.]]',
+          ],
+          table: {
+            head: ['Słowo', 'Szyk', 'Przykład'],
+            rows: [
+              ['weil', 'czasownik na końcu', '…, weil ich müde bin.'],
+              ['denn', 'szyk bez zmian', '…, denn ich bin müde.'],
+              ['deshalb / deswegen', 'czasownik zaraz po nim', '…, deshalb bleibe ich zu Hause.'],
+              ['außerdem', 'czasownik zaraz po nim', 'Außerdem ist die Miete teuer.'],
+            ],
+          },
+          contrast:
+            'Po polsku „bo”, „ponieważ” i „dlatego” nie zmieniają szyku zdania. Po niemiecku każde z tych słów ma własną regułę: weil wysyła czasownik na koniec, denn niczego nie rusza, a deshalb zajmuje 1. miejsce, więc czasownik stoi zaraz po nim: deshalb bleibe ich — nie „deshalb ich bleibe”.',
+        },
+        {
+          id: 'de.g.obwohl-trotzdem',
+          title: 'Obwohl czy trotzdem?',
+          body: [
+            'Oba słowa wyrażają **kontrast**: coś dzieje się mimo przeszkody. [[obwohl]] (chociaż, mimo że) to spójnik — odmieniony czasownik idzie **na koniec**: [[Obwohl es kalt ist, gehen wir schwimmen.]] Zdanie z obwohl na początku zajmuje 1. miejsce, więc dalej od razu czasownik: [[…, gehen wir schwimmen.]]',
+            '[[trotzdem]] (mimo to) to przysłówek w zdaniu głównym. Stoi na 1. miejscu (czasownik zaraz po nim) albo w środku zdania: [[Es ist kalt. Trotzdem gehen wir schwimmen.]] [[Es ist kalt, aber wir gehen trotzdem schwimmen.]]',
+            'Zapamiętaj: obwohl wprowadza **przeszkodę** (chociaż jest zimno), a trotzdem — **to, co i tak się dzieje** (mimo to idziemy). Nie myl ich z przyimkiem [[trotz]] + dopełniacz: [[trotz des Regens]]. Gdy najpierw coś przyznajesz, przyda się para [[zwar … aber]]: [[Die Wohnung ist zwar klein, aber gemütlich.]]',
+          ],
+          table: {
+            head: ['', 'Przeszkoda', 'Co i tak się dzieje'],
+            rows: [
+              ['obwohl', 'Obwohl es regnet,', 'gehen wir spazieren.'],
+              ['trotzdem', 'Es regnet.', 'Trotzdem gehen wir spazieren.'],
+              ['trotz', 'Trotz des Regens', 'gehen wir spazieren.'],
+              ['zwar … aber', 'Es regnet zwar,', 'aber wir gehen spazieren.'],
+            ],
+          },
+          contrast:
+            'Po polsku „chociaż” i „mimo to” nie wpływają na szyk. Po niemiecku obwohl wysyła czasownik na koniec swojego zdania, a trotzdem — jak deshalb — ściąga czasownik zaraz za siebie. Uwaga na pułapkę: trotzdem to „mimo to”, a nie „mimo że” — „mimo że” to obwohl.',
+        },
+      ],
+      exercises: [
+        {
+          type: 'gap',
+          id: 'de.x.31-1',
+          concept: 'de.g.konnektoren-grund',
+          sentence: 'Wir fahren nicht in den Urlaub, ___ wir haben kein Geld.',
+          pl: 'Nie jedziemy na urlop, bo nie mamy pieniędzy.',
+          options: ['weil', 'denn', 'deshalb'],
+          answer: 'denn',
+          explanation: 'Po luce szyk się nie zmienia (wir haben…), więc pasuje denn. Z weil byłoby: weil wir kein Geld haben.',
+        },
+        {
+          type: 'gap',
+          id: 'de.x.31-2',
+          concept: 'de.g.konnektoren-grund',
+          sentence: 'Ich bin krank, ___ bleibe ich heute im Bett.',
+          pl: 'Jestem chory / chora, dlatego zostaję dziś w łóżku.',
+          options: ['weil', 'denn', 'deshalb'],
+          answer: 'deshalb',
+          explanation: 'Zaraz po luce stoi czasownik (bleibe ich), więc potrzebny jest przysłówek deshalb (dlatego) — wprowadza skutek.',
+        },
+        {
+          type: 'choice',
+          id: 'de.x.31-3',
+          concept: 'de.g.konnektoren-grund',
+          prompt: 'Które zdanie jest poprawne?',
+          options: [
+            'Das Wetter ist schön, deswegen wir gehen schwimmen.',
+            'Das Wetter ist schön, deswegen gehen wir schwimmen.',
+            'Das Wetter ist schön, deswegen wir schwimmen gehen.',
+          ],
+          answer: 1,
+          explanation: 'Deswegen zajmuje 1. miejsce, więc odmieniony czasownik (gehen) stoi zaraz po nim, a podmiot (wir) — za czasownikiem.',
+        },
+        {
+          type: 'gap',
+          id: 'de.x.31-4',
+          concept: 'de.g.obwohl-trotzdem',
+          sentence: '___ es regnet, gehen wir spazieren.',
+          pl: 'Chociaż pada, idziemy na spacer.',
+          options: ['Obwohl', 'Trotzdem', 'Deshalb'],
+          answer: 'Obwohl',
+          explanation: 'Czasownik regnet stoi na końcu, a potem zaczyna się zdanie główne (gehen wir) — to szyk po spójniku obwohl (chociaż).',
+        },
+        {
+          type: 'gap',
+          id: 'de.x.31-5',
+          concept: 'de.g.obwohl-trotzdem',
+          sentence: 'Ich bin müde. ___ gehe ich heute ins Kino.',
+          pl: 'Jestem zmęczony / zmęczona. Mimo to idę dziś do kina.',
+          options: ['Obwohl', 'Trotzdem', 'Weil'],
+          answer: 'Trotzdem',
+          explanation: 'Zaraz po luce stoi czasownik (gehe ich), więc potrzebny jest przysłówek trotzdem (mimo to). Obwohl i weil wysłałyby czasownik na koniec.',
+        },
+        {
+          type: 'choice',
+          id: 'de.x.31-6',
+          concept: 'de.g.obwohl-trotzdem',
+          prompt: 'Jak powiesz: „Chociaż mieszkanie jest drogie, kupujemy je”?',
+          options: [
+            'Obwohl die Wohnung teuer ist, kaufen wir sie.',
+            'Obwohl die Wohnung ist teuer, kaufen wir sie.',
+            'Trotzdem die Wohnung teuer ist, kaufen wir sie.',
+          ],
+          answer: 0,
+          explanation: 'Po obwohl czasownik idzie na koniec (teuer ist), a zdanie główne zaczyna się od czasownika (kaufen wir). Trotzdem nie jest spójnikiem i nie wprowadza takiego zdania.',
+        },
+        {
+          type: 'gap',
+          id: 'de.x.31-7',
+          concept: 'de.g.obwohl-trotzdem',
+          sentence: 'Das Zimmer ist ___ klein, aber sehr hell.',
+          pl: 'Pokój jest wprawdzie mały, ale bardzo jasny.',
+          options: ['zwar', 'trotzdem', 'obwohl'],
+          answer: 'zwar',
+          explanation: 'Para zwar … aber: najpierw przyznajemy coś (wprawdzie mały), potem dodajemy kontrast (ale jasny).',
+        },
+      ],
+      dialogue: {
+        id: 'de.d.31',
+        title: 'Miasto czy wieś?',
+        context: 'Nina i Paweł mieszkają w małym mieszkaniu w centrum Hamburga. Nina znalazła ogłoszenie i chce porozmawiać o przeprowadzce.',
+        speakers: {
+          N: { name: 'Nina', voice: 'a', accent: 'de-DE' },
+          P: { name: 'Paweł', voice: 'b', accent: 'de-DE' },
+        },
+        lines: [
+          { speaker: 'N', text: 'Paweł, schau mal! Hier ist ein Haus auf dem Land, mit Garten.', pl: 'Paweł, zobacz! Tu jest dom na wsi, z ogrodem.' },
+          { speaker: 'P', text: 'Auf dem Land? Aber wir arbeiten doch in der Stadt!', pl: 'Na wsi? Ale przecież pracujemy w mieście!' },
+          {
+            speaker: 'N',
+            text: 'Ich weiß. Aber hier ist es so laut, und außerdem ist die Miete sehr teuer.',
+            pl: 'Wiem. Ale tu jest tak głośno, a poza tym czynsz jest bardzo drogi.',
+          },
+          {
+            speaker: 'P',
+            text: 'Das stimmt. Trotzdem möchte ich nicht jeden Tag so lange mit dem Bus fahren.',
+            pl: 'To prawda. Mimo to nie chciałbym codziennie tak długo jeździć autobusem.',
+          },
+          {
+            speaker: 'N',
+            text: 'Einerseits hast du recht. Andererseits hätten wir dort einen großen Garten!',
+            pl: 'Z jednej strony masz rację. Z drugiej strony mielibyśmy tam duży ogród!',
+          },
+          {
+            speaker: 'P',
+            text: 'Obwohl ich gern im Garten arbeite, finde ich das Land ein bisschen langweilig.',
+            pl: 'Chociaż lubię pracować w ogrodzie, wieś wydaje mi się trochę nudna.',
+          },
+          { speaker: 'N', text: 'Langweilig? Dort ist es ruhig, und die Natur ist so schön!', pl: 'Nudna? Tam jest spokojnie, a przyroda jest taka piękna!' },
+          {
+            speaker: 'P',
+            text: 'Also gut, am Samstag fahren wir aufs Land. Vielleicht gefällt es mir ja doch.',
+            pl: 'No dobrze, w sobotę jedziemy na wieś. Może jednak mi się spodoba.',
+          },
+        ],
+        questions: [
+          {
+            id: 'de.d.31-q1',
+            prompt: 'Co Nina pokazuje Pawłowi?',
+            options: ['Mieszkanie w centrum', 'Dom z ogrodem na wsi', 'Ogłoszenie o pracy'],
+            answer: 1,
+            explanation: '„Hier ist ein Haus auf dem Land, mit Garten.”',
+          },
+          {
+            id: 'de.d.31-q2',
+            prompt: 'Jakie wady mieszkania w mieście wymienia Nina?',
+            options: ['Hałas i drogi czynsz', 'Brak autobusów', 'Nudę i brak przyrody'],
+            answer: 0,
+            explanation: '„Hier ist es so laut, und außerdem ist die Miete sehr teuer.”',
+          },
+          {
+            id: 'de.d.31-q3',
+            prompt: 'Co nie podoba się Pawłowi w życiu na wsi?',
+            options: ['Praca w ogrodzie', 'Długie dojazdy autobusem i nuda', 'Wysoki czynsz'],
+            answer: 1,
+            explanation: '„Trotzdem möchte ich nicht jeden Tag so lange mit dem Bus fahren.” i „…finde ich das Land ein bisschen langweilig.” Ogród akurat lubi.',
+          },
+        ],
+      },
+      summary: [
+        'Weil → czasownik na końcu, denn → szyk bez zmian: …, weil ich müde bin / …, denn ich bin müde.',
+        'Deshalb, deswegen, außerdem, trotzdem na 1. miejscu → czasownik zaraz po nich: Deshalb bleibe ich zu Hause.',
+        'Obwohl (chociaż) → czasownik na końcu: Obwohl es kalt ist, gehen wir schwimmen.',
+        'Pary: zwar … aber (wprawdzie…, ale), einerseits … andererseits (z jednej strony…, z drugiej strony…).',
+      ],
+      followUp:
+        'Wybierz temat — miasto czy wieś, samochód czy autobus — i podaj na głos dwa argumenty za (weil, außerdem) i jeden przeciw (obwohl albo trotzdem). Za około 10 minut zrób krótką powtórkę.',
+    },
   ],
 };
