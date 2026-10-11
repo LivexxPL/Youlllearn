@@ -838,5 +838,282 @@ export const unit7: Unit = {
       ],
       followUp: 'Za kilka minut powtórz osiem krótkich form: ven, haz, pon, sal, ten, di, ve, sé. W następnej lekcji poznasz zaimki „komu?” i pary me lo, te la, se lo.',
     },
+    {
+      id: 'es.l27',
+      title: 'Prezenty i przysługi',
+      subtitle: '¿Me lo prestas?',
+      objective: 'Powiesz, komu coś dajesz, pożyczasz, wysyłasz albo wyjaśniasz, i zastąpisz zaimkami zarówno osobę, jak i rzecz: me lo, te la, se lo.',
+      level: 'A2+',
+      minutes: 12,
+      items: [
+        verb('dar', 'dar', 'dawać', {
+          plAlts: ['dać'],
+          note: 'doy, das, da, damos, dais, dan. Indefinido bez kresek: di, diste, dio… Nie myl di (dałem / dałam) z di (powiedz!).',
+        }),
+        verb('regalar', 'regalar', 'dawać w prezencie', {
+          plAlts: ['podarować', 'dać w prezencie', 'sprezentować'],
+          note: 'Regalar algo a alguien — podarować coś komuś: Le regalé un libro a Ana. — Dałem / dałam Anie książkę w prezencie.',
+        }),
+        noun('el-regalo', 'el regalo', 'prezent', 'm', {
+          plAlts: ['podarunek', 'upominek'],
+          note: 'Hacer un regalo — dać prezent. Papel de regalo — papier do pakowania prezentów.',
+        }),
+        verb('prestar', 'prestar', 'pożyczać (komuś)', {
+          plAlts: ['pożyczyć'],
+          note: 'Pułapka: prestar to pożyczać komuś, czyli dawać na chwilę: ¿Me prestas tu libro? — Pożyczysz mi swoją książkę? „Pożyczyć od kogoś” to pedir prestado.',
+        }),
+        verb('decir', 'decir', 'mówić; powiedzieć', {
+          note: 'digo, dices, dice, decimos, decís, dicen. Polskie „mówić” to dwa czasowniki: hablar (mówić, rozmawiać — hablo español) i decir (mówić coś komuś, powiedzieć — le digo la verdad).',
+        }),
+        verb('enviar', 'enviar', 'wysyłać', {
+          plAlts: ['wysłać', 'przesłać', 'przesyłać'],
+          note: 'envío, envías, envía — z kreską na í. Potocznie, zwłaszcza w Meksyku, częściej mówi się mandar: te mando un mensaje.',
+        }),
+        verb('explicar', 'explicar', 'wyjaśniać; tłumaczyć', {
+          plAlts: ['wyjaśnić', 'wytłumaczyć', 'objaśniać'],
+          note: 'Explicar to tłumaczyć w sensie „objaśniać”. Tłumaczyć z języka na język to traducir. Ja w indefinido: expliqué (c → qu).',
+        }),
+        noun('el-cumpleanos', 'el cumpleaños', 'urodziny', 'm', {
+          note: 'Jedna forma w liczbie pojedynczej i mnogiej: el cumpleaños, los cumpleaños. ¡Feliz cumpleaños! — Wszystkiego najlepszego z okazji urodzin!',
+        }),
+        noun('el-mensaje', 'el mensaje', 'wiadomość', 'm', {
+          plAlts: ['SMS', 'esemes', 'wiadomość tekstowa'],
+          note: 'Mandar un mensaje — wysłać wiadomość (SMS, na czacie). Wiadomość w gazecie albo w telewizji to la noticia.',
+        }),
+        noun('la-carta', 'la carta', 'list', 'f', {
+          note: 'Escribir una carta — napisać list. Uwaga: la carta to też karta dań w restauracji. Pocztówka to la postal.',
+        }),
+        word('le-les', 'le / les', 'mu / jej; im', {
+          pos: 'pron',
+          tts: 'le, les',
+          alts: ['le', 'les'],
+          plAlts: ['panu', 'pani', 'państwu'],
+          note: 'Zaimki „komu?”: le — mu, jej, panu, pani; les — im, państwu. Le doy un regalo — daję mu / jej prezent.',
+        }),
+        phrase('me-lo-prestas', '¿me lo prestas?', 'pożyczysz mi to?', {
+          plAlts: ['pożyczysz mi go?', 'czy pożyczysz mi to?', 'możesz mi to pożyczyć?'],
+          note: 'Me (komu? — mnie) + lo (co? — to). O rzeczy rodzaju żeńskiego: ¿me la prestas? — pożyczysz mi ją?',
+        }),
+        phrase('se-lo-doy', 'se lo doy', 'daję mu / jej to', {
+          plAlts: ['daję mu to', 'daję jej to', 'dam mu to', 'dam jej to', 'daję mu go', 'daję jej go'],
+          note: 'Le + lo zmienia się w se lo — „le lo” nie istnieje. To se nie ma nic wspólnego z polskim „się”.',
+        }),
+        phrase('te-lo-prometo', 'te lo prometo', 'obiecuję ci to', {
+          plAlts: ['obiecuję ci', 'obiecuję'],
+          note: 'Bardzo częsta formuła: ¡Te lo prometo! — Obiecuję! Lo zastępuje tu całą obietnicę.',
+        }),
+      ],
+      sentences: [
+        s('27-1', 'Le regalé un libro a mi hermana.', 'Dałem / dałam siostrze książkę w prezencie.', {
+          plAlts: [
+            'Dałem siostrze książkę w prezencie.',
+            'Dałam siostrze książkę w prezencie.',
+            'Dałem mojej siostrze książkę w prezencie.',
+            'Dałam mojej siostrze książkę w prezencie.',
+            'Podarowałem siostrze książkę.',
+            'Podarowałam siostrze książkę.',
+          ],
+          note: 'Le zapowiada odbiorcę, a a mi hermana go nazywa — po hiszpańsku to podwojenie jest normalne.',
+        }),
+        s('27-2', '¿Me prestas tu libro de español?', 'Pożyczysz mi swoją książkę do hiszpańskiego?', {
+          plAlts: ['Pożyczysz mi swój podręcznik do hiszpańskiego?', 'Pożyczysz mi twoją książkę do hiszpańskiego?', 'Czy pożyczysz mi swoją książkę do hiszpańskiego?'],
+          accent: 'es-MX',
+        }),
+        s('27-3', 'Mis padres me dieron un regalo.', 'Rodzice dali mi prezent.', {
+          plAlts: ['Moi rodzice dali mi prezent.', 'Rodzice dali mi upominek.', 'Rodzice podarowali mi prezent.'],
+        }),
+        s('27-4', 'Te envío las fotos esta noche.', 'Wyślę ci zdjęcia dziś wieczorem.', {
+          plAlts: ['Dziś wieczorem wyślę ci zdjęcia.', 'Wysyłam ci zdjęcia dziś wieczorem.', 'Prześlę ci zdjęcia dziś wieczorem.'],
+        }),
+        s('27-5', 'La profesora nos explica la gramática.', 'Nauczycielka wyjaśnia nam gramatykę.', {
+          plAlts: ['Nauczycielka tłumaczy nam gramatykę.', 'Pani profesor wyjaśnia nam gramatykę.', 'Wykładowczyni wyjaśnia nam gramatykę.'],
+        }),
+        s('27-6', '¿El regalo? Se lo doy mañana.', 'Prezent? Dam mu / jej go jutro.', {
+          plAlts: [
+            'Prezent? Dam mu go jutro.',
+            'Prezent? Dam jej go jutro.',
+            'Prezent? Jutro mu go dam.',
+            'Prezent? Jutro jej go dam.',
+            'Prezent? Daję mu go jutro.',
+            'Prezent? Daję jej go jutro.',
+          ],
+        }),
+        s('27-7', '¿Las fotos? Te las envío ahora.', 'Zdjęcia? Zaraz ci je wyślę.', {
+          plAlts: ['Zdjęcia? Wyślę ci je teraz.', 'Zdjęcia? Teraz ci je wyślę.', 'Zdjęcia? Wysyłam ci je teraz.'],
+          accent: 'es-MX',
+        }),
+        s('27-8', '¿Qué le digo a tu madre?', 'Co mam powiedzieć twojej mamie?', {
+          plAlts: ['Co powiem twojej mamie?', 'Co mam powiedzieć twojej matce?', 'Co mówię twojej mamie?'],
+          accent: 'es-MX',
+        }),
+        s('27-9', 'Les envié un mensaje a mis amigos.', 'Wysłałem / wysłałam wiadomość znajomym.', {
+          plAlts: [
+            'Wysłałem wiadomość znajomym.',
+            'Wysłałam wiadomość znajomym.',
+            'Wysłałem wiadomość przyjaciołom.',
+            'Wysłałam wiadomość przyjaciołom.',
+            'Wysłałem znajomym wiadomość.',
+            'Wysłałam znajomym wiadomość.',
+          ],
+        }),
+      ],
+      grammar: [
+        {
+          id: 'es.g.objeto-indirecto',
+          title: 'Komu? Zaimki me, te, le, nos, os, les',
+          body: [
+            'Zaimki dopełnienia dalszego odpowiadają na pytanie **komu?**: [[me]] (mi), [[te]] (ci), [[le]] (mu, jej, panu, pani), [[nos]] (nam), [[os]] (wam), [[les]] (im, państwu). Znasz je już z [[me gusta]] i [[me duele]].',
+            'Stoją przed odmienionym czasownikiem: [[Te envío un mensaje.]], [[Le regalé un libro.]] Do bezokolicznika i twierdzącego rozkazu doklejamy je na końcu: [[Voy a darte un regalo.]], [[Dame el libro.]]',
+            'Le i les nie mówią, czy chodzi o mężczyznę, czy o kobietę, dlatego często dodajemy osobę z a — a zaimek **zostaje**: [[Le di el regalo a Marta.]] — Dałem / dałam prezent Marcie. To podwojenie jest po hiszpańsku całkiem normalne.',
+            'Typowe czasowniki: [[dar]], [[regalar]], [[prestar]], [[decir]], [[enviar]], [[explicar]]. Dar ma w indefinido formy bez kresek: [[di]], [[diste]], [[dio]], [[dimos]], [[disteis]], [[dieron]].',
+          ],
+          table: {
+            head: ['Osoba', 'komu?', 'przykład'],
+            rows: [
+              ['yo', 'me — mi', 'Ana me presta su libro.'],
+              ['tú', 'te — ci', 'Te envío un mensaje.'],
+              ['él / ella / usted', 'le — mu, jej, panu, pani', 'Le explico la gramática.'],
+              ['nosotros / nosotras', 'nos — nam', 'Nos dan un regalo.'],
+              ['vosotros / vosotras', 'os — wam', 'Os digo la verdad.'],
+              ['ellos / ellas / ustedes', 'les — im, państwu', 'Les regalo un libro.'],
+            ],
+          },
+          contrast:
+            'Po polsku „komu?” wyraża końcówka celownika: daję mamie, mówię bratu. Po hiszpańsku rzeczownik się nie odmienia — odbiorcę wskazuje a (a mi madre) i zwykle dodatkowo zaimek: le doy un regalo a mi madre. W centralnej Hiszpanii le słychać czasem także zamiast lo przy mężczyznach: le vi ayer — widziałem go wczoraj (tzw. leísmo). W Ameryce Łacińskiej mówi się wtedy lo vi.',
+        },
+        {
+          id: 'es.g.se-lo',
+          title: 'Me lo, te la, se lo: dwa zaimki razem',
+          body: [
+            'Gdy zastępujemy zaimkami i osobę (komu?), i rzecz (co?), kolejność jest stała: najpierw **komu**, potem **co**: [[Me lo das.]] — Dajesz mi to. [[Te la presto.]] — Pożyczam ci ją.',
+            'Gdy spotykają się dwa zaimki na l-, le i les zmieniają się w **se**: le + lo → [[se lo]]. Nigdy nie mówimy „le lo”: [[¿El regalo? Se lo doy a Marta.]] Se może znaczyć „jemu, jej, panu, pani, im, państwu”, dlatego dla jasności dodajemy [[a él]], [[a ella]], [[a usted]].',
+            'Oba zaimki stoją razem przed odmienionym czasownikiem ([[Te lo digo.]]), a do bezokolicznika i twierdzącego rozkazu doklejamy je razem na końcu: [[Voy a decírtelo.]], [[Dímelo.]] — wtedy zwykle dochodzi kreska.',
+          ],
+          table: {
+            head: ['komu + co', 'lo', 'la', 'los', 'las'],
+            rows: [
+              ['me', 'me lo', 'me la', 'me los', 'me las'],
+              ['te', 'te lo', 'te la', 'te los', 'te las'],
+              ['le / les → se', 'se lo', 'se la', 'se los', 'se las'],
+              ['nos', 'nos lo', 'nos la', 'nos los', 'nos las'],
+              ['os', 'os lo', 'os la', 'os los', 'os las'],
+            ],
+          },
+          contrast:
+            'Po polsku kolejność jest swobodna: „dam ci go” albo „dam go tobie”. Po hiszpańsku jest sztywna: komu (te) przed co (lo) — te lo doy. Pułapka dla Polaka: se w se lo nie ma nic wspólnego ze zwrotnym „się” — to po prostu „mu / jej / im” przed lo, la, los, las.',
+        },
+      ],
+      exercises: [
+        {
+          type: 'gap',
+          id: 'es.x.27-1',
+          concept: 'es.g.objeto-indirecto',
+          sentence: 'Mañana ___ escribo a mis abuelos.',
+          pl: 'Jutro napiszę do dziadków.',
+          options: ['les', 'los', 'le'],
+          answer: 'les',
+          explanation: 'Komu? — dziadkom, kilku osobom → les. Los odpowiada na pytanie „kogo? co?”, a le dotyczy jednej osoby. Po polsku piszemy „do kogoś”, a po hiszpańsku — „komuś”.',
+        },
+        {
+          type: 'gap',
+          id: 'es.x.27-2',
+          concept: 'es.g.objeto-indirecto',
+          sentence: '¿___ prestas tu libro? Lo necesito para el examen.',
+          pl: 'Pożyczysz mi swoją książkę? Potrzebuję jej na egzamin.',
+          options: ['Me', 'Mi', 'Te'],
+          answer: 'Me',
+          explanation: 'Komu? — mnie → me. Mi to „mój / moja” (mi libro) albo forma po przyimku (para mí), a te znaczyłoby „tobie”.',
+        },
+        {
+          type: 'gap',
+          id: 'es.x.27-3',
+          concept: 'es.g.se-lo',
+          sentence: '¿El regalo para Ana? ___ doy mañana.',
+          pl: 'Prezent dla Any? Dam jej go jutro.',
+          options: ['Le lo', 'Se lo', 'Se la'],
+          answer: 'Se lo',
+          explanation: 'Le + lo zmienia się w se lo. Lo, bo el regalo jest rodzaju męskiego; se la pasowałoby do rzeczy żeńskiej.',
+        },
+        {
+          type: 'gap',
+          id: 'es.x.27-4',
+          concept: 'es.g.se-lo',
+          sentence: '¿Las fotos? Te ___ envío esta noche.',
+          pl: 'Zdjęcia? Wyślę ci je dziś wieczorem.',
+          options: ['las', 'los', 'les'],
+          answer: 'las',
+          explanation: 'Co? — las fotos (rodzaj żeński, liczba mnoga) → las. Uwaga: la foto jest żeńska, choć kończy się na -o — to skrót od la fotografía.',
+        },
+        {
+          type: 'choice',
+          id: 'es.x.27-5',
+          concept: 'es.g.se-lo',
+          prompt: 'Jak powiesz: „Powiedz mi to!”?',
+          options: ['¡Dímelo!', '¡Me lo di!', '¡Dilo me!'],
+          answer: 0,
+          explanation: 'Twierdzący rozkaz: oba zaimki na końcu, najpierw komu (me), potem co (lo), razem i z kreską — dímelo.',
+        },
+        {
+          type: 'choice',
+          id: 'es.x.27-6',
+          concept: 'es.g.objeto-indirecto',
+          optionsLang: 'pl',
+          prompt: 'Co znaczy „Le di mi número a Carlos”?',
+          options: ['Dałem Carlosowi swój numer.', 'Carlos dał mi swój numer.', 'Powiedz Carlosowi mój numer.'],
+          answer: 0,
+          explanation: 'Di to tutaj indefinido od dar (dałem / dałam), a le zapowiada odbiorcę: a Carlos. Rozkaz „powiedz” (di) nie miałby przed sobą zaimka le.',
+        },
+      ],
+      dialogue: {
+        id: 'es.d.27',
+        title: 'Prezent dla Lucíi',
+        context: 'Tomek wynajmuje mieszkanie w Sewilli razem z Albą. W sobotę są urodziny ich koleżanki Lucíi i zastanawiają się nad prezentem.',
+        speakers: {
+          T: { name: 'Tomek', voice: 'b', accent: 'es-ES' },
+          A: { name: 'Alba', voice: 'a', accent: 'es-ES' },
+        },
+        lines: [
+          { speaker: 'T', text: 'Alba, el sábado es el cumpleaños de Lucía. ¿Qué le regalamos?', pl: 'Alba, w sobotę są urodziny Lucíi. Co jej kupimy w prezencie?' },
+          { speaker: 'A', text: 'Le encanta leer. ¿Le compramos un libro?', pl: 'Uwielbia czytać. Może kupimy jej książkę?' },
+          { speaker: 'T', text: 'Buena idea, pero no sé qué libros le gustan.', pl: 'Dobry pomysł, ale nie wiem, jakie książki lubi.' },
+          { speaker: 'A', text: 'Su hermana lo sabe. Le envío un mensaje ahora.', pl: 'Jej siostra wie. Zaraz wyślę jej wiadomość.' },
+          { speaker: 'T', text: 'Perfecto. Y yo le preparo una cena polaca.', pl: 'Świetnie. A ja przygotuję jej polską kolację.' },
+          { speaker: 'A', text: '¡Me encanta la idea! Pero no se lo digas: es una sorpresa.', pl: 'Super pomysł! Ale nie mów jej o tym: to niespodzianka.' },
+          { speaker: 'T', text: 'Tranquila, no se lo digo a nadie.', pl: 'Spokojnie, nikomu nie powiem.' },
+          { speaker: 'A', text: 'Ah, ¿y me prestas veinte euros? Te los doy el lunes.', pl: 'A, i pożyczysz mi dwadzieścia euro? Oddam ci je w poniedziałek.' },
+          { speaker: 'T', text: 'Vale, te los presto… ¡pero el lunes me los das!', pl: 'Dobra, pożyczę ci… ale w poniedziałek mi je oddasz!' },
+        ],
+        questions: [
+          {
+            id: 'es.d.27-q1',
+            prompt: 'Co lubi robić Lucía?',
+            options: ['Gotować', 'Czytać', 'Podróżować'],
+            answer: 1,
+            explanation: '„Le encanta leer.” — uwielbia czytać.',
+          },
+          {
+            id: 'es.d.27-q2',
+            prompt: 'Do kogo Alba wysyła wiadomość?',
+            options: ['Do Lucíi', 'Do Tomka', 'Do siostry Lucíi'],
+            answer: 2,
+            explanation: '„Su hermana lo sabe. Le envío un mensaje ahora.” — pisze do siostry Lucíi, bo ona wie, jakie książki Lucía lubi.',
+          },
+          {
+            id: 'es.d.27-q3',
+            prompt: 'Ile pieniędzy Tomek pożycza Albie?',
+            options: ['Dziesięć euro', 'Dwadzieścia euro', 'Nic nie pożycza'],
+            answer: 1,
+            explanation: '„¿Me prestas veinte euros?” — „Vale, te los presto…”',
+          },
+        ],
+      },
+      summary: [
+        'Komu? me, te, le, nos, os, les — te envío, le explico, nos dan.',
+        'Le / les + osoba z a: Le regalé un libro a mi hermana.',
+        'Dwa zaimki: najpierw komu, potem co — me lo, te la; le / les + lo / la → se lo, se la.',
+        'Przy bezokoliczniku i rozkazie zaimki na końcu: voy a decírtelo, dímelo; w przeczeniu przed czasownikiem: no se lo digas.',
+      ],
+      followUp: 'Za kilka minut powtórz pary zaimków: te lo, se la, me los. W następnej lekcji opowiesz, co dzieje się w tej chwili (estoy leyendo), i poznasz różnicę między por i para.',
+    },
   ],
 };
