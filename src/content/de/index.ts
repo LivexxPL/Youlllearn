@@ -6,6 +6,7 @@ import { unit4 } from './unit4';
 import { unit5 } from './unit5';
 import { unit6 } from './unit6';
 import { unit7 } from './unit7';
+import { unit8 } from './unit8';
 import { stories } from './stories';
 
 export const german: CourseDefinition = {
@@ -21,6 +22,6 @@ export const german: CourseDefinition = {
   emblem: 'DE',
   description: 'Od powitań i rodzajników po czasy przeszłe, zdania podrzędne i porównania — krok po kroku od A1 do A2, bez tabel na start.',
   framework: 'CEFR A1 → A2',
-  units: [unit1, unit2, unit3, unit4, unit5, unit6, unit7],
+  units: [unit1, unit2, unit3, unit4, unit5, unit6, unit7, unit8],
   stories,
 };
