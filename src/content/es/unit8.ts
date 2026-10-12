@@ -271,8 +271,8 @@ export const unit8: Unit = {
         questions: [
           {
             id: 'es.d.29-q1',
-            prompt: 'Dlaczego Weronika się denerwuje?',
-            options: ['Bo jutro ma egzamin z hiszpańskiego', 'Bo nie może jechać na plażę', 'Bo przyjeżdża jej rodzina'],
+            prompt: 'Co czeka Weronikę jutro?',
+            options: ['Egzamin z hiszpańskiego', 'Wyjazd na plażę', 'Przyjazd rodziny'],
             answer: 0,
             explanation: '„Mañana tengo el examen de español y estoy muy cansada.”',
           },
