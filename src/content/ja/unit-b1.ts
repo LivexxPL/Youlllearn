@@ -40,7 +40,7 @@ export const unitB1: Unit = {
           { text: '{春分|しゅんぶん}の {日|ひ}', pl: 'równonoc wiosenna (święto)' },
         ], {
           plAlts: ['wiosenny'],
-          note: 'Rok szkolny i rok podatkowy zaczynają się w Japonii wiosną — w kwietniu, gdy kwitną wiśnie.',
+          note: 'Rok szkolny i rok budżetowy zaczynają się w Japonii wiosną — w kwietniu, gdy kwitną wiśnie.',
         }),
         kanji('natsu', '夏', 'lato', 'なつ・か', ['カ', 'ゲ'], ['なつ'], [
           { text: '{夏|なつ}', pl: 'lato' },
@@ -431,14 +431,14 @@ export const unitB1: Unit = {
         p('tekureru', '〜て くれる', 'ktoś robi coś dla mnie', {
           romaji: '~te kureru',
           tts: 'つくって くれる',
-          alts: ['てくれる', 'て くれます', 'つくって くれました'],
+          alts: ['てくれる', 'て くれます', 'つくって くれる'],
           plAlts: ['ktoś coś dla mnie robi', 'zrobić coś dla mnie'],
           note: 'Ktoś (z życzliwości) robi coś dla mnie albo „moich”: 母が 料理を 作って くれました. Prośba: 〜て くれませんか — czy mógłbyś…?',
         }),
         p('temorau', '〜て もらう', 'dostać od kogoś przysługę', {
           romaji: '~te morau',
           tts: 'おしえて もらう',
-          alts: ['てもらう', 'て もらいます', 'おしえて もらいました'],
+          alts: ['てもらう', 'て もらいます', 'おしえて もらう'],
           plAlts: ['poprosić kogoś o zrobienie czegoś', 'ktoś coś dla mnie zrobił'],
           note: 'Ja dostaję przysługę, często na własną prośbę; wykonawca + に: 友だちに 教えて もらいました — kolega mi wytłumaczył. Grzeczna prośba: 〜て もらえませんか.',
         }),
@@ -508,7 +508,7 @@ export const unitB1: Unit = {
         }),
         s('33-5', 'かさを {電車|でんしゃ}の {中|なか}に わすれて しまいました。', 'Niestety zostawiłem / zostawiłam parasol w pociągu.', {
           romaji: 'kasa o densha no naka ni wasurete shimaimashita.',
-          plAlts: ['Niestety zostawiłem parasol w pociągu.', 'Niestety zostawiłam parasol w pociągu.', 'Zapomniałem parasola z pociągu.', 'Zapomniałam parasola z pociągu.'],
+          plAlts: ['Niestety zostawiłem parasol w pociągu.', 'Niestety zostawiłam parasol w pociągu.', 'Zapomniałem parasola w pociągu.', 'Zapomniałam parasola w pociągu.'],
           tokens: ['かさ', 'を', '{電車|でんしゃ}', 'の', '{中|なか}', 'に', 'わすれて', 'しまいました'],
         }),
         s('33-6', 'ケーキを ぜんぶ {食|た}べちゃった。', 'Zjadłem / zjadłam całe ciasto.', {
@@ -541,7 +541,7 @@ export const unitB1: Unit = {
             'Czasowniki dawania łączą się z formą て i wtedy „dają” **czynność** — przysługę. Kierunek jest taki sam jak przy przedmiotach: [[〜て あげる]] — robię coś dla kogoś, [[〜て くれる]] — ktoś robi coś dla mnie, [[〜て もらう]] — dostaję od kogoś przysługę.',
             '[[いもうとに {本|ほん}を {読|よ}んで あげました。]] — Przeczytałem siostrze książkę. [[{母|はは}が {料理|りょうり}を {作|つく}って くれました。]] — Mama ugotowała dla mnie obiad. [[{友|とも}だちに しゅくだいを {教|おし}えて もらいました。]] — Kolega wytłumaczył mi zadanie (bo go poprosiłem).',
             'くれる i もらう opisują tę samą przysługę z dwóch stron: くれる podkreśla życzliwość wykonawcy (podmiot z が), もらう — że to my skorzystaliśmy, często na własną prośbę (wykonawca z に). Bez nich zdanie brzmi chłodno: 母が 料理を 作りました — mama ugotowała (i tyle).',
-            'Prośby: [[〜て くれませんか]] (do bliskich) i grzeczniej [[〜て もらえませんか]] — czy mógłbyś…? Uwaga: 〜て あげる wobec starszych i przełożonych brzmi protekcjonalnie. Zamiast ✗ 先生、てつだって あげます zaproponuj: [[てつだいましょうか。]]',
+            'Prośby: [[〜て くれませんか]] (uprzejmie) i jeszcze grzeczniej [[〜て もらえませんか]] — czy mógłbyś…? Uwaga: 〜て あげる wobec starszych i przełożonych brzmi protekcjonalnie. Zamiast ✗ 先生、てつだって あげます zaproponuj: [[てつだいましょうか。]]',
           ],
           table: {
             head: ['', 'kto dla kogo', 'przykład'],
@@ -669,9 +669,9 @@ export const unitB1: Unit = {
           { speaker: 'H', text: 'じゃあ、わたしは {飲|の}み{物|もの}を {買|か}って おきますね。', pl: 'To ja kupię wcześniej napoje.', romaji: 'jaa, watashi wa nomimono o katte okimasu ne.' },
           {
             speaker: 'W',
-            text: 'あ、そうだ。きのう、カメラを {学校|がっこう}に わすれて しまったんです。',
-            pl: 'A, właśnie. Wczoraj niestety zostawiłam aparat w szkole.',
-            romaji: 'a, sou da. kinou, kamera o gakkou ni wasurete shimatta n desu.',
+            text: 'あ、そうだ。きのう、カメラを {電車|でんしゃ}の {中|なか}に わすれて しまったんです。',
+            pl: 'A, właśnie. Wczoraj niestety zostawiłam aparat w pociągu.',
+            romaji: 'a, sou da. kinou, kamera o densha no naka ni wasurete shimatta n desu.',
           },
           { speaker: 'H', text: 'だいじょうぶですよ。わたしが しゃしんを とって あげます。', pl: 'Nic nie szkodzi. Ja zrobię zdjęcia.', romaji: 'daijoubu desu yo. watashi ga shashin o totte agemasu.' },
           { speaker: 'H', text: 'じゃあ、かえりましょう。あ、まどを {閉|し}めて くれませんか。', pl: 'To wracajmy. Aha, możesz zamknąć okno?', romaji: 'jaa, kaerimashou. a, mado o shimete kuremasen ka.' },
@@ -695,9 +695,9 @@ export const unitB1: Unit = {
           {
             id: 'ja.d.33-q3',
             prompt: 'Co się stało z aparatem Weroniki?',
-            options: ['Zepsuł się', 'Zostawiła go w szkole', 'Pożyczyła go Haruto'],
+            options: ['Zepsuł się', 'Zostawiła go w pociągu', 'Pożyczyła go Haruto'],
             answer: 1,
-            explanation: 'カメラを 学校に わすれて しまったんです — niestety zostawiłam aparat w szkole.',
+            explanation: 'カメラを 電車の 中に わすれて しまったんです — niestety zostawiłam aparat w pociągu.',
           },
         ],
       },
@@ -724,7 +724,7 @@ export const unitB1: Unit = {
           { text: '{明日|あした}', pl: 'jutro' },
         ], {
           plAlts: ['jasność', 'światło', 'wyraźny'],
-          note: 'Słońce (日) i księżyc (月) razem dają światło. W 明日 czytanie jest nieregularne: あした (oficjalnie あす). Od teraz piszemy 明日.',
+          note: 'Łatwo zapamiętać: słońce (日) i księżyc (月) razem dają światło. W 明日 czytanie jest nieregularne: あした (oficjalnie あす). Od teraz piszemy 明日.',
         }),
         kanji('mise', '店', 'sklep; lokal', 'みせ・てん', ['テン'], ['みせ'], [
           { text: '{店|みせ}', pl: 'sklep; lokal' },
@@ -739,7 +739,7 @@ export const unitB1: Unit = {
           { text: '{長男|ちょうなん}', pl: 'najstarszy syn' },
         ], {
           plAlts: ['męski', 'chłopak'],
-          note: 'Na górze pole ryżowe, na dole znak siły — dawniej mężczyzna to ten, kto pracuje w polu. Od teraz おとこの ひと piszemy 男の人.',
+          note: 'Na górze pole ryżowe, na dole znak siły — łatwo zapamiętać: mężczyzna to ten, kto pracuje w polu. Od teraz おとこの ひと piszemy 男の人.',
         }),
         kanji('onna', '女', 'kobieta', 'おんな・じょ', ['ジョ', 'ニョ'], ['おんな', 'め'], [
           { text: '{女|おんな}の {人|ひと}', pl: 'kobieta' },
@@ -999,7 +999,7 @@ export const unitB1: Unit = {
             pl: 'Tak. Podobno mają tam przepyszny ramen.',
             romaji: 'hai. ano mise no raamen wa totemo oishii rashii desu yo.',
           },
-          { speaker: 'Z', text: '{人気|にんき}が あるみたいですね。', pl: 'Najwyraźniej jest bardzo popularny.', romaji: 'ninki ga aru mitai desu ne.' },
+          { speaker: 'Z', text: '{人気|にんき}が あるみたいですね。', pl: 'Najwyraźniej jest popularny.', romaji: 'ninki ga aru mitai desu ne.' },
           {
             speaker: 'S',
             text: 'でも、{友|とも}だちに よると、{一時間|いちじかん} まつそうです。',
@@ -1088,7 +1088,7 @@ export const unitB1: Unit = {
           { text: '{日本犬|にほんけん}', pl: 'rodzime japońskie rasy psów (np. shiba)' },
         ], {
           plAlts: ['psy', 'piesek'],
-          note: 'Znak 大 (duży) z kropką w prawym górnym rogu — to sterczące ucho psa. Słowo いぬ znasz z lekcji hiragany — od teraz piszemy 犬.',
+          note: 'Znak 大 (duży) z kropką w prawym górnym rogu — wyobraź sobie sterczące ucho psa. Słowo いぬ znasz z lekcji hiragany — od teraz piszemy 犬.',
         }),
         kanji('otouto', '弟', 'młodszy brat', 'おとうと・だい', ['ダイ', 'テイ', 'デ'], ['おとうと'], [
           { text: '{弟|おとうと}', pl: '(mój) młodszy brat' },
@@ -1103,7 +1103,7 @@ export const unitB1: Unit = {
           { text: '{早起|はやお}き', pl: 'wczesne wstawanie' },
         ], {
           plAlts: ['wstać', 'obudzić się', 'budzić'],
-          note: 'Po lewej znak biegu, po prawej sylwetka, która się prostuje — wstajemy i ruszamy. 起きる (gr. 2) — wstaję sam(a), 起こす (gr. 1) — budzę kogoś, 起こる — coś się dzieje. Od teraz おきます piszemy 起きます.',
+          note: 'Po lewej znak biegu, a prawą część wyobraź sobie jako sylwetkę, która się prostuje — wstajemy i ruszamy. 起きる (gr. 2) — wstaję sam(a), 起こす (gr. 1) — budzę kogoś, 起こる — coś się dzieje. Od teraz おきます piszemy 起きます.',
         }),
         p('ukemi', '〜に 〜られる', 'zostać …-nym przez kogoś (strona bierna)', {
           romaji: '~ni ~rareru',
@@ -1251,7 +1251,7 @@ export const unitB1: Unit = {
           title: '„Poszkodowana” strona bierna: coś mi się przytrafiło',
           body: [
             'Japońska strona bierna ma drugie, bardzo częste zastosowanie: mówi, że ktoś **ucierpiał** przez czyjeś działanie albo przez zdarzenie. [[{雨|あめ}に ふられました。]] — Zmokłem (dosł. deszcz spadł na mnie, a ja na tym ucierpiałem). Ten wariant działa nawet z czasownikami bez dopełnienia: [[どろぼうに {入|はい}られました。]] — Okradli nas (złodziej nam wszedł).',
-            'Gdy ktoś zrobi coś z **twoją rzeczą albo częścią ciała**, podmiotem zostajesz ty, a rzecz zachowuje を: [[となりの {人|ひと}に {足|あし}を ふまれました。]] — Osoba obok nadepnęła mi na nogę. Nie mów ✗ わたしの {足|あし}は ふまれました — podmiotem jest człowiek, któremu coś się przytrafiło, a nie jego noga.',
+            'Gdy ktoś zrobi coś z **twoją rzeczą albo częścią ciała**, podmiotem zostajesz ty, a rzecz zachowuje を: [[となりの {人|ひと}に {足|あし}を ふまれました。]] — Osoba obok nadepnęła mi na nogę. Nie mów ✗ わたしの 足は ふまれました — podmiotem jest człowiek, któremu coś się przytrafiło, a nie jego noga.',
             'Porównaj z 〜て くれる: [[{弟|おとうと}が ケーキを {作|つく}って くれました。]] — Brat upiekł mi ciasto (miło!) ↔ [[{弟|おとうと}に ケーキを {食|た}べられました。]] — Brat zjadł mi ciasto (szkoda!). Strona bierna często niesie żal albo kłopot, 〜て くれる — wdzięczność.',
           ],
           table: {
@@ -1314,7 +1314,7 @@ export const unitB1: Unit = {
           id: 'ja.x.35-5',
           concept: 'ja.g.suffering-passive',
           sentence: '{友|とも}だちに ___、しゅくだいが できませんでした。',
-          pl: 'Przyszedł do mnie kolega i nie mogłem odrobić zadania.',
+          pl: 'Przyszedł do mnie kolega i nie mogłem / nie mogłam odrobić zadania.',
           options: ['こられて', 'きられて', 'くられて'],
           answer: 'こられて',
           explanation: 'くる → こられる (tak samo jak forma potencjalna). To „poszkodowana” strona bierna: kolega przyszedł nie w porę, a ja na tym ucierpiałem.',
@@ -1449,7 +1449,7 @@ export const unitB1: Unit = {
           { text: '{駅員|えきいん}', pl: 'pracownik stacji' },
         ], {
           plAlts: ['pracownik', 'członek', 'personel'],
-          note: 'Na górze 口, na dole muszla — dawniej pieniądz; ludzi liczono „po głowach”. Tylko czytanie on いん, zawsze na końcu słów o ludziach: 店員, 駅員, 会社員.',
+          note: 'Łatwo zapamiętać: na górze 口 („głowa”), na dole muszla — dawny pieniądz; pracownik to „głowa”, której się płaci. Tylko czytanie on いん, zwykle na końcu słów o ludziach: 店員, 駅員, 会社員.',
         }),
         kanji('eki', '駅', 'stacja', 'えき', ['エキ'], [], [
           { text: '{駅|えき}', pl: 'stacja; dworzec' },
@@ -1465,7 +1465,7 @@ export const unitB1: Unit = {
           { text: 'お{待|ま}たせしました', pl: 'przepraszam, że musiał pan / musiała pani czekać' },
         ], {
           plAlts: ['poczekać', 'zaczekać', 'oczekiwać'],
-          note: 'Po lewej znak drogi, po prawej świątynia — czekanie u bram świątyni. Od teraz まつ piszemy 待つ. お待たせしました usłyszysz za każdym razem, gdy kelner przyniesie zamówienie.',
+          note: 'Po lewej znak drogi, po prawej świątynia — wyobraź sobie czekanie u bram świątyni. Od teraz まつ piszemy 待つ. お待たせしました usłyszysz za każdym razem, gdy kelner przyniesie zamówienie.',
         }),
         p('irassharu', 'いらっしゃる', 'być; przychodzić; iść (z szacunkiem)', {
           alts: ['いらっしゃいます'],

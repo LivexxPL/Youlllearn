@@ -1570,7 +1570,7 @@ export const unitCasual: Unit = {
           concept: 'ja.g.potential',
           sentence: 'あした、うちに ___か。',
           pl: 'Możesz jutro przyjść do mnie?',
-          options: ['{来|こ}られます', '{来|き}られます', '{来|く}れます'],
+          options: ['{来|こ}られます', '{来|き}られます', 'くれます'],
           answer: '{来|こ}られます',
           explanation: 'くる jest nieregularny: こられる → こられます (jak przeczenie こない). ✗ きられます, a くれます to inny czasownik — poznasz go w następnej lekcji.',
         },
@@ -1983,9 +1983,9 @@ export const unitCasual: Unit = {
           { speaker: 'O', text: 'わあ、ありがとう ございます! {何|なん}ですか。', pl: 'Och, dziękuję bardzo! Co to jest?', romaji: 'waa, arigatou gozaimasu! nan desu ka.' },
           {
             speaker: 'K',
-            text: 'きょうとの おかしです。{先月|せんげつ} {日本|にほん}へ {行|い}ったので、{買|か}いました。',
-            pl: 'Słodycze z Kioto. W zeszłym miesiącu byłem w Japonii, więc je kupiłem.',
-            romaji: 'kyouto no okashi desu. sengetsu nihon e itta node, kaimashita.',
+            text: 'きょうとの おかしです。{先月|せんげつ} {日本|にほん}に かえったので、{買|か}いました。',
+            pl: 'Słodycze z Kioto. W zeszłym miesiącu pojechałem do domu, do Japonii, więc je kupiłem.',
+            romaji: 'kyouto no okashi desu. sengetsu nihon ni kaetta node, kaimashita.',
           },
           {
             speaker: 'O',
