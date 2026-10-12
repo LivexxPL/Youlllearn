@@ -423,7 +423,7 @@ export const stories: Story[] = [
     questions: [
       {
         id: 'es.st.11-q1',
-        prompt: 'Dlaczego Ernesto nie pojechał do Madrytu?',
+        prompt: 'Dlaczego Ernesto musiał czekać na następny pociąg?',
         options: ['Bo pociąg już odjechał', 'Bo nie miał biletu', 'Bo musiał pracować w hotelu'],
         answer: 0,
         explanation: '„Cuando llegué a la estación, el tren para Madrid ya había salido.” — pluscuamperfecto: pociąg odjechał, zanim Ernesto dotarł na dworzec.',
