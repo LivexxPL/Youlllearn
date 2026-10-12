@@ -1,6 +1,6 @@
 # Stroke-order data
 
-`strokes.json` contains stroke paths for 284 characters extracted from
+`strokes.json` contains stroke paths for 287 characters extracted from
 **KanjiVG** (https://kanjivg.tagaini.net), copyright © Ulrich Apel and contributors,
 licensed under **Creative Commons Attribution-Share Alike 3.0**
 (https://creativecommons.org/licenses/by-sa/3.0/).
