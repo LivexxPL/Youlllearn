@@ -376,7 +376,7 @@ export const stories: Story[] = [
         text: 'Das ist der Stephansdom. Hier wurde schon im 12. Jahrhundert eine Kirche gebaut.',
         pl: 'To katedra świętego Szczepana. Już w XII wieku zbudowano tu kościół.',
       },
-      { speaker: 'Elisabeth', text: 'Auch heute muss die Kirche jedes Jahr repariert werden.', pl: 'Także dziś katedrę trzeba co roku remontować.' },
+      { speaker: 'Elisabeth', text: 'Noch heute muss die Kirche ständig repariert werden.', pl: 'Do dziś katedrę trzeba stale remontować.' },
       { speaker: 'Elisabeth', text: 'Und hier sehen Sie das Hotel Sacher. Es wurde 1876 gegründet.', pl: 'A tu widzą państwo hotel Sacher. Założono go w 1876 roku.' },
       {
         speaker: 'Elisabeth',

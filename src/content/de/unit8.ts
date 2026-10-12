@@ -339,7 +339,7 @@ export const unit8: Unit = {
           plAlts: ['więc', 'z tego powodu', 'zatem'],
           note: 'Wprowadza skutek; czasownik zaraz po nim: Ich bin müde, deshalb bleibe ich zu Hause.',
         }),
-        word('deswegen', 'deswegen', 'dlatego (potocznie)', {
+        word('deswegen', 'deswegen', 'dlatego (częściej w mowie)', {
           pos: 'adv',
           plAlts: ['dlatego', 'więc', 'z tego powodu'],
           note: 'To samo co deshalb, częstsze w mowie. Szyk ten sam: Deswegen bleibe ich zu Hause.',
@@ -352,7 +352,7 @@ export const unit8: Unit = {
         word('ausserdem', 'außerdem', 'poza tym; oprócz tego', {
           pos: 'adv',
           plAlts: ['poza tym', 'oprócz tego', 'ponadto', 'w dodatku'],
-          note: 'Dodaje kolejny argument; czasownik zaraz po nim: Außerdem ist die Miete teuer.',
+          note: 'Dodaje kolejny argument; czasownik zaraz po nim: Außerdem ist die Miete hoch.',
         }),
         phrase('einerseits-andererseits', 'einerseits … andererseits', 'z jednej strony…, z drugiej strony…', {
           tts: 'einerseits, andererseits',
@@ -449,10 +449,11 @@ export const unit8: Unit = {
           note: 'heuer — austriackie „w tym roku”.',
           accent: 'de-AT',
         }),
-        s('31-6', 'In der Stadt ist es laut. Außerdem ist die Miete sehr teuer.', 'W mieście jest głośno. Poza tym czynsz jest bardzo drogi.', {
+        s('31-6', 'In der Stadt ist es laut. Außerdem ist die Miete sehr hoch.', 'W mieście jest głośno. Poza tym czynsz jest bardzo wysoki.', {
           plAlts: [
-            'W mieście jest głośno. Oprócz tego czynsz jest bardzo drogi.',
-            'W mieście jest głośno, a poza tym czynsz jest bardzo drogi.',
+            'W mieście jest głośno. Oprócz tego czynsz jest bardzo wysoki.',
+            'W mieście jest głośno, a poza tym czynsz jest bardzo wysoki.',
+            'W mieście jest głośno. Poza tym czynsz jest bardzo drogi.',
             'W mieście jest głośno. Poza tym czynsze są bardzo wysokie.',
           ],
         }),
@@ -500,7 +501,7 @@ export const unit8: Unit = {
               ['weil', 'czasownik na końcu', '…, weil ich müde bin.'],
               ['denn', 'szyk bez zmian', '…, denn ich bin müde.'],
               ['deshalb / deswegen', 'czasownik zaraz po nim', '…, deshalb bleibe ich zu Hause.'],
-              ['außerdem', 'czasownik zaraz po nim', 'Außerdem ist die Miete teuer.'],
+              ['außerdem', 'czasownik zaraz po nim', 'Außerdem ist die Miete hoch.'],
             ],
           },
           contrast:
@@ -618,8 +619,8 @@ export const unit8: Unit = {
           { speaker: 'P', text: 'Auf dem Land? Aber wir arbeiten doch in der Stadt!', pl: 'Na wsi? Ale przecież pracujemy w mieście!' },
           {
             speaker: 'N',
-            text: 'Ich weiß. Aber hier ist es so laut, und außerdem ist die Miete sehr teuer.',
-            pl: 'Wiem. Ale tu jest tak głośno, a poza tym czynsz jest bardzo drogi.',
+            text: 'Ich weiß. Aber hier ist es so laut, und außerdem ist die Miete sehr hoch.',
+            pl: 'Wiem. Ale tu jest tak głośno, a poza tym czynsz jest bardzo wysoki.',
           },
           {
             speaker: 'P',
@@ -1104,7 +1105,6 @@ export const unit8: Unit = {
             'Zanim przyjechałam do Grazu, w ogóle nie znałam niemieckiego.',
           ],
           note: 'Kein Deutsch können — nie znać niemieckiego (ani trochę).',
-          accent: 'de-AT',
         }),
         s('33-8', 'Dann fand ich den Schlüssel unter dem Sofa.', 'Potem znalazłem klucz pod kanapą.', {
           alts: ['Dann fand ich unter dem Sofa den Schlüssel.'],
@@ -1566,7 +1566,7 @@ export const unit8: Unit = {
       dialogue: {
         id: 'de.d.34',
         title: 'Gdybyśmy wygrali…',
-        context: 'Przerwa w pracy w Wiedniu. Tomek i jego koleżanka Julia kupili razem los na loterię i zaczynają marzyć.',
+        context: 'Przerwa w pracy w Wiedniu. Tomek i jego koleżanka Julia wysłali razem kupon lotto i zaczynają marzyć.',
         speakers: {
           J: { name: 'Julia', voice: 'a', accent: 'de-AT' },
           T: { name: 'Tomek', voice: 'b', accent: 'de-AT' },

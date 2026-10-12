@@ -294,7 +294,7 @@ export const unit7: Unit = {
         }),
         phrase('ich-haette-gern', 'ich hätte gern', 'poproszę… (bardzo grzecznie)', {
           plAlts: ['poproszę', 'chętnie bym wziął', 'chętnie bym wzięła'],
-          note: 'Jeszcze uprzejmiej niż ich möchte: Ich hätte gern einen Tee. — Poproszę herbatę. Hätte = miałbym / miałabym (od haben).',
+          note: 'Tak samo uprzejme jak ich möchte, typowe przy ladzie i w kawiarni: Ich hätte gern einen Tee. — Poproszę herbatę. Hätte = miałbym / miałabym (od haben).',
         }),
         phrase('koennten-sie', 'Könnten Sie…?', 'czy mógłby pan…? / czy mogłaby pani…?', {
           tts: 'Könnten Sie mir helfen?',
