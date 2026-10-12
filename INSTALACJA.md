@@ -75,10 +75,14 @@ Postępy są zapisane tylko na urządzeniu, nie ma konta ani chmury. Aby przenie
 
 ## Jednorazowe ustawienie dla właściciela repozytorium
 
-Strona https://livexxpl.github.io/Youlllearn/ działa, gdy GitHub Pages publikuje gałąź
-`gh-pages`, którą tworzy workflow CI. Jeśli link pokazuje błąd 404, włącz to raz w GitHubie:
-*Settings → Pages → Build and deployment → Source: **Deploy from a branch**, Branch:
-**gh-pages** / **(root)** → Save*. Po minucie strona działa.
+Strona https://livexxpl.github.io/Youlllearn/ działa, gdy w repozytorium włączone jest GitHub
+Pages. Workflow CI publikuje każdą sprawdzoną wersję na oba sposoby, więc pasuje każde z dwóch
+ustawień w *Settings → Pages → Build and deployment → Source*:
+
+- **GitHub Actions** — nic więcej nie trzeba ustawiać;
+- **Deploy from a branch** — wtedy wybierz Branch: **gh-pages** / **(root)** → Save.
+
+Strona pojawia się po zakończeniu najbliższego przebiegu CI (kilka minut).
 
 ## Dla programistów
 

@@ -1,7 +1,8 @@
 # Web checks: lint, types, unit tests, production build and Playwright E2E
 # (phone + tablet viewports). Runs on every push and pull request.
-# On pushes, the tested build is published to GitHub Pages (gh-pages branch):
-#   https://<owner>.github.io/<repo>/  (see INSTALACJA.md)
+# On pushes, the tested build is published to GitHub Pages, whichever source the repository
+# uses (the gh-pages branch or "GitHub Actions"): https://<owner>.github.io/<repo>/
+# (see INSTALACJA.md)
 name: CI
 
 on:
@@ -57,6 +58,13 @@ jobs:
             commit -q -m "Deploy ${GITHUB_SHA::7} from ${GITHUB_REF_NAME}"
           git push -q --force "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" gh-pages
 
+      # The same build as a Pages artifact, for repositories whose Pages source is "GitHub Actions".
+      - name: Package the web app for GitHub Pages
+        if: github.event_name == 'push'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
       - name: Upload Playwright report
         if: failure()
         uses: actions/upload-artifact@v6
@@ -66,3 +74,31 @@ jobs:
             playwright-report
             test-results
           retention-days: 7
+
+  # GitHub Pages can publish either the gh-pages branch (pushed above) or an artifact deployed
+  # from a workflow. This job reads which source the repository uses and deploys the artifact
+  # when the source is "GitHub Actions".
+  pages:
+    needs: web
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Read the GitHub Pages settings
+        id: config
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          config=$(gh api "repos/${GITHUB_REPOSITORY}/pages" 2>/dev/null || echo '{}')
+          echo "$config" | jq '{status, build_type, source, html_url}'
+          echo "build_type=$(echo "$config" | jq -r '.build_type // "none"')" >> "$GITHUB_OUTPUT"
+
+      - name: Deploy to GitHub Pages
+        id: deploy
+        if: steps.config.outputs.build_type == 'workflow'
+        uses: actions/deploy-pages@v4

@@ -115,9 +115,10 @@ The same APK is also attached to each run's *Artifacts* section. Install it by o
 the phone (allow "install unknown apps") or with `adb install -r`. Step-by-step instructions
 in Polish: [INSTALACJA.md](../INSTALACJA.md).
 
-`ci.yml` publishes the tested web build to the `gh-pages` branch, served by GitHub Pages at
-https://livexxpl.github.io/Youlllearn/ (enable Pages once: *Settings → Pages → Deploy from a
-branch → gh-pages*).
+`ci.yml` publishes the tested web build to GitHub Pages at https://livexxpl.github.io/Youlllearn/,
+both as the `gh-pages` branch and as a Pages deployment, so either Pages source works (enable
+Pages once in *Settings → Pages*: source "GitHub Actions", or "Deploy from a branch" with
+`gh-pages`).
 
 ## 5. What the Android build contains
 
