@@ -1,7 +1,7 @@
 # Polyglot Quest
 
 Mobile-first, audio-first language learning for Polish speakers: **Spanish, German and
-Japanese from zero to A2**. One codebase runs in the browser (installable PWA, works offline) and as
+Japanese from zero to A2, plus a first B1 unit**. One codebase runs in the browser (installable PWA, works offline) and as
 an Android app (Capacitor). No account, no ads, no paid APIs: progress stays on the device.
 
 > **Jak zacząć (PL):** otwórz **[aplikację w przeglądarce](https://livexxpl.github.io/Youlllearn/)**
@@ -31,15 +31,15 @@ an Android app (Capacitor). No account, no ads, no paid APIs: progress stays on 
 | Area | State |
 | --- | --- |
 | Web app / PWA | ✅ Builds, runs offline, tested on phone/tablet/desktop viewports (light and dark) |
-| Courses | ✅ 23 Spanish, 24 German, 25 Japanese lessons: A1 and a large part of A2 (CEFR / JF Standard), with real content, checked in a separate proofreading pass; ⚠️ not yet proofread by native speakers, A2 not complete yet |
+| Courses | ✅ 33 Spanish, 34 German, 36 Japanese lessons: A1, A2 (completed by an A2+ unit) and a first B1 unit (CEFR / JF Standard), with real content, checked in a separate proofreading pass; ⚠️ not yet proofread by native speakers, B1 only started |
 | Android project | ✅ Capacitor project, icons, signing config, CI workflow. GitHub Actions builds an installable debug APK (and an unsigned release APK) on every push. ⚠️ Not built in the development sandbox (the Android SDK host is blocked there) and not yet tried on a physical device; see [docs/ANDROID_BUILD.md](docs/ANDROID_BUILD.md). |
 | Audio | ✅ Device text-to-speech with graceful fallbacks; ⚠️ voice quality not evaluated by ear (no audio in the sandbox), see [docs/AUDIO.md](docs/AUDIO.md) |
-| Tests | ✅ 237 unit tests, 16 E2E tests (phone + tablet), lint and type check clean |
+| Tests | ✅ 370 unit tests, 12 E2E tests run on phone and tablet, lint and type check clean |
 
 ## Features
 
 **Learning**
-- Lesson path per language, grouped by level (Kana, A1, A2). Learners who already know a
+- Lesson path per language, grouped by level (Kana, A1, A2, A2+, B1). Learners who already know a
   level can start the next one directly; "continue" then moves on from there.
 - Each lesson: objective → warm-up → new words in small chunks with audio →
   grammar with Polish contrasts → examples → dialogue with questions → speaking → (Japanese)
@@ -156,7 +156,7 @@ attribution.
 - Native-speaker proofreading of all three courses; recorded human audio for core phrases,
   using openly licensed recordings with per-file attribution.
 - Reliable screen-off listening on Android: a foreground audio service with pre-rendered TTS.
-- Complete A2 (the missing topics are listed in docs/CURRICULUM.md), then B1; additional
+- Complete B1 (the missing topics are listed in docs/CURRICULUM.md); additional
   interface languages (the catalogue architecture is ready).
 - FSRS-style scheduler parameters fitted to each learner's review history.
 - Optional on-device speech recognition (Whisper-compatible), still without pretending to

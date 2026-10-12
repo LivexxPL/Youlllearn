@@ -48,10 +48,13 @@ column is kept honest: a milestone is "done" only when it is implemented *and* c
 | 5 | Spaced repetition, daily goals, motivation | ✅ done |
 | 6 | Stylus & tablet support | ✅ done: Pointer Events canvas, KanjiVG stroke guides, stylus mode, notes |
 | 7 | Persistence, offline, import/export | ✅ done: IndexedDB, PWA precache, JSON export/import (E2E-tested round trip) |
-| 8 | Tests, optimisation, Android packaging | ✅ tests (now 237 unit, 16 E2E) and Android project/CI. The debug APK and an unsigned release APK are built by GitHub Actions; ⚠️ not compiled in this sandbox (SDK host blocked), not yet tried on a physical device. |
+| 8 | Tests, optimisation, Android packaging | ✅ tests (now 370 unit, 12 E2E on phone and tablet) and Android project/CI. The debug APK and an unsigned release APK are built by GitHub Actions; ⚠️ not compiled in this sandbox (SDK host blocked), not yet tried on a physical device. |
 | 9 | Documentation | ✅ done |
 | 10 | Level A2 (second iteration) | ✅ 25 new lessons (Spanish 9, German 9, Japanese 7), 9 stories, 33 more kanji; level labels on the path, "start at A2" shortcut, progress per level, two new badges. Proofread in a separate pass; ⚠️ not yet by native speakers. A2 is not complete (docs/CURRICULUM.md lists the missing topics). |
 | 11 | Bug hunt (second iteration) | ✅ fixes from a code review and user reports, each with a regression test where practical: slow (turtle) playback, Japanese answers graded wrong (several readings, romaji particles, n'), early reviews inflating SRS intervals, Android back navigation, dialog focus loss while typing, stale audio loops, loading flicker, and more (see git history). |
+| 12 | Easy access | ✅ web app on GitHub Pages (needs Pages enabled once), permanent APK link (release `android-latest`), install button and banner, QR codes, Polish install guide (INSTALACJA.md). |
+| 13 | Pastel colour themes | ✅ seven pastel palettes plus the classic one, each in light and dark mode, with background motifs; every palette contrast-tested (WCAG AA, body text AAA); no flash of the default theme on start. |
+| 14 | Levels A2+ and B1 (third iteration) | ✅ 31 new lessons (Spanish 10, German 10, Japanese 11): A2+ units complete A2, a first B1 unit per course; 9 stories, 44 more kanji (106 in total), a B1 badge. Proofread in a separate pass; ⚠️ not yet by native speakers. B1 has only started (docs/CURRICULUM.md lists the missing topics). |
 
 Checks run after the milestones: `npm run lint`, `npm run typecheck`, `npm test`,
 `npm run build`, `npm run build:native`, and `npx playwright test` (phone + tablet).

@@ -7,15 +7,17 @@ native speakers**. That review is the first recommended step before a public rel
 
 | Course | Framework | Units / lessons | Items | Sentences | Grammar notes | Authored exercises | Dialogues / stories | Lesson time |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Spanish | CEFR A1 → A2 | 6 / 23 (A2: 9) | 276 (203 words, 73 phrases) | 163 | 45 | 96 | 23 / 8 | ≈ 3.6 h |
-| German | CEFR A1 → A2 | 6 / 24 (A2: 9) | 283 (200 words, 83 phrases) | 166 | 44 | 98 | 24 / 8 | ≈ 3.8 h |
-| Japanese | Kana + JF Standard A1 → A2 (JLPT N5 → N4 only as orientation) | 6 / 25 (A2: 7) | 362 (121 kana, 62 kanji, 56 words, 123 phrases) | 121 | 50 | 96 | 15 / 7 | ≈ 4.7 h |
+| Spanish | CEFR A1 → B1 (B1 started) | 8 / 33 (A2: 9, A2+: 5, B1: 5) | 405 (289 words, 116 phrases) | 263 | 65 | 163 | 33 / 11 | ≈ 5.7 h |
+| German | CEFR A1 → B1 (B1 started) | 8 / 34 (A2: 9, A2+: 5, B1: 5) | 419 (318 words, 101 phrases) | 264 | 64 | 166 | 34 / 11 | ≈ 5.9 h |
+| Japanese | Kana + JF Standard A1 → B1 (JLPT N5 → N3 only as orientation; B1 started) | 8 / 36 (A2: 7, A2+: 6, B1: 5) | 534 (121 kana, 106 kanji, 56 words, 251 phrases) | 253 | 72 | 170 | 26 / 10 | ≈ 6.9 h |
 
 Reviews, Audio Quest and stories add open-ended practice on top. Every unit carries a level
-label (Kana, A1, A2) shown on the learning path; learners who already know a level can start
-the next one from its first unit, and "continue" then moves on from the furthest completed
-lesson. A1 is covered; **A2 is well under way but not complete** (missing topics are listed
-at the end of each course section). See docs/LEARNING_METHODOLOGY.md §2.
+label (Kana, A1, A2, A2+, B1) shown on the learning path; learners who already know a level can
+start the next one from its first unit, and "continue" then moves on from the furthest
+completed lesson. A1 and A2 are covered: the **A2+** units add the A2 topics that were still
+missing. **B1 has only started**: each course has one B1 unit of five lessons, and the topics
+still missing for a complete B1 are listed at the end of each course section. See
+docs/LEARNING_METHODOLOGY.md §2.
 
 ## Shared lesson format
 
@@ -49,15 +51,20 @@ are re-practised at the end of the lesson.
 | **W świecie** | 12 Travel: *estar* vs location, *ir* · 13 University: adjective agreement, *tener que* · 14 Plans & memories: *ir a* + infinitive, *pretérito perfecto* (first look at future and past) |
 | **Dzień po dniu** (A2) | 15 Daily routine: **reflexive verbs** (*me levanto*, stem changes), sequencing · 16 Shopping & clothes: numbers to 100, prices, *este/ese*, **direct object pronouns** *lo/la/los/las* · 17 Weather & seasons: *hace*, *llueve*, months; *gustar / encantar / preferir* · 18 At the doctor's: *me duele(n)* (like *gustar*), *ser* vs *estar* for states, advice |
 | **Opowiadamy o przeszłości** (A2) | 19 Yesterday: **pretérito indefinido** of *-ar* verbs; *he trabajado* vs *trabajé* · 20 The weekend: *-er/-ir* verbs, *ir/ser* (*fui*) · 21 Holidays: irregular *hice, tuve, estuve, pude, vine* (Mexican dialogue) · 22 **Comparisons**: *más/menos … que*, *tan … como*, *mejor/peor*, superlative · 23 Childhood: **pretérito imperfecto**, background vs event |
+| **Plany, prośby i polecenia** (A2+) | 24 Plans and predictions: **futuro simple** (regular and irregular stems), *voy a ir* vs *iré* · 25 Polite requests and advice: **condicional** (*me gustaría, podría, debería, yo que tú*) · 26 Instructions: **imperative** *tú/usted* with attached pronouns (*dímelo, siéntese*), negative imperative · 27 Gifts and favours: **indirect object pronouns**, *se lo* · 28 *estar* + **gerund**, **por vs para** |
+| **Życzenia, opinie i opowieści** (B1) | 29 Wishes: **presente de subjuntivo** (*quiero que, espero que, ojalá*) · 30 Advice and feelings: subjunctive after *te recomiendo que, es importante que, me alegra que*; infinitive vs *que* · 31 Opinions: *creo que* vs *no creo que* + subjunctive, connectors (*aunque, sin embargo, por eso, además, en cambio*) · 32 Telling a story: **pluscuamperfecto**, relative clauses (*que, donde, lo que, quien*) · 33 What if…?: *si* + present, **si + imperfecto de subjuntivo + condicional** |
 
 Accents: listening items are tagged **es-ES** or **es-MX**, and the tag is shown.
 Stories: *Nowa w Madrycie*, *Rodzina Pabla*, *Zwykły dzień Eleny*, *Wyjazd do Barcelony*,
 *Mój pierwszy rok hiszpańskiego*, *Pechowy poniedziałek*, *Wakacje na Jukatanie*,
-*Dzieciństwo w Andaluzji*.
+*Dzieciństwo w Andaluzji*, *Przyjęcie dla babci*, *Góry czy morze?*, *Pociąg, który
+odjechał*.
 
-Not yet covered for a complete A2: the simple future and the conditional, the affirmative
-and negative imperative, indirect object pronouns and their combination (*se lo*),
-*por* vs *para*, and *estar* + gerund.
+The A2 topics that were still missing (simple future and conditional, imperative, indirect
+object pronouns and *se lo*, *por* vs *para*, *estar* + gerund) are covered by the A2+ unit.
+Not yet covered for a complete B1: the subjunctive after time and purpose conjunctions
+(*cuando llegues, para que*), reported speech (*dijo que…*), the passive with *se* and *ser*,
+the future and conditional perfect, and longer texts on abstract topics.
 
 ## German (de)
 
@@ -69,15 +76,20 @@ and negative imperative, indirect object pronouns and their combination (*se lo*
 | **Unterwegs** | 12 **Modal verbs** and the sentence bracket · 13 Travel: **dative** after *mit/zu/in*, *nach/zu/in* · 14 University: *weil* (verb-final) · 15 *Perfekt* with *haben/sein* (intro to A2) |
 | **Tag für Tag** (A2) | 16 My day: **reflexive verbs** (*sich waschen*), pronoun position · 17 Clothes & shopping: *gefallen/passen/stehen* + **dative**, *dieser/welcher*, prices · 18 Weather & seasons: *es regnet*, months, **um / am / im** · 19 At the doctor's: *Mir tut … weh*, **imperative** (*Sie*, *du*, *ihr*) |
 | **Erzählen** (A2) | 20 In the past: **Präteritum** of *sein/haben* and the modal verbs · 21 The weekend: *Perfekt* with irregular and separable participles, *haben* vs *sein* · 22 My flat: **two-way prepositions** (*Wo?* + dative, *Wohin?* + accusative), *liegen/legen, stehen/stellen* · 23 Opinions: **dass / wenn** clauses (verb last), *Wenn …, dann* word order · 24 **Comparative and superlative** (*besser als*, *am besten*, *lieber*) |
+| **Plany, prośby i opisy** (A2+) | 25 **Futur I** with *werden* (plans, predictions, *wohl*) · 26 **Konjunktiv II** of politeness (*würde, hätte gern, wäre, könnte, dürfte*), advice with *sollte* · 27 **Adjective endings** after *der/ein* and without article (nominative, accusative, dative) · 28 **Genitive** (*des Mannes, Annas*), *wegen, während, trotz, statt*, colloquial *von* · 29 **Relative clauses** (*der/die/das, den, dem, denen*; *wo*; with prepositions) |
+| **Cele, argumenty i historie** (B1) | 30 **zu + infinitive**, *um … zu* vs *damit* · 31 *weil* vs *denn*, *deshalb*, **obwohl vs trotzdem**, *zwar … aber* · 32 **Passive** (present, Präteritum, with modal verbs), *man* · 33 **Präteritum** in narration, **Plusquamperfekt**, *nachdem / als / bevor* · 34 **Konjunktiv II** for unreal conditions, *ich wünschte*, **indirect questions** (*ob*, question words) |
 
 Cases are introduced progressively (accusative in lesson 9, dative in lesson 13), only after
 the learner can already use basic phrases. Accents: de-DE and **de-AT**. Stories: *Nowy
 sąsiad*, *Rodzina Leny*, *Sobotni poranek*, *Podróż do Wiednia*, *Pierwszy semestr*,
-*Chory poniedziałek*, *Weekend w Wiedniu*, *Dawniej i dziś*.
+*Chory poniedziałek*, *Weekend w Wiedniu*, *Dawniej i dziś*, *Sąsiedzi z kamienicy*, *Spacer
+po Wiedniu*, *Ostatni wieczór w Grazu*.
 
-Not yet covered for a complete A2: adjective endings in all cases, the genitive,
-*Konjunktiv II* (*würde, hätte, wäre*) for polite requests, relative clauses and the
-future with *werden*.
+The A2 topics that were still missing (adjective endings, the genitive, *Konjunktiv II* for
+polite requests, relative clauses, *Futur I*) are covered by the A2+ unit. Not yet covered for
+a complete B1: *Konjunktiv I* and reported speech, the *n*-declension, the stative passive
+(*ist geöffnet*), *Futur II*, two-part connectors (*sowohl … als auch, weder … noch, je …
+desto*), adjective endings in the genitive, and longer texts on abstract topics.
 
 ## Japanese (ja)
 
@@ -91,11 +103,14 @@ A dedicated curriculum, not a translation of the European courses.
 | **Codzienność** | 15 Time & weekdays (〜じ, はん, 〜ようび; kanji 日 月 火 水 木 金 土; one character, several readings) · 16 **ます forms** and particles **を, に, で, へ**; verb-final word order · 17 Likes: 〜**が** すきです, い-adjectives, polite refusal · 18 Travel: あります/います, positions (上 下 中), で "by means of" |
 | **Przeszłość i liczenie** (A2) | 19 Yesterday: polite past **〜ました / 〜ませんでした**, time words (今年 先週 来週 毎日) · 20 How was it?: **adjective past** (〜かったです, 〜でした), な-adjectives · 21 How many?: **counters** 〜つ, 〜人, 〜まい, 〜本 with sound changes, quantity after the particle |
 | **Prośby, plany i pozwolenia** (A2) | 22 Please…: **verb groups**, dictionary form and the **て-form**, 〜てください · 23 What are you doing?: **〜ています** (in progress, states), **〜てもいいですか** · 24 Let's go together!: **〜たいです**, invitations **〜ませんか / 〜ましょう** · 25 Please don't…: the **ない-form**, 〜ないでください |
+| **Swobodnie: opinie, doświadczenia, umiejętności** (A2+) | 26 Between friends: **plain forms** (dictionary, ない, た, なかった; だ) and casual speech · 27 **〜と おもいます**, **〜と いいました**, 〜でしょう, 〜かもしれません · 28 Experiences: **〜たことが あります**, 〜たり〜たり · 29 Reasons: **から vs ので**, **〜んです** · 30 **Potential form**, 〜ことが できます · 31 Giving and receiving: **あげる / もらう / くれる** |
+| **Pierwsze kroki na B1** (B1) | 32 Conditionals **〜たら, 〜ば, 〜と** · 33 Favours: **〜てあげる / 〜てもらう / 〜てくれる**, 〜てしまう (ちゃう), 〜ておく · 34 It seems…: **〜そうです** (appearance and hearsay), 〜ようです / みたい, 〜らしい · 35 The **passive**, including the "suffering" passive (雨に ふられました) · 36 **Keigo** basics: honorific and humble forms in shops and offices |
 
 Particles covered: は, が, を, に, で, の, も, へ, か, と.
-Kanji (62): 一二三四五六七八九十百千円 日月火水木金土 人山川口大小上下中 (A1) and
-今年先週来毎 高安新古長 何本半分 見食飲読書 話聞買休 行会友時間 入出名前 (A2), each with
-on/kun readings and example words. Japanese text uses kanji only after they are taught,
+Kanji (106): 一二三四五六七八九十百千円 日月火水木金土 人山川口大小上下中 (A1),
+今年先週来毎 高安新古長 何本半分 見食飲読書 話聞買休 行会友時間 入出名前 (A2),
+学校生好 思言天気 映画音楽 雨電車早 手作料理 父母花物 (A2+) and 春夏秋冬 教送開閉 明店男女
+足犬弟起 社員駅待 (B1), each with on/kun readings and example words. Japanese text uses kanji only after they are taught,
 always with furigana (enforced by a content test).
 
 - **Readings and romaji.** Kanji are shown with furigana (toggle in Settings). Romaji is a
@@ -115,11 +130,14 @@ always with furigana (enforced by a content test).
   - modifiers and positions come before or after the noun (の, つくえの した);
   - politeness is systematic, and 〜さん is gender-neutral.
 - Stories: *Hana się przedstawia*, *W sklepie*, *Mój dzień*, *Wycieczka do Kioto*, *Weekend
-  w Narze*, *Zakupy na piknik*, *W muzeum*.
+  w Narze*, *Zakupy na piknik*, *W muzeum*, *Deszczowe urodziny*, *Pierwszy dzień w Tokio*,
+  *Pierwszy dzień w firmie*.
 
-Not yet covered for a complete A2: plain (dictionary / た) forms in casual speech, 〜と
-おもいます, 〜たことが あります, reasons with から / ので, the potential form, giving and
-receiving (あげる / もらう / くれる) and more N4-level kanji.
+The A2 topics that were still missing (plain forms in casual speech, 〜と おもいます, 〜たことが
+あります, から / ので, the potential form, giving and receiving, more N4 kanji) are covered by
+the A2+ unit. Not yet covered for a complete B1: the causative and causative-passive, 〜ように /
+〜ために, 〜はずです / 〜べきです, 〜ながら, more keigo, many more N4/N3 kanji, and longer reading
+texts.
 
 ## Quality checklist for new content
 

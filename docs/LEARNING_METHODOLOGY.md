@@ -31,7 +31,7 @@ the original papers before relying on finer details.
 
 ## 2. Level frameworks
 
-- **Spanish and German** are aligned with **CEFR A1 → A2**. The CEFR defines six levels
+- **Spanish and German** are aligned with **CEFR A1 → B1** (B1 only started). The CEFR defines six levels
   (A1–C2). Its A1 global descriptor is about understanding and using familiar everyday
   expressions and very basic phrases for concrete needs, and exchanging basic personal details.
   Lesson objectives are written as can-do statements in that spirit. The A1 units cover the
@@ -41,18 +41,26 @@ the original papers before relying on finer details.
   the learning path) move to routine tasks and simple descriptions of past events: daily
   routine, shopping, weather, health, holidays, home, opinions and comparisons, with the
   past tenses (Spanish *indefinido* and *imperfecto*; German *Präteritum* of *sein/haben* and
-  the modal verbs, and *Perfekt*). See docs/CURRICULUM.md.
+  the modal verbs, and *Perfekt*). The A2+ units complete A2 (Spanish: future, conditional,
+  imperative, indirect object pronouns, *por/para*; German: *Futur I*, polite *Konjunktiv II*,
+  adjective endings, genitive, relative clauses). The first B1 unit moves on to describing
+  experiences, wishes and plans, giving reasons for opinions and telling a story, with the
+  Spanish subjunctive and the German *zu*-infinitive, connectors, passive and *Konjunktiv II*.
+  See docs/CURRICULUM.md.
 - **Japanese** has its own curriculum: kana first (with mora timing), then conversation
   patterns, particles, です/ます forms and introductory kanji, then (A2) the polite past,
   counters, the て-form (requests, actions in progress, permission), wishes and invitations
-  and the ない-form, with 62 kanji in total. It is designed with the **JF Standard for
+  and the ない-form; then (A2+) plain forms and casual speech, opinions and reported speech
+  with と, experiences, reasons, the potential form and giving and receiving; and (B1, started)
+  conditionals, favours, appearance and hearsay, the passive and a first look at keigo, with
+  106 kanji in total. It is designed with the **JF Standard for
   Japanese-Language Education** (Japan Foundation) in mind. JF Standard is task-based:
   levels are defined by what you can do, on the same six A1–C2 levels as the CEFR. **JLPT
-  N5/N4** is mentioned only as an orientation. JLPT is a separate test with its own scale,
+  N5–N3** is mentioned only as an orientation. JLPT is a separate test with its own scale,
   and CEFR/JF levels and JLPT levels are **not** equivalent.
-- The courses now have roughly 3.5–4.5 hours of lessons per language plus open-ended reviews
-  and listening. A1 is covered and A2 is well under way, but A2 is **not complete** yet (see
-  the list of missing topics in docs/CURRICULUM.md).
+- The courses now have roughly 5.5–7 hours of lessons per language plus open-ended reviews
+  and listening. A1 and A2 are covered; **B1 has only started** (one unit of five lessons per
+  course; the missing topics are listed in docs/CURRICULUM.md).
 
 ## 3. What is a hypothesis and should be tested
 
