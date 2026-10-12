@@ -22,8 +22,8 @@ export const japanese: CourseDefinition = {
   color: 'var(--lang-ja)',
   emblem: '日',
   description:
-    'Osobny program dla japońskiego: hiragana i katakana z pisaniem, rytm mor, partykuły, formy です / ます, czas przeszły, liczniki, forma て i 62 kanji z czytaniami.',
-  framework: 'Kana + JF Standard A1 → A2 (orientacyjnie JLPT N5 → N4)',
+    'Osobny program dla japońskiego: hiragana i katakana z pisaniem, rytm mor, partykuły, formy です / ます, czas przeszły, liczniki, forma て, mowa potoczna i 106 kanji z czytaniami. Poziom B1 jest dopiero zaczęty: zdania warunkowe, przysługi, przypuszczenia, strona bierna i pierwsze kroki w keigo — do pełnego B1 (N3) brakuje jeszcze wielu lekcji.',
+  framework: 'Kana + JF Standard A1 → B1 (orientacyjnie JLPT N5 → N3; B1: pierwsze kroki)',
   units: [unitHiragana, unitKatakana, unitConversation, unitDaily, unitPast, unitRequests, unitCasual, unitB1],
   stories,
 };
