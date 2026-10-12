@@ -751,6 +751,7 @@ export const unit8: Unit = {
             'Chleb jest tu pieczony każdego ranka.',
             'Chleb piecze się tu codziennie rano na świeżo.',
             'Tutaj chleb jest codziennie rano pieczony na świeżo.',
+            'Chleb jest tu codziennie rano świeżo pieczony.',
           ],
         }),
         s('32-2', 'In dieser Fabrik werden Autos hergestellt.', 'W tej fabryce produkuje się samochody.', {
@@ -920,7 +921,7 @@ export const unit8: Unit = {
       dialogue: {
         id: 'de.d.32',
         title: 'W starej piekarni',
-        context: 'Kuba pisze artykuł do gazetki studenckiej o najstarszej piekarni w Salzburgu. Rozmawia z właścicielką, panią Moser.',
+        context: 'Kuba pisze artykuł do gazetki studenckiej o starej piekarni w Salzburgu. Rozmawia z właścicielką, panią Moser.',
         speakers: {
           K: { name: 'Kuba', voice: 'b', accent: 'de-AT' },
           M: { name: 'Frau Moser', voice: 'a', accent: 'de-AT' },
@@ -995,7 +996,7 @@ export const unit8: Unit = {
           note: 'Präteritum od sehen: ich sah, du sahst, er sah, wir sahen.',
         }),
         verb('ich-fand', 'ich fand', 'znalazłem / znalazłam', {
-          plAlts: ['znalazłem', 'znalazłam', 'uznałem', 'uznałam'],
+          plAlts: ['znalazłem', 'znalazłam', 'uznałem', 'uznałam', 'uważałem', 'uważałam'],
           note: 'Präteritum od finden: ich fand, er fand, wir fanden. Także „uważałem”, jak w ich finde: Ich fand den Film gut. — Film mi się podobał.',
         }),
         verb('ich-sagte', 'ich sagte', 'powiedziałem / powiedziałam', {
@@ -1397,6 +1398,7 @@ export const unit8: Unit = {
         s('34-4', 'Ich wünschte, ich hätte genug Geld für eine Reise um die Welt.', 'Szkoda, że nie mam dość pieniędzy na podróż dookoła świata.', {
           plAlts: [
             'Szkoda, że nie mam wystarczająco pieniędzy na podróż dookoła świata.',
+            'Żałuję, że nie mam dość pieniędzy na podróż dookoła świata.',
             'Chciałbym mieć dość pieniędzy na podróż dookoła świata.',
             'Chciałabym mieć dość pieniędzy na podróż dookoła świata.',
             'Chciałbym mieć wystarczająco dużo pieniędzy na podróż dookoła świata.',
