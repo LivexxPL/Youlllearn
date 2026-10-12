@@ -65,7 +65,7 @@ export const unit7: Unit = {
           note: 'Rozdzielny i bez „sich”: Wir ziehen nach Graz um. Perfekt z sein: Ich bin umgezogen. (Sich umziehen znaczy „przebierać się”.)',
         }),
         verb('heiraten', 'heiraten', 'brać ślub; pobierać się', {
-          plAlts: ['wziąć ślub', 'pobrać się', 'ożenić się', 'wyjść za mąż', 'żenić się'],
+          plAlts: ['wziąć ślub', 'pobrać się', 'ożenić się', 'wyjść za mąż', 'żenić się', 'wychodzić za mąż'],
           note: 'Bez „się” i bez przyimka: Er heiratet Anna. — Żeni się z Anną. Sie heiraten im Mai. — Pobierają się w maju.',
         }),
         verb('schaffen', 'schaffen', 'dać radę; zdążyć', {
@@ -222,7 +222,7 @@ export const unit7: Unit = {
           prompt: 'Jak najprościej powiesz: „Jutro jadę do Grazu”?',
           options: ['Morgen fahre ich nach Graz.', 'Morgen werde ich nach Graz gefahren.', 'Morgen ich fahre nach Graz.'],
           answer: 0,
-          explanation: 'Plan z określeniem czasu (morgen) — wystarczy czas teraźniejszy z czasownikiem na 2. miejscu. „Werde … gefahren” to błędne połączenie werden z imiesłowem.',
+          explanation: 'Plan z określeniem czasu (morgen) — wystarczy czas teraźniejszy z czasownikiem na 2. miejscu. Czas przyszły wymaga bezokolicznika (werde … fahren), a werden z imiesłowem (werde … gefahren) to strona bierna: „ktoś mnie zawiezie”.',
         },
       ],
       dialogue: {
@@ -289,22 +289,22 @@ export const unit7: Unit = {
       minutes: 12,
       items: [
         phrase('ich-wuerde-gern', 'ich würde gern', 'chętnie bym…', {
-          plAlts: ['chciałbym', 'chciałabym', 'chętnie bym'],
+          plAlts: ['chciałbym', 'chciałabym'],
           note: 'Würde + bezokolicznik na końcu: Ich würde gern ins Kino gehen. — Chętnie poszedłbym / poszłabym do kina.',
         }),
         phrase('ich-haette-gern', 'ich hätte gern', 'poproszę… (bardzo grzecznie)', {
           plAlts: ['poproszę', 'chętnie bym wziął', 'chętnie bym wzięła'],
-          note: 'Jeszcze uprzejmiej niż ich möchte: Ich hätte gern einen Tee. — Poproszę herbatę. Hätte = miałbym / miałabym (od haben).',
+          note: 'Tak samo uprzejme jak ich möchte, typowe przy ladzie i w kawiarni: Ich hätte gern einen Tee. — Poproszę herbatę. Hätte = miałbym / miałabym (od haben).',
         }),
         phrase('koennten-sie', 'Könnten Sie…?', 'czy mógłby pan…? / czy mogłaby pani…?', {
           tts: 'Könnten Sie mir helfen?',
-          alts: ['Könnten Sie', 'Könnten Sie mir helfen?'],
+          alts: ['Könnten Sie mir helfen?'],
           plAlts: ['mógłby pan', 'mogłaby pani', 'czy mogliby państwo'],
           note: 'Najgrzeczniejsza forma prośby: Könnten Sie mir bitte helfen? Do kolegi lub koleżanki: Könntest du…?',
         }),
         phrase('duerfte-ich', 'Dürfte ich…?', 'czy mógłbym…? / czy mogłabym…?', {
           tts: 'Dürfte ich das Fenster aufmachen?',
-          alts: ['Dürfte ich', 'Dürfte ich das Fenster aufmachen?'],
+          alts: ['Dürfte ich das Fenster aufmachen?'],
           plAlts: ['czy wolno mi', 'czy mogę', 'mógłbym', 'mogłabym'],
           note: 'Bardzo grzeczne pytanie o pozwolenie (od dürfen). Na co dzień wystarczy: Darf ich…? albo Kann ich…?',
         }),
@@ -1213,7 +1213,7 @@ export const unit7: Unit = {
             'Zdanie względne (**Relativsatz**) dopowiada coś o osobie albo rzeczy — jak polskie „który, która, które”: [[Der Mann, der nebenan wohnt, ist mein Lehrer.]] Zaimek względny wygląda prawie jak rodzajnik: **der, die, das**, a w liczbie mnogiej **die**.',
             '**Rodzaj i liczbę** zaimek bierze od rzeczownika, który opisuje, a **przypadek** — od swojej roli w zdaniu względnym: [[der Film, der lustig war]] (film był — mianownik), [[der Film, den wir gesehen haben]] (widzieliśmy film — biernik), [[der Kollege, dem ich helfe]] (pomagam koledze — celownik).',
             'Zdanie względne oddzielamy **przecinkiem**, a odmieniony czasownik stoi **na samym końcu** — tak jak po dass i weil: [[die Frau, die ich gestern kennengelernt habe]]. Gdy zdanie względne wchodzi w środek zdania, zamyka je drugi przecinek: [[Die Leute, die hier wohnen, sind nett.]]',
-            'Tylko jedna forma różni się od rodzajnika: celownik liczby mnogiej to **denen**: [[die Kollegen, denen ich helfe]]. Uważaj też na pisownię: zaimek [[das]] (które) piszemy przez jedno s, a spójnik [[dass]] (że) — przez dwa.',
+            'W mianowniku, bierniku i celowniku tylko jedna forma różni się od rodzajnika: celownik liczby mnogiej to **denen**: [[die Kollegen, denen ich helfe]]. Uważaj też na pisownię: zaimek [[das]] (które) piszemy przez jedno s, a spójnik [[dass]] (że) — przez dwa.',
           ],
           table: {
             caption: 'Zaimek względny = rodzajnik określony, z wyjątkiem denen',
@@ -1343,7 +1343,7 @@ export const unit7: Unit = {
           { speaker: 'M', text: 'Vermisst du deine Kindheit?', pl: 'Tęsknisz za dzieciństwem?' },
           { speaker: 'S', text: 'Ein bisschen. Aber viele Leute, die hier wohnen, kenne ich noch.', pl: 'Trochę. Ale wciąż znam wielu ludzi, którzy tu mieszkają.' },
           { speaker: 'M', text: 'Und ich kenne in Graz nur meine Kollegen!', pl: 'A ja w Grazu znam tylko kolegów z pracy!' },
-          { speaker: 'S', text: 'Dann komm mit! Heute lernst du meine Nachbarn kennen.', pl: 'To chodź ze mną! Dziś poznasz moich sąsiadów.' },
+          { speaker: 'S', text: 'Dann komm mit! Heute lernst du meine alten Nachbarn kennen.', pl: 'To chodź ze mną! Dziś poznasz moich dawnych sąsiadów.' },
         ],
         questions: [
           {
@@ -1365,7 +1365,7 @@ export const unit7: Unit = {
             prompt: 'Kogo Michał zna w Grazu?',
             options: ['Tylko kolegów z pracy', 'Wszystkich sąsiadów Sophie', 'Tylko panią Huber'],
             answer: 0,
-            explanation: '„Und ich kenne in Graz nur meine Kollegen!” — dlatego Sophie chce, żeby poznał jej sąsiadów.',
+            explanation: '„Und ich kenne in Graz nur meine Kollegen!” — dlatego Sophie chce, żeby poznał jej dawnych sąsiadów.',
           },
         ],
       },

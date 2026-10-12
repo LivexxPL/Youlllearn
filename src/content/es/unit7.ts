@@ -214,7 +214,7 @@ export const unit7: Unit = {
           pl: 'Jest za pięć dziewiąta, a zajęcia są o dziewiątej: spóźnimy się.',
           options: ['vamos', 'iremos', 'llegaremos'],
           answer: 'vamos',
-          explanation: 'Już teraz widać, co się stanie, więc ir a + bezokolicznik: vamos a llegar tarde. Po iremos i llegaremos nie stawiamy „a + bezokolicznik”.',
+          explanation: 'Już teraz widać, co się stanie, więc ir a + bezokolicznik: vamos a llegar tarde. W tej konstrukcji ir stoi w czasie teraźniejszym, więc iremos i llegaremos tu nie pasują.',
         },
         {
           type: 'choice',
@@ -346,7 +346,7 @@ export const unit7: Unit = {
         }),
         noun('el-consejo', 'el consejo', 'rada', 'm', {
           plAlts: ['porada'],
-          note: 'Dar un consejo — dać radę. Po polsku „rada” jest żeńska, a el consejo — męski. El consejo to także rada jako grupa ludzi: el Consejo de Ministros.',
+          note: 'Dar un consejo — udzielić rady. Po polsku „rada” jest żeńska, a el consejo — męski. El consejo to także rada jako grupa ludzi: el Consejo de Ministros.',
         }),
         phrase('con-mucho-gusto', 'con mucho gusto', 'z przyjemnością', {
           plAlts: ['chętnie', 'z chęcią', 'bardzo chętnie'],
@@ -942,7 +942,7 @@ export const unit7: Unit = {
           plAlts: ['Zdjęcia? Wyślę ci je teraz.', 'Zdjęcia? Teraz ci je wyślę.', 'Zdjęcia? Wysyłam ci je teraz.'],
           accent: 'es-MX',
         }),
-        s('27-8', '¿Qué le digo a tu madre?', 'Co mam powiedzieć twojej mamie?', {
+        s('27-8', '¿Qué le digo a tu mamá?', 'Co mam powiedzieć twojej mamie?', {
           plAlts: ['Co powiem twojej mamie?', 'Co mam powiedzieć twojej matce?', 'Co mówię twojej mamie?'],
           accent: 'es-MX',
         }),
@@ -1022,7 +1022,7 @@ export const unit7: Unit = {
           pl: 'Pożyczysz mi swoją książkę? Potrzebuję jej na egzamin.',
           options: ['Me', 'Mi', 'Te'],
           answer: 'Me',
-          explanation: 'Komu? — mnie → me. Mi to „mój / moja” (mi libro) albo forma po przyimku (para mí), a te znaczyłoby „tobie”.',
+          explanation: 'Komu? — mnie → me. Mi to „mój / moja” (mi libro), mí z kreską stoi po przyimku (para mí), a te znaczyłoby „tobie”.',
         },
         {
           type: 'gap',

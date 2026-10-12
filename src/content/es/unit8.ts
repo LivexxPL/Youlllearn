@@ -271,8 +271,8 @@ export const unit8: Unit = {
         questions: [
           {
             id: 'es.d.29-q1',
-            prompt: 'Dlaczego Weronika się denerwuje?',
-            options: ['Bo jutro ma egzamin z hiszpańskiego', 'Bo nie może jechać na plażę', 'Bo przyjeżdża jej rodzina'],
+            prompt: 'Co czeka Weronikę jutro?',
+            options: ['Egzamin z hiszpańskiego', 'Wyjazd na plażę', 'Przyjazd rodziny'],
             answer: 0,
             explanation: '„Mañana tengo el examen de español y estoy muy cansada.”',
           },
@@ -730,7 +730,7 @@ export const unit8: Unit = {
           title: 'Creo que es… / No creo que sea…',
           body: [
             'Gdy **twierdzimy**, że coś jest prawdą, po [[creo que]] i [[pienso que]] stoi zwykły tryb oznajmujący: [[Creo que tienes razón.]] — Myślę, że masz rację. [[Pienso que es caro.]] — Uważam, że to drogie.',
-            'Gdy **zaprzeczamy** albo wątpimy, pojawia się subjuntivo: [[No creo que tengas razón.]] — Nie sądzę, żebyś miał / miała rację. [[No pienso que sea caro.]] — Nie uważam, żeby to było drogie.',
+            'Gdy **zaprzeczamy** albo wątpimy, pojawia się subjuntivo: [[No creo que tengas razón.]] — Nie sądzę, żebyś miał / miała rację. [[No creo que sea caro.]] — Nie sądzę, żeby to było drogie. Przecząc, zwykle mówimy no creo que; no pienso que jest poprawne, ale dużo rzadsze.',
             'Krótkie odpowiedzi nie mają czasownika: [[creo que sí]] (chyba tak), [[creo que no]] (chyba nie). Opinię bez que wprowadzają [[en mi opinión]] i [[para mí]]: [[En mi opinión, es caro.]]',
             'Zgoda i niezgoda: [[Estoy de acuerdo.]], [[No estoy de acuerdo contigo.]], [[Tienes razón.]], a gdy odpowiedź nie jest prosta — [[Depende.]]',
           ],
@@ -738,7 +738,7 @@ export const unit8: Unit = {
             head: ['Twierdzę → oznajmujący', 'Zaprzeczam → subjuntivo'],
             rows: [
               ['Creo que es fácil.', 'No creo que sea fácil.'],
-              ['Pienso que viene.', 'No pienso que venga.'],
+              ['Pienso que viene.', 'No creo que venga.'],
               ['Creo que tienes razón.', 'No creo que tengas razón.'],
               ['Creo que hay tiempo.', 'No creo que haya tiempo.'],
             ],
@@ -886,7 +886,7 @@ export const unit8: Unit = {
           {
             id: 'es.d.31-q2',
             prompt: 'Czego obawia się Óscar?',
-            options: ['Że na wsi nie ma kin', 'Że na wsi nie ma dużo pracy', 'Że Sara nie będzie go odwiedzać'],
+            options: ['Że na wsi jest za drogo', 'Że na wsi nie ma dużo pracy', 'Że Sara nie będzie go odwiedzać'],
             answer: 1,
             explanation: '„No creo que haya mucho trabajo en un pueblo.” — no creo que + subjuntivo (haya).',
           },
@@ -901,7 +901,7 @@ export const unit8: Unit = {
       },
       summary: [
         'Creo que / pienso que + tryb oznajmujący: Creo que tienes razón.',
-        'No creo que / no pienso que + subjuntivo: No creo que sea fácil.',
+        'No creo que + subjuntivo: No creo que sea fácil.',
         'Dyskusja: en mi opinión, (no) estoy de acuerdo, tienes razón, depende, creo que sí / creo que no.',
         'Łączniki: además (poza tym), por eso (dlatego), sin embargo (jednak), en cambio (natomiast), aunque (chociaż).',
       ],
@@ -1028,7 +1028,7 @@ export const unit8: Unit = {
           plAlts: ['Nie rozumiem tego, co mówisz.', 'Nie rozumiem, co ty mówisz.'],
           accent: 'es-MX',
         }),
-        s('32-9', 'La película que vimos anoche era muy buena.', 'Film, który obejrzeliśmy wczoraj wieczorem, był bardzo dobry.', {
+        s('32-9', 'La película que vimos anoche fue muy buena.', 'Film, który obejrzeliśmy wczoraj wieczorem, był bardzo dobry.', {
           plAlts: [
             'Film, który widzieliśmy wczoraj wieczorem, był bardzo dobry.',
             'Film, który oglądaliśmy wczoraj wieczorem, był bardzo dobry.',
@@ -1509,7 +1509,7 @@ export const unit8: Unit = {
         'Warunek realny: si + presente → presente, futuro albo rozkaz: Si llueve, me quedo en casa.',
         'Warunek nierealny: si + imperfecto de subjuntivo → condicional: Si tuviera dinero, viajaría.',
         'Imperfecto de subjuntivo: „ellos” z indefinido bez -ron + -ra — tuviera, fuera, pudiera, hiciera, viviera; nosotros z kreską: tuviéramos.',
-        'Po si nigdy nie stoi futuro ani condicional: si tengo (nie „si tendré”), si tuviera (nie „si tendría”).',
+        'Po si w znaczeniu „jeśli” nigdy nie stoi futuro ani condicional: si tengo (nie „si tendré”), si tuviera (nie „si tendría”).',
       ],
       followUp:
         'Gratulacje — masz za sobą pierwsze kroki na poziomie B1! W Audio Quest czeka historia „Pociąg, który odjechał”. Wracaj do powtórek subjuntivo: quiero que vengas, no creo que sea, si tuviera…',

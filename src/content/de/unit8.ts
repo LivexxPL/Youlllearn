@@ -339,7 +339,7 @@ export const unit8: Unit = {
           plAlts: ['więc', 'z tego powodu', 'zatem'],
           note: 'Wprowadza skutek; czasownik zaraz po nim: Ich bin müde, deshalb bleibe ich zu Hause.',
         }),
-        word('deswegen', 'deswegen', 'dlatego (potocznie)', {
+        word('deswegen', 'deswegen', 'dlatego (częściej w mowie)', {
           pos: 'adv',
           plAlts: ['dlatego', 'więc', 'z tego powodu'],
           note: 'To samo co deshalb, częstsze w mowie. Szyk ten sam: Deswegen bleibe ich zu Hause.',
@@ -352,7 +352,7 @@ export const unit8: Unit = {
         word('ausserdem', 'außerdem', 'poza tym; oprócz tego', {
           pos: 'adv',
           plAlts: ['poza tym', 'oprócz tego', 'ponadto', 'w dodatku'],
-          note: 'Dodaje kolejny argument; czasownik zaraz po nim: Außerdem ist die Miete teuer.',
+          note: 'Dodaje kolejny argument; czasownik zaraz po nim: Außerdem ist die Miete hoch.',
         }),
         phrase('einerseits-andererseits', 'einerseits … andererseits', 'z jednej strony…, z drugiej strony…', {
           tts: 'einerseits, andererseits',
@@ -449,10 +449,11 @@ export const unit8: Unit = {
           note: 'heuer — austriackie „w tym roku”.',
           accent: 'de-AT',
         }),
-        s('31-6', 'In der Stadt ist es laut. Außerdem ist die Miete sehr teuer.', 'W mieście jest głośno. Poza tym czynsz jest bardzo drogi.', {
+        s('31-6', 'In der Stadt ist es laut. Außerdem ist die Miete sehr hoch.', 'W mieście jest głośno. Poza tym czynsz jest bardzo wysoki.', {
           plAlts: [
-            'W mieście jest głośno. Oprócz tego czynsz jest bardzo drogi.',
-            'W mieście jest głośno, a poza tym czynsz jest bardzo drogi.',
+            'W mieście jest głośno. Oprócz tego czynsz jest bardzo wysoki.',
+            'W mieście jest głośno, a poza tym czynsz jest bardzo wysoki.',
+            'W mieście jest głośno. Poza tym czynsz jest bardzo drogi.',
             'W mieście jest głośno. Poza tym czynsze są bardzo wysokie.',
           ],
         }),
@@ -500,7 +501,7 @@ export const unit8: Unit = {
               ['weil', 'czasownik na końcu', '…, weil ich müde bin.'],
               ['denn', 'szyk bez zmian', '…, denn ich bin müde.'],
               ['deshalb / deswegen', 'czasownik zaraz po nim', '…, deshalb bleibe ich zu Hause.'],
-              ['außerdem', 'czasownik zaraz po nim', 'Außerdem ist die Miete teuer.'],
+              ['außerdem', 'czasownik zaraz po nim', 'Außerdem ist die Miete hoch.'],
             ],
           },
           contrast:
@@ -618,8 +619,8 @@ export const unit8: Unit = {
           { speaker: 'P', text: 'Auf dem Land? Aber wir arbeiten doch in der Stadt!', pl: 'Na wsi? Ale przecież pracujemy w mieście!' },
           {
             speaker: 'N',
-            text: 'Ich weiß. Aber hier ist es so laut, und außerdem ist die Miete sehr teuer.',
-            pl: 'Wiem. Ale tu jest tak głośno, a poza tym czynsz jest bardzo drogi.',
+            text: 'Ich weiß. Aber hier ist es so laut, und außerdem ist die Miete sehr hoch.',
+            pl: 'Wiem. Ale tu jest tak głośno, a poza tym czynsz jest bardzo wysoki.',
           },
           {
             speaker: 'P',
@@ -751,6 +752,7 @@ export const unit8: Unit = {
             'Chleb jest tu pieczony każdego ranka.',
             'Chleb piecze się tu codziennie rano na świeżo.',
             'Tutaj chleb jest codziennie rano pieczony na świeżo.',
+            'Chleb jest tu codziennie rano świeżo pieczony.',
           ],
         }),
         s('32-2', 'In dieser Fabrik werden Autos hergestellt.', 'W tej fabryce produkuje się samochody.', {
@@ -920,7 +922,7 @@ export const unit8: Unit = {
       dialogue: {
         id: 'de.d.32',
         title: 'W starej piekarni',
-        context: 'Kuba pisze artykuł do gazetki studenckiej o najstarszej piekarni w Salzburgu. Rozmawia z właścicielką, panią Moser.',
+        context: 'Kuba pisze artykuł do gazetki studenckiej o starej piekarni w Salzburgu. Rozmawia z właścicielką, panią Moser.',
         speakers: {
           K: { name: 'Kuba', voice: 'b', accent: 'de-AT' },
           M: { name: 'Frau Moser', voice: 'a', accent: 'de-AT' },
@@ -995,7 +997,7 @@ export const unit8: Unit = {
           note: 'Präteritum od sehen: ich sah, du sahst, er sah, wir sahen.',
         }),
         verb('ich-fand', 'ich fand', 'znalazłem / znalazłam', {
-          plAlts: ['znalazłem', 'znalazłam', 'uznałem', 'uznałam'],
+          plAlts: ['znalazłem', 'znalazłam', 'uznałem', 'uznałam', 'uważałem', 'uważałam'],
           note: 'Präteritum od finden: ich fand, er fand, wir fanden. Także „uważałem”, jak w ich finde: Ich fand den Film gut. — Film mi się podobał.',
         }),
         verb('ich-sagte', 'ich sagte', 'powiedziałem / powiedziałam', {
@@ -1103,7 +1105,6 @@ export const unit8: Unit = {
             'Zanim przyjechałam do Grazu, w ogóle nie znałam niemieckiego.',
           ],
           note: 'Kein Deutsch können — nie znać niemieckiego (ani trochę).',
-          accent: 'de-AT',
         }),
         s('33-8', 'Dann fand ich den Schlüssel unter dem Sofa.', 'Potem znalazłem klucz pod kanapą.', {
           alts: ['Dann fand ich unter dem Sofa den Schlüssel.'],
@@ -1397,6 +1398,7 @@ export const unit8: Unit = {
         s('34-4', 'Ich wünschte, ich hätte genug Geld für eine Reise um die Welt.', 'Szkoda, że nie mam dość pieniędzy na podróż dookoła świata.', {
           plAlts: [
             'Szkoda, że nie mam wystarczająco pieniędzy na podróż dookoła świata.',
+            'Żałuję, że nie mam dość pieniędzy na podróż dookoła świata.',
             'Chciałbym mieć dość pieniędzy na podróż dookoła świata.',
             'Chciałabym mieć dość pieniędzy na podróż dookoła świata.',
             'Chciałbym mieć wystarczająco dużo pieniędzy na podróż dookoła świata.',
@@ -1564,7 +1566,7 @@ export const unit8: Unit = {
       dialogue: {
         id: 'de.d.34',
         title: 'Gdybyśmy wygrali…',
-        context: 'Przerwa w pracy w Wiedniu. Tomek i jego koleżanka Julia kupili razem los na loterię i zaczynają marzyć.',
+        context: 'Przerwa w pracy w Wiedniu. Tomek i jego koleżanka Julia wysłali razem kupon lotto i zaczynają marzyć.',
         speakers: {
           J: { name: 'Julia', voice: 'a', accent: 'de-AT' },
           T: { name: 'Tomek', voice: 'b', accent: 'de-AT' },
