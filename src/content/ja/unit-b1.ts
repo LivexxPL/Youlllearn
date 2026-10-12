@@ -541,7 +541,7 @@ export const unitB1: Unit = {
             'Czasowniki dawania łączą się z formą て i wtedy „dają” **czynność** — przysługę. Kierunek jest taki sam jak przy przedmiotach: [[〜て あげる]] — robię coś dla kogoś, [[〜て くれる]] — ktoś robi coś dla mnie, [[〜て もらう]] — dostaję od kogoś przysługę.',
             '[[いもうとに {本|ほん}を {読|よ}んで あげました。]] — Przeczytałem siostrze książkę. [[{母|はは}が {料理|りょうり}を {作|つく}って くれました。]] — Mama ugotowała dla mnie obiad. [[{友|とも}だちに しゅくだいを {教|おし}えて もらいました。]] — Kolega wytłumaczył mi zadanie (bo go poprosiłem).',
             'くれる i もらう opisują tę samą przysługę z dwóch stron: くれる podkreśla życzliwość wykonawcy (podmiot z が), もらう — że to my skorzystaliśmy, często na własną prośbę (wykonawca z に). Bez nich zdanie brzmi chłodno: 母が 料理を 作りました — mama ugotowała (i tyle).',
-            'Prośby: [[〜て くれませんか]] (do bliskich) i grzeczniej [[〜て もらえませんか]] — czy mógłbyś…? Uwaga: 〜て あげる wobec starszych i przełożonych brzmi protekcjonalnie. Zamiast ✗ 先生、てつだって あげます zaproponuj: [[てつだいましょうか。]]',
+            'Prośby: [[〜て くれませんか]] (uprzejmie) i jeszcze grzeczniej [[〜て もらえませんか]] — czy mógłbyś…? Uwaga: 〜て あげる wobec starszych i przełożonych brzmi protekcjonalnie. Zamiast ✗ 先生、てつだって あげます zaproponuj: [[てつだいましょうか。]]',
           ],
           table: {
             head: ['', 'kto dla kogo', 'przykład'],
@@ -999,7 +999,7 @@ export const unitB1: Unit = {
             pl: 'Tak. Podobno mają tam przepyszny ramen.',
             romaji: 'hai. ano mise no raamen wa totemo oishii rashii desu yo.',
           },
-          { speaker: 'Z', text: '{人気|にんき}が あるみたいですね。', pl: 'Najwyraźniej jest bardzo popularny.', romaji: 'ninki ga aru mitai desu ne.' },
+          { speaker: 'Z', text: '{人気|にんき}が あるみたいですね。', pl: 'Najwyraźniej jest popularny.', romaji: 'ninki ga aru mitai desu ne.' },
           {
             speaker: 'S',
             text: 'でも、{友|とも}だちに よると、{一時間|いちじかん} まつそうです。',
@@ -1314,7 +1314,7 @@ export const unitB1: Unit = {
           id: 'ja.x.35-5',
           concept: 'ja.g.suffering-passive',
           sentence: '{友|とも}だちに ___、しゅくだいが できませんでした。',
-          pl: 'Przyszedł do mnie kolega i nie mogłem odrobić zadania.',
+          pl: 'Przyszedł do mnie kolega i nie mogłem / nie mogłam odrobić zadania.',
           options: ['こられて', 'きられて', 'くられて'],
           answer: 'こられて',
           explanation: 'くる → こられる (tak samo jak forma potencjalna). To „poszkodowana” strona bierna: kolega przyszedł nie w porę, a ja na tym ucierpiałem.',

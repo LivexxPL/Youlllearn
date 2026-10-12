@@ -1570,7 +1570,7 @@ export const unitCasual: Unit = {
           concept: 'ja.g.potential',
           sentence: 'あした、うちに ___か。',
           pl: 'Możesz jutro przyjść do mnie?',
-          options: ['{来|こ}られます', '{来|き}られます', '{来|く}れます'],
+          options: ['{来|こ}られます', '{来|き}られます', 'くれます'],
           answer: '{来|こ}られます',
           explanation: 'くる jest nieregularny: こられる → こられます (jak przeczenie こない). ✗ きられます, a くれます to inny czasownik — poznasz go w następnej lekcji.',
         },
