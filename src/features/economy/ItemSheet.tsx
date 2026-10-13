@@ -17,6 +17,8 @@ import { useEquip } from './equip';
 import { itemName, slotName } from './labels';
 import { ItemPreview } from './ItemPreview';
 import { CoinAmount } from './Coin';
+import { useAuth } from '../../auth/session';
+import { DevChip } from '../devtools/DevChip';
 
 type Stage = 'view' | 'confirm' | 'done';
 
@@ -24,6 +26,7 @@ export function ItemSheet({ id, onClose }: { id: string | null; onClose: () => v
   const wallet = useWallet();
   const toast = useToast();
   const { isEquipped, equip, unequip } = useEquip();
+  const devAccess = useAuth().can('cosmetics.useAll');
   const [stage, setStage] = useState<Stage>('view');
   const [purchaseId, setPurchaseId] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
@@ -39,6 +42,8 @@ export function ItemSheet({ id, onClose }: { id: string | null; onClose: () => v
 
   const name = itemName(id);
   const owned = bundle ? bundle.items.every((i) => wallet.owned.has(i)) : wallet.owned.has(id);
+  // Developer access: usable without owning — nothing is bought and nothing enters the ledger.
+  const viaDev = !owned && devAccess;
   const price = priceOf(id, wallet);
   const missing = price !== null ? Math.max(0, price - wallet.balance) : 0;
 
@@ -116,6 +121,8 @@ export function ItemSheet({ id, onClose }: { id: string | null; onClose: () => v
             <span className="chip chip--success">
               <Check size={14} /> {item && isEquipped(item) ? t('shop.equipped') : t('shop.owned')}
             </span>
+          ) : viaDev ? (
+            <DevChip label={item && isEquipped(item) ? `${t('dev.chip')} · ${t('shop.equipped')}` : undefined} />
           ) : price !== null ? (
             <span className="chip chip--accent">
               <CoinAmount amount={price} />
@@ -143,7 +150,9 @@ export function ItemSheet({ id, onClose }: { id: string | null; onClose: () => v
           </>
         )}
 
-        {!owned && reward && (
+        {viaDev && <p className="subtle">{t('dev.previewHint')}</p>}
+
+        {!owned && !viaDev && reward && (
           <p className="banner">
             <Lock size={18} /> {t('shop.rewardOnly', { name: t(`ach.${reward}` as never), desc: t(`ach.${reward}.desc` as never) })}
           </p>
@@ -163,7 +172,7 @@ export function ItemSheet({ id, onClose }: { id: string | null; onClose: () => v
               <Undo2 size={18} /> {t('shop.undo')}
             </button>
           </div>
-        ) : owned ? (
+        ) : owned || viaDev ? (
           item ? (
             equipButtons(item)
           ) : null

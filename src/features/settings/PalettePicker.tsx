@@ -11,6 +11,8 @@ import { t } from '../../i18n';
 import { themeItemFor } from '../../config/cosmetics';
 import { navigate } from '../../app/router';
 import { useWallet } from '../economy/wallet';
+import { useAuth } from '../../auth/session';
+import { mayUseCosmetic } from '../../auth/entitlements';
 
 function paletteName(id: PaletteId): string {
   return t(`palette.${id}` as never);
@@ -39,9 +41,10 @@ export function PalettePicker() {
   const toast = useToast();
   const wallet = useWallet();
   // Free palettes and the themes bought in the shop: switching between them costs nothing.
+  const { principal } = useAuth();
   const owned = PALETTES.filter((p) => {
     const item = themeItemFor(p.id);
-    return !item || item.free || wallet?.owned.has(item.id) || p.id === settings.palette;
+    return !item || item.free || mayUseCosmetic(wallet?.owned ?? new Set(), principal, item.id) || p.id === settings.palette;
   });
 
   const choose = (id: PaletteId) => {

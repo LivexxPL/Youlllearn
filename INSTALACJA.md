@@ -111,6 +111,24 @@ Strona pojawia się po zakończeniu najbliższego przebiegu CI (kilka minut).
 Projekt w Google Cloud i te usługi są w tym zastosowaniu bezpłatne; kopia zajmuje miejsce na
 Twoim Dysku (zwykle poniżej 1 MB). Szczegóły techniczne: [docs/CLOUD_SYNC.md](docs/CLOUD_SYNC.md).
 
+### Konto dewelopera (jednorazowo, po skonfigurowaniu logowania Google)
+
+1. W aplikacji zaloguj się swoim kontem Google (*Profil → Zaloguj się przez Google*).
+2. *Profil → Informacje techniczne* pokazuje **identyfikator roli** konta (64 znaki). Skopiuj go.
+   To skrót identyfikatora konta Google — nie jest tajny i nie ujawnia konta.
+3. W repozytorium GitHub: *Settings → Secrets and variables → Actions → Variables →
+   New repository variable*, nazwa `DEVELOPER_ACCOUNT_IDS`, wartość: identyfikator roli
+   (kilka kont: po przecinku). Opcjonalnie `ADMIN_ACCOUNT_IDS` dla administratorów.
+4. Po najbliższym przebiegu CI to konto jest rozpoznawane jako deweloper automatycznie po
+   zalogowaniu: wszystkie kosmetyki bez kupowania, podgląd zablokowanych treści, panel
+   *Ustawienia → Narzędzia deweloperskie* z diagnostyką i piaskownicą do testów (osobne dane
+   testowe — prawdziwe postępy zostają nietknięte).
+
+Aplikacja nie ma serwera, więc role sprawdza sama na urządzeniu: nie da się ich nadać sobie
+przez zmianę zapisanych danych, ale ktoś, kto zmodyfikuje kod aplikacji w swojej przeglądarce,
+może obejść blokady po swojej stronie. Szczegóły i ograniczenia:
+[docs/DEVELOPER_ACCESS.md](docs/DEVELOPER_ACCESS.md).
+
 ## Dla programistów
 
 ```bash

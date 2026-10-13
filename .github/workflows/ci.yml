@@ -39,6 +39,9 @@ jobs:
           # set it as the repository variable GOOGLE_CLIENT_ID (Settings → Secrets and variables
           # → Actions → Variables). Empty = the account features stay hidden.
           VITE_GOOGLE_CLIENT_ID: ${{ vars.GOOGLE_CLIENT_ID }}
+          # Role ids (not secrets) of the developer and admin accounts: docs/DEVELOPER_ACCESS.md.
+          VITE_DEVELOPER_ACCOUNTS: ${{ vars.DEVELOPER_ACCOUNT_IDS }}
+          VITE_ADMIN_ACCOUNTS: ${{ vars.ADMIN_ACCOUNT_IDS }}
 
       - name: Install Playwright Chromium
         run: npx playwright install --with-deps chromium

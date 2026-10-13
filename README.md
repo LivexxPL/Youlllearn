@@ -94,6 +94,14 @@ an Android app (Capacitor). No account, no ads, no paid APIs: progress stays on 
   optional course-inspired collections; rewards-only items for achievements; offline,
   without an account ([ECONOMY_DESIGN.md](ECONOMY_DESIGN.md)).
 
+**Roles and developer tools**
+- Roles on top of the Google account: admins get a read-only dashboard; the designated
+  developer account automatically gets every cosmetic and locked content without touching the
+  economy, unreleased features, diagnostics and a sandbox for simulations on separate test
+  data. Roles come from build configuration, not from anything stored on the device
+  ([docs/DEVELOPER_ACCESS.md](docs/DEVELOPER_ACCESS.md), including the limits of a
+  client-only app).
+
 **Data and privacy**
 - IndexedDB storage, JSON export/import (Android: share sheet), reset with confirmation.
 - Optional Google account (web/PWA): progress is synchronised to the learner's own Google
@@ -147,6 +155,7 @@ links to the installer. Step-by-step guide in Polish: [INSTALACJA.md](INSTALACJA
 | [docs/ANDROID_BUILD.md](docs/ANDROID_BUILD.md) | Debug/release APK, AAB, signing, CI |
 | [docs/CLOUD_SYNC.md](docs/CLOUD_SYNC.md) | Google account, Drive copy, merge rules, client id setup |
 | [ECONOMY_DESIGN.md](ECONOMY_DESIGN.md) | Coins, rewards and anti-farming rules, cosmetics catalogue, prices, transaction model |
+| [docs/DEVELOPER_ACCESS.md](docs/DEVELOPER_ACCESS.md) | Roles (user/admin/developer), developer account bootstrap, sandbox, security limits |
 | [CONTENT_SOURCES.md](CONTENT_SOURCES.md) | Every third-party resource, its licence and attribution |
 
 ## Rebranding

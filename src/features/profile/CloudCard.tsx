@@ -9,6 +9,7 @@ import { cloud } from '../../services/cloud';
 import { loadGoogle } from '../../services/cloud/google';
 import { cloudConfigured } from '../../config/cloud';
 import { isNative } from '../../services/platform';
+import { sandboxActive } from '../../services/db';
 import { brand } from '../../config/brand';
 import { t } from '../../i18n';
 import { useToast } from '../../components/Toasts';
@@ -41,6 +42,7 @@ export function CloudCard() {
   }
 
   if (!cloudConfigured()) return <p className="subtle">{t('cloud.notConfigured')}</p>;
+  if (sandboxActive()) return <p className="subtle">{t('cloud.sandbox')}</p>;
 
   const report = (state: string) => {
     const snap = cloud.getSnapshot();

@@ -8,6 +8,9 @@ import { getCourse } from '../../content/registry';
 import { useAudioStatus, useCards, useCompleted, useListeningStage } from '../../state/hooks';
 import { navigate } from '../../app/router';
 import { t } from '../../i18n';
+import { useAuth } from '../../auth/session';
+import { contentAccess } from '../../auth/permissions';
+import { DevChip } from '../devtools/DevChip';
 import { Banner, EmptyState, PageHeader, Segmented, Switch } from '../../components/ui';
 import { CourseSwitcher } from '../home/HomeScreen';
 import { isNative } from '../../services/platform';
@@ -26,6 +29,7 @@ function ModeCard({ icon, title, desc, onClick, disabled, testId }: { icon: Reac
 }
 
 export default function AudioQuestScreen() {
+  const { principal } = useAuth();
   const { settings, update } = useSettings();
   const course = getCourse(settings.activeCourse);
   const cards = useCards(course.id);
@@ -143,7 +147,8 @@ export default function AudioQuestScreen() {
         <p className="subtle">{t('aq.dialoguesDesc')}</p>
         <ul className="list" aria-busy={!completed}>
           {completed && course.stories.map((st) => {
-            const unlocked = completed.has(st.afterLesson);
+            const access = contentAccess(principal, completed.has(st.afterLesson));
+            const unlocked = access !== 'locked';
             const lesson = course.lessons[course.lessonIndex.get(st.afterLesson) ?? 0];
             const done = storyDone.get(st.id);
             return (
@@ -151,8 +156,10 @@ export default function AudioQuestScreen() {
                 <button type="button" className="list-row" disabled={!unlocked} onClick={() => navigate(`/audio/story?id=${st.id}`)} data-testid={`story-${st.id}`}>
                   <span className={`story-icon${unlocked ? '' : ' is-locked'}`}>{unlocked ? <Play size={18} /> : <Lock size={18} />}</span>
                   <div className="list-row__body">
-                    <div className="list-row__title">{st.title}</div>
-                    <div className="list-row__desc">{unlocked ? `${st.context} · ${t(`aq.stage${st.stage}` as never)}` : t('aq.locked', { lesson: lesson.title })}</div>
+                    <div className="list-row__title">
+                      {st.title} {access === 'preview' && <DevChip />}
+                    </div>
+                    <div className="list-row__desc">{access === 'open' ? `${st.context} · ${t(`aq.stage${st.stage}` as never)}` : t('aq.locked', { lesson: lesson.title })}</div>
                     {done && (
                       <div className="list-row__meta">
                         <CheckCircle2 size={14} /> {t('aq.storyDone', { correct: done.correct, total: done.total })}

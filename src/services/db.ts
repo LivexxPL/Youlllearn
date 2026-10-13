@@ -225,7 +225,23 @@ export function createDb(name = DB_NAME): PolyglotDB {
   return db;
 }
 
-export const db = createDb();
+/**
+ * Developer sandbox: test data in a separate database, so simulations never touch the
+ * learner's real progress (src/services/devtools.ts). The flag lives in sessionStorage: it
+ * ends with the tab, and on its own it grants nothing — every tool checks the permission.
+ */
+export const SANDBOX_FLAG = 'pq.sandbox';
+export const SANDBOX_DB_NAME = `${DB_NAME}-sandbox`;
+
+export function sandboxActive(): boolean {
+  try {
+    return typeof sessionStorage !== 'undefined' && sessionStorage.getItem(SANDBOX_FLAG) === '1';
+  } catch {
+    return false;
+  }
+}
+
+export const db = createDb(sandboxActive() ? SANDBOX_DB_NAME : DB_NAME);
 
 export const TABLES = [
   'settings',
@@ -275,5 +291,5 @@ export async function setMeta(key: string, value: unknown, database: PolyglotDB 
  * files and the cloud copy, and importing a backup keeps this device's values.
  */
 export function isDeviceMeta(key: string): boolean {
-  return key === CLOUD_META_KEY || key === 'installHintDismissed' || key.startsWith('resume:');
+  return key === CLOUD_META_KEY || key === 'installHintDismissed' || key === 'devAudit' || key.startsWith('resume:');
 }

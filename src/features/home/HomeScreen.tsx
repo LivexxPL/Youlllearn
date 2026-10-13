@@ -23,6 +23,8 @@ import { cloud } from '../../services/cloud';
 import { cloudErrorText } from '../profile/cloudText';
 import { CoinChip } from '../economy/Coin';
 import { REWARDS } from '../../config/economy';
+import { useAuth } from '../../auth/session';
+import { DevChip } from '../devtools/DevChip';
 import type { CourseId } from '../../content/types';
 
 function greeting(name: string): string {
@@ -171,6 +173,7 @@ function QuestList({ quests, allClaimed }: { quests: QuestStatus[]; allClaimed: 
 
 export function HomeScreen() {
   const { settings } = useSettings();
+  const devOverride = useAuth().can('cosmetics.useAll');
   const course = getCourse(settings.activeCourse);
   const completedState = useCompleted(course.id);
   const cards = useCards(course.id);
@@ -235,7 +238,9 @@ export function HomeScreen() {
     <div className="page page--wide">
       <header className="home-header">
         <div className="home-header__title">
-          <p className="eyebrow">{t('home.todayTitle')}</p>
+          <p className="eyebrow">
+            {t('home.todayTitle')} {devOverride && <DevChip />}
+          </p>
           <h1>{greeting(settings.displayName)}</h1>
         </div>
         <CourseSwitcher />

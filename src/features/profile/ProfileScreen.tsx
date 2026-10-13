@@ -16,11 +16,13 @@ import { CoinAmount } from '../economy/Coin';
 import { useWallet } from '../economy/wallet';
 import { equippedItem } from '../economy/equip';
 import { itemName } from '../economy/labels';
+import { useAuth } from '../../auth/session';
 
 export default function ProfileScreen() {
   const { settings, update } = useSettings();
   const cloud = useCloud();
   const wallet = useWallet();
+  const auth = useAuth();
   const name = settings.displayName || cloud.account?.name || '';
   const banner = equippedItem(settings.cosmetics, 'banner');
   const badge = equippedItem(settings.cosmetics, 'badge');
@@ -79,6 +81,18 @@ export default function ProfileScreen() {
           </button>
         </div>
       </section>
+
+      {auth.principal.roleId && (
+        <details className="card dev-details" data-testid="profile-tech">
+          <summary>{t('profile.tech')}</summary>
+          <p>
+            {t('dev.role')}: <strong>{t(`dev.role.${auth.principal.role}` as never)}</strong>
+          </p>
+          <p className="subtle">{t('dev.roleId')}</p>
+          <code className="dev-code">{auth.principal.roleId}</code>
+          <p className="subtle">{t('dev.roleIdHelp')}</p>
+        </details>
+      )}
 
       <section className="stack stack--s" aria-labelledby="cloud-title">
         <h2 id="cloud-title" className="section-title">

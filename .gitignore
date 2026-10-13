@@ -1,5 +1,6 @@
 node_modules
 dist
+dist-e2e
 dev-dist
 coverage
 playwright-report
@@ -12,6 +13,8 @@ test-results
 *.local
 .env
 .env.*
+# Test-only build settings (fake identities, no secrets).
+!.env.e2e
 
 # Android build outputs (the android/ project itself is committed)
 android/.gradle

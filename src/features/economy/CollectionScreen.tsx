@@ -15,6 +15,8 @@ import { itemName, slotName } from './labels';
 import { ItemCard } from './ShopScreen';
 import { ItemSheet } from './ItemSheet';
 import { ItemPreview } from './ItemPreview';
+import { useAuth } from '../../auth/session';
+import { mayUseCosmetic } from '../../auth/entitlements';
 
 const SLOTS: Slot[] = ['theme', 'frame', 'banner', 'badge', 'title', 'bar', 'fx'];
 
@@ -22,6 +24,7 @@ export default function CollectionScreen() {
   const wallet = useWallet();
   const { settings } = useSettings();
   const { unequip } = useEquip();
+  const { principal } = useAuth();
   const [open, setOpen] = useState<string | null>(null);
   if (!wallet) return <div className="page"><p className="muted">{t('common.loading')}</p></div>;
 
@@ -37,8 +40,9 @@ export default function CollectionScreen() {
       </section>
 
       {SLOTS.map((slot) => {
-        const owned = COSMETICS.filter((c) => c.slot === slot && wallet.owned.has(c.id));
-        const toEarn = COSMETICS.filter((c) => c.slot === slot && c.rewardOf && !wallet.owned.has(c.id));
+        // With developer access everything is usable (and shown as such); nothing is "to earn".
+        const owned = COSMETICS.filter((c) => c.slot === slot && mayUseCosmetic(wallet.owned, principal, c.id));
+        const toEarn = COSMETICS.filter((c) => c.slot === slot && c.rewardOf && !mayUseCosmetic(wallet.owned, principal, c.id));
         const inShop = COSMETICS.filter((c) => c.slot === slot && c.price !== null && !wallet.owned.has(c.id)).length;
         const equippedNone = slot === 'theme' ? settings.palette === 'classic' : !settings.cosmetics[slot as CosmeticSlot];
         return (

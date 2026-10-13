@@ -34,8 +34,10 @@ export default defineConfig({
     { name: 'desktop-shots', testMatch: /visual\.spec/, use: { viewport: { width: 1440, height: 900 }, launchOptions } },
     { name: 'phone-dark-shots', testMatch: /visual\.spec/, use: { ...devices['Pixel 7'], launchOptions } },
   ],
+  // A separate build with test settings (.env.e2e: fake Google client and role ids); the
+  // production build never contains them.
   webServer: {
-    command: 'npm run preview -- --port 4173 --strictPort',
+    command: 'npm run build:e2e && npx vite preview --outDir dist-e2e --port 4173 --strictPort',
     url: 'http://localhost:4173/',
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,

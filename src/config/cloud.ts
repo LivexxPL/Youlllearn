@@ -8,10 +8,9 @@
  */
 const BUILD_CLIENT_ID = (import.meta.env.VITE_GOOGLE_CLIENT_ID ?? '').trim();
 
-/** The OAuth client id. End-to-end tests provide one at runtime (window.__pqGoogleClientId). */
+/** The OAuth client id of this build (end-to-end tests use a build with a fake one). */
 export function googleClientId(): string {
-  const override = typeof window === 'undefined' ? undefined : (window as { __pqGoogleClientId?: unknown }).__pqGoogleClientId;
-  return typeof override === 'string' ? override : BUILD_CLIENT_ID;
+  return BUILD_CLIENT_ID;
 }
 
 /** Only this app's hidden folder on the user's Drive — no access to their other files. */

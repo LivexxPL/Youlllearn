@@ -16,6 +16,8 @@ import { ItemPreview } from './ItemPreview';
 import { ItemSheet } from './ItemSheet';
 import { CoinAmount } from './Coin';
 import type { Wallet } from '../../services/economy';
+import { useAuth } from '../../auth/session';
+import { DevChip } from '../devtools/DevChip';
 
 const SHELVES: Shelf[] = ['themes', 'profile', 'interface', 'collections'];
 /** Slots on each tab; collection items also appear on the tab of their slot. */
@@ -28,8 +30,9 @@ const COLLECTIONS: Collection[] = ['ja', 'de', 'es'];
 
 export function ItemCard({ item, wallet, onOpen }: { item: CosmeticItem; wallet: Wallet; onOpen: (id: string) => void }) {
   const { isEquipped } = useEquip();
+  const devAccess = useAuth().can('cosmetics.useAll');
   const owned = wallet.owned.has(item.id);
-  const equipped = owned && isEquipped(item);
+  const equipped = (owned || devAccess) && isEquipped(item);
   return (
     <button type="button" className={`item-card${equipped ? ' is-equipped' : ''}`} onClick={() => onOpen(item.id)} data-testid={`item-${item.id}`}>
       <ItemPreview item={item} />
@@ -41,6 +44,8 @@ export function ItemCard({ item, wallet, onOpen }: { item: CosmeticItem; wallet:
           </span>
         ) : owned ? (
           <span className="chip">{t('shop.owned')}</span>
+        ) : devAccess ? (
+          <DevChip />
         ) : item.price !== null ? (
           <CoinAmount amount={item.price} />
         ) : null}
@@ -70,6 +75,7 @@ export default function ShopScreen({ query }: { query: URLSearchParams }) {
   const [shelf, setShelf] = useState<Shelf>(initial && SHELVES.includes(initial) ? initial : 'themes');
   const [open, setOpen] = useState<string | null>(query.get('item'));
   const wallet = useWallet();
+  const devAccess = useAuth().can('cosmetics.useAll');
   const forSale = (filter: (c: CosmeticItem) => boolean) => COSMETICS.filter((c) => c.price !== null && filter(c));
 
   return (
@@ -90,6 +96,11 @@ export default function ShopScreen({ query }: { query: URLSearchParams }) {
         </div>
       </section>
       <p className="muted">{t('shop.subtitle')}</p>
+      {devAccess && (
+        <p className="banner banner--warn" data-testid="shop-dev-access">
+          {t('dev.overrides')}
+        </p>
+      )}
 
       <Segmented<Shelf> value={shelf} onChange={setShelf} label={t('shop.title')} options={SHELVES.map((s) => ({ value: s, label: t(`shop.tab.${s}` as never) }))} />
 

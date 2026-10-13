@@ -198,6 +198,18 @@ describe('cloud synchronisation', () => {
     expect((await getMeta<{ account: { sub: string } }>(CLOUD_META_KEY, { account: { sub: '' } }, d)).account.sub).toBe('123');
   });
 
+  it('does nothing where synchronisation is unavailable (e.g. the developer sandbox)', async () => {
+    const d = createDb(`test-cloud-off-${Math.random()}`);
+    await setMeta(CLOUD_META_KEY, { account, autoSync: true, lastSyncAt: null, syncedPrint: null, remoteModified: null }, d);
+    const off = new CloudSync(d, false);
+    (off as unknown as { set(p: object): void }).set({ account });
+    off.setAccessToken({ token: 'good', expiresAt: Date.now() + 3_600_000 });
+    await off.sync();
+    expect(await off.connect()).toBe('idle');
+    expect(await off.deleteCloudCopyAndSignOut()).toBe(false);
+    expect(drive.calls).toEqual([]);
+  });
+
   it('signs out without deleting anything', async () => {
     const { d, sync } = await device();
     await recordLessonCompletion({ course: es, lessonId: 'es.l01', outcomes: outcomes() }, d);

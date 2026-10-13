@@ -12,7 +12,7 @@
  */
 import Dexie from 'dexie';
 import { CLOUD_META_KEY, cloudConfigured } from '../../config/cloud';
-import { db, getMeta, setMeta, TABLES, type PolyglotDB, type TableName } from '../db';
+import { db, getMeta, sandboxActive, setMeta, TABLES, type PolyglotDB, type TableName } from '../db';
 import { BackupError, backupFile, readAll, validateBackup, type BackupData } from '../backup';
 import { isNative } from '../platform';
 import { canonicalJson, fingerprint, mergeData } from './merge';
@@ -96,7 +96,8 @@ export class CloudSync {
 
   constructor(
     private readonly database: PolyglotDB = db,
-    available = cloudConfigured() && !isNative(),
+    // Never in the developer sandbox: test data must not reach the real cloud copy.
+    available = cloudConfigured() && !isNative() && !sandboxActive(),
   ) {
     this.snap = { ...defaultCloudMeta, available, state: 'idle', connected: false, dirty: false, error: null };
   }
@@ -219,6 +220,8 @@ export class CloudSync {
 
   /** Synchronises now when access is valid; otherwise only reports that it is not. */
   sync(): Promise<void> {
+    // Unavailable (no client id, the APK, the developer sandbox): never touch the cloud copy.
+    if (!this.snap.available) return Promise.resolve();
     if (this.running) {
       this.queued = true;
       return this.running;
@@ -325,6 +328,7 @@ export class CloudSync {
    * Resolves to the result state so the caller can show a message.
    */
   async connect(): Promise<SyncState> {
+    if (!this.snap.available) return this.snap.state;
     this.set({ state: 'connecting', error: null });
     try {
       const t = await this.authorize();
@@ -368,6 +372,7 @@ export class CloudSync {
 
   /** Deletes the copy on Drive, then signs out. Call it from a click handler. */
   async deleteCloudCopyAndSignOut(): Promise<boolean> {
+    if (!this.snap.available) return false;
     this.set({ state: 'connecting', error: null });
     try {
       const token = this.validToken() ?? (await this.authorize()).token;

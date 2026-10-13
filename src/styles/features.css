@@ -3440,3 +3440,159 @@ button.item-card:active {
 .history-list__minus {
   color: var(--text-muted);
 }
+
+/* =====================================================================
+ * Developer / admin tools
+ * ===================================================================== */
+.chip--dev {
+  border: 1px dashed var(--info);
+  background: var(--info-soft);
+  color: var(--text);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  vertical-align: middle;
+}
+
+.sandbox-banner {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-2) var(--sp-4);
+  background: repeating-linear-gradient(-45deg, var(--accent-soft) 0 14px, var(--surface-2) 14px 28px);
+  border-bottom: 2px dashed var(--accent);
+  color: var(--text);
+  font-size: var(--fs-s);
+  font-weight: 700;
+}
+
+.dev-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  gap: var(--sp-4);
+  align-items: start;
+}
+
+.dev-card .card__title {
+  margin: 0;
+}
+
+.dev-subtitle {
+  margin: var(--sp-2) 0 0;
+  font-size: var(--fs-m, 1rem);
+}
+
+.dev-perms {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--text-muted);
+  font-size: var(--fs-s);
+}
+
+.dev-perms li {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.dev-perms li.is-granted {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.dev-perms li.is-granted svg {
+  color: var(--success);
+}
+
+.dev-details summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.dev-details[open] {
+  display: grid;
+  gap: var(--sp-2);
+}
+
+.dev-code {
+  display: block;
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--radius-m);
+  background: var(--surface-2);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.8rem;
+  overflow-wrap: anywhere;
+  user-select: all;
+}
+
+.dev-dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 4px var(--sp-3);
+  margin: 0;
+  font-size: var(--fs-s);
+}
+
+.dev-dl dt {
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+.dev-dl dd {
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.dev-log {
+  display: grid;
+  gap: 4px;
+  max-height: 260px;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  list-style: none;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.78rem;
+}
+
+.dev-log time {
+  color: var(--text-muted);
+}
+
+.dev-log__error {
+  color: var(--danger);
+}
+
+.dev-table-wrap {
+  max-height: 320px;
+  overflow: auto;
+}
+
+.dev-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.dev-table th,
+.dev-table td {
+  padding: 4px 6px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.dev-table th {
+  position: sticky;
+  top: 0;
+  background: var(--surface);
+  color: var(--text-muted);
+}

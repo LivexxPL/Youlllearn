@@ -11,7 +11,11 @@ import { audio } from '../services/audio';
 import { configureFeedback } from '../services/feedback';
 import { t } from '../i18n';
 import { detectComeback, refreshAchievements, setFlag, updateStreak } from '../services/progress';
-import { reconcileRewards } from '../services/economy';
+import { getWallet, reconcileRewards } from '../services/economy';
+import { auth } from '../auth/session';
+import { can } from '../auth/permissions';
+import { releaseUnusable } from '../auth/entitlements';
+import { SandboxBanner } from '../features/devtools/SandboxBanner';
 import { CURRENCY } from '../config/economy';
 import { entryReason } from '../features/economy/labels';
 import { HomeScreen } from '../features/home/HomeScreen';
@@ -41,6 +45,7 @@ const ProfileScreen = lazy(() => import('../features/profile/ProfileScreen'));
 const ShopScreen = lazy(() => import('../features/economy/ShopScreen'));
 const CollectionScreen = lazy(() => import('../features/economy/CollectionScreen'));
 const CoinsScreen = lazy(() => import('../features/economy/CoinsScreen'));
+const DevScreen = lazy(() => import('../features/devtools/DevScreen'));
 
 const IMMERSIVE = new Set(['lesson', 'onboarding', 'notes']);
 
@@ -86,6 +91,8 @@ function Screen() {
       return <CollectionScreen />;
     case 'coins':
       return <CoinsScreen />;
+    case 'dev':
+      return <DevScreen />;
     case 'write':
       return b && c ? <WritingPractice set={b} char={c} /> : <WritingHub />;
     case 'kana':
@@ -98,9 +105,22 @@ function Screen() {
 }
 
 function useBackgroundTasks() {
-  const { settings, replace } = useSettings();
+  const { settings, replace, update } = useSettings();
   const toast = useToast();
   const today = useDayKey();
+
+  // Role of the signed-in account. Whenever the account changes to one without developer access
+  // (sign-out, another account, or a role revoked in the configuration before this start), take
+  // off anything that was only usable thanks to it. For anyone else this changes nothing.
+  useEffect(() => {
+    auth.start().catch((e) => console.warn('Could not read the account', e));
+    return auth.onChange(async (_prev, next) => {
+      if (can(next, 'cosmetics.useAll')) return;
+      const [current, wallet] = await Promise.all([loadSettings(), getWallet()]);
+      const patch = releaseUnusable(current, wallet.owned, next);
+      if (Object.keys(patch).length) update(patch);
+    });
+  }, [update]);
 
   // Optional Google Drive copy: start watching for changes; reload settings a sync changed.
   useEffect(() => {
@@ -182,6 +202,7 @@ function Shell() {
       <a href="#main" className="skip-link" onClick={(e) => { e.preventDefault(); document.getElementById('main')?.focus(); }}>
         {t('nav.skipToContent')}
       </a>
+      <SandboxBanner />
       {!immersive && <Nav reviewBadge={due} />}
       <main id="main" className="app__main" tabIndex={-1}>
         <ErrorBoundary key={route.path}>

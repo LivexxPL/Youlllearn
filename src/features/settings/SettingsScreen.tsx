@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
-import { Bell, BookOpen, ChevronRight, Coins, Download, History, Info, Keyboard, Library, Mic, Palette, PenLine, RotateCcw, Upload, Trash2, Volume2, Database, Target, Languages, Smartphone } from 'lucide-react';
+import { Bell, BookOpen, ChevronRight, Coins, Download, History, Info, Keyboard, Library, Mic, Palette, PenLine, RotateCcw, Upload, Trash2, Volume2, Database, Target, Languages, Smartphone, Wrench } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useSettings, TEXT_SCALES, loadSettings } from '../../state/settings';
 import { allCourses, getCourse } from '../../content/registry';
@@ -22,6 +22,7 @@ import { useCloud } from '../../state/cloud';
 import { storagePersisted } from '../../services/storage';
 import { Avatar } from '../../components/Avatar';
 import { useEquip } from '../economy/equip';
+import { useAuth } from '../../auth/session';
 
 function Section({ icon, title, children }: { icon: ReactNode; title: string; children: ReactNode }) {
   return (
@@ -93,6 +94,7 @@ export default function SettingsScreen() {
   const fileRef = useRef<HTMLInputElement>(null);
   const account = useCloud().account;
   const { resetLook } = useEquip();
+  const canDev = useAuth().can('devtools.dashboard');
 
   useEffect(() => {
     reminderPermission().then(setPerm).catch(() => setPerm('unsupported'));
@@ -166,6 +168,16 @@ export default function SettingsScreen() {
           </div>
           <ChevronRight size={20} aria-hidden="true" />
         </button>
+        {canDev && (
+          <button type="button" className="list-row" onClick={() => navigate('/dev')} data-testid="settings-dev">
+            <Wrench size={20} />
+            <div className="list-row__body">
+              <div className="list-row__title">{t('dev.settingsRow')}</div>
+              <div className="list-row__desc">{t('dev.settingsRowDesc')}</div>
+            </div>
+            <ChevronRight size={20} aria-hidden="true" />
+          </button>
+        )}
       </div>
 
       <Section icon={<BookOpen size={20} />} title={t('set.courses')}>

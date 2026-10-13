@@ -49,6 +49,8 @@ import { sessionCoinLines, type CoinLine } from '../economy/labels';
 import { CoinRewardCard } from '../economy/CoinRewardCard';
 import { Celebration } from '../economy/Celebration';
 import { newSessionId } from '../economy/session';
+import { useAuth } from '../../auth/session';
+import { contentAccess } from '../../auth/permissions';
 import { cue } from '../../services/feedback';
 import { navigate, useBackHandler } from '../../app/router';
 import { formatDuration, t } from '../../i18n';
@@ -790,6 +792,7 @@ function StoryPlayer({ id }: { id: string }) {
 }
 
 function StoryView({ course, story }: { course: Course; story: Story }) {
+  const { principal } = useAuth();
   const { settings } = useSettings();
   const progress = useLessonProgress();
   const showRomaji = useShowRomaji();
@@ -835,7 +838,7 @@ function StoryView({ course, story }: { course: Course; story: Story }) {
   }, [phase, correct, story, course.id, settings, xpBefore]);
 
   if (!progress) return <div className="page"><p className="muted">{t('common.loading')}</p></div>;
-  if (!progress.has(story.afterLesson)) {
+  if (contentAccess(principal, progress.has(story.afterLesson)) === 'locked') {
     const lesson = course.lessons[course.lessonIndex.get(story.afterLesson) ?? 0];
     return (
       <div className="page">

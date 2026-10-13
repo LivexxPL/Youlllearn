@@ -69,7 +69,6 @@ class FakeDrive {
 async function device(context: BrowserContext, drive: FakeDrive): Promise<Page> {
   await context.addInitScript(() => {
     const w = window as unknown as Record<string, unknown>;
-    w.__pqGoogleClientId = 'e2e-client.apps.googleusercontent.com';
     const fake = { expiresIn: 3599, requests: 0, revoked: 0 };
     w.__fakeGoogle = fake;
     w.google = {

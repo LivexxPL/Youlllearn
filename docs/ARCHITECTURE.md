@@ -57,6 +57,10 @@ validates it before replacing data. "Reset" clears everything after typed confir
 Device-only `meta` records (`isDeviceMeta`: account and sync state, lesson resume position,
 dismissed install hint) are left out of exports and kept on import.
 
+Roles (`src/auth`) sit on the same Google account: a central policy decides what `user`,
+`admin` and `developer` may do; developer tools work on a separate sandbox database
+([DEVELOPER_ACCESS.md](DEVELOPER_ACCESS.md)).
+
 The optional Google account (`services/cloud`) keeps the same JSON in the user's Google Drive
 application data folder and merges copies from several devices record by record — see
 [CLOUD_SYNC.md](CLOUD_SYNC.md). The app asks the browser for persistent storage after setup

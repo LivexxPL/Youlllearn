@@ -17,6 +17,10 @@ import { isNative } from './services/platform';
 import { canGoBack, currentPath, goBack, navigate, runBackHandlers } from './app/router';
 import { captureInstallPrompt, registerServiceWorker } from './services/pwa';
 import type { Settings } from './services/db';
+import { installErrorLog } from './services/diagnostics';
+
+// First, so that start-up errors also reach the developer dashboard (secrets redacted).
+installErrorLog();
 
 function installViewportHeight() {
   // Keeps layouts above the on-screen keyboard (visualViewport shrinks when it opens).
