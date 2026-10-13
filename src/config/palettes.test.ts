@@ -117,7 +117,7 @@ describe('colour palettes', () => {
   });
 
   it('falls back to the classic palette for unknown ids', () => {
-    expect(getPalette('neon').id).toBe('classic');
+    expect(getPalette('no-such-palette').id).toBe('classic');
     expect(getPalette(undefined).id).toBe('classic');
   });
 });
