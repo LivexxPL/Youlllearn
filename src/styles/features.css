@@ -2290,18 +2290,31 @@ body.is-writing {
   stroke-width: 2.4;
 }
 
+/* The stroke-order animation teaches how to write the character, so it is kept (and its
+ * timing honoured) even when animations are reduced elsewhere in the app. */
 .stroke-guide--animate .stroke-guide__path {
   stroke: var(--primary);
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
   animation-name: draw-stroke;
   animation-timing-function: ease-in-out;
-  animation-fill-mode: forwards;
+  /* "both": strokes wait invisible until their turn (no stray round caps). */
+  animation-fill-mode: both;
+  animation-delay: var(--stroke-delay, 0s) !important;
+  animation-duration: var(--stroke-dur, 0.7s) !important;
 }
 
 @keyframes draw-stroke {
-  to {
+  0% {
+    stroke-dashoffset: 1;
+    opacity: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  100% {
     stroke-dashoffset: 0;
+    opacity: 1;
   }
 }
 
@@ -2319,6 +2332,7 @@ body.is-writing {
 .stroke-guide--animate .stroke-guide__num {
   opacity: 0;
   animation: fade-in 1ms linear forwards;
+  animation-delay: var(--stroke-delay, 0s) !important;
 }
 
 .step--write .pad,
@@ -2890,7 +2904,7 @@ body.is-writing {
 }
 
 .coin-card--subtle .coin-card__head {
-  animation: fade-in 500ms ease-out both;
+  animation: coin-fade-in 500ms ease-out both;
 }
 
 .coin-card__list {
@@ -2959,7 +2973,7 @@ body.is-writing {
   }
 }
 
-@keyframes fade-in {
+@keyframes coin-fade-in {
   from {
     opacity: 0;
     transform: translateY(4px);

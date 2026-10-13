@@ -61,6 +61,8 @@ function Practice({ set, char, initial, practisedAt }: { set: 'hiragana' | 'kata
   const [strokes, setStrokes] = useState<Stroke[]>(initial);
   const [replay, setReplay] = useState(0);
   const [showOrder, setShowOrder] = useState(false);
+  /** The stroke order is being played (also over the tracing template). */
+  const [animating, setAnimating] = useState(false);
   const [grid, setGrid] = useState(true);
   const [compared, setCompared] = useState<{ hints: StrokeHint[]; countOk: boolean; expected: number } | null>(null);
   const [settingsOpen, setSettingsOpen] = useState(false);
@@ -126,7 +128,7 @@ function Practice({ set, char, initial, practisedAt }: { set: 'hiragana' | 'kata
     setCompared(null);
   };
 
-  const guideMode = compared ? 'numbers' : mode === 'trace' ? 'faint' : 'animate';
+  const guideMode = compared ? 'numbers' : animating || mode !== 'trace' ? 'animate' : 'faint';
   const showUnderlay = compared !== null || mode === 'trace' || showOrder;
 
   return (
@@ -161,6 +163,7 @@ function Practice({ set, char, initial, practisedAt }: { set: 'hiragana' | 'kata
         onChange={(m) => {
           setMode(m);
           setShowOrder(false);
+          setAnimating(false);
           setCompared(null);
         }}
         label={t('write.modeLabel')}
@@ -184,7 +187,7 @@ function Practice({ set, char, initial, practisedAt }: { set: 'hiragana' | 'kata
         showGridToggle
         grid={grid}
         onGrid={setGrid}
-        underlay={showUnderlay ? <StrokeGuide char={char} mode={guideMode} replayKey={replay} /> : undefined}
+        underlay={showUnderlay ? <StrokeGuide char={char} mode={guideMode} replayKey={replay} onDone={() => setAnimating(false)} /> : undefined}
         overlay={compared ? <StrokeGuide char={char} mode="solid" /> : undefined}
       />
 
@@ -193,9 +196,12 @@ function Practice({ set, char, initial, practisedAt }: { set: 'hiragana' | 'kata
           type="button"
           className="btn btn--sm btn--outline"
           onClick={() => {
+            setCompared(null);
             setShowOrder(true);
+            setAnimating(true);
             setReplay((r) => r + 1);
           }}
+          data-testid="write-animate"
         >
           <Play size={16} /> {t('write.animate')}
         </button>

@@ -24,6 +24,8 @@ export function WriteStep({ ex, courseId, locked, onResult }: StepProps<Exercise
   const [strokes, setStrokes] = useState<Stroke[]>([]);
   const [replay, setReplay] = useState(0);
   const [showOrder, setShowOrder] = useState(ex.mode === 'trace');
+  /** The stroke order is being played (also over the tracing template). */
+  const [animating, setAnimating] = useState(false);
   const [compared, setCompared] = useState<{ hints: StrokeHint[]; countOk: boolean; expected: number } | null>(null);
   const [grid, setGrid] = useState(true);
 
@@ -60,7 +62,11 @@ export function WriteStep({ ex, courseId, locked, onResult }: StepProps<Exercise
         showGridToggle
         grid={grid}
         onGrid={setGrid}
-        underlay={showOrder || compared ? <StrokeGuide char={ex.char} mode={compared ? 'numbers' : ex.mode === 'trace' ? 'faint' : 'animate'} replayKey={replay} /> : undefined}
+        underlay={
+          showOrder || compared ? (
+            <StrokeGuide char={ex.char} mode={compared ? 'numbers' : animating || ex.mode !== 'trace' ? 'animate' : 'faint'} replayKey={replay} onDone={() => setAnimating(false)} />
+          ) : undefined
+        }
         overlay={compared ? <StrokeGuide char={ex.char} mode="solid" /> : undefined}
       />
       <div className="row row--wrap" style={{ justifyContent: 'center' }}>
@@ -68,9 +74,12 @@ export function WriteStep({ ex, courseId, locked, onResult }: StepProps<Exercise
           type="button"
           className="btn btn--sm btn--outline"
           onClick={() => {
+            setCompared(null);
             setShowOrder(true);
+            setAnimating(true);
             setReplay((r) => r + 1);
           }}
+          data-testid="write-animate"
         >
           <Play size={16} /> {t('write.animate')}
         </button>
