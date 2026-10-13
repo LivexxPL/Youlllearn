@@ -69,9 +69,16 @@ wybrać.
 
 ## Przenoszenie postępów między urządzeniami
 
-Postępy są zapisane tylko na urządzeniu, nie ma konta ani chmury. Aby przenieść naukę:
-*Ustawienia → Dane i kopia zapasowa → Eksportuj postępy* na starym urządzeniu, a potem
-*Importuj postępy* z tego pliku na nowym.
+**Konto Google (wersja w przeglądarce / zainstalowana z przeglądarki):** *Profil* (awatar w
+prawym górnym rogu ekranu startowego) → *Zaloguj się przez Google*. Postępy zapisują się
+same na Twoim Dysku Google, w ukrytym folderze aplikacji (aplikacja nie widzi innych plików).
+Na nowym urządzeniu na ekranie powitalnym wybierz *Masz już postępy na Dysku Google?
+Przywróć je*. Google daje dostęp na około godzinę — potem, jeśli coś czeka na zapis, na
+ekranie startowym pojawi się przycisk *Zapisz teraz* (jedno dotknięcie).
+
+W aplikacji APK logowanie Google nie działa (Google blokuje je w oknach wbudowanych w
+aplikacje). Tam, albo bez konta: *Ustawienia → Dane i kopia zapasowa → Eksportuj postępy*
+na starym urządzeniu, a potem *Importuj postępy* z tego pliku na nowym.
 
 ## Jednorazowe ustawienie dla właściciela repozytorium
 
@@ -83,6 +90,26 @@ ustawień w *Settings → Pages → Build and deployment → Source*:
 - **Deploy from a branch** — wtedy wybierz Branch: **gh-pages** / **(root)** → Save.
 
 Strona pojawia się po zakończeniu najbliższego przebiegu CI (kilka minut).
+
+### Logowanie Google i kopia na Dysku (jednorazowo, ok. 10 minut)
+
+1. Wejdź na <https://console.cloud.google.com/> i utwórz projekt (np. „Polyglot Quest”).
+2. *APIs & Services → Library* → wyszukaj **Google Drive API** → *Enable*.
+3. *APIs & Services → OAuth consent screen*: nazwa aplikacji, Twój e-mail, odbiorcy
+   **External**. Dopóki aplikacja jest w trybie **Testing**, w *Test users* dodaj konta Google,
+   które mają się logować (np. swoje). Zakresy: `openid`, `userinfo.email`, `userinfo.profile`,
+   `drive.appdata`.
+4. *APIs & Services → Credentials → Create credentials → OAuth client ID* → typ
+   **Web application**. W *Authorised JavaScript origins* dodaj `https://livexxpl.github.io`
+   (do testów lokalnych także `http://localhost:5173` i `http://localhost:4173`). Adres
+   przekierowania nie jest potrzebny.
+5. Skopiuj **Client ID** (kończy się na `.apps.googleusercontent.com` — to nie jest hasło) i
+   w repozytorium GitHub: *Settings → Secrets and variables → Actions → Variables →
+   New repository variable*, nazwa `GOOGLE_CLIENT_ID`, wartość: Client ID. Następny przebieg
+   CI opublikuje wersję z logowaniem.
+
+Projekt w Google Cloud i te usługi są w tym zastosowaniu bezpłatne; kopia zajmuje miejsce na
+Twoim Dysku (zwykle poniżej 1 MB). Szczegóły techniczne: [docs/CLOUD_SYNC.md](docs/CLOUD_SYNC.md).
 
 ## Dla programistów
 

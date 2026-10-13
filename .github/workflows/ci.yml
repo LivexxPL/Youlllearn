@@ -34,6 +34,11 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
+        env:
+          # Google sign-in for the Drive copy (docs/CLOUD_SYNC.md). An OAuth client id is public;
+          # set it as the repository variable GOOGLE_CLIENT_ID (Settings → Secrets and variables
+          # → Actions → Variables). Empty = the account features stay hidden.
+          VITE_GOOGLE_CLIENT_ID: ${{ vars.GOOGLE_CLIENT_ID }}
 
       - name: Install Playwright Chromium
         run: npx playwright install --with-deps chromium

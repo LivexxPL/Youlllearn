@@ -1,29 +1,45 @@
 /**
  * Export / import of all local data as a JSON file, and full reset.
  * Import validates the file before replacing anything (single transaction).
+ * The same format is used for the copy on Google Drive (services/cloud).
  */
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 import { Share } from '@capacitor/share';
-import { db, TABLES, type PolyglotDB, type TableName } from './db';
+import { db, isDeviceMeta, TABLES, type MetaRecord, type PolyglotDB, type TableName } from './db';
 import { appVersion, isNative } from './platform';
 import { dayKey } from '../engine/dates';
 
 export const BACKUP_FORMAT = 1;
+
+export type BackupData = Record<TableName, unknown[]>;
 
 export interface BackupFile {
   app: 'polyglot-quest';
   format: number;
   exportedAt: string;
   appVersion: string;
-  data: Record<TableName, unknown[]>;
+  data: BackupData;
 }
 
-export async function exportData(database: PolyglotDB = db): Promise<BackupFile> {
-  const data = {} as Record<TableName, unknown[]>;
+/**
+ * All learner data in one consistent read, without this device's own meta records
+ * (isDeviceMeta). Can run inside a wider read-write transaction.
+ */
+export async function readAll(database: PolyglotDB = db): Promise<BackupData> {
+  const data = {} as BackupData;
   await database.transaction('r', TABLES.map((t) => database.table(t)), async () => {
     for (const t of TABLES) data[t] = await database.table(t).toArray();
   });
+  data.meta = (data.meta as MetaRecord[]).filter((m) => !isDeviceMeta(m.key));
+  return data;
+}
+
+export function backupFile(data: BackupData): BackupFile {
   return { app: 'polyglot-quest', format: BACKUP_FORMAT, exportedAt: new Date().toISOString(), appVersion, data };
+}
+
+export async function exportData(database: PolyglotDB = db): Promise<BackupFile> {
+  return backupFile(await readAll(database));
 }
 
 export class BackupError extends Error {}
@@ -44,11 +60,14 @@ export function validateBackup(raw: unknown): BackupFile {
   return f as BackupFile;
 }
 
+/** Replaces all learner data with the file's; this device's own meta records are kept. */
 export async function importData(file: BackupFile, database: PolyglotDB = db): Promise<void> {
   await database.transaction('rw', TABLES.map((t) => database.table(t)), async () => {
+    const deviceMeta = (await database.meta.toArray()).filter((m) => isDeviceMeta(m.key));
     for (const t of TABLES) {
       await database.table(t).clear();
-      const rows = file.data[t] ?? [];
+      let rows = file.data[t] ?? [];
+      if (t === 'meta') rows = [...(rows as MetaRecord[]).filter((m) => !isDeviceMeta(m.key)), ...deviceMeta];
       if (rows.length) await database.table(t).bulkPut(rows);
     }
   });

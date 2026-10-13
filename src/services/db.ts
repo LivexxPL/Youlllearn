@@ -1,11 +1,13 @@
 /**
- * Local persistence (IndexedDB via Dexie). Everything stays on the device;
- * there is no account and no server. See docs/ARCHITECTURE.md.
+ * Local persistence (IndexedDB via Dexie). The device is the source of truth; an optional
+ * Google account keeps a copy in the user's own Google Drive (services/cloud). There is no
+ * server of our own. See docs/ARCHITECTURE.md and docs/CLOUD_SYNC.md.
  */
 import Dexie, { type EntityTable } from 'dexie';
 import type { CourseId } from '../content/types';
 import type { Card } from '../engine/srs';
 import type { PaletteId } from '../config/palettes';
+import { CLOUD_META_KEY } from '../config/cloud';
 
 export type ThemePref = 'system' | 'light' | 'dark';
 export type MotionPref = 'system' | 'reduce' | 'full';
@@ -54,6 +56,8 @@ export interface Settings {
   leftHanded: boolean;
   brushSize: number;
   reminders: ReminderSettings;
+  /** Optional name for the greeting (filled from the Google account on first sign-in). */
+  displayName: string;
   /** Seed for deterministic but per-user daily quests. */
   profileSeed: string;
   createdAt: number;
@@ -197,4 +201,13 @@ export async function getMeta<T>(key: string, fallback: T, database: PolyglotDB 
 
 export async function setMeta(key: string, value: unknown, database: PolyglotDB = db): Promise<void> {
   await database.meta.put({ key, value });
+}
+
+/**
+ * meta keys that describe this device rather than the learner: the Google account and sync
+ * state, an unfinished lesson to resume, a dismissed install hint. They stay out of backup
+ * files and the cloud copy, and importing a backup keeps this device's values.
+ */
+export function isDeviceMeta(key: string): boolean {
+  return key === CLOUD_META_KEY || key === 'installHintDismissed' || key.startsWith('resume:');
 }

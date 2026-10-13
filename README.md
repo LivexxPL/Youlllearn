@@ -89,8 +89,11 @@ an Android app (Capacitor). No account, no ads, no paid APIs: progress stays on 
 
 **Data and privacy**
 - IndexedDB storage, JSON export/import (Android: share sheet), reset with confirmation.
-- Offline-first: all content is bundled. Nothing is sent anywhere, except speech
-  recognition, which is off by default and explained before it can be turned on.
+- Optional Google account (web/PWA): progress is synchronised to the learner's own Google
+  Drive (hidden app folder only), restored on a new device and merged across devices —
+  no server of ours ([docs/CLOUD_SYNC.md](docs/CLOUD_SYNC.md)).
+- Offline-first: all content is bundled. Without signing in nothing is sent anywhere, except
+  speech recognition, which is off by default and explained before it can be turned on.
 
 ## Quick start
 
@@ -135,6 +138,7 @@ links to the installer. Step-by-step guide in Polish: [INSTALACJA.md](INSTALACJA
 | [docs/AUDIO.md](docs/AUDIO.md) | Audio Quest, TTS/ASR engines, limitations |
 | [docs/MOTIVATION.md](docs/MOTIVATION.md) | Goals, XP, streak, quests, badges, reminders |
 | [docs/ANDROID_BUILD.md](docs/ANDROID_BUILD.md) | Debug/release APK, AAB, signing, CI |
+| [docs/CLOUD_SYNC.md](docs/CLOUD_SYNC.md) | Google account, Drive copy, merge rules, client id setup |
 | [CONTENT_SOURCES.md](CONTENT_SOURCES.md) | Every third-party resource, its licence and attribution |
 
 ## Rebranding

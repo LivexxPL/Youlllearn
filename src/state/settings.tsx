@@ -9,6 +9,7 @@ import { COURSE_IDS } from '../content/types';
 
 export const TEXT_SCALES = [0.9, 1, 1.15, 1.3] as const;
 export const SETTINGS_SCHEMA = 1;
+export const DISPLAY_NAME_MAX = 30;
 
 export function defaultSettings(now = Date.now()): Settings {
   return {
@@ -40,6 +41,7 @@ export function defaultSettings(now = Date.now()): Settings {
     leftHanded: false,
     brushSize: 0.04,
     reminders: { enabled: false, time: '19:00', days: [1, 2, 3, 4, 5, 6, 0] },
+    displayName: '',
     profileSeed: Math.random().toString(36).slice(2, 10),
     createdAt: now,
   };
@@ -55,6 +57,7 @@ export function migrateSettings(stored: Partial<Settings> | undefined): Settings
   if (merged.courses.length === 0) merged.courses = [merged.activeCourse];
   // A backup from a newer version may name a palette this version does not have.
   if (!PALETTE_IDS.includes(merged.palette)) merged.palette = 'classic';
+  merged.displayName = typeof merged.displayName === 'string' ? merged.displayName.slice(0, DISPLAY_NAME_MAX) : '';
   merged.schema = SETTINGS_SCHEMA;
   return merged;
 }

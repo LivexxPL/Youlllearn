@@ -71,6 +71,18 @@ export function formatDate(date: Date | number, opts: Intl.DateTimeFormatOptions
   return new Intl.DateTimeFormat(locales[current], opts).format(date);
 }
 
+/** "przed chwilą", "5 minut temu", "wczoraj", … */
+export function formatRelative(ts: number, now = Date.now()): string {
+  const sec = Math.round((ts - now) / 1000);
+  if (Math.abs(sec) < 60) return t('time.justNow');
+  const rtf = new Intl.RelativeTimeFormat(locales[current], { numeric: 'auto' });
+  const min = Math.round(sec / 60);
+  if (Math.abs(min) < 60) return rtf.format(min, 'minute');
+  const hours = Math.round(min / 60);
+  if (Math.abs(hours) < 24) return rtf.format(hours, 'hour');
+  return rtf.format(Math.round(hours / 24), 'day');
+}
+
 export function weekdayShort(dayIndex: number): string {
   // 2023-01-01 was a Sunday.
   const d = new Date(2023, 0, 1 + dayIndex);

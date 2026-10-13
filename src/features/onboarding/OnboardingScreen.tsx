@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Check, Download, Lock, Volume2 } from 'lucide-react';
-import { useSettings } from '../../state/settings';
+import { Check, CloudDownload, Download, Lock, Volume2 } from 'lucide-react';
+import { loadSettings, useSettings } from '../../state/settings';
 import { allCourses, getCourse } from '../../content/registry';
 import { navigate } from '../../app/router';
 import { t } from '../../i18n';
@@ -11,6 +11,10 @@ import type { DailyGoal } from '../../services/db';
 import { audio } from '../../services/audio';
 import { useAudioStatus } from '../../state/hooks';
 import { isNative } from '../../services/platform';
+import { cloud } from '../../services/cloud';
+import { useCloud } from '../../state/cloud';
+import { useToast } from '../../components/Toasts';
+import { cloudErrorText } from '../profile/cloudText';
 
 const SAMPLES: Record<CourseId, string> = {
   es: '¡Hola! Buenos días.',
@@ -19,6 +23,36 @@ const SAMPLES: Record<CourseId, string> = {
 };
 
 const GOALS: DailyGoal[] = [5, 10, 20, 30];
+
+/** "Already learning? Restore from Google Drive" on the welcome screen. */
+function RestoreFromCloud() {
+  const c = useCloud();
+  const { replace } = useSettings();
+  const toast = useToast();
+  if (!c.available) return null;
+  const busy = c.state === 'connecting' || c.state === 'syncing';
+  const restore = async () => {
+    const state = await cloud.connect();
+    if (state !== 'synced') {
+      const err = cloud.getSnapshot().error;
+      if (err) toast(cloudErrorText(err));
+      return;
+    }
+    const s = await loadSettings();
+    if (!s.onboarded) {
+      toast(t('cloud.restoreEmpty'));
+      return;
+    }
+    replace(s);
+    toast(t('cloud.restoreDone'), 'success');
+    navigate('/', { replace: true });
+  };
+  return (
+    <button type="button" className="btn btn--ghost btn--block" onClick={restore} disabled={busy} data-testid="onb-restore">
+      <CloudDownload size={18} /> {busy ? t('cloud.state.connecting') : t('cloud.restore')}
+    </button>
+  );
+}
 
 export function OnboardingScreen() {
   const { settings, update } = useSettings();
@@ -59,6 +93,7 @@ export function OnboardingScreen() {
           <button type="button" className="btn btn--primary btn--lg btn--block" onClick={() => setStep(1)} data-testid="onb-start">
             {t('onb.welcomeCta')}
           </button>
+          <RestoreFromCloud />
         </section>
       )}
 

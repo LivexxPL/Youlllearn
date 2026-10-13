@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
-import { Bell, BookOpen, Download, Info, Keyboard, Mic, Palette, PenLine, Upload, Trash2, Volume2, Database, Target, Languages, Smartphone } from 'lucide-react';
+import { Bell, BookOpen, ChevronRight, Download, Info, Keyboard, Mic, Palette, PenLine, Upload, Trash2, Volume2, Database, Target, Languages, Smartphone } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useSettings, TEXT_SCALES, loadSettings } from '../../state/settings';
 import { allCourses, getCourse } from '../../content/registry';
@@ -17,6 +17,10 @@ import { recognitionAvailable } from '../../services/audio/speech';
 import { brand } from '../../config/brand';
 import { InstallSection } from './InstallCard';
 import { PalettePicker } from './PalettePicker';
+import { cloud } from '../../services/cloud';
+import { useCloud } from '../../state/cloud';
+import { storagePersisted } from '../../services/storage';
+import { Avatar } from '../../components/Avatar';
 
 function Section({ icon, title, children }: { icon: ReactNode; title: string; children: ReactNode }) {
   return (
@@ -84,11 +88,14 @@ export default function SettingsScreen() {
   const [srAvailable, setSrAvailable] = useState(false);
   const [resetOpen, setResetOpen] = useState(false);
   const [resetText, setResetText] = useState('');
+  const [persisted, setPersisted] = useState<boolean | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
+  const account = useCloud().account;
 
   useEffect(() => {
     reminderPermission().then(setPerm).catch(() => setPerm('unsupported'));
     recognitionAvailable().then(setSrAvailable);
+    storagePersisted().then(setPersisted);
   }, []);
 
   const toggleCourse = (id: CourseId) => {
@@ -131,6 +138,8 @@ export default function SettingsScreen() {
   };
 
   const doReset = async () => {
+    // A reset starts from scratch on this device; the copy on Drive stays (Profile can delete it).
+    await cloud.signOut();
     await resetAll();
     replace(await loadSettings());
     setResetOpen(false);
@@ -145,6 +154,17 @@ export default function SettingsScreen() {
   return (
     <div className="page">
       <PageHeader title={t('set.title')} />
+
+      <div className="list">
+        <button type="button" className="list-row" onClick={() => navigate('/profile')} data-testid="settings-profile">
+          <Avatar name={settings.displayName || account?.name || ''} picture={account?.picture} size={40} />
+          <div className="list-row__body">
+            <div className="list-row__title">{t('set.profileRow')}</div>
+            <div className="list-row__desc">{account ? account.email : t('set.profileRowDesc')}</div>
+          </div>
+          <ChevronRight size={20} aria-hidden="true" />
+        </button>
+      </div>
 
       <Section icon={<BookOpen size={20} />} title={t('set.courses')}>
         {allCourses().map((c) => (
@@ -351,8 +371,9 @@ export default function SettingsScreen() {
             <Trash2 size={18} /> {t('set.reset')}
           </button>
         </div>
-        <div className="list-row">
+        <div className="list-row" style={{ flexDirection: 'column', alignItems: 'stretch', gap: 'var(--sp-2)' }}>
           <p className="subtle">{t('set.storage')}</p>
+          {persisted !== null && <p className="subtle">{persisted ? t('set.persisted') : t('set.notPersisted')}</p>}
         </div>
       </Section>
 

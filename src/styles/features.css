@@ -1361,12 +1361,38 @@
 /* =====================================================================
  * Home
  * ===================================================================== */
+/* Phone: greeting with the avatar beside it, the course switcher below.
+ * Wider screens: greeting, course switcher and avatar in one row. */
 .home-header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    'title profile'
+    'course course';
+  align-items: center;
   gap: var(--sp-3);
-  flex-wrap: wrap;
+}
+
+.home-header__title {
+  grid-area: title;
+  min-width: 0;
+}
+
+.home-header > .course-chip {
+  grid-area: course;
+  justify-self: start;
+}
+
+.home-header > .profile-btn {
+  grid-area: profile;
+}
+
+@media (min-width: 720px) {
+  .home-header {
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    grid-template-areas: 'title course profile';
+    align-items: end;
+  }
 }
 
 .course-chip {
@@ -2657,4 +2683,118 @@ body.is-writing {
   body {
     background-image: none;
   }
+}
+
+/* =====================================================================
+ * Profile and Google account
+ * ===================================================================== */
+.avatar {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--primary-soft);
+  color: var(--primary);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-btn {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  min-width: var(--touch);
+  min-height: var(--touch);
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: none;
+  color: inherit;
+}
+
+.profile-btn .avatar {
+  box-shadow: 0 0 0 2px var(--surface), var(--shadow-1);
+}
+
+.profile-btn__badge {
+  position: absolute;
+  right: -2px;
+  bottom: -2px;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--bg);
+  background: var(--accent-bright);
+  color: var(--on-accent);
+}
+
+.profile-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-4);
+}
+
+.cloud-account {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.cloud-account__email {
+  overflow-wrap: anywhere;
+}
+
+.cloud-points {
+  display: grid;
+  gap: var(--sp-2);
+  margin: 0;
+  padding-left: 1.2em;
+  color: var(--text-muted);
+  font-size: var(--fs-s);
+}
+
+.cloud-status {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin: 0;
+  font-size: var(--fs-s);
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.cloud-status svg {
+  flex: none;
+}
+
+.cloud-status--ok {
+  color: var(--success);
+}
+
+.cloud-status--warn {
+  color: var(--accent);
+}
+
+.spin {
+  animation: spin 1.2s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+[data-motion='reduce'] .spin {
+  animation: none;
 }

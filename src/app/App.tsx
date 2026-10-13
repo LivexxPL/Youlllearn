@@ -2,7 +2,7 @@ import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { Nav } from './Nav';
 import { navigate, useRoute } from './router';
-import { useSettings } from '../state/settings';
+import { loadSettings, useSettings } from '../state/settings';
 import { ToastProvider, useToast } from '../components/Toasts';
 import { ErrorBoundary } from '../components/ErrorBoundary';
 import { db } from '../services/db';
@@ -16,6 +16,8 @@ import { LearnScreen } from '../features/learn/LearnScreen';
 import { OnboardingScreen } from '../features/onboarding/OnboardingScreen';
 import { useDayKey } from '../state/hooks';
 import { rescheduleReminders } from '../services/notifications';
+import { cloud } from '../services/cloud';
+import { requestPersistentStorage } from '../services/storage';
 import { formatDate } from '../i18n';
 import { parseDayKey } from '../engine/dates';
 import { Shield, Sunrise } from 'lucide-react';
@@ -32,6 +34,7 @@ const WritingHub = lazy(() => import('../features/writing/WritingHub'));
 const WritingPractice = lazy(() => import('../features/writing/WritingPractice'));
 const KanaChart = lazy(() => import('../features/writing/KanaChart'));
 const NotesScreen = lazy(() => import('../features/writing/NotesScreen'));
+const ProfileScreen = lazy(() => import('../features/profile/ProfileScreen'));
 
 const IMMERSIVE = new Set(['lesson', 'onboarding', 'notes']);
 
@@ -69,6 +72,8 @@ function Screen() {
       return <SettingsScreen />;
     case 'about':
       return <AboutScreen />;
+    case 'profile':
+      return <ProfileScreen />;
     case 'write':
       return b && c ? <WritingPractice set={b} char={c} /> : <WritingHub />;
     case 'kana':
@@ -81,9 +86,24 @@ function Screen() {
 }
 
 function useBackgroundTasks() {
-  const { settings } = useSettings();
+  const { settings, replace } = useSettings();
   const toast = useToast();
   const today = useDayKey();
+
+  // Optional Google Drive copy: start watching for changes; reload settings a sync changed.
+  useEffect(() => {
+    cloud.start().catch((e) => console.warn('Cloud sync could not start', e));
+    return cloud.onSettingsChanged(() => {
+      loadSettings()
+        .then(replace)
+        .catch(() => {});
+    });
+  }, [replace]);
+
+  // Ask the browser to keep the data even when space runs low (after setup, not on first visit).
+  useEffect(() => {
+    if (settings.onboarded) requestPersistentStorage().catch(() => {});
+  }, [settings.onboarded]);
 
   useEffect(() => {
     audio.configure({ voices: settings.voices, speechRate: settings.speechRate });

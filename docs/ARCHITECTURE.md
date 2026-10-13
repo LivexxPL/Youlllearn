@@ -49,10 +49,17 @@ android/        Capacitor Android project
 | `dailyStats` | Per day: active seconds, listening seconds, open seconds, exercises, correct, new items, reviews, lessons, speaking, writing, audio sessions, XP, best run, courses |
 | `achievements`, `rewards` | Unlocked badges; claimed quest/challenge rewards (granted once) |
 | `drawings` | Handwriting practice (`practice:<char>`) and lesson notes (`note:<lessonId>`), normalised stroke points with pressure |
-| `meta` | Streak state, lesson resume position, story results, flags |
+| `meta` | Streak state, lesson resume position, story results, flags, Google account and sync state |
 
 Export/import (`services/backup.ts`) writes all tables to a versioned JSON file and
 validates it before replacing data. "Reset" clears everything after typed confirmation.
+Device-only `meta` records (`isDeviceMeta`: account and sync state, lesson resume position,
+dismissed install hint) are left out of exports and kept on import.
+
+The optional Google account (`services/cloud`) keeps the same JSON in the user's Google Drive
+application data folder and merges copies from several devices record by record — see
+[CLOUD_SYNC.md](CLOUD_SYNC.md). The app asks the browser for persistent storage after setup
+(`services/storage.ts`).
 
 **Active time vs open time.** `services/activity.ts` counts a second as *active* only while
 a learning activity is open **and** the learner interacted within 60 s, or Audio Quest is

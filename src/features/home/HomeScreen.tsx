@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
-import { ChevronDown, Clock, Flame, Headphones, Play, RotateCcw, Shield, Sparkles, Timer, Trophy, Zap } from 'lucide-react';
+import { ChevronDown, Clock, CloudUpload, Flame, Headphones, Play, RotateCcw, Shield, Sparkles, Timer, Trophy, Zap } from 'lucide-react';
 import { useSettings } from '../../state/settings';
 import { getCourse, allCourses } from '../../content/registry';
 import { useAllStats, useCards, useCompleted, useDayKey, useToday } from '../../state/hooks';
@@ -16,13 +16,63 @@ import { weekDays } from '../../engine/dates';
 import { questStatuses, challengeStatus, type QuestStatus, type ChallengeStatus } from '../../services/progress';
 import { isUpdateReady, onUpdateReady, applyUpdate } from '../../services/pwa';
 import { InstallBanner } from '../settings/InstallCard';
+import { Avatar } from '../../components/Avatar';
+import { useToast } from '../../components/Toasts';
+import { useCloud } from '../../state/cloud';
+import { cloud } from '../../services/cloud';
+import { cloudErrorText } from '../profile/cloudText';
 import type { CourseId } from '../../content/types';
 
-function greetingKey(): 'home.greetingMorning' | 'home.greetingDay' | 'home.greetingEvening' {
+function greeting(name: string): string {
   const h = new Date().getHours();
-  if (h < 11) return 'home.greetingMorning';
-  if (h < 18) return 'home.greetingDay';
-  return 'home.greetingEvening';
+  const part = h < 11 ? 'Morning' : h < 18 ? 'Day' : 'Evening';
+  const first = name.trim();
+  return first ? t(`home.greeting${part}Name`, { name: first }) : t(`home.greeting${part}`);
+}
+
+/** Avatar in the header: opens the profile; a badge shows changes waiting for the cloud. */
+function ProfileButton() {
+  const { settings } = useSettings();
+  const c = useCloud();
+  const waiting = Boolean(c.account && c.dirty && !c.connected);
+  return (
+    <button type="button" className="profile-btn" onClick={() => navigate('/profile')} aria-label={t('profile.open')} data-testid="profile-button">
+      <Avatar name={settings.displayName || c.account?.name || ''} picture={c.account?.picture} size={44} />
+      {waiting && (
+        <span className="profile-btn__badge" aria-hidden="true">
+          <CloudUpload size={12} />
+        </span>
+      )}
+    </button>
+  );
+}
+
+/** Shown when changes wait for the cloud and access has expired: one tap renews and saves. */
+function CloudPendingBanner() {
+  const c = useCloud();
+  const toast = useToast();
+  if (!c.available || !c.account || !c.autoSync || !c.dirty || c.connected) return null;
+  const busy = c.state === 'connecting' || c.state === 'syncing';
+  return (
+    <div className="banner" role="status" data-testid="cloud-pending">
+      <CloudUpload size={18} />
+      <span className="grow">{t('cloud.homePending')}</span>
+      <button
+        type="button"
+        className="btn btn--sm btn--primary"
+        disabled={busy}
+        onClick={() =>
+          cloud.connect().then((state) => {
+            const err = cloud.getSnapshot().error;
+            if (state === 'synced') toast(t('cloud.synced'), 'success');
+            else if (err) toast(cloudErrorText(err));
+          })
+        }
+      >
+        {t('cloud.homeAction')}
+      </button>
+    </div>
+  );
 }
 
 export function CourseSwitcher() {
@@ -182,13 +232,15 @@ export function HomeScreen() {
   return (
     <div className="page page--wide">
       <header className="home-header">
-        <div>
+        <div className="home-header__title">
           <p className="eyebrow">{t('home.todayTitle')}</p>
-          <h1>{t(greetingKey())}</h1>
+          <h1>{greeting(settings.displayName)}</h1>
         </div>
         <CourseSwitcher />
+        <ProfileButton />
       </header>
 
+      <CloudPendingBanner />
       <InstallBanner />
 
       {updateReady && (
