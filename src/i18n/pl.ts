@@ -514,6 +514,7 @@ export const pl = {
   'quest.allDone': 'Komplet zadań! Bonus +{xp} XP',
   'quest.allDoneHint': 'Wszystkie trzy zadania: bonus +{xp} XP',
   'quest.fixedRewards': 'Nagrody są stałe i widoczne z góry.',
+  'quest.coinsHint': 'Monety: {quest} za zadanie, {all} za komplet.',
   'challenge.days': 'Ucz się w {count} dniach tego tygodnia',
   'challenge.lessons': { one: 'Ukończ {count} lekcję w tym tygodniu', few: 'Ukończ {count} lekcje w tym tygodniu', many: 'Ukończ {count} lekcji w tym tygodniu', other: 'Ukończ {count} lekcji w tym tygodniu' },
   'challenge.listen': 'Słuchaj łącznie {count} min w tym tygodniu',

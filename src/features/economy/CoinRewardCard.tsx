@@ -22,13 +22,15 @@ export function CoinRewardCard({ lines, note }: { lines: CoinLine[]; note?: stri
   const played = useRef(false);
 
   useEffect(() => {
+    let timer = 0;
     if (total > 0 && !played.current) {
       played.current = true;
-      cue('coin');
+      // After the "lesson complete" fanfare rather than on top of it.
+      timer = window.setTimeout(() => cue('coin'), 450);
     }
     if (mode !== 'full') {
       setShown(total);
-      return;
+      return () => window.clearTimeout(timer);
     }
     let raf = 0;
     const start = performance.now();
@@ -38,7 +40,10 @@ export function CoinRewardCard({ lines, note }: { lines: CoinLine[]; note?: stri
       if (k < 1) raf = requestAnimationFrame(step);
     };
     raf = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(raf);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.clearTimeout(timer);
+    };
   }, [total, mode]);
 
   if (!total && !note) return null;

@@ -147,6 +147,8 @@ function useBackgroundTasks() {
       const granted = await reconcileRewards();
       const total = granted.reduce((n, e) => n + e.amount, 0);
       if (cancelled || total <= 0) return;
+      // Coins just granted may unlock a badge of their own ("first 100 coins").
+      for (const a of await refreshAchievements()) toast(t('ach.unlocked', { name: t(`ach.${a.id}` as never) }), 'reward');
       const amount = t('coins.amount', { count: total });
       if (granted.some((e) => e.type === 'migration')) toast(t('coins.welcome', { currency: CURRENCY.name, amount }), 'reward');
       else toast(t('coins.gained', { amount, reason: granted.length === 1 ? entryReason(granted[0]) : t('coins.why.catchUp') }), 'reward');

@@ -9,7 +9,8 @@ screens.
 - Make starting easy: one prominent "Kontynuuj naukę" button, a 3-minute session option,
   and a 5-minute minimum goal.
 - Fair and transparent: every reward is fixed and visible before you start. Nothing can be
-  bought. No random loot, no artificial scarcity, no countdown pressure.
+  bought with money; coins earned by learning buy only cosmetics (ECONOMY_DESIGN.md). No
+  random loot, no artificial scarcity, no countdown pressure.
 - No guilt: copy never shames. Missing a day costs nothing but the streak counter, which is
   forgiving. **Learning progress (cards, lessons, XP) is never reset by a broken streak.**
 - Honest numbers: active learning time is counted separately from time the app is open.
@@ -75,7 +76,7 @@ with targets scaled to the daily goal.
 One per week from: 5 active days, N lessons, N listening minutes, N reviews, 15 speaking
 exercises, or goal × 5 active minutes.
 
-## Badges (27) and personal bests
+## Badges (30) and personal bests
 
 Milestones for lessons (1/10/25/50), the first lessons of levels A2 (A2 or A2+) and B1, words started (50/150), established words (25), streaks
 (3/7/30), active days (20), listening (30/120 min), reviews (100/500), speaking (25),
@@ -112,3 +113,10 @@ The card always shows the estimated time (lesson minutes, or 18 s per review car
   (and this app has no server). Reminders only appear while the app or tab is open; the
   Settings screen says so and asks for notification permission only when reminders are
   turned on.
+
+## Coins
+
+Lessons, practice, quests, the weekly challenge, badges and every 7 active days also earn
+Lingo Coins, spent in the cosmetics shop (themes, avatar frames, profile backgrounds,
+badges, titles, progress bar styles, completion effects). Amounts, anti-farming rules and
+the catalogue: [ECONOMY_DESIGN.md](../ECONOMY_DESIGN.md).

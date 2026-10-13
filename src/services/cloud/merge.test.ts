@@ -114,6 +114,16 @@ describe('merging learner data from two devices', () => {
     expect(mergeStreak(a, b)).toEqual({ ...b, best: 3 });
   });
 
+  it('joins coin histories by event, so a reward or purchase made on both devices counts once', () => {
+    const tx = (id: string, amount: number, at: number) => ({ id, type: 'lesson', amount, currency: 'coins', at, date: '2026-10-13' });
+    const merged = mergeData(
+      data({ ledger: [tx('lesson:es.l01:first', 15, 1), tx('purchase:frame-gold:0', -200, 5)] }),
+      data({ ledger: [tx('lesson:es.l01:first', 15, 2), tx('lesson:es.l02:first', 15, 3), tx('purchase:frame-gold:0', -200, 6)] }),
+    );
+    expect((merged.ledger as { id: string }[]).map((e) => e.id)).toEqual(['lesson:es.l01:first', 'lesson:es.l02:first', 'purchase:frame-gold:0']);
+    expect((merged.ledger as { amount: number }[]).reduce((n, e) => n + e.amount, 0)).toBe(-170);
+  });
+
   it('accepts copies from older versions that lack tables', () => {
     const local = data({ cards: [introduceCard('es.hola', 'es', 'item', [{ correct: true, skill: 'recognition' }], 1)] });
     expect(mergeData(local, { cards: undefined } as unknown as BackupData).cards).toEqual(local.cards);

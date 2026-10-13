@@ -22,6 +22,7 @@ import { useCloud } from '../../state/cloud';
 import { cloud } from '../../services/cloud';
 import { cloudErrorText } from '../profile/cloudText';
 import { CoinChip } from '../economy/Coin';
+import { REWARDS } from '../../config/economy';
 import type { CourseId } from '../../content/types';
 
 function greeting(name: string): string {
@@ -162,7 +163,7 @@ function QuestList({ quests, allClaimed }: { quests: QuestStatus[]; allClaimed: 
         ))}
       </ul>
       <p className="subtle" style={{ marginTop: 'var(--sp-3)' }}>
-        {t('quest.allDoneHint', { xp: 30 })} · {t('quest.fixedRewards')}
+        {t('quest.allDoneHint', { xp: 30 })} · {t('quest.coinsHint', { quest: REWARDS.quest, all: REWARDS.allQuests })} · {t('quest.fixedRewards')}
       </p>
     </section>
   );

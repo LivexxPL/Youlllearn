@@ -130,6 +130,30 @@ test.describe('coins and the cosmetics shop', () => {
     await context.setOffline(false);
   });
 
+  test('a bought theme applies at once, is switched to again for free and the default look returns', async ({ page }) => {
+    await onboard(page);
+    await addCoins(page, 325);
+    await page.goto('./#/shop?tab=themes');
+    await buy(page, 'theme-forest');
+    await page.getByTestId('item-equip-now').click();
+    await expect(page.locator('html')).toHaveAttribute('data-palette', 'forest');
+    await page.keyboard.press('Escape');
+
+    await page.goto('./#/settings');
+    await page.getByTestId('palette-mint').click();
+    await expect(page.locator('html')).toHaveAttribute('data-palette', 'mint');
+    await page.getByTestId('palette-forest').click();
+    await expect(page.locator('html')).toHaveAttribute('data-palette', 'forest');
+    await page.reload();
+    await expect(page.locator('html')).toHaveAttribute('data-palette', 'forest');
+    await page.getByTestId('reset-look').click();
+    await expect(page.locator('html')).toHaveAttribute('data-palette', 'classic');
+    // Still owned: it stays in the picker.
+    await expect(page.getByTestId('palette-forest')).toBeVisible();
+    await page.goto('./#/');
+    expect(await balance(page)).toBe(0);
+  });
+
   test('reward-only items show how to earn them in the collection', async ({ page }) => {
     await onboard(page);
     await page.goto('./#/collection');

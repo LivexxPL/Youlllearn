@@ -56,6 +56,7 @@ Records are matched by primary key and nothing is ever deleted by a merge:
 | `drawings` | the more recently updated drawing |
 | `settings` | this device's settings plus courses started elsewhere; the cloud settings on a device that has not been set up yet (restore) |
 | `meta` | streak: the state evaluated to the later day, shield days combined, best streak max; flags: any set flag; story results: newer |
+| `ledger` | union of coin transactions by id — ids name the event, so a reward or purchase made on two devices counts once (ECONOMY_DESIGN.md) |
 
 **Device-only records** (`isDeviceMeta` in `services/db.ts`: the account and sync state, the
 lesson resume position, the dismissed install hint) are never uploaded, never taken from the

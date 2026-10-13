@@ -50,6 +50,7 @@ android/        Capacitor Android project
 | `achievements`, `rewards` | Unlocked badges; claimed quest/challenge rewards (granted once) |
 | `drawings` | Handwriting practice (`practice:<char>`) and lesson notes (`note:<lessonId>`), normalised stroke points with pressure |
 | `meta` | Streak state, lesson resume position, story results, flags, Google account and sync state |
+| `ledger` | Coin transactions (v2): rewards, purchases, refunds — the only record of the balance and owned items ([ECONOMY_DESIGN.md](../ECONOMY_DESIGN.md)) |
 
 Export/import (`services/backup.ts`) writes all tables to a versioned JSON file and
 validates it before replacing data. "Reset" clears everything after typed confirmation.

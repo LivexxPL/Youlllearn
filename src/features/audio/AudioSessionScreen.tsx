@@ -47,6 +47,7 @@ import { db, setMeta, type LedgerEntry } from '../../services/db';
 import { awardMarathon, awardPractice, awardStory } from '../../services/economy';
 import { sessionCoinLines, type CoinLine } from '../economy/labels';
 import { CoinRewardCard } from '../economy/CoinRewardCard';
+import { Celebration } from '../economy/Celebration';
 import { newSessionId } from '../economy/session';
 import { cue } from '../../services/feedback';
 import { navigate, useBackHandler } from '../../app/router';
@@ -425,6 +426,7 @@ function HandsFree({ query }: { query: URLSearchParams }) {
         </div>
         {result && <RewardBanners rewards={result.rewards} />}
         {result && <CoinRewardCard lines={result.coins} />}
+        <Celebration fx={settings.cosmetics.fx} />
         <div className="stack">
           <button
             type="button"
@@ -692,6 +694,7 @@ function AudioFlashcards() {
         </div>
         {result && <RewardBanners rewards={result.rewards} />}
         {result && <CoinRewardCard lines={result.coins} />}
+        <Celebration fx={settings.cosmetics.fx} />
         <BackToHub primary />
       </div>
     );
@@ -856,6 +859,7 @@ function StoryView({ course, story }: { course: Course; story: Story }) {
         </div>
         {result && <RewardBanners rewards={result.rewards} />}
         {result && <CoinRewardCard lines={result.coins} />}
+        <Celebration fx={settings.cosmetics.fx} />
         <BackToHub primary />
       </div>
     );
