@@ -5,10 +5,32 @@
  * version. src/config/palettes.test.ts checks the text contrast of every palette (WCAG AA).
  */
 
-export type PaletteId = 'classic' | 'strawberry' | 'mint' | 'lavender' | 'peach' | 'lemon' | 'sky' | 'candy';
+export type PaletteId =
+  | 'classic'
+  | 'strawberry'
+  | 'mint'
+  | 'lavender'
+  | 'peach'
+  | 'lemon'
+  | 'sky'
+  | 'candy'
+  | 'galaxy'
+  | 'sakura'
+  | 'neon';
 
 /** Small shapes repeated in the page background of a palette. */
-export type Motif = 'none' | 'hearts' | 'leaves' | 'sparkles' | 'bubbles' | 'dots' | 'clouds' | 'confetti';
+export type Motif =
+  | 'none'
+  | 'hearts'
+  | 'leaves'
+  | 'sparkles'
+  | 'bubbles'
+  | 'dots'
+  | 'clouds'
+  | 'confetti'
+  | 'stars'
+  | 'petals'
+  | 'circuit';
 
 /** Colours of one palette in one mode (all opaque #rrggbb). */
 export interface PaletteColors {
@@ -576,6 +598,202 @@ export const PALETTES: readonly Palette[] = [
       ink: '#f5a0e6',
     },
   },
+  // Premium palettes.
+  {
+    id: 'galaxy',
+    emoji: '🌌',
+    motif: 'stars',
+    light: {
+      bg: '#f6f6ff',
+      bgElevated: '#ffffff',
+      surface: '#ffffff',
+      surface2: '#ebebfd',
+      surface3: '#dcdaf8',
+      text: '#181439',
+      textMuted: '#494772',
+      textSubtle: '#5f5e8a',
+      border: '#e3e2f5',
+      borderStrong: '#c5c3e7',
+      primary: '#443ac0',
+      primaryStrong: '#34289e',
+      primarySoft: '#e3e6ff',
+      primaryEdge: '#2a1e84',
+      onPrimary: '#ffffff',
+      accent: '#8d5e00',
+      accentBright: '#fed25f',
+      accentSoft: '#fff5d9',
+      accentDeep: '#fcba43',
+      accentEdge: '#ce871b',
+      onAccent: '#382000',
+      heroFrom: '#2c207f',
+      heroTo: '#6f287e',
+      onHero: '#ffffff',
+      onHeroMuted: '#e7e1f6',
+      heroPressedFg: '#34289e',
+      chartBar: '#6a69db',
+      ink: '#6660cb',
+    },
+    dark: {
+      bg: '#0c091f',
+      bgElevated: '#15132d',
+      surface: '#15132d',
+      surface2: '#1c1937',
+      surface3: '#252344',
+      text: '#ededfc',
+      textMuted: '#babadd',
+      textSubtle: '#9d9dc6',
+      border: '#292745',
+      borderStrong: '#373659',
+      primary: '#a5abff',
+      primaryStrong: '#c3c9ff',
+      primarySoft: '#22224f',
+      primaryEdge: '#6363c6',
+      onPrimary: '#0d0b2f',
+      accent: '#ffd16b',
+      accentBright: '#ffd16b',
+      accentSoft: '#322405',
+      accentDeep: '#f5ae39',
+      accentEdge: '#b77610',
+      onAccent: '#281600',
+      heroFrom: '#321868',
+      heroTo: '#041d50',
+      onHero: '#ffffff',
+      onHeroMuted: '#dbdcf2',
+      heroPressedFg: '#38308f',
+      chartBar: '#8286e6',
+      ink: '#cbcbfe',
+    },
+  },
+  {
+    id: 'sakura',
+    emoji: '🌸',
+    motif: 'petals',
+    light: {
+      bg: '#fff6f9',
+      bgElevated: '#ffffff',
+      surface: '#ffffff',
+      surface2: '#fdeaf1',
+      surface3: '#fad9e4',
+      text: '#2e1818',
+      textMuted: '#66464a',
+      textSubtle: '#7e5c60',
+      border: '#f7e1e9',
+      borderStrong: '#eac1cf',
+      primary: '#b03576',
+      primaryStrong: '#921f5e',
+      primarySoft: '#fde0ec',
+      primaryEdge: '#78174d',
+      onPrimary: '#ffffff',
+      accent: '#3a732c',
+      accentBright: '#b8e89e',
+      accentSoft: '#e8f8e0',
+      accentDeep: '#9fd780',
+      accentEdge: '#629e4d',
+      onAccent: '#193612',
+      heroFrom: '#f7bfd3',
+      heroTo: '#ffe4e3',
+      onHero: '#3d1825',
+      onHeroMuted: '#683f4c',
+      heroPressedFg: '#921f5e',
+      chartBar: '#d06793',
+      ink: '#df84a8',
+    },
+    dark: {
+      bg: '#160c10',
+      bgElevated: '#211419',
+      surface: '#211419',
+      surface2: '#2b1b21',
+      surface3: '#36242b',
+      text: '#f7ebef',
+      textMuted: '#d4b8c2',
+      textSubtle: '#ba9ba6',
+      border: '#3a282f',
+      borderStrong: '#4c363e',
+      primary: '#f5a6c4',
+      primaryStrong: '#fbc2d6',
+      primarySoft: '#421d2d',
+      primaryEdge: '#b75f84',
+      onPrimary: '#32081c',
+      accent: '#afe392',
+      accentBright: '#afe392',
+      accentSoft: '#1e2b17',
+      accentDeep: '#8fcb6d',
+      accentEdge: '#558b41',
+      onAccent: '#0e2608',
+      heroFrom: '#622243',
+      heroTo: '#331d1b',
+      onHero: '#ffffff',
+      onHeroMuted: '#edd8df',
+      heroPressedFg: '#921f5e',
+      chartBar: '#d87da2',
+      ink: '#f5a6c4',
+    },
+  },
+  {
+    id: 'neon',
+    emoji: '⚡',
+    motif: 'circuit',
+    light: {
+      bg: '#f1f6fa',
+      bgElevated: '#ffffff',
+      surface: '#ffffff',
+      surface2: '#e7eef5',
+      surface3: '#d7e1eb',
+      text: '#0f1621',
+      textMuted: '#424e5e',
+      textSubtle: '#586474',
+      border: '#dfe5ec',
+      borderStrong: '#bec9d4',
+      primary: '#007095',
+      primaryStrong: '#005b79',
+      primarySoft: '#d3f1fd',
+      primaryEdge: '#004963',
+      onPrimary: '#ffffff',
+      accent: '#a70593',
+      accentBright: '#f88ae2',
+      accentSoft: '#ffebfa',
+      accentDeep: '#ec5cd3',
+      accentEdge: '#b2339f',
+      onAccent: '#2f0729',
+      heroFrom: '#0b1628',
+      heroTo: '#34125a',
+      onHero: '#ffffff',
+      onHeroMuted: '#80ebf7',
+      heroPressedFg: '#005b79',
+      chartBar: '#008fad',
+      ink: '#0096af',
+    },
+    dark: {
+      bg: '#05070c',
+      bgElevated: '#0c1118',
+      surface: '#0c1118',
+      surface2: '#131922',
+      surface3: '#1b222e',
+      text: '#e7f4f9',
+      textMuted: '#abc2ce',
+      textSubtle: '#8da6b5',
+      border: '#1f2733',
+      borderStrong: '#2f3848',
+      primary: '#2eebfc',
+      primaryStrong: '#a0f5ff',
+      primarySoft: '#002c35',
+      primaryEdge: '#0090a8',
+      onPrimary: '#00151c',
+      accent: '#f479dd',
+      accentBright: '#f479dd',
+      accentSoft: '#35122f',
+      accentDeep: '#e555cd',
+      accentEdge: '#9c2d8b',
+      onAccent: '#20051c',
+      heroFrom: '#003d48',
+      heroTo: '#4a0358',
+      onHero: '#ffffff',
+      onHeroMuted: '#b0eaf1',
+      heroPressedFg: '#005d6d',
+      chartBar: '#00c3db',
+      ink: '#2eebfc',
+    },
+  },
 ];
 
 export const PALETTE_IDS: readonly PaletteId[] = PALETTES.map((p) => p.id);
@@ -615,6 +833,11 @@ export function contrastRatio(a: string, b: string): number {
 // ---------------------------------------------------------------------------
 // Background motifs: one 72×72 tile, drawn in the palette's ink colour at low opacity.
 
+/** Shapes drawn more than once in a tile (centred on 0,0 unless noted). */
+const STAR = 'M0 -6 1.6 -2.2 5.7 -1.9 2.6 .8 3.5 4.9 0 2.7 -3.5 4.9 -2.6 .8 -5.7 -1.9 -1.6 -2.2Z';
+/** A notched cherry petal pointing up from 0,0. */
+const PETAL = 'M0 0C-1.9-1.3-3.6-4.2-2.4-6.6Q-1.2-7.4 0-6.6Q1.2-7.4 2.4-6.6C3.6-4.2 1.9-1.3 0 0Z';
+
 const MOTIFS: Record<Exclude<Motif, 'none'>, (ink: string, ink2: string) => string> = {
   hearts: (ink) =>
     `<g fill="${ink}"><path transform="translate(12 12) rotate(-14 7 6)" d="M7 12.5S0 8 0 3.9C0 1.7 1.7 0 3.9 0 5.3 0 6.4.8 7 1.9 7.6.8 8.7 0 10.1 0 12.3 0 14 1.7 14 3.9 14 8 7 12.5 7 12.5Z"/><path transform="translate(46 44) rotate(12 5 4.5) scale(.72)" d="M7 12.5S0 8 0 3.9C0 1.7 1.7 0 3.9 0 5.3 0 6.4.8 7 1.9 7.6.8 8.7 0 10.1 0 12.3 0 14 1.7 14 3.9 14 8 7 12.5 7 12.5Z"/></g>`,
@@ -630,6 +853,12 @@ const MOTIFS: Record<Exclude<Motif, 'none'>, (ink: string, ink2: string) => stri
     `<g fill="${ink}"><path transform="translate(8 14)" d="M5 11h13a4.5 4.5 0 0 0 .4-9 6 6 0 0 0-11.3 1.3A4 4 0 0 0 5 11Z"/><path transform="translate(42 46) scale(.7)" d="M5 11h13a4.5 4.5 0 0 0 .4-9 6 6 0 0 0-11.3 1.3A4 4 0 0 0 5 11Z"/></g>`,
   confetti: (ink, ink2) =>
     `<rect x="10" y="12" width="9" height="3.4" rx="1.7" fill="${ink}" transform="rotate(-30 14 14)"/><rect x="46" y="16" width="8" height="3.2" rx="1.6" fill="${ink2}" transform="rotate(40 50 18)"/><rect x="20" y="48" width="8" height="3.2" rx="1.6" fill="${ink2}" transform="rotate(15 24 50)"/><rect x="50" y="52" width="9" height="3.4" rx="1.7" fill="${ink}" transform="rotate(-55 54 54)"/><circle cx="34" cy="32" r="1.8" fill="${ink}"/>`,
+  stars: (ink, ink2) =>
+    `<g stroke-linejoin="round"><path transform="translate(19 19) rotate(-8)" fill="${ink}" stroke="${ink}" stroke-width="1.2" d="${STAR}"/><path transform="translate(52 51) rotate(12) scale(.6)" fill="${ink2}" stroke="${ink2}" stroke-width="1.6" d="${STAR}"/></g><circle cx="54" cy="18" r="1.4" fill="${ink}"/><circle cx="22" cy="53" r="1.1" fill="${ink2}"/>`,
+  petals: (ink, ink2) =>
+    `<g fill="${ink}"><g transform="translate(19 19) rotate(10)">${[0, 72, 144, 216, 288].map((a) => `<path transform="rotate(${a})" d="${PETAL}"/>`).join('')}</g><path transform="translate(50 47) rotate(140)" d="${PETAL}"/></g><path transform="translate(52 14) rotate(30) scale(.5)" fill="${ink2}" d="M0 5C3-1 13-1 16 5 13 11 3 11 0 5Z"/>`,
+  circuit: (ink, ink2) =>
+    `<g fill="none" stroke="${ink}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16h11l8 8v10"/><path d="M60 42h-8l-6 6v8"/><circle cx="9.6" cy="16" r="2.4"/><circle cx="62.4" cy="42" r="2.4"/></g><circle cx="31" cy="36.6" r="2.6" fill="${ink2}"/><circle cx="46" cy="58.6" r="2.6" fill="${ink2}"/>`,
 };
 
 /** CSS `background-image` value for a palette's motif, or `none`. */
