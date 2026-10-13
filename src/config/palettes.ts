@@ -16,7 +16,10 @@ export type PaletteId =
   | 'candy'
   | 'galaxy'
   | 'sakura'
-  | 'neon';
+  | 'neon'
+  | 'forest'
+  | 'ocean'
+  | 'academia';
 
 /** Small shapes repeated in the page background of a palette. */
 export type Motif =
@@ -30,7 +33,10 @@ export type Motif =
   | 'confetti'
   | 'stars'
   | 'petals'
-  | 'circuit';
+  | 'circuit'
+  | 'pines'
+  | 'waves'
+  | 'diamonds';
 
 /** Colours of one palette in one mode (all opaque #rrggbb). */
 export interface PaletteColors {
@@ -794,6 +800,201 @@ export const PALETTES: readonly Palette[] = [
       ink: '#2eebfc',
     },
   },
+  {
+    id: 'forest',
+    emoji: '🌲',
+    motif: 'pines',
+    light: {
+      bg: '#f3f7ee',
+      bgElevated: '#ffffff',
+      surface: '#ffffff',
+      surface2: '#e7eedc',
+      surface3: '#d6e1c5',
+      text: '#102211',
+      textMuted: '#44523c',
+      textSubtle: '#5a6952',
+      border: '#dfe6d4',
+      borderStrong: '#c0cdad',
+      primary: '#1d6835',
+      primaryStrong: '#18522a',
+      primarySoft: '#d8efd8',
+      primaryEdge: '#0d401e',
+      onPrimary: '#ffffff',
+      accent: '#8a5600',
+      accentBright: '#fecd5c',
+      accentSoft: '#fff3d6',
+      accentDeep: '#f5ae39',
+      accentEdge: '#bf7b1f',
+      onAccent: '#3a1f00',
+      heroFrom: '#0e492a',
+      heroTo: '#4a4b19',
+      onHero: '#ffffff',
+      onHeroMuted: '#e2e8d2',
+      heroPressedFg: '#18522a',
+      chartBar: '#4d8b50',
+      ink: '#428252',
+    },
+    dark: {
+      bg: '#0a100a',
+      bgElevated: '#121912',
+      surface: '#121912',
+      surface2: '#192219',
+      surface3: '#212c21',
+      text: '#eaf1e4',
+      textMuted: '#b5c3a9',
+      textSubtle: '#98a88a',
+      border: '#242f24',
+      borderStrong: '#334133',
+      primary: '#98cf8b',
+      primaryStrong: '#b9e2b0',
+      primarySoft: '#182f19',
+      primaryEdge: '#528a54',
+      onPrimary: '#09200b',
+      accent: '#fbc959',
+      accentBright: '#fbc959',
+      accentSoft: '#302409',
+      accentDeep: '#f2ab35',
+      accentEdge: '#ad721c',
+      onAccent: '#2b1800',
+      heroFrom: '#0a4027',
+      heroTo: '#311f13',
+      onHero: '#ffffff',
+      onHeroMuted: '#dbe1cb',
+      heroPressedFg: '#18522a',
+      chartBar: '#77a86c',
+      ink: '#98cf8b',
+    },
+  },
+  {
+    id: 'ocean',
+    emoji: '🐚',
+    motif: 'waves',
+    light: {
+      bg: '#eef9f9',
+      bgElevated: '#ffffff',
+      surface: '#ffffff',
+      surface2: '#ddf4f2',
+      surface3: '#c4eae7',
+      text: '#02242b',
+      textMuted: '#35565c',
+      textSubtle: '#4b6d73',
+      border: '#d4ecea',
+      borderStrong: '#aad4d1',
+      primary: '#006580',
+      primaryStrong: '#005066',
+      primarySoft: '#d0f0f8',
+      primaryEdge: '#003e51',
+      onPrimary: '#ffffff',
+      accent: '#b14328',
+      accentBright: '#fead98',
+      accentSoft: '#ffeee8',
+      accentDeep: '#f48e74',
+      accentEdge: '#c55c43',
+      onAccent: '#451a0f',
+      heroFrom: '#aee8e0',
+      heroTo: '#fae5c3',
+      onHero: '#002c35',
+      onHeroMuted: '#234f57',
+      heroPressedFg: '#005066',
+      chartBar: '#1b8fa5',
+      ink: '#33969b',
+    },
+    dark: {
+      bg: '#031217',
+      bgElevated: '#061b22',
+      surface: '#061b22',
+      surface2: '#0b242b',
+      surface3: '#112f36',
+      text: '#e0f3f3',
+      textMuted: '#a1c6c8',
+      textSubtle: '#81aaad',
+      border: '#173239',
+      borderStrong: '#25454d',
+      primary: '#85decd',
+      primaryStrong: '#b3ecdf',
+      primarySoft: '#003333',
+      primaryEdge: '#2e918c',
+      onPrimary: '#002021',
+      accent: '#fca48d',
+      accentBright: '#fca48d',
+      accentSoft: '#371f19',
+      accentDeep: '#ee8266',
+      accentEdge: '#b05139',
+      onAccent: '#36130a',
+      heroFrom: '#004349',
+      heroTo: '#042f54',
+      onHero: '#ffffff',
+      onHeroMuted: '#c8e5e4',
+      heroPressedFg: '#005066',
+      chartBar: '#58b7b1',
+      ink: '#85decd',
+    },
+  },
+  {
+    id: 'academia',
+    emoji: '📚',
+    motif: 'diamonds',
+    light: {
+      bg: '#f9f1e2',
+      bgElevated: '#fefcf4',
+      surface: '#fefcf4',
+      surface2: '#f3e8d3',
+      surface3: '#ead9ba',
+      text: '#2b1b12',
+      textMuted: '#5f4738',
+      textSubtle: '#755e4c',
+      border: '#eae0cb',
+      borderStrong: '#d4c2a4',
+      primary: '#1b5a3e',
+      primaryStrong: '#124830',
+      primarySoft: '#d8eee1',
+      primaryEdge: '#0d3926',
+      onPrimary: '#fefcf4',
+      accent: '#7e5d1d',
+      accentBright: '#e5bf6d',
+      accentSoft: '#faeed1',
+      accentDeep: '#d2a249',
+      accentEdge: '#9d712d',
+      onAccent: '#352206',
+      heroFrom: '#6b1d2a',
+      heroTo: '#4b161e',
+      onHero: '#fbf4e6',
+      onHeroMuted: '#eedacb',
+      heroPressedFg: '#751e2d',
+      chartBar: '#448061',
+      ink: '#8b333f',
+    },
+    dark: {
+      bg: '#130d09',
+      bgElevated: '#1d1511',
+      surface: '#1d1511',
+      surface2: '#261d17',
+      surface3: '#32261f',
+      text: '#f3ead9',
+      textMuted: '#cbbba5',
+      textSubtle: '#b29e87',
+      border: '#332922',
+      borderStrong: '#483a31',
+      primary: '#90ceac',
+      primaryStrong: '#b3e1c7',
+      primarySoft: '#162f22',
+      primaryEdge: '#4a8667',
+      onPrimary: '#072014',
+      accent: '#e9c67d',
+      accentBright: '#e9c67d',
+      accentSoft: '#2f2512',
+      accentDeep: '#d6a95b',
+      accentEdge: '#936c32',
+      onAccent: '#251804',
+      heroFrom: '#5e1924',
+      heroTo: '#401315',
+      onHero: '#fbf4e6',
+      onHeroMuted: '#e7d3c4',
+      heroPressedFg: '#751e2d',
+      chartBar: '#6ba887',
+      ink: '#e9c67d',
+    },
+  },
 ];
 
 export const PALETTE_IDS: readonly PaletteId[] = PALETTES.map((p) => p.id);
@@ -837,6 +1038,8 @@ export function contrastRatio(a: string, b: string): number {
 const STAR = 'M0 -6 1.6 -2.2 5.7 -1.9 2.6 .8 3.5 4.9 0 2.7 -3.5 4.9 -2.6 .8 -5.7 -1.9 -1.6 -2.2Z';
 /** A notched cherry petal pointing up from 0,0. */
 const PETAL = 'M0 0C-1.9-1.3-3.6-4.2-2.4-6.6Q-1.2-7.4 0-6.6Q1.2-7.4 2.4-6.6C3.6-4.2 1.9-1.3 0 0Z';
+/** A small fir tree, 13×14.8, top-left at 0,0. */
+const PINE = 'M6.5 0 10 4.6H8.4L11.6 8.4H9.8L13 12.4H0L3.2 8.4H1.4L4.6 4.6H3ZM5.5 12h2v2.8h-2Z';
 
 const MOTIFS: Record<Exclude<Motif, 'none'>, (ink: string, ink2: string) => string> = {
   hearts: (ink) =>
@@ -859,6 +1062,12 @@ const MOTIFS: Record<Exclude<Motif, 'none'>, (ink: string, ink2: string) => stri
     `<g fill="${ink}"><g transform="translate(19 19) rotate(10)">${[0, 72, 144, 216, 288].map((a) => `<path transform="rotate(${a})" d="${PETAL}"/>`).join('')}</g><path transform="translate(50 47) rotate(140)" d="${PETAL}"/></g><path transform="translate(52 14) rotate(30) scale(.5)" fill="${ink2}" d="M0 5C3-1 13-1 16 5 13 11 3 11 0 5Z"/>`,
   circuit: (ink, ink2) =>
     `<g fill="none" stroke="${ink}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16h11l8 8v10"/><path d="M60 42h-8l-6 6v8"/><circle cx="9.6" cy="16" r="2.4"/><circle cx="62.4" cy="42" r="2.4"/></g><circle cx="31" cy="36.6" r="2.6" fill="${ink2}"/><circle cx="46" cy="58.6" r="2.6" fill="${ink2}"/>`,
+  pines: (ink) =>
+    `<g fill="${ink}"><path transform="translate(9 9) scale(1.1)" d="${PINE}"/><path transform="translate(24 17) scale(.75)" d="${PINE}"/><path transform="translate(44 42) scale(.9)" d="${PINE}"/></g>`,
+  waves: (ink) =>
+    `<g fill="none" stroke="${ink}" stroke-width="1.8" stroke-linecap="round"><path d="M9 20q3.5-4 7 0t7 0 7 0"/><path d="M42 52q3-3.4 6 0t6 0 6 0"/></g>`,
+  diamonds: (ink, ink2) =>
+    `<path d="M18 10l6 8-6 8-6-8ZM54 15l2 3-2 3-2-3ZM19 50l2 3-2 3-2-3Z" fill="${ink}"/><path d="M53 44.5l4.5 6-4.5 6-4.5-6Z" fill="none" stroke="${ink2}" stroke-width="1.4" stroke-linejoin="round"/><circle cx="53" cy="50.5" r="1.3" fill="${ink2}"/>`,
 };
 
 /** CSS `background-image` value for a palette's motif, or `none`. */
