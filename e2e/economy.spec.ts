@@ -30,10 +30,9 @@ async function addCoins(page: Page, amount: number) {
   await page.reload();
 }
 
-async function balance(page: Page): Promise<number> {
-  const chip = page.getByTestId('coin-chip');
-  await expect(chip).not.toHaveText('…');
-  return Number((await chip.innerText()).replace(/\D/g, ''));
+/** Waits until the balance on Home settles at `n` (rewards are granted just after start-up). */
+async function expectBalance(page: Page, n: number) {
+  await expect(page.getByTestId('coin-chip')).toHaveAccessibleName(new RegExp(`saldo: ${n} monet`));
 }
 
 async function buy(page: Page, id: string) {
@@ -55,7 +54,8 @@ test.describe('coins and the cosmetics shop', () => {
     await expect(card).toContainText('Odznaka: Pierwszy krok');
     await page.getByTestId('summary-home').click();
     // At least the lesson (15) and the first-lesson badge (25).
-    expect(await balance(page)).toBeGreaterThanOrEqual(40);
+    // At least the lesson (15) and the first-lesson badge (25).
+    await expect.poll(async () => Number((await page.getByTestId('coin-chip').innerText()).replace(/\D/g, ''))).toBeGreaterThanOrEqual(40);
     await page.getByTestId('coin-chip').click();
     await page.getByRole('button', { name: /Historia monet/ }).click();
     await expect(page.getByText(/Nowa lekcja ukończona/)).toBeVisible();
@@ -65,7 +65,7 @@ test.describe('coins and the cosmetics shop', () => {
     await onboard(page);
     // 175 + 25 for the "first purse" badge = exactly the price of the frame.
     await addCoins(page, 175);
-    expect(await balance(page)).toBe(200);
+    await expectBalance(page, 200);
     await page.getByTestId('coin-chip').click();
     await page.getByText('Profil', { exact: true }).first().click();
     await buy(page, 'frame-gold');
@@ -75,7 +75,7 @@ test.describe('coins and the cosmetics shop', () => {
 
     await page.reload();
     await page.goto('./#/');
-    expect(await balance(page)).toBe(0);
+    await expectBalance(page, 0);
     await expect(page.getByTestId('profile-button').locator('.avatar-frame[data-frame="gold"]')).toBeVisible();
     await page.getByTestId('profile-button').click();
     await expect(page.getByTestId('profile-card').locator('.avatar-frame[data-frame="gold"]')).toBeVisible();
@@ -97,7 +97,7 @@ test.describe('coins and the cosmetics shop', () => {
     await expect(page.getByTestId('item-missing')).toContainText('Brakuje 240 monet');
     await page.keyboard.press('Escape');
     await page.goto('./#/');
-    expect(await balance(page)).toBe(60);
+    await expectBalance(page, 60);
   });
 
   test('a purchase can be undone right away', async ({ page }) => {
@@ -111,7 +111,7 @@ test.describe('coins and the cosmetics shop', () => {
     await expect(page.getByText('Zakup cofnięty')).toBeVisible();
     await expect(page.locator('html')).not.toHaveAttribute('data-bar', 'stripes');
     await page.goto('./#/');
-    expect(await balance(page)).toBe(300);
+    await expectBalance(page, 300);
   });
 
   test('works offline: buying and equipping need no connection', async ({ page, context }) => {
@@ -151,7 +151,7 @@ test.describe('coins and the cosmetics shop', () => {
     // Still owned: it stays in the picker.
     await expect(page.getByTestId('palette-forest')).toBeVisible();
     await page.goto('./#/');
-    expect(await balance(page)).toBe(0);
+    await expectBalance(page, 0);
   });
 
   test('reward-only items show how to earn them in the collection', async ({ page }) => {
