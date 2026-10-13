@@ -5,6 +5,10 @@ import type { ClaimedReward } from '../../services/progress';
 import { t, formatPercent, formatDuration } from '../../i18n';
 import { navigate } from '../../app/router';
 import { StatTile } from '../../components/ui';
+import { useSettings } from '../../state/settings';
+import { CoinRewardCard } from '../economy/CoinRewardCard';
+import { Celebration } from '../economy/Celebration';
+import type { CoinLine } from '../economy/labels';
 
 export interface SummaryData {
   accuracy: number;
@@ -15,6 +19,10 @@ export interface SummaryData {
   achievements: AchievementDef[];
   levelUp?: { level: number; titleIndex: number };
   reviewed?: number;
+  /** Coins earned, with their reasons (services/economy.ts). */
+  coins?: CoinLine[];
+  /** Shown when practice earned no coins (cards already rewarded today). */
+  coinNote?: string;
 }
 
 export function SummaryStep({
@@ -31,8 +39,10 @@ export function SummaryStep({
   nextLessonId?: string;
   onExit: () => void;
 }) {
+  const { settings } = useSettings();
   return (
     <div className="step summary">
+      <Celebration fx={settings.cosmetics.fx} />
       <div className="summary__hero">
         <PartyPopper size={48} />
         <h1>{mode === 'lesson' ? t('lesson.summaryTitle') : t('review.sessionDone')}</h1>
@@ -72,6 +82,7 @@ export function SummaryStep({
               <span>{t('ach.unlocked', { name: t(`ach.${a.id}` as never) })}</span>
             </div>
           ))}
+          <CoinRewardCard lines={summary.coins ?? []} note={summary.coinNote} />
         </>
       ) : (
         <p className="muted">{t('common.loading')}</p>

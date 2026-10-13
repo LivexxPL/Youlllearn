@@ -9,6 +9,7 @@ import { useSettings } from '../../state/settings';
 import { db, type Drawing, type Stroke } from '../../services/db';
 import { activity } from '../../services/activity';
 import { addStats, applyOutcome } from '../../services/progress';
+import { awardWriting } from '../../services/economy';
 import { audio } from '../../services/audio';
 import { XP } from '../../engine/gamification';
 import type { SelfRating } from '../../engine/srs';
@@ -114,6 +115,8 @@ function Practice({ set, char, initial, practisedAt }: { set: 'hiragana' | 'kata
   const rate = async (r: SelfRating) => {
     await addStats({ writing: 1, exercises: 1, correct: r === 'again' ? 0 : 1, xp: r === 'again' ? 0 : XP.correctRetry }, 'ja');
     if (info.item) await applyOutcome('ja', info.item.id, { correct: r !== 'again', skill: 'writing', selfRating: r });
+    // Any honest self-assessment counts (also "again"): practising is what earns the coin.
+    await awardWriting(char);
     toast(r === 'again' ? t('write.ratedAgain') : t('write.rated'), r === 'again' ? 'default' : 'success');
     practised.current = Date.now();
     pad.current?.clear();

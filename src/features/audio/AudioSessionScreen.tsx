@@ -42,8 +42,12 @@ import type { SelfRating } from '../../engine/srs';
 import { audio, wait, type Speed } from '../../services/audio';
 import { activity } from '../../services/activity';
 import { allowScreenOff, keepScreenOn } from '../../services/keepAwake';
-import { addStats, applyOutcome, claimRewards, markDifficult, recordReviewSession, refreshAchievements, totalXp, type ClaimedReward, type SessionOutcomes } from '../../services/progress';
-import { setMeta } from '../../services/db';
+import { addStats, applyOutcome, claimRewards, markDifficult, recordReviewSession, refreshAchievements, setFlag, totalXp, type ClaimedReward, type SessionOutcomes } from '../../services/progress';
+import { db, setMeta, type LedgerEntry } from '../../services/db';
+import { awardMarathon, awardPractice, awardStory } from '../../services/economy';
+import { sessionCoinLines, type CoinLine } from '../economy/labels';
+import { CoinRewardCard } from '../economy/CoinRewardCard';
+import { newSessionId } from '../economy/session';
 import { cue } from '../../services/feedback';
 import { navigate, useBackHandler } from '../../app/router';
 import { formatDuration, t } from '../../i18n';
@@ -98,14 +102,19 @@ function NoMaterial({ courseId }: { courseId: CourseId }) {
   );
 }
 
-/** Awards rewards/achievements after an audio activity and reports a level-up. */
-async function finishActivity(settings: Parameters<typeof claimRewards>[0], xpBefore: number) {
+/** Awards rewards/achievements after an audio activity and reports a level-up and the coins. */
+async function finishActivity(settings: Parameters<typeof claimRewards>[0], xpBefore: number, coinEntries: LedgerEntry[] = []) {
   const rewards = await claimRewards(settings);
   const achievements = await refreshAchievements();
   const after = await totalXp();
   const before = levelForXp(xpBefore);
   const now = levelForXp(after);
-  return { rewards, achievements, levelUp: now.level > before.level ? { level: now.level, titleIndex: now.titleIndex } : undefined };
+  return {
+    rewards,
+    achievements,
+    coins: sessionCoinLines(coinEntries, rewards, achievements),
+    levelUp: now.level > before.level ? { level: now.level, titleIndex: now.titleIndex } : undefined,
+  };
 }
 
 function useXpBefore() {
@@ -169,7 +178,7 @@ function HandsFree({ query }: { query: URLSearchParams }) {
   const [round, setRound] = useState(0);
   const [finished, setFinished] = useState(false);
   const [marked, setMarked] = useState<Set<string>>(new Set());
-  const [result, setResult] = useState<{ xp: number; seconds: number; rewards: ClaimedReward[] } | null>(null);
+  const [result, setResult] = useState<{ xp: number; seconds: number; rewards: ClaimedReward[]; coins: CoinLine[] } | null>(null);
   const [screenLock, setScreenLock] = useState<boolean | null>(null);
   const ctrl = useRef<AbortController | null>(null);
   const indexRef = useRef(0);
@@ -361,11 +370,14 @@ function HandsFree({ query }: { query: URLSearchParams }) {
     const xp = Math.floor(seconds / 60) * XP.listeningMinute;
     (async () => {
       await addStats({ audioSessions: 1, xp }, course.id);
-      const extra = await finishActivity(settings, xpBefore.current ?? 0);
-      setResult({ xp: xp + extra.rewards.reduce((n, r) => n + r.xp, 0), seconds, rewards: extra.rewards });
+      // Listening to the end earns a fixed daily reward, never coins per minute played.
+      const coins = await awardMarathon();
+      await setFlag('marathon');
+      const extra = await finishActivity(settings, xpBefore.current ?? 0, coins);
+      setResult({ xp: xp + extra.rewards.reduce((n, r) => n + r.xp, 0), seconds, rewards: extra.rewards, coins: extra.coins });
     })().catch((e) => {
       console.warn(e);
-      setResult({ xp, seconds, rewards: [] });
+      setResult({ xp, seconds, rewards: [], coins: [] });
     });
   }, [finished, course.id, settings, xpBefore]);
 
@@ -412,6 +424,7 @@ function HandsFree({ query }: { query: URLSearchParams }) {
           <StatTile icon={<Flag size={20} />} value={marked.size} label={t('aq.markedCount')} />
         </div>
         {result && <RewardBanners rewards={result.rewards} />}
+        {result && <CoinRewardCard lines={result.coins} />}
         <div className="stack">
           <button
             type="button"
@@ -574,7 +587,8 @@ function AudioFlashcards() {
   const [i, setI] = useState(0);
   const [revealed, setRevealed] = useState(false);
   const [ratings, setRatings] = useState<SelfRating[]>([]);
-  const [result, setResult] = useState<{ xp: number; rewards: ClaimedReward[] } | null>(null);
+  const [sessionId] = useState(newSessionId);
+  const [result, setResult] = useState<{ xp: number; rewards: ClaimedReward[]; coins: CoinLine[] } | null>(null);
   const xpBefore = useXpBefore();
   const done = deck !== null && i >= deck.length && deck.length > 0;
 
@@ -654,10 +668,11 @@ function AudioFlashcards() {
     const xp = good * XP.correctRetry;
     (async () => {
       await addStats({ reviews: ratings.length, exercises: ratings.length, correct: good, audioSessions: 1, xp }, course.id);
-      const extra = await finishActivity(settings, xpBefore.current ?? 0);
-      setResult({ xp: xp + extra.rewards.reduce((n, r) => n + r.xp, 0), rewards: extra.rewards });
-    })().catch(() => setResult({ xp, rewards: [] }));
-  }, [done, ratings, course.id, settings, xpBefore]);
+      const coins = await awardPractice('audio', sessionId, (deck ?? []).slice(0, ratings.length).map((c) => c.refId));
+      const extra = await finishActivity(settings, xpBefore.current ?? 0, coins);
+      setResult({ xp: xp + extra.rewards.reduce((n, r) => n + r.xp, 0), rewards: extra.rewards, coins: extra.coins });
+    })().catch(() => setResult({ xp, rewards: [], coins: [] }));
+  }, [done, ratings, course.id, settings, xpBefore, deck, sessionId]);
 
   if (!deck) return <div className="page"><p className="muted">{t('common.loading')}</p></div>;
   if (deck.length === 0) return <NoMaterial courseId={course.id} />;
@@ -676,6 +691,7 @@ function AudioFlashcards() {
           <StatTile icon={<Zap size={20} />} value={`+${result?.xp ?? 0}`} label={t('lesson.summaryXp')} />
         </div>
         {result && <RewardBanners rewards={result.rewards} />}
+        {result && <CoinRewardCard lines={result.coins} />}
         <BackToHub primary />
       </div>
     );
@@ -781,7 +797,7 @@ function StoryView({ course, story }: { course: Course; story: Story }) {
   const [selected, setSelected] = useState<number | null>(null);
   const [checked, setChecked] = useState(false);
   const [correct, setCorrect] = useState(0);
-  const [result, setResult] = useState<{ xp: number; rewards: ClaimedReward[] } | null>(null);
+  const [result, setResult] = useState<{ xp: number; rewards: ClaimedReward[]; coins: CoinLine[] } | null>(null);
   const xpBefore = useXpBefore();
 
   // Narration lines use voice A; named speakers alternate B/A so dialogue turns sound distinct.
@@ -809,9 +825,10 @@ function StoryView({ course, story }: { course: Course; story: Story }) {
     (async () => {
       await addStats({ exercises: total, correct, audioSessions: 1, xp }, course.id);
       await setMeta(`story:${story.id}`, { correct, total, at: Date.now() });
-      const extra = await finishActivity(settings, xpBefore.current ?? 0);
-      setResult({ xp: xp + extra.rewards.reduce((n, r) => n + r.xp, 0), rewards: extra.rewards });
-    })().catch(() => setResult({ xp, rewards: [] }));
+      const coins = await awardStory(story.id, correct, total);
+      const extra = await finishActivity(settings, xpBefore.current ?? 0, coins);
+      setResult({ xp: xp + extra.rewards.reduce((n, r) => n + r.xp, 0), rewards: extra.rewards, coins: extra.coins });
+    })().catch(() => setResult({ xp, rewards: [], coins: [] }));
   }, [phase, correct, story, course.id, settings, xpBefore]);
 
   if (!progress) return <div className="page"><p className="muted">{t('common.loading')}</p></div>;
@@ -838,6 +855,7 @@ function StoryView({ course, story }: { course: Course; story: Story }) {
           <StatTile icon={<Zap size={20} />} value={`+${result?.xp ?? 0}`} label={t('lesson.summaryXp')} />
         </div>
         {result && <RewardBanners rewards={result.rewards} />}
+        {result && <CoinRewardCard lines={result.coins} />}
         <BackToHub primary />
       </div>
     );
@@ -1016,11 +1034,12 @@ function AudioDrill({ mode }: { mode: DrillMode }) {
     setSteps(built);
   }, [cards, steps, course, mode]);
 
+  const [sessionId] = useState(newSessionId);
   const onFinish = useCallback(
     async (outcomes: SessionOutcomes, seconds: number): Promise<SummaryData> => {
-      const res = await recordReviewSession(course, outcomes);
+      const res = await recordReviewSession(course, outcomes, Date.now(), db, { family: 'audio', sessionId });
       await addStats({ audioSessions: 1 }, course.id);
-      const extra = await finishActivity(settings, xpBefore.current ?? 0);
+      const extra = await finishActivity(settings, xpBefore.current ?? 0, res.coins);
       return {
         accuracy: outcomes.graded ? outcomes.correct / outcomes.graded : 1,
         xp: res.xp + extra.rewards.reduce((n, r) => n + r.xp, 0),
@@ -1030,9 +1049,11 @@ function AudioDrill({ mode }: { mode: DrillMode }) {
         rewards: extra.rewards,
         achievements: extra.achievements,
         levelUp: extra.levelUp,
+        coins: extra.coins,
+        coinNote: !res.coins.length && res.reviewed >= 5 ? t('coins.noFresh') : undefined,
       };
     },
-    [course, settings, xpBefore],
+    [course, settings, xpBefore, sessionId],
   );
 
   if (!steps) return <div className="page"><p className="muted">{t('common.loading')}</p></div>;

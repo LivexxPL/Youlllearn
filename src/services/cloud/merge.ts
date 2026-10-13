@@ -15,8 +15,11 @@
  *   device has not been set up yet (restoring onto a new phone).
  * - meta: streak and flags combined (see mergeMeta), other keys by their own rule.
  *   Device-only keys (isDeviceMeta) never come from the cloud.
+ * - ledger: union of coin transactions by id. Ids name the event (a lesson's first
+ *   completion, a quest of a day, the n-th purchase of an item), so the same reward or
+ *   purchase made on two devices is counted once.
  */
-import { isDeviceMeta, type AchievementRecord, type DailyStats, type Drawing, type LessonProgress, type MetaRecord, type Settings, type TableName } from '../db';
+import { isDeviceMeta, type AchievementRecord, type DailyStats, type Drawing, type LedgerEntry, type LessonProgress, type MetaRecord, type Settings, type TableName } from '../db';
 import type { BackupData } from '../backup';
 import type { Card } from '../../engine/srs';
 import type { StreakState } from '../../engine/gamification';
@@ -111,6 +114,7 @@ export function mergeData(local: BackupData, remote: Partial<BackupData>): Backu
     rewards: mergeBy<{ id: string }>(local.rewards, remote.rewards, (r) => r.id, keepLocal),
     drawings: mergeBy<Drawing>(local.drawings, remote.drawings, (d) => d.id, newerDrawing),
     meta: mergeMeta(local.meta, remote.meta),
+    ledger: mergeBy<LedgerEntry>(local.ledger, remote.ledger, (e) => e.id, keepLocal),
   } satisfies Record<TableName, unknown[]>;
 }
 

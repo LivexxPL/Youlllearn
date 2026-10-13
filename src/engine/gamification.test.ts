@@ -153,6 +153,9 @@ describe('achievements', () => {
     writing: 0,
     perfectLesson: false,
     comeback: false,
+    marathon: false,
+    beginnerCourseDone: false,
+    coinsEarned: 0,
   };
 
   it('unlock when conditions are met and only once', () => {
@@ -169,6 +172,13 @@ describe('achievements', () => {
     expect(ids).not.toContain('level-b1');
     expect(newlyUnlocked({ ...base, levelB1Lessons: 1 }, new Set()).map((a) => a.id)).toContain('level-b1');
     expect(newlyUnlocked({ ...base, lessonsCompleted: 49 }, new Set()).map((a) => a.id)).not.toContain('lessons-50');
+  });
+
+  it('reward a finished listening marathon, the beginner part of a course and the first 100 coins', () => {
+    expect(newlyUnlocked(base, new Set()).map((a) => a.id)).toEqual([]);
+    const ids = newlyUnlocked({ ...base, marathon: true, beginnerCourseDone: true, coinsEarned: 100 }, new Set()).map((a) => a.id);
+    expect(ids).toEqual(expect.arrayContaining(['marathon', 'beginner-course', 'coins-100']));
+    expect(newlyUnlocked({ ...base, coinsEarned: 99 }, new Set()).map((a) => a.id)).not.toContain('coins-100');
   });
 
   it('have unique ids and an i18n entry', async () => {

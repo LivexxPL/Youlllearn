@@ -8,10 +8,12 @@ import { isNative } from './platform';
 let ctx: AudioContext | null = null;
 let soundsOn = true;
 let hapticsOn = true;
+let coinSoundsOn = true;
 
-export function configureFeedback(opts: { sounds: boolean; haptics: boolean }) {
+export function configureFeedback(opts: { sounds: boolean; haptics: boolean; coinSounds?: boolean }) {
   soundsOn = opts.sounds;
   hapticsOn = opts.haptics;
+  coinSoundsOn = opts.coinSounds ?? true;
 }
 
 function audioCtx(): AudioContext | null {
@@ -39,10 +41,11 @@ function tone(freq: number, start: number, dur: number, type: OscillatorType = '
   osc.stop(t0 + dur + 0.02);
 }
 
-export type Cue = 'correct' | 'almost' | 'wrong' | 'complete' | 'tap' | 'reward';
+export type Cue = 'correct' | 'almost' | 'wrong' | 'complete' | 'tap' | 'reward' | 'coin' | 'purchase';
 
 export function cue(kind: Cue) {
-  if (soundsOn) {
+  const coinCue = kind === 'coin' || kind === 'purchase';
+  if (soundsOn && (!coinCue || coinSoundsOn)) {
     switch (kind) {
       case 'correct':
         tone(660, 0, 0.12, 'triangle');
@@ -66,6 +69,14 @@ export function cue(kind: Cue) {
       case 'tap':
         tone(880, 0, 0.04, 'sine', 0.04);
         break;
+      case 'coin':
+        // A light "ding-ding".
+        tone(1319, 0, 0.09, 'triangle', 0.07);
+        tone(1760, 0.07, 0.16, 'triangle', 0.07);
+        break;
+      case 'purchase':
+        [659, 880, 1109, 1319].forEach((f, i) => tone(f, i * 0.06, 0.16, 'triangle', 0.08));
+        break;
     }
   }
   if (hapticsOn) haptic(kind);
@@ -75,7 +86,7 @@ function haptic(kind: Cue) {
   if (isNative()) {
     if (kind === 'correct' || kind === 'tap') Haptics.impact({ style: ImpactStyle.Light }).catch(() => {});
     else if (kind === 'wrong') Haptics.notification({ type: NotificationType.Warning }).catch(() => {});
-    else if (kind === 'complete' || kind === 'reward') Haptics.notification({ type: NotificationType.Success }).catch(() => {});
+    else if (kind === 'complete' || kind === 'reward' || kind === 'purchase') Haptics.notification({ type: NotificationType.Success }).catch(() => {});
     return;
   }
   if ('vibrate' in navigator && (kind === 'wrong' || kind === 'complete')) {

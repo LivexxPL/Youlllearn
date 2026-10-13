@@ -9,6 +9,7 @@ import { SessionPlayer } from '../session/SessionPlayer';
 import type { SummaryData } from '../session/SummaryStep';
 import { db, getMeta, setMeta } from '../../services/db';
 import { claimRewards, recordLessonCompletion, refreshAchievements, setFlag, totalXp, type SessionOutcomes } from '../../services/progress';
+import { sessionCoinLines } from '../economy/labels';
 import { levelForXp } from '../../engine/gamification';
 import { navigate } from '../../app/router';
 import { t } from '../../i18n';
@@ -92,6 +93,7 @@ export default function LessonScreen({ lessonId }: { lessonId?: string }) {
         rewards,
         achievements,
         levelUp: now.level > before.level ? { level: now.level, titleIndex: now.titleIndex } : undefined,
+        coins: sessionCoinLines(res.coins, rewards, achievements),
       };
     },
     [found, resumeKey, settings],

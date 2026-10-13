@@ -9,7 +9,8 @@ import { db, isDeviceMeta, TABLES, type MetaRecord, type PolyglotDB, type TableN
 import { appVersion, isNative } from './platform';
 import { dayKey } from '../engine/dates';
 
-export const BACKUP_FORMAT = 1;
+/** 2: coin ledger added. Files of format 1 still import (without coins). */
+export const BACKUP_FORMAT = 2;
 
 export type BackupData = Record<TableName, unknown[]>;
 
@@ -57,6 +58,12 @@ export function validateBackup(raw: unknown): BackupFile {
   }
   const cards = (f.data.cards ?? []) as { id?: unknown; courseId?: unknown; due?: unknown }[];
   if (cards.some((c) => typeof c.id !== 'string' || typeof c.due !== 'number')) throw new BackupError('uszkodzone karty powtórek');
+  const ledger = (f.data.ledger ?? []) as { id?: unknown; amount?: unknown; type?: unknown; items?: unknown }[];
+  const badTx = (e: (typeof ledger)[number]) =>
+    typeof e.id !== 'string' || typeof e.type !== 'string' || !Number.isSafeInteger(e.amount) || (e.items !== undefined && !Array.isArray(e.items));
+  if (ledger.some(badTx)) throw new BackupError('uszkodzona historia monet');
+  const meta = (f.data.meta ?? []) as { key?: unknown }[];
+  if (meta.some((m) => typeof m.key !== 'string')) throw new BackupError('uszkodzone dane pomocnicze');
   return f as BackupFile;
 }
 

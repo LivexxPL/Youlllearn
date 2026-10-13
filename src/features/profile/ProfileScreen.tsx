@@ -1,27 +1,50 @@
 /**
- * The learner's profile: name for the greeting and the optional Google account that keeps a
- * copy of the progress on Google Drive.
+ * The learner's profile: name, avatar with the equipped frame, background, badge and title,
+ * coins (shop, collection, history) and the optional Google account that keeps a copy of the
+ * progress on Google Drive. Everything here works without an account.
  */
-import { Cloud } from 'lucide-react';
+import { Cloud, History, Library, Store } from 'lucide-react';
 import { useSettings, DISPLAY_NAME_MAX } from '../../state/settings';
 import { useCloud } from '../../state/cloud';
 import { t } from '../../i18n';
+import { navigate } from '../../app/router';
 import { PageHeader } from '../../components/ui';
 import { Avatar } from '../../components/Avatar';
+import { CURRENCY } from '../../config/economy';
 import { CloudCard } from './CloudCard';
+import { CoinAmount } from '../economy/Coin';
+import { useWallet } from '../economy/wallet';
+import { equippedItem } from '../economy/equip';
+import { itemName } from '../economy/labels';
 
 export default function ProfileScreen() {
   const { settings, update } = useSettings();
   const cloud = useCloud();
+  const wallet = useWallet();
   const name = settings.displayName || cloud.account?.name || '';
+  const banner = equippedItem(settings.cosmetics, 'banner');
+  const badge = equippedItem(settings.cosmetics, 'badge');
+  const title = equippedItem(settings.cosmetics, 'title');
 
   return (
     <div className="page">
       <PageHeader title={t('profile.title')} back />
 
-      <section className="card profile-card" aria-label={t('profile.local')}>
-        <Avatar name={name} picture={cloud.account?.picture} size={72} />
-        <div className="grow stack stack--s" style={{ minWidth: 0 }}>
+      <section className="card profile-card" aria-label={t('profile.local')} data-testid="profile-card">
+        <div className="profile-banner" data-banner={banner ? banner.id.replace(/^banner-/, '') : 'default'} aria-hidden="true" />
+        <div className="profile-card__who">
+          <Avatar name={name} picture={cloud.account?.picture} size={84} frame={settings.cosmetics.frame} />
+          <div className="profile-card__name">
+            <span className="profile-name">{name || t('profile.local')}</span>
+            {badge && (
+              <span className="profile-badge" role="img" aria-label={itemName(badge.id)} title={itemName(badge.id)}>
+                {badge.icon}
+              </span>
+            )}
+          </div>
+          {title && <span className="profile-title">{itemName(title.id)}</span>}
+        </div>
+        <div className="stack stack--s profile-card__form">
           <label className="list-row__title" htmlFor="display-name">
             {t('profile.name')}
           </label>
@@ -36,6 +59,24 @@ export default function ProfileScreen() {
             data-testid="display-name"
           />
           <p className="subtle">{t('profile.nameHelp')}</p>
+        </div>
+      </section>
+
+      <section className="card wallet-card" aria-label={t('coins.balance')}>
+        <div className="wallet-card__balance">
+          <span className="subtle">{CURRENCY.name}</span>
+          {wallet ? <CoinAmount amount={wallet.balance} size={28} className="coin-amount--large" /> : '…'}
+        </div>
+        <div className="row row--wrap">
+          <button type="button" className="btn btn--primary btn--sm" onClick={() => navigate('/shop')} data-testid="profile-shop">
+            <Store size={18} /> {t('shop.title')}
+          </button>
+          <button type="button" className="btn btn--ghost btn--sm" onClick={() => navigate('/collection')}>
+            <Library size={18} /> {t('shop.myCollection')}
+          </button>
+          <button type="button" className="btn btn--ghost btn--sm" onClick={() => navigate('/coins')}>
+            <History size={18} /> {t('shop.history')}
+          </button>
         </div>
       </section>
 

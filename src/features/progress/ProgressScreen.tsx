@@ -6,10 +6,12 @@ import {
   Brain,
   Brush,
   Calendar,
+  Coins,
   Compass,
   Crown,
   Flame,
   Footprints,
+  GraduationCap,
   Gem,
   Globe,
   Headphones,
@@ -65,6 +67,8 @@ const ICONS: Record<string, ReactNode> = {
   sunrise: <Sunrise size={22} />,
   star: <Star size={22} />,
   medal: <Medal size={22} />,
+  graduation: <GraduationCap size={22} />,
+  coins: <Coins size={22} />,
 };
 
 export default function ProgressScreen() {

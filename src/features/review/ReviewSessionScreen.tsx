@@ -8,6 +8,9 @@ import type { Exercise } from '../../engine/exercises';
 import { SessionPlayer } from '../session/SessionPlayer';
 import type { SummaryData } from '../session/SummaryStep';
 import { claimRewards, recordReviewSession, refreshAchievements, totalXp, type SessionOutcomes } from '../../services/progress';
+import { db } from '../../services/db';
+import { sessionCoinLines } from '../economy/labels';
+import { newSessionId } from '../economy/session';
 import { levelForXp } from '../../engine/gamification';
 import { navigate } from '../../app/router';
 import { t } from '../../i18n';
@@ -26,6 +29,7 @@ export default function ReviewSessionScreen({ query }: { query: URLSearchParams 
   const lessonId = query.get('lesson') ?? undefined;
   const [steps, setSteps] = useState<Exercise[] | null>(null);
   const xpBefore = useRef<number | null>(null);
+  const [sessionId] = useState(newSessionId);
 
   useEffect(() => {
     totalXp().then((x) => (xpBefore.current = x));
@@ -50,7 +54,9 @@ export default function ReviewSessionScreen({ query }: { query: URLSearchParams 
 
   const onFinish = useCallback(
     async (outcomes: SessionOutcomes, seconds: number): Promise<SummaryData> => {
-      const res = await recordReviewSession(course, outcomes);
+      // Every session (Endless practice included) earns coins for cards that have not earned
+      // any in reviews today; the session id keeps a repeated report from paying twice.
+      const res = await recordReviewSession(course, outcomes, Date.now(), db, { family: 'review', sessionId });
       const rewards = await claimRewards(settings);
       const achievements = await refreshAchievements();
       const after = await totalXp();
@@ -65,9 +71,11 @@ export default function ReviewSessionScreen({ query }: { query: URLSearchParams 
         rewards,
         achievements,
         levelUp: now.level > before.level ? { level: now.level, titleIndex: now.titleIndex } : undefined,
+        coins: sessionCoinLines(res.coins, rewards, achievements),
+        coinNote: !res.coins.length && res.reviewed >= 5 ? t('coins.noFresh') : undefined,
       };
     },
-    [course, settings],
+    [course, settings, sessionId],
   );
 
   if (!steps) return <div className="page"><p className="muted">{t('common.loading')}</p></div>;

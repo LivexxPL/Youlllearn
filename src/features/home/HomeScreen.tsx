@@ -21,6 +21,7 @@ import { useToast } from '../../components/Toasts';
 import { useCloud } from '../../state/cloud';
 import { cloud } from '../../services/cloud';
 import { cloudErrorText } from '../profile/cloudText';
+import { CoinChip } from '../economy/Coin';
 import type { CourseId } from '../../content/types';
 
 function greeting(name: string): string {
@@ -37,7 +38,7 @@ function ProfileButton() {
   const waiting = Boolean(c.account && c.dirty && !c.connected);
   return (
     <button type="button" className="profile-btn" onClick={() => navigate('/profile')} aria-label={t('profile.open')} data-testid="profile-button">
-      <Avatar name={settings.displayName || c.account?.name || ''} picture={c.account?.picture} size={44} />
+      <Avatar name={settings.displayName || c.account?.name || ''} picture={c.account?.picture} size={44} frame={settings.cosmetics.frame} />
       {waiting && (
         <span className="profile-btn__badge" aria-hidden="true">
           <CloudUpload size={12} />
@@ -237,6 +238,7 @@ export function HomeScreen() {
           <h1>{greeting(settings.displayName)}</h1>
         </div>
         <CourseSwitcher />
+        <CoinChip />
         <ProfileButton />
       </header>
 

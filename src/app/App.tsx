@@ -11,6 +11,9 @@ import { audio } from '../services/audio';
 import { configureFeedback } from '../services/feedback';
 import { t } from '../i18n';
 import { detectComeback, refreshAchievements, setFlag, updateStreak } from '../services/progress';
+import { reconcileRewards } from '../services/economy';
+import { CURRENCY } from '../config/economy';
+import { entryReason } from '../features/economy/labels';
 import { HomeScreen } from '../features/home/HomeScreen';
 import { LearnScreen } from '../features/learn/LearnScreen';
 import { OnboardingScreen } from '../features/onboarding/OnboardingScreen';
@@ -35,6 +38,9 @@ const WritingPractice = lazy(() => import('../features/writing/WritingPractice')
 const KanaChart = lazy(() => import('../features/writing/KanaChart'));
 const NotesScreen = lazy(() => import('../features/writing/NotesScreen'));
 const ProfileScreen = lazy(() => import('../features/profile/ProfileScreen'));
+const ShopScreen = lazy(() => import('../features/economy/ShopScreen'));
+const CollectionScreen = lazy(() => import('../features/economy/CollectionScreen'));
+const CoinsScreen = lazy(() => import('../features/economy/CoinsScreen'));
 
 const IMMERSIVE = new Set(['lesson', 'onboarding', 'notes']);
 
@@ -74,6 +80,12 @@ function Screen() {
       return <AboutScreen />;
     case 'profile':
       return <ProfileScreen />;
+    case 'shop':
+      return <ShopScreen key={queryKey} query={route.query} />;
+    case 'collection':
+      return <CollectionScreen />;
+    case 'coins':
+      return <CoinsScreen />;
     case 'write':
       return b && c ? <WritingPractice set={b} char={c} /> : <WritingHub />;
     case 'kana':
@@ -110,8 +122,8 @@ function useBackgroundTasks() {
   }, [settings.voices, settings.speechRate]);
 
   useEffect(() => {
-    configureFeedback({ sounds: settings.sounds, haptics: settings.haptics });
-  }, [settings.sounds, settings.haptics]);
+    configureFeedback({ sounds: settings.sounds, haptics: settings.haptics, coinSounds: settings.coinSounds });
+  }, [settings.sounds, settings.haptics, settings.coinSounds]);
 
   useEffect(() => {
     rescheduleReminders(settings).catch(() => {});
@@ -131,6 +143,13 @@ function useBackgroundTasks() {
       }
       const fresh = await refreshAchievements();
       for (const a of fresh) toast(t('ach.unlocked', { name: t(`ach.${a.id}` as never) }), 'reward');
+      // Coins for learning recorded before coins existed, or synchronised from another device.
+      const granted = await reconcileRewards();
+      const total = granted.reduce((n, e) => n + e.amount, 0);
+      if (cancelled || total <= 0) return;
+      const amount = t('coins.amount', { count: total });
+      if (granted.some((e) => e.type === 'migration')) toast(t('coins.welcome', { currency: CURRENCY.name, amount }), 'reward');
+      else toast(t('coins.gained', { amount, reason: granted.length === 1 ? entryReason(granted[0]) : t('coins.why.catchUp') }), 'reward');
     })().catch((e) => console.warn(e));
     return () => {
       cancelled = true;

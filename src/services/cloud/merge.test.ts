@@ -6,7 +6,7 @@ import { introduceCard, reviewCard } from '../../engine/srs';
 import { defaultSettings } from '../../state/settings';
 
 function data(patch: Partial<BackupData> = {}): BackupData {
-  return { settings: [], cards: [], lessonProgress: [], dailyStats: [], achievements: [], rewards: [], drawings: [], meta: [], ...patch };
+  return { settings: [], cards: [], lessonProgress: [], dailyStats: [], achievements: [], rewards: [], drawings: [], meta: [], ledger: [], ...patch } as BackupData;
 }
 
 const lesson = (id: string, p: Partial<LessonProgress> = {}): LessonProgress => ({

@@ -4,7 +4,9 @@
  */
 import type { CourseId, Course } from '../content/types';
 import { allCourses, COURSE_ORDER } from '../content/registry';
-import { db, emptyDailyStats, getMeta, setMeta, type DailyStats, type PolyglotDB, type Settings } from './db';
+import { db, emptyDailyStats, getMeta, setMeta, type DailyStats, type LedgerEntry, type PolyglotDB, type Settings } from './db';
+import { achievementEntry, entry, grant, lessonEntry, practiceEntry, walletOf, type PracticeFamily } from './economy';
+import { REWARDS } from '../config/economy';
 import { dayKey, weekKey, daysBetween } from '../engine/dates';
 import { introduceCard, reviewCard, cardStatus, type Card, type CardKind, type Outcome } from '../engine/srs';
 import {
@@ -71,6 +73,8 @@ export interface LessonCompletionResult {
   accuracy: number;
   xp: number;
   perfect: boolean;
+  /** Coin entries granted for this completion (none when already rewarded). */
+  coins: LedgerEntry[];
 }
 
 export async function recordLessonCompletion(input: LessonCompletion, database: PolyglotDB = db): Promise<LessonCompletionResult> {
@@ -88,7 +92,8 @@ export async function recordLessonCompletion(input: LessonCompletion, database: 
     ...(lesson.grammar ?? []).filter((g) => course.conceptExercises.has(g.id)).map((g) => g.id),
   ];
   let newItems = 0;
-  await database.transaction('rw', database.cards, database.lessonProgress, async () => {
+  let coins: LedgerEntry[] = [];
+  await database.transaction('rw', database.cards, database.lessonProgress, database.ledger, async () => {
     const existing = new Map((await database.cards.bulkGet(ids)).filter((c): c is Card => Boolean(c)).map((c) => [c.id, c]));
     const writes: Card[] = [];
     for (const id of ids) {
@@ -116,6 +121,9 @@ export async function recordLessonCompletion(input: LessonCompletion, database: 
       bestAccuracy: Math.max(lp?.bestAccuracy ?? 0, accuracy),
       lastAccuracy: accuracy,
     });
+    // Saved with the progress: a completion is rewarded once, whatever happens next.
+    const reward = lessonEntry(lessonId, !lp, outcomes.graded, now);
+    if (reward) coins = await grant([reward], database);
   });
 
   await addStats(
@@ -133,17 +141,34 @@ export async function recordLessonCompletion(input: LessonCompletion, database: 
     dayKey(now),
     database,
   );
-  return { newItems, accuracy, xp, perfect: outcomes.graded > 0 && outcomes.correct === outcomes.graded };
+  return { newItems, accuracy, xp, perfect: outcomes.graded > 0 && outcomes.correct === outcomes.graded, coins };
 }
 
-export async function recordReviewSession(course: Course, outcomes: SessionOutcomes, now = Date.now(), database: PolyglotDB = db): Promise<{ reviewed: number; xp: number }> {
+/** Identifies one practice session for its coin reward (see services/economy.ts). */
+export interface PracticeReward {
+  family: PracticeFamily;
+  sessionId: string;
+}
+
+export async function recordReviewSession(
+  course: Course,
+  outcomes: SessionOutcomes,
+  now = Date.now(),
+  database: PolyglotDB = db,
+  reward?: PracticeReward,
+): Promise<{ reviewed: number; xp: number; coins: LedgerEntry[] }> {
   let reviewed = 0;
-  await database.transaction('rw', database.cards, async () => {
+  let coins: LedgerEntry[] = [];
+  await database.transaction('rw', database.cards, database.ledger, async () => {
     const ids = [...outcomes.byRef.keys()];
     const cards = (await database.cards.bulkGet(ids)).filter((c): c is Card => Boolean(c));
     const writes = cards.map((c) => reviewCard(c, outcomes.byRef.get(c.id)![0], now));
     reviewed = writes.length;
     if (writes.length) await database.cards.bulkPut(writes);
+    if (reward) {
+      const e = await practiceEntry(reward.family, reward.sessionId, cards.map((c) => c.id), now, database);
+      if (e) coins = await grant([e], database);
+    }
   });
   await addStats(
     {
@@ -159,7 +184,7 @@ export async function recordReviewSession(course: Course, outcomes: SessionOutco
     dayKey(now),
     database,
   );
-  return { reviewed, xp: outcomes.xp };
+  return { reviewed, xp: outcomes.xp, coins };
 }
 
 /** Self-rated flashcards / audio reviews update cards individually. */
@@ -219,32 +244,43 @@ export interface ClaimedReward {
   titleKey: string;
   target?: number;
   xp: number;
+  coins: number;
 }
 
-/** Awards XP for newly completed quests/challenge. Each reward is granted once. */
+/**
+ * Awards XP and coins for newly completed quests/challenge, in one transaction. Each reward is
+ * granted once (the reward record and the coin entry share the quest's day or week).
+ */
 export async function claimRewards(settings: Settings, date = dayKey(), database: PolyglotDB = db): Promise<ClaimedReward[]> {
-  const claimed: ClaimedReward[] = [];
-  const { quests, allClaimed } = await questStatuses(settings, date, database);
-  const at = Date.now();
-  for (const q of quests) {
-    if (q.done && !q.claimed) {
-      await database.rewards.put({ id: `${date}:${q.quest.id}`, xp: q.quest.xp, at, date });
-      claimed.push({ kind: 'quest', titleKey: q.quest.titleKey, target: q.quest.target, xp: q.quest.xp });
+  return database.transaction('rw', [database.rewards, database.ledger, database.dailyStats], async () => {
+    const claimed: ClaimedReward[] = [];
+    const coinEntries: LedgerEntry[] = [];
+    const { quests, allClaimed } = await questStatuses(settings, date, database);
+    const at = Date.now();
+    for (const q of quests) {
+      if (q.done && !q.claimed) {
+        await database.rewards.put({ id: `${date}:${q.quest.id}`, xp: q.quest.xp, at, date });
+        coinEntries.push(entry('quest', `quest:${date}:${q.quest.id}`, REWARDS.quest, at, { ref: q.quest.id }));
+        claimed.push({ kind: 'quest', titleKey: q.quest.titleKey, target: q.quest.target, xp: q.quest.xp, coins: REWARDS.quest });
+      }
     }
-  }
-  if (!allClaimed && quests.length && quests.every((q) => q.done)) {
-    await database.rewards.put({ id: `${date}:all`, xp: XP.allQuestsBonus, at, date });
-    claimed.push({ kind: 'all-quests', titleKey: 'quest.allDone', xp: XP.allQuestsBonus });
-  }
-  const ch = await challengeStatus(settings, date, database);
-  if (ch.done && !ch.claimed) {
-    const week = weekKey(new Date(date + 'T12:00:00'));
-    await database.rewards.put({ id: `${week}:${ch.challenge.id}`, xp: ch.challenge.xp, at, date });
-    claimed.push({ kind: 'challenge', titleKey: ch.challenge.titleKey, target: ch.challenge.target, xp: ch.challenge.xp });
-  }
-  const bonus = claimed.reduce((n, c) => n + c.xp, 0);
-  if (bonus) await addStats({ xp: bonus }, undefined, date, database);
-  return claimed;
+    if (!allClaimed && quests.length && quests.every((q) => q.done)) {
+      await database.rewards.put({ id: `${date}:all`, xp: XP.allQuestsBonus, at, date });
+      coinEntries.push(entry('quest', `quest:${date}:all`, REWARDS.allQuests, at, { ref: 'all' }));
+      claimed.push({ kind: 'all-quests', titleKey: 'quest.allDone', xp: XP.allQuestsBonus, coins: REWARDS.allQuests });
+    }
+    const ch = await challengeStatus(settings, date, database);
+    if (ch.done && !ch.claimed) {
+      const week = weekKey(new Date(date + 'T12:00:00'));
+      await database.rewards.put({ id: `${week}:${ch.challenge.id}`, xp: ch.challenge.xp, at, date });
+      coinEntries.push(entry('challenge', `challenge:${week}:${ch.challenge.id}`, REWARDS.weeklyChallenge, at, { ref: ch.challenge.id }));
+      claimed.push({ kind: 'challenge', titleKey: ch.challenge.titleKey, target: ch.challenge.target, xp: ch.challenge.xp, coins: REWARDS.weeklyChallenge });
+    }
+    await grant(coinEntries, database);
+    const bonus = claimed.reduce((n, c) => n + c.xp, 0);
+    if (bonus) await addStats({ xp: bonus }, undefined, date, database);
+    return claimed;
+  });
 }
 
 export async function totalXp(database: PolyglotDB = db): Promise<number> {
@@ -270,12 +306,13 @@ export async function updateStreak(today = dayKey(), database: PolyglotDB = db):
 // Achievements
 
 export async function aggregateStats(now = Date.now(), database: PolyglotDB = db): Promise<AggregateStats> {
-  const [progress, cards, days, streak, meta] = await Promise.all([
+  const [progress, cards, days, streak, meta, ledger] = await Promise.all([
     database.lessonProgress.toArray(),
     database.cards.toArray(),
     database.dailyStats.toArray(),
     getMeta<StreakState>(STREAK_KEY, initialStreak, database),
-    getMeta<{ comeback?: boolean; perfect?: boolean }>('flags', {}, database),
+    getMeta<{ comeback?: boolean; perfect?: boolean; marathon?: boolean }>('flags', {}, database),
+    database.ledger.toArray(),
   ]);
   const totals = Object.fromEntries(allCourses().map((c) => [c.id, c.lessons.length])) as Record<CourseId, number>;
   const lessonsOfLevel = (match: (level: string) => boolean) =>
@@ -284,6 +321,12 @@ export async function aggregateStats(now = Date.now(), database: PolyglotDB = db
   const b1 = lessonsOfLevel((level) => level === 'B1');
   const perCourse = Object.fromEntries(COURSE_ORDER.map((c) => [c, 0])) as Record<CourseId, number>;
   for (const p of progress) perCourse[p.courseId] += 1;
+  const done = new Set(progress.map((p) => p.id));
+  // The beginner part of a course: its kana and A1 units.
+  const beginnerCourseDone = allCourses().some((c) => {
+    const beginner = c.units.filter((u) => u.level && (u.level.startsWith('A1') || u.level === 'Kana')).flatMap((u) => u.lessons.map((l) => l.id));
+    return beginner.length > 0 && beginner.every((id) => done.has(id));
+  });
   return {
     lessonsCompleted: progress.length,
     levelA2Lessons: progress.filter((p) => a2.has(p.id)).length,
@@ -301,20 +344,35 @@ export async function aggregateStats(now = Date.now(), database: PolyglotDB = db
     writing: days.reduce((n, d) => n + d.writing, 0),
     perfectLesson: Boolean(meta.perfect),
     comeback: Boolean(meta.comeback),
+    marathon: Boolean(meta.marathon),
+    beginnerCourseDone,
+    coinsEarned: walletOf(ledger).earned,
   };
 }
 
-export async function setFlag(flag: 'comeback' | 'perfect', database: PolyglotDB = db) {
+export async function setFlag(flag: 'comeback' | 'perfect' | 'marathon', database: PolyglotDB = db) {
   const flags = await getMeta<Record<string, boolean>>('flags', {}, database);
   if (!flags[flag]) await setMeta('flags', { ...flags, [flag]: true }, database);
 }
 
+/** Unlocks achievements that are now earned, with their coins and items, in one transaction. */
 export async function refreshAchievements(database: PolyglotDB = db): Promise<AchievementDef[]> {
-  const stats = await aggregateStats(Date.now(), database);
-  const unlocked = new Set((await database.achievements.toArray()).map((a) => a.id));
-  const fresh = newlyUnlocked(stats, unlocked);
-  if (fresh.length) await database.achievements.bulkPut(fresh.map((a) => ({ id: a.id, unlockedAt: Date.now() })));
-  return fresh;
+  const tables = [database.achievements, database.ledger, database.lessonProgress, database.cards, database.dailyStats, database.meta];
+  return database.transaction('rw', tables, async () => {
+    const all: AchievementDef[] = [];
+    // A second pass catches achievements that the first pass's coins unlock (e.g. "100 coins").
+    for (let pass = 0; pass < 2; pass++) {
+      const now = Date.now();
+      const stats = await aggregateStats(now, database);
+      const unlocked = new Set((await database.achievements.toArray()).map((a) => a.id));
+      const fresh = newlyUnlocked(stats, unlocked);
+      if (!fresh.length) break;
+      await database.achievements.bulkPut(fresh.map((a) => ({ id: a.id, unlockedAt: now })));
+      await grant(fresh.map((a) => achievementEntry(a.id, now)), database);
+      all.push(...fresh);
+    }
+    return all;
+  });
 }
 
 /** Called once per app start/day: detects a return after a break (for a positive "welcome back"). */

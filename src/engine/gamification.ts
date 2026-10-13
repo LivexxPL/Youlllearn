@@ -288,6 +288,12 @@ export interface AggregateStats {
   writing: number;
   perfectLesson: boolean;
   comeback: boolean;
+  /** A listening-only session was played to the end. */
+  marathon: boolean;
+  /** Every kana and A1 lesson of at least one course is completed. */
+  beginnerCourseDone: boolean;
+  /** Coins earned in total (src/services/economy.ts). */
+  coinsEarned: number;
 }
 
 export interface AchievementDef {
@@ -323,6 +329,9 @@ export const ACHIEVEMENTS: AchievementDef[] = [
   { id: 'writer-50', icon: 'brush', check: (s) => s.writing >= 50 },
   { id: 'polyglot', icon: 'globe', check: (s) => (['es', 'de', 'ja'] as CourseId[]).every((c) => s.lessonsPerCourse[c] > 0) },
   { id: 'comeback', icon: 'sunrise', check: (s) => s.comeback },
+  { id: 'marathon', icon: 'headphones', check: (s) => s.marathon },
+  { id: 'beginner-course', icon: 'graduation', check: (s) => s.beginnerCourseDone },
+  { id: 'coins-100', icon: 'coins', check: (s) => s.coinsEarned >= 100 },
   { id: 'perfect', icon: 'star', check: (s) => s.perfectLesson },
   { id: 'course-es', icon: 'medal', check: (s) => s.lessonsPerCourse.es >= s.courseLessonTotals.es && s.courseLessonTotals.es > 0 },
   { id: 'course-de', icon: 'medal', check: (s) => s.lessonsPerCourse.de >= s.courseLessonTotals.de && s.courseLessonTotals.de > 0 },

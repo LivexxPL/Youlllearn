@@ -2,18 +2,22 @@
  * Colour palette picker: a card per palette with a small preview in the current light/dark
  * mode, plus "surprise me" and the background-motif switch.
  */
-import { Check, Dices } from 'lucide-react';
+import { Check, Dices, Store } from 'lucide-react';
 import { PALETTES, heroIsLight, motifImage, type Palette, type PaletteId } from '../../config/palettes';
 import { useSettings } from '../../state/settings';
 import { SettingRow, Switch } from '../../components/ui';
 import { useToast } from '../../components/Toasts';
 import { t } from '../../i18n';
+import { themeItemFor } from '../../config/cosmetics';
+import { navigate } from '../../app/router';
+import { useWallet } from '../economy/wallet';
 
 function paletteName(id: PaletteId): string {
   return t(`palette.${id}` as never);
 }
 
-function Preview({ palette, mode }: { palette: Palette; mode: 'light' | 'dark' }) {
+/** Miniature of the app in a palette (also used by the shop). */
+export function Preview({ palette, mode }: { palette: Palette; mode: 'light' | 'dark' }) {
   const c = palette[mode];
   const cta = heroIsLight(c) ? c.primary : c.accentBright;
   return (
@@ -33,6 +37,12 @@ function Preview({ palette, mode }: { palette: Palette; mode: 'light' | 'dark' }
 export function PalettePicker() {
   const { settings, update, resolvedTheme } = useSettings();
   const toast = useToast();
+  const wallet = useWallet();
+  // Free palettes and the themes bought in the shop: switching between them costs nothing.
+  const owned = PALETTES.filter((p) => {
+    const item = themeItemFor(p.id);
+    return !item || item.free || wallet?.owned.has(item.id) || p.id === settings.palette;
+  });
 
   const choose = (id: PaletteId) => {
     if (id !== settings.palette) update({ palette: id });
@@ -40,7 +50,7 @@ export function PalettePicker() {
 
   /** A random pastel palette other than the current one, announced with a toast. */
   const surprise = () => {
-    const others = PALETTES.filter((p) => p.id !== settings.palette && p.id !== 'classic');
+    const others = owned.filter((p) => p.id !== settings.palette && p.id !== 'classic');
     const p = others[Math.floor(Math.random() * others.length)];
     choose(p.id);
     toast(t('set.palette.changed', { emoji: p.emoji, name: paletteName(p.id) }));
@@ -56,7 +66,7 @@ export function PalettePicker() {
           <div className="list-row__desc">{t('set.palette.desc')}</div>
         </div>
         <div className="palette-grid" role="radiogroup" aria-labelledby="palette-label" data-testid="palette-picker">
-          {PALETTES.map((p) => {
+          {owned.map((p) => {
             const selected = p.id === settings.palette;
             return (
               <label key={p.id} className={`palette-card${selected ? ' is-selected' : ''}`} data-testid={`palette-${p.id}`}>
@@ -70,9 +80,14 @@ export function PalettePicker() {
             );
           })}
         </div>
-        <button type="button" className="btn btn--ghost btn--sm palette-surprise" onClick={surprise}>
-          <Dices size={18} /> {t('set.palette.random')}
-        </button>
+        <div className="row row--wrap palette-actions">
+          <button type="button" className="btn btn--ghost btn--sm palette-surprise" onClick={surprise}>
+            <Dices size={18} /> {t('set.palette.random')}
+          </button>
+          <button type="button" className="btn btn--ghost btn--sm" onClick={() => navigate('/shop?tab=themes')} data-testid="palette-shop">
+            <Store size={18} /> {t('set.palette.more')}
+          </button>
+        </div>
       </div>
       {settings.palette !== 'classic' && (
         <SettingRow

@@ -19,7 +19,7 @@ const ITEMS: NavItem[] = [
   { path: '/audio', labelKey: 'nav.audio', shortKey: 'nav.audioShort', icon: <Headphones size={22} />, match: (s) => s === 'audio' },
   { path: '/review', labelKey: 'nav.review', icon: <RotateCcw size={22} />, match: (s) => s === 'review' },
   { path: '/progress', labelKey: 'nav.progress', icon: <ChartColumn size={22} />, match: (s) => s === 'progress' },
-  { path: '/settings', labelKey: 'nav.settings', icon: <Settings size={22} />, match: (s) => s === 'settings' || s === 'about' || s === 'profile' },
+  { path: '/settings', labelKey: 'nav.settings', icon: <Settings size={22} />, match: (s) => s === 'settings' || s === 'about' || s === 'profile' || s === 'shop' || s === 'collection' || s === 'coins' },
 ];
 
 export function Nav({ reviewBadge }: { reviewBadge?: number }) {

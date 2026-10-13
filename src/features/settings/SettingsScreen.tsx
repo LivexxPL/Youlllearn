@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
-import { Bell, BookOpen, ChevronRight, Download, Info, Keyboard, Mic, Palette, PenLine, Upload, Trash2, Volume2, Database, Target, Languages, Smartphone } from 'lucide-react';
+import { Bell, BookOpen, ChevronRight, Coins, Download, History, Info, Keyboard, Library, Mic, Palette, PenLine, RotateCcw, Upload, Trash2, Volume2, Database, Target, Languages, Smartphone } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useSettings, TEXT_SCALES, loadSettings } from '../../state/settings';
 import { allCourses, getCourse } from '../../content/registry';
 import type { CourseId } from '../../content/types';
-import type { DailyGoal, RomajiMode, ThemePref, MotionPref } from '../../services/db';
+import type { CoinFx, DailyGoal, RomajiMode, ThemePref, MotionPref } from '../../services/db';
 import { t, weekdayShort } from '../../i18n';
 import { Banner, LangBadge, PageHeader, Segmented, SettingRow, Sheet, Switch } from '../../components/ui';
 import { audio } from '../../services/audio';
@@ -21,6 +21,7 @@ import { cloud } from '../../services/cloud';
 import { useCloud } from '../../state/cloud';
 import { storagePersisted } from '../../services/storage';
 import { Avatar } from '../../components/Avatar';
+import { useEquip } from '../economy/equip';
 
 function Section({ icon, title, children }: { icon: ReactNode; title: string; children: ReactNode }) {
   return (
@@ -91,6 +92,7 @@ export default function SettingsScreen() {
   const [persisted, setPersisted] = useState<boolean | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
   const account = useCloud().account;
+  const { resetLook } = useEquip();
 
   useEffect(() => {
     reminderPermission().then(setPerm).catch(() => setPerm('unsupported'));
@@ -157,7 +159,7 @@ export default function SettingsScreen() {
 
       <div className="list">
         <button type="button" className="list-row" onClick={() => navigate('/profile')} data-testid="settings-profile">
-          <Avatar name={settings.displayName || account?.name || ''} picture={account?.picture} size={40} />
+          <Avatar name={settings.displayName || account?.name || ''} picture={account?.picture} size={40} frame={settings.cosmetics.frame} />
           <div className="list-row__body">
             <div className="list-row__title">{t('set.profileRow')}</div>
             <div className="list-row__desc">{account ? account.email : t('set.profileRowDesc')}</div>
@@ -243,6 +245,49 @@ export default function SettingsScreen() {
         </div>
         <SettingRow title={t('set.sounds')} control={<Switch checked={settings.sounds} onChange={(v) => update({ sounds: v })} label={t('set.sounds')} />} />
         <SettingRow title={t('set.haptics')} control={<Switch checked={settings.haptics} onChange={(v) => update({ haptics: v })} label={t('set.haptics')} />} />
+      </Section>
+
+      <Section icon={<Coins size={20} />} title={t('set.economy')}>
+        <div className="list-row" style={{ flexWrap: 'wrap' }}>
+          <div className="list-row__body">
+            <div className="list-row__title">{t('set.coinFx')}</div>
+            <div className="list-row__desc">{t('set.coinFxHelp')}</div>
+          </div>
+          <Segmented<CoinFx>
+            value={settings.coinFx}
+            onChange={(v) => update({ coinFx: v })}
+            label={t('set.coinFx')}
+            options={[
+              { value: 'full', label: t('set.coinFx.full') },
+              { value: 'subtle', label: t('set.coinFx.subtle') },
+              { value: 'off', label: t('set.coinFx.off') },
+            ]}
+          />
+        </div>
+        <SettingRow title={t('set.coinSounds')} control={<Switch checked={settings.coinSounds} onChange={(v) => update({ coinSounds: v })} label={t('set.coinSounds')} />} />
+        <button type="button" className="list-row" onClick={() => navigate('/coins')}>
+          <History size={20} />
+          <div className="list-row__body list-row__title">{t('shop.history')}</div>
+          <ChevronRight size={20} aria-hidden="true" />
+        </button>
+        <button type="button" className="list-row" onClick={() => navigate('/collection')}>
+          <Library size={20} />
+          <div className="list-row__body list-row__title">{t('shop.myCollection')}</div>
+          <ChevronRight size={20} aria-hidden="true" />
+        </button>
+        <div className="list-row">
+          <button
+            type="button"
+            className="btn btn--outline"
+            onClick={() => {
+              resetLook();
+              toast(t('set.resetLookDone'));
+            }}
+            data-testid="reset-look"
+          >
+            <RotateCcw size={18} /> {t('set.resetLook')}
+          </button>
+        </div>
       </Section>
 
       <Section icon={<Volume2 size={20} />} title={t('set.audio')}>

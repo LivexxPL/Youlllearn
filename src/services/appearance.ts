@@ -13,6 +13,8 @@ export interface Appearance {
   palette: PaletteId;
   /** Background motif of pastel palettes. */
   pattern: boolean;
+  /** Progress bar style (cosmetic item without the `bar-` prefix); empty = default. */
+  bar?: string;
 }
 
 /** Read by the inline script in index.html; keep both in sync. */
@@ -28,6 +30,8 @@ export function applyAppearance(a: Appearance, root: HTMLElement = document.docu
   root.dataset.palette = palette.id;
   root.dataset.hero = hero;
   root.style.setProperty('--text-scale', String(a.textScale));
+  if (a.bar) root.dataset.bar = a.bar;
+  else delete root.dataset.bar;
   for (const name of PALETTE_VAR_NAMES) if (!(name in vars)) root.style.removeProperty(name);
   for (const [name, value] of Object.entries(vars)) root.style.setProperty(name, value);
 

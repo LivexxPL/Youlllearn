@@ -8,12 +8,25 @@ import type { CourseId } from '../content/types';
 import type { Card } from '../engine/srs';
 import type { PaletteId } from '../config/palettes';
 import { CLOUD_META_KEY } from '../config/cloud';
+import type { CurrencyId } from '../config/economy';
 
 export type ThemePref = 'system' | 'light' | 'dark';
 export type MotionPref = 'system' | 'reduce' | 'full';
 export type RomajiMode = 'auto' | 'always' | 'never';
 export type DailyGoal = 5 | 10 | 20 | 30;
 export type UiLang = 'pl';
+/** How coin rewards are shown: animated count and burst, a quiet fade, or text only. */
+export type CoinFx = 'full' | 'subtle' | 'off';
+
+/** Equipped cosmetic items per slot (src/config/cosmetics.ts); null = the default look. */
+export interface EquippedCosmetics {
+  frame: string | null;
+  banner: string | null;
+  badge: string | null;
+  title: string | null;
+  bar: string | null;
+  fx: string | null;
+}
 
 export interface ReminderSettings {
   enabled: boolean;
@@ -36,6 +49,11 @@ export interface Settings {
   palette: PaletteId;
   /** Show the palette's background motif. */
   bgPattern: boolean;
+  /** Equipped cosmetics (the colour theme is `palette`). */
+  cosmetics: EquippedCosmetics;
+  coinFx: CoinFx;
+  /** A soft sound when coins are earned or spent (only while `sounds` is on). */
+  coinSounds: boolean;
   textScale: number;
   motion: MotionPref;
   sounds: boolean;
@@ -106,6 +124,47 @@ export interface RewardRecord {
   date: string;
 }
 
+export type TxType =
+  | 'lesson'
+  | 'practice'
+  | 'story'
+  | 'marathon'
+  | 'writing'
+  | 'quest'
+  | 'challenge'
+  | 'achievement'
+  | 'milestone'
+  | 'purchase'
+  | 'refund'
+  | 'migration'
+  | 'adjustment';
+
+/**
+ * One coin transaction. The ledger is the only record of coins and of owned cosmetic items:
+ * the balance is the sum of `amount`, ownership follows from purchases (minus refunds) and
+ * item rewards. See ECONOMY_DESIGN.md.
+ */
+export interface LedgerEntry {
+  /** Unique id of the event, which is also its idempotency key (e.g. `lesson:es.l01:first`). */
+  id: string;
+  type: TxType;
+  /** Whole coins: positive = earned, negative = spent, 0 = an item reward only. */
+  amount: number;
+  currency: CurrencyId;
+  at: number;
+  /** Local day (yyyy-mm-dd) of the event. */
+  date: string;
+  /** What it was for: lesson, quest, achievement or item id. */
+  ref?: string;
+  /** Cosmetic items granted (reward) or bought (purchase). */
+  items?: string[];
+  /** A refund: id of the purchase it reverses. */
+  refundOf?: string;
+  /** Practice rewards: the cards that earned coins and the kind of practice (anti-farming). */
+  cards?: string[];
+  family?: 'review' | 'audio';
+}
+
 export type StrokePoint = [x: number, y: number, pressure: number];
 
 export interface Stroke {
@@ -141,6 +200,7 @@ export type PolyglotDB = Dexie & {
   rewards: EntityTable<RewardRecord, 'id'>;
   drawings: EntityTable<Drawing, 'id'>;
   meta: EntityTable<MetaRecord, 'key'>;
+  ledger: EntityTable<LedgerEntry, 'id'>;
 };
 
 export const DB_NAME = 'polyglot-quest';
@@ -157,6 +217,11 @@ export function createDb(name = DB_NAME): PolyglotDB {
     drawings: 'id, kind, updatedAt',
     meta: 'key',
   });
+  // v2: coin economy. Existing data is untouched; coins for earlier learning are granted once
+  // by services/economy.ts (reconcileRewards).
+  db.version(2).stores({
+    ledger: 'id, date, type',
+  });
   return db;
 }
 
@@ -171,6 +236,7 @@ export const TABLES = [
   'rewards',
   'drawings',
   'meta',
+  'ledger',
 ] as const;
 export type TableName = (typeof TABLES)[number];
 

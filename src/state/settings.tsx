@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useState, type ReactNode } from 'react';
 import { SystemBars, SystemBarsStyle } from '@capacitor/core';
-import { db, type Settings } from '../services/db';
+import { db, type EquippedCosmetics, type Settings } from '../services/db';
 import { isNative, prefersDark, prefersReducedMotion } from '../services/platform';
 import { applyAppearance, type Appearance } from '../services/appearance';
 import { PALETTE_IDS } from '../config/palettes';
@@ -9,6 +9,7 @@ import { COURSE_IDS } from '../content/types';
 
 export const TEXT_SCALES = [0.9, 1, 1.15, 1.3] as const;
 export const SETTINGS_SCHEMA = 1;
+export const NO_COSMETICS: EquippedCosmetics = { frame: null, banner: null, badge: null, title: null, bar: null, fx: null };
 export const DISPLAY_NAME_MAX = 30;
 
 export function defaultSettings(now = Date.now()): Settings {
@@ -23,6 +24,9 @@ export function defaultSettings(now = Date.now()): Settings {
     theme: 'system',
     palette: 'classic',
     bgPattern: true,
+    cosmetics: { ...NO_COSMETICS },
+    coinFx: 'full',
+    coinSounds: true,
     textScale: 1,
     motion: 'system',
     sounds: true,
@@ -51,13 +55,20 @@ export function defaultSettings(now = Date.now()): Settings {
 export function migrateSettings(stored: Partial<Settings> | undefined): Settings {
   const base = defaultSettings();
   if (!stored) return base;
-  const merged: Settings = { ...base, ...stored, reminders: { ...base.reminders, ...stored.reminders }, voices: { ...stored.voices } };
+  const merged: Settings = {
+    ...base,
+    ...stored,
+    reminders: { ...base.reminders, ...stored.reminders },
+    voices: { ...stored.voices },
+    cosmetics: { ...NO_COSMETICS, ...stored.cosmetics },
+  };
   if (!COURSE_IDS.includes(merged.activeCourse)) merged.activeCourse = 'es';
   merged.courses = (merged.courses ?? []).filter((c) => COURSE_IDS.includes(c));
   if (merged.courses.length === 0) merged.courses = [merged.activeCourse];
   // A backup from a newer version may name a palette this version does not have.
   if (!PALETTE_IDS.includes(merged.palette)) merged.palette = 'classic';
   merged.displayName = typeof merged.displayName === 'string' ? merged.displayName.slice(0, DISPLAY_NAME_MAX) : '';
+  if (!['full', 'subtle', 'off'].includes(merged.coinFx)) merged.coinFx = 'full';
   merged.schema = SETTINGS_SCHEMA;
   return merged;
 }
@@ -70,6 +81,7 @@ export function appearanceFor(s: Settings, systemDark = prefersDark(), systemRed
     textScale: s.textScale,
     palette: s.palette,
     pattern: s.bgPattern,
+    bar: s.cosmetics.bar?.replace(/^bar-/, '') ?? '',
   };
 }
 
@@ -110,15 +122,15 @@ export function SettingsProvider({ initial, children }: { initial: Settings; chi
 
   const appearance = appearanceFor(settings, systemDark, systemReduce);
   const resolvedTheme = appearance.theme;
-  const { motion, textScale, palette, pattern } = appearance;
+  const { motion, textScale, palette, pattern, bar } = appearance;
 
   // Before paint, so that switching palettes never shows a frame in the old colours.
   useLayoutEffect(() => {
-    applyAppearance({ theme: resolvedTheme, motion, textScale, palette, pattern });
+    applyAppearance({ theme: resolvedTheme, motion, textScale, palette, pattern, bar });
     if (isNative()) {
       SystemBars.setStyle({ style: resolvedTheme === 'dark' ? SystemBarsStyle.Dark : SystemBarsStyle.Light }).catch(() => {});
     }
-  }, [resolvedTheme, motion, textScale, palette, pattern]);
+  }, [resolvedTheme, motion, textScale, palette, pattern, bar]);
 
   useEffect(() => {
     setUiLang(settings.uiLang);
