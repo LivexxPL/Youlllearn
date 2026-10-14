@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content"
+    />
+    <meta name="theme-color" content="#0f766e" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0f141a" media="(prefers-color-scheme: dark)" />
+    <meta name="description" content="Nauka hiszpańskiego, niemieckiego i japońskiego od zera — krótkie lekcje, nauka ze słuchu i powtórki z odstępami." />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png" />
+    <title>Polyglot Quest</title>
+    <script>
+      // Saved colour theme, painted before the app loads (written by src/services/appearance.ts).
+      try {
+        var saved = JSON.parse(localStorage.getItem('pq.appearance') || 'null');
+        if (saved && saved.vars) {
+          var root = document.documentElement;
+          root.dataset.theme = saved.theme;
+          root.dataset.palette = saved.palette;
+          root.dataset.hero = saved.hero;
+          for (var name in saved.vars) root.style.setProperty(name, saved.vars[name]);
+        }
+      } catch (e) {}
+    </script>
+    <script type="module" crossorigin src="./assets/index-BjEWjLQu.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/ui-DP3q1sAi.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CPAKd-Fu.js">
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-CRzLMJPS.js">
+    <link rel="modulepreload" crossorigin href="./assets/dates-B0HnAE8a.js">
+    <link rel="modulepreload" crossorigin href="./assets/platform-BewevX6l.js">
+    <link rel="modulepreload" crossorigin href="./assets/economy-54qjgJRO.js">
+    <link rel="modulepreload" crossorigin href="./assets/progress-Cp6wPFz_.js">
+    <link rel="stylesheet" crossorigin href="./assets/index-C92axWUa.css">
+  <link rel="manifest" href="./manifest.webmanifest"></head>
+  <body>
+    <div id="root"></div>
+    <noscript>Polyglot Quest wymaga włączonej obsługi JavaScript.</noscript>
+  </body>
+</html>

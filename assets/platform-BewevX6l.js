@@ -1,0 +1,1 @@
+import{t as e}from"./dist-CPAKd-Fu.js";var t=()=>e.isNativePlatform(),n=()=>e.getPlatform(),r=`0.1.0`;function i(){return typeof window<`u`&&window.matchMedia?.(`(prefers-reduced-motion: reduce)`).matches}function a(){return typeof window<`u`&&window.matchMedia?.(`(prefers-color-scheme: dark)`).matches}export{i as a,a as i,t as n,n as r,r as t};
