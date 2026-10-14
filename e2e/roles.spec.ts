@@ -131,6 +131,16 @@ test.describe('roles and developer access', () => {
     await expect(page.getByTestId('sandbox-banner')).toHaveCount(0);
   });
 
+  test('the profile shows the role id with a copy button (for designating the account)', async ({ page, context }) => {
+    await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+    await start(page, { sub: 'e2e-someone' });
+    await page.getByTestId('profile-tech').locator('summary').click();
+    await page.getByTestId('copy-role-id').click();
+    const copied = await page.evaluate(() => navigator.clipboard.readText());
+    expect(copied).toMatch(/^[0-9a-f]{64}$/);
+    await expect(page.getByTestId('profile-tech')).toContainText(copied);
+  });
+
   test('an admin sees the dashboard read-only, without overrides or the sandbox', async ({ page }) => {
     await start(page, { sub: 'e2e-admin' });
     await page.goto('./#/dev');

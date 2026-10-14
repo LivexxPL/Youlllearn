@@ -1,6 +1,7 @@
 # Web checks: lint, types, unit tests, production build and Playwright E2E
 # (phone + tablet viewports). Runs on every push and pull request.
-# On pushes, the tested build is published to GitHub Pages, whichever source the repository
+# On pushes and manual runs ("Run workflow", e.g. after changing repository variables such as
+# GOOGLE_CLIENT_ID), the tested build is published to GitHub Pages, whichever source the repository
 # uses (the gh-pages branch or "GitHub Actions"): https://<owner>.github.io/<repo>/
 # (see INSTALACJA.md)
 name: CI
@@ -52,7 +53,7 @@ jobs:
       # Only a build that passed every check above is published. Relative paths and hash
       # routing let the app run from the /<repo>/ subfolder of GitHub Pages.
       - name: Publish the web app (GitHub Pages)
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -68,7 +69,7 @@ jobs:
 
       # The same build as a Pages artifact, for repositories whose Pages source is "GitHub Actions".
       - name: Package the web app for GitHub Pages
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
@@ -88,7 +89,7 @@ jobs:
   # when the source is "GitHub Actions".
   pages:
     needs: web
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     permissions:
       pages: write

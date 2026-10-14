@@ -91,8 +91,9 @@ redacted before it is kept; access tokens are never shown or logged.
 4. GitHub → repository → *Settings → Secrets and variables → Actions → Variables*:
    - `DEVELOPER_ACCOUNT_IDS` = the role id (several: separated by commas),
    - optionally `ADMIN_ACCOUNT_IDS` for admins.
-5. The next CI run builds and deploys the app with these ids; after it, the account is a
-   developer on every device where it is signed in. To revoke, remove the id and let CI deploy.
+5. Run CI (*Actions → CI → Run workflow*, or push): it builds and deploys the app with these
+   ids; after it, the account is a developer on every device where it is signed in. To revoke,
+   remove the id and run CI again.
 
 Local development: put the same variables in `.env.local` as `VITE_DEVELOPER_ACCOUNTS=…` /
 `VITE_ADMIN_ACCOUNTS=…` (ignored by git). The end-to-end tests use a separate build

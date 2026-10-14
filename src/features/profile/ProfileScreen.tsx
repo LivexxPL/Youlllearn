@@ -3,7 +3,7 @@
  * coins (shop, collection, history) and the optional Google account that keeps a copy of the
  * progress on Google Drive. Everything here works without an account.
  */
-import { Cloud, History, Library, Store } from 'lucide-react';
+import { Cloud, Copy, History, Library, Store } from 'lucide-react';
 import { useSettings, DISPLAY_NAME_MAX } from '../../state/settings';
 import { useCloud } from '../../state/cloud';
 import { t } from '../../i18n';
@@ -17,12 +17,24 @@ import { useWallet } from '../economy/wallet';
 import { equippedItem } from '../economy/equip';
 import { itemName } from '../economy/labels';
 import { useAuth } from '../../auth/session';
+import { useToast } from '../../components/Toasts';
 
 export default function ProfileScreen() {
   const { settings, update } = useSettings();
   const cloud = useCloud();
   const wallet = useWallet();
   const auth = useAuth();
+  const toast = useToast();
+  const copyRoleId = (id: string) => {
+    const selectIt = () => {
+      // No clipboard access: select the text so it can be copied by hand.
+      const el = document.getElementById('role-id');
+      if (el) window.getSelection()?.selectAllChildren(el);
+      toast(t('dev.selected'));
+    };
+    if (navigator.clipboard?.writeText) navigator.clipboard.writeText(id).then(() => toast(t('dev.copied')), selectIt);
+    else selectIt();
+  };
   const name = settings.displayName || cloud.account?.name || '';
   const banner = equippedItem(settings.cosmetics, 'banner');
   const badge = equippedItem(settings.cosmetics, 'badge');
@@ -89,7 +101,12 @@ export default function ProfileScreen() {
             {t('dev.role')}: <strong>{t(`dev.role.${auth.principal.role}` as never)}</strong>
           </p>
           <p className="subtle">{t('dev.roleId')}</p>
-          <code className="dev-code">{auth.principal.roleId}</code>
+          <code className="dev-code" id="role-id">
+            {auth.principal.roleId}
+          </code>
+          <button type="button" className="btn btn--outline btn--sm" onClick={() => copyRoleId(auth.principal.roleId!)} data-testid="copy-role-id">
+            <Copy size={16} /> {t('dev.copy')}
+          </button>
           <p className="subtle">{t('dev.roleIdHelp')}</p>
         </details>
       )}

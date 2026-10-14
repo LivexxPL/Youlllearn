@@ -1000,6 +1000,7 @@ export const pl = {
   'dev.roleIdHelp': 'Skrót identyfikatora konta Google: nie jest tajny i nie ujawnia konta. Rolę nadaje się, wpisując go w zmiennej repozytorium DEVELOPER_ACCOUNT_IDS lub ADMIN_ACCOUNT_IDS (docs/DEVELOPER_ACCESS.md).',
   'dev.copy': 'Kopiuj',
   'dev.copied': 'Skopiowano.',
+  'dev.selected': 'Zaznaczono — skopiuj tekst ręcznie.',
   'dev.signedOut': 'Zaloguj się kontem Google (Profil), aby aplikacja rozpoznała rolę konta.',
   'dev.perm.devtools.dashboard': 'Panel narzędzi',
   'dev.perm.devtools.diagnostics': 'Diagnostyka i dziennik działań',

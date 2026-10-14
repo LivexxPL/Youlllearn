@@ -105,8 +105,9 @@ Strona pojawia się po zakończeniu najbliższego przebiegu CI (kilka minut).
    przekierowania nie jest potrzebny.
 5. Skopiuj **Client ID** (kończy się na `.apps.googleusercontent.com` — to nie jest hasło) i
    w repozytorium GitHub: *Settings → Secrets and variables → Actions → Variables →
-   New repository variable*, nazwa `GOOGLE_CLIENT_ID`, wartość: Client ID. Następny przebieg
-   CI opublikuje wersję z logowaniem.
+   New repository variable*, nazwa `GOOGLE_CLIENT_ID`, wartość: Client ID.
+6. *Actions → CI → Run workflow* (gałąź `claude/polyglot-quest-app-6awz6m`) — po kilku minutach
+   strona zostanie opublikowana z logowaniem. To samo po każdej zmianie zmiennych.
 
 Projekt w Google Cloud i te usługi są w tym zastosowaniu bezpłatne; kopia zajmuje miejsce na
 Twoim Dysku (zwykle poniżej 1 MB). Szczegóły techniczne: [docs/CLOUD_SYNC.md](docs/CLOUD_SYNC.md).
@@ -119,8 +120,8 @@ Twoim Dysku (zwykle poniżej 1 MB). Szczegóły techniczne: [docs/CLOUD_SYNC.md]
 3. W repozytorium GitHub: *Settings → Secrets and variables → Actions → Variables →
    New repository variable*, nazwa `DEVELOPER_ACCOUNT_IDS`, wartość: identyfikator roli
    (kilka kont: po przecinku). Opcjonalnie `ADMIN_ACCOUNT_IDS` dla administratorów.
-4. Po najbliższym przebiegu CI to konto jest rozpoznawane jako deweloper automatycznie po
-   zalogowaniu: wszystkie kosmetyki bez kupowania, podgląd zablokowanych treści, panel
+4. *Actions → CI → Run workflow*. Po tym przebiegu CI to konto jest rozpoznawane jako
+   deweloper automatycznie po zalogowaniu: wszystkie kosmetyki bez kupowania, podgląd zablokowanych treści, panel
    *Ustawienia → Narzędzia deweloperskie* z diagnostyką i piaskownicą do testów (osobne dane
    testowe — prawdziwe postępy zostają nietknięte).
 
