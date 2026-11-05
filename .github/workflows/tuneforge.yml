@@ -1,0 +1,47 @@
+# TuneForge FPV (tuneforge/): lint, types, unit tests and production build of the web app,
+# plus the tests of the pyserial push tool. Runs only when tuneforge/ (or this file) changes;
+# the Polyglot Quest workflow (ci.yml) ignores the folder.
+name: TuneForge
+
+on:
+  push:
+    branches: [main, 'claude/**']
+    paths: ['tuneforge/**', '.github/workflows/tuneforge.yml']
+  pull_request:
+    paths: ['tuneforge/**', '.github/workflows/tuneforge.yml']
+  workflow_dispatch:
+
+concurrency:
+  group: tuneforge-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: tuneforge
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: tuneforge/package-lock.json
+
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+
+      - name: Push tool tests (pyserial against a fake flight controller on a pseudo-terminal)
+        run: |
+          python3 -m venv .venv
+          .venv/bin/pip install --quiet pyserial
+          .venv/bin/python -m unittest discover -s tools -p "test_*.py" -v

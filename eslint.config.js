@@ -6,7 +6,8 @@ import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
   {
-    ignores: ['dist', 'dev-dist', 'android', 'node_modules', 'coverage', 'playwright-report', 'test-results'],
+    // tuneforge/ is a separate app with its own lint setup (tuneforge/eslint.config.js).
+    ignores: ['dist', 'dev-dist', 'android', 'node_modules', 'coverage', 'playwright-report', 'test-results', 'tuneforge'],
   },
   {
     files: ['**/*.{ts,tsx}'],
