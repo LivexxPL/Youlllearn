@@ -51,11 +51,13 @@ android/        Capacitor Android project
 | `drawings` | Handwriting practice (`practice:<char>`) and lesson notes (`note:<lessonId>`), normalised stroke points with pressure |
 | `meta` | Streak state, lesson resume position, story results, flags, Google account and sync state |
 | `ledger` | Coin transactions (v2): rewards, purchases, refunds — the only record of the balance and owned items ([ECONOMY_DESIGN.md](../ECONOMY_DESIGN.md)) |
+| `songs`, `playlists`, `words` | Music Lab (v3): the learner's songs (lyrics, times, translations, line progress), playlists, words met in songs (status, own meaning); review cards of song words live in `cards` ([MUSIC_LAB.md](MUSIC_LAB.md)) |
+| `songCache`, `songState` | Device-only (v3): cached Japanese analysis per song, playback position — never exported or synchronised |
 
 Export/import (`services/backup.ts`) writes all tables to a versioned JSON file and
 validates it before replacing data. "Reset" clears everything after typed confirmation.
 Device-only `meta` records (`isDeviceMeta`: account and sync state, lesson resume position,
-dismissed install hint) are left out of exports and kept on import.
+dismissed install hint, the optional AI key) are left out of exports and kept on import.
 
 Roles (`src/auth`) sit on the same Google account: a central policy decides what `user`,
 `admin` and `developer` may do; developer tools work on a separate sandbox database

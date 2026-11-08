@@ -34,7 +34,8 @@ an Android app (Capacitor). No account, no ads, no paid APIs: progress stays on 
 | Courses | ✅ 33 Spanish, 34 German, 36 Japanese lessons: A1, A2 (completed by an A2+ unit) and a first B1 unit (CEFR / JF Standard), with real content, checked in a separate proofreading pass; ⚠️ not yet proofread by native speakers, B1 only started |
 | Android project | ✅ Capacitor project, icons, signing config, CI workflow. GitHub Actions builds an installable debug APK (and an unsigned release APK) on every push. ⚠️ Not built in the development sandbox (the Android SDK host is blocked there) and not yet tried on a physical device; see [docs/ANDROID_BUILD.md](docs/ANDROID_BUILD.md). |
 | Audio | ✅ Device text-to-speech with graceful fallbacks; ⚠️ voice quality not evaluated by ear (no audio in the sandbox), see [docs/AUDIO.md](docs/AUDIO.md) |
-| Tests | ✅ 370 unit tests, 12 E2E tests run on phone and tablet, lint and type check clean |
+| Music Lab | ✅ YouTube songs with your own lyrics, synced display, Japanese analysis, song words in the reviews, eight exercise kinds, optional AI translations; ⚠️ YouTube playback inside the Android app not yet tried on a device |
+| Tests | ✅ 665 unit tests, 36 E2E scenarios run on phone and tablet viewports, lint and type check clean |
 
 ## Features
 
@@ -52,6 +53,21 @@ an Android app (Capacitor). No account, no ads, no paid APIs: progress stays on 
   - repeat, shadowing, tracing and writing from memory.
 - Spaced repetition (SM-2-inspired, recognition- and production-aware): due, weak and
   lesson reviews, plus a 3-minute session. See [docs/SRS_ALGORITHM.md](docs/SRS_ALGORITHM.md).
+
+**Music Lab** — learning from YouTube songs ([docs/MUSIC_LAB.md](docs/MUSIC_LAB.md))
+- Paste a YouTube link and the lyrics (or an `.lrc`/`.srt`/`.vtt` file): the official YouTube
+  player with lyrics in sync, tap a line to play it, loop, slower speed, karaoke view, tap-sync for
+  untimed lyrics. Word timing is used only when the file has it.
+- Tap any word: meaning from the course (or your own, or the optional AI assistant — always
+  labelled), add it to the regular reviews (same SRS, same cards as the course), mark it as known.
+- Japanese: furigana, hiragana reading line and Hepburn romaji from a morphological analysis
+  (kuromoji) that runs in the browser and works offline after a one-time 17 MB download; reading
+  corrections; conjugated forms explained.
+- Rule-based grammar notes in Polish adapted to your level, eight exercise kinds built from the
+  song (gap fill, listening from the video, matching, translation, word order, kanji reading,
+  grammar, dictation), a measured difficulty estimate, playlists, three public-domain samples.
+- XP and coins only for correct answers (once per line or word per day); playing a video earns
+  nothing. Optional AI translations with your own Anthropic API key (cost shown before each use).
 
 **Audio Quest** (all 15 requirements, [docs/AUDIO.md](docs/AUDIO.md))
 - Hands-free 5/10/15-minute sessions from your lessons and review queue, with Polish

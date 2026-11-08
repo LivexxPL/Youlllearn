@@ -16,7 +16,7 @@ interface NavItem {
 const ITEMS: NavItem[] = [
   { path: '/', labelKey: 'nav.home', icon: <House size={22} />, match: (s) => !s },
   { path: '/learn', labelKey: 'nav.learn', icon: <BookOpen size={22} />, match: (s) => s === 'learn' || s === 'write' || s === 'kana' },
-  { path: '/audio', labelKey: 'nav.audio', shortKey: 'nav.audioShort', icon: <Headphones size={22} />, match: (s) => s === 'audio' },
+  { path: '/audio', labelKey: 'nav.audio', shortKey: 'nav.audioShort', icon: <Headphones size={22} />, match: (s) => s === 'audio' || s === 'music' },
   { path: '/review', labelKey: 'nav.review', icon: <RotateCcw size={22} />, match: (s) => s === 'review' },
   { path: '/progress', labelKey: 'nav.progress', icon: <ChartColumn size={22} />, match: (s) => s === 'progress' },
   { path: '/settings', labelKey: 'nav.settings', icon: <Settings size={22} />, match: (s) => s === 'settings' || s === 'about' || s === 'profile' || s === 'shop' || s === 'collection' || s === 'coins' || s === 'dev' },

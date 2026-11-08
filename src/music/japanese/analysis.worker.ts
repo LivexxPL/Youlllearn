@@ -4,7 +4,7 @@
  * kept in the Cache API (works offline afterwards, in the browser and in the Android app);
  * the worker is stopped when idle so its ~100 MB are released (./analyzer.ts).
  */
-import { buildTokenizer, DICT_TOTAL_BYTES, isGzip, type JapaneseTokenizer } from './dictionary';
+import { buildTokenizer, DICT_FILES, DICT_TOTAL_BYTES, isGzip, servedName, type JapaneseTokenizer } from './dictionary';
 import { fromIpadic, type JaToken } from './tokens';
 
 export interface AnalysisRequest {
@@ -20,7 +20,7 @@ export type AnalysisResponse =
   | { id: number; type: 'result'; tokens: JaToken[][] }
   | { id: number; type: 'error'; code: AnalysisErrorCode; message: string };
 
-const CACHE_NAME = 'pq-ja-dictionary-v1';
+const CACHE_NAME = 'pq-ja-dictionary-v2';
 const scope = self as unknown as DedicatedWorkerGlobalScope;
 
 let tokenizer: Promise<JapaneseTokenizer> | null = null;
@@ -37,7 +37,7 @@ class CodedError extends Error {
 }
 
 function report(bytes: number) {
-  loaded = Math.min(DICT_TOTAL_BYTES, loaded + bytes);
+  loaded = Math.min(DICT_TOTAL_BYTES, Math.round(loaded + bytes));
   for (const id of listeners) scope.postMessage({ id, type: 'progress', loaded, total: DICT_TOTAL_BYTES } satisfies AnalysisResponse);
 }
 
@@ -49,21 +49,28 @@ async function openCache(): Promise<Cache | null> {
   }
 }
 
-async function readBody(res: Response): Promise<ArrayBuffer> {
-  if (!res.body) {
-    const buf = await res.arrayBuffer();
-    report(buf.byteLength);
-    return buf;
-  }
-  const reader = res.body.getReader();
+/**
+ * Reads a download and reports progress in compressed bytes. Should a server unpack the file
+ * on the way (Content-Encoding), the bytes are scaled to the compressed size.
+ */
+async function readBody(res: Response, file: { bytes: number; raw: number }): Promise<ArrayBuffer> {
   const parts: Uint8Array[] = [];
   let size = 0;
-  for (;;) {
-    const { done, value } = await reader.read();
-    if (done) break;
-    parts.push(value);
-    size += value.byteLength;
-    report(value.byteLength);
+  let scale = 1;
+  const add = (chunk: Uint8Array) => {
+    if (size === 0 && chunk.byteLength >= 2 && !(chunk[0] === 0x1f && chunk[1] === 0x8b)) scale = file.bytes / file.raw;
+    parts.push(chunk);
+    size += chunk.byteLength;
+    report(chunk.byteLength * scale);
+  };
+  if (!res.body) add(new Uint8Array(await res.arrayBuffer()));
+  else {
+    const reader = res.body.getReader();
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      add(value);
+    }
   }
   const out = new Uint8Array(size);
   let at = 0;
@@ -82,7 +89,8 @@ async function gunzip(buf: ArrayBuffer): Promise<ArrayBuffer> {
 }
 
 async function loadFile(dictUrl: string, name: string): Promise<ArrayBuffer> {
-  const url = new URL(name, dictUrl).href;
+  const file = DICT_FILES.find((f) => f.name === name)!;
+  const url = new URL(servedName(name), dictUrl).href;
   const cache = await openCache();
   let res = await cache?.match(url);
   if (!res) {
@@ -94,7 +102,7 @@ async function loadFile(dictUrl: string, name: string): Promise<ArrayBuffer> {
     if (!res.ok) throw new CodedError('network', `Could not download ${name}: HTTP ${res.status}`);
     await cache?.put(url, res.clone()).catch(() => {});
   }
-  return gunzip(await readBody(res));
+  return gunzip(await readBody(res, file));
 }
 
 scope.onmessage = async (e: MessageEvent<AnalysisRequest>) => {

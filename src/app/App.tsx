@@ -46,6 +46,13 @@ const ShopScreen = lazy(() => import('../features/economy/ShopScreen'));
 const CollectionScreen = lazy(() => import('../features/economy/CollectionScreen'));
 const CoinsScreen = lazy(() => import('../features/economy/CoinsScreen'));
 const DevScreen = lazy(() => import('../features/devtools/DevScreen'));
+const MusicHome = lazy(() => import('../features/music/MusicHome'));
+const AddSongScreen = lazy(() => import('../features/music/AddSongScreen'));
+const SongScreen = lazy(() => import('../features/music/SongScreen'));
+const SyncEditor = lazy(() => import('../features/music/SyncEditor'));
+const MusicPracticeScreen = lazy(() => import('../features/music/MusicPracticeScreen'));
+const PlaylistScreen = lazy(() => import('../features/music/PlaylistScreen'));
+const AiSettingsScreen = lazy(() => import('../features/music/AiPanel'));
 
 const IMMERSIVE = new Set(['lesson', 'onboarding', 'notes']);
 
@@ -55,12 +62,13 @@ function isImmersive(segments: string[]): boolean {
   if (a === 'review' && b === 'session') return true;
   if (a === 'audio' && b) return true;
   if (a === 'write' && segments.length >= 3) return true;
+  if (a === 'music' && b === 'song' && segments[3] === 'practice') return true;
   return false;
 }
 
 function Screen() {
   const route = useRoute();
-  const [a, b, c] = route.segments;
+  const [a, b, c, d] = route.segments;
   // Session screens build their exercises once; a new query (e.g. ?mode=quick → ?mode=extra)
   // must start a new session. Other screens are remounted per path by the error boundary.
   const queryKey = route.query.toString();
@@ -93,6 +101,17 @@ function Screen() {
       return <CoinsScreen />;
     case 'dev':
       return <DevScreen />;
+    case 'music':
+      if (b === 'new') return <AddSongScreen />;
+      if (b === 'ai') return <AiSettingsScreen />;
+      if (b === 'playlist' && c) return <PlaylistScreen id={c} />;
+      if (b === 'song' && c) {
+        if (d === 'edit') return <AddSongScreen editId={c} />;
+        if (d === 'sync') return <SyncEditor id={c} />;
+        if (d === 'practice') return <MusicPracticeScreen key={queryKey} id={c} query={route.query} />;
+        return <SongScreen id={c} />;
+      }
+      return <MusicHome />;
     case 'write':
       return b && c ? <WritingPractice set={b} char={c} /> : <WritingHub />;
     case 'kana':

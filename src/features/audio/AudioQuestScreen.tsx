@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BookHeadphones, CheckCircle2, Ear, Headphones, Layers, Lock, Mic, MoonStar, PenLine, Play, Repeat2, Waves } from 'lucide-react';
+import { BookHeadphones, CheckCircle2, Ear, Headphones, Layers, Lock, Mic, MoonStar, Music4, PenLine, Play, Repeat2, Waves } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '../../services/db';
@@ -128,6 +128,7 @@ export default function AudioQuestScreen() {
               {t('aq.modes')}
             </h2>
             <div className="mode-grid">
+              <ModeCard icon={<Music4 size={24} />} title={t('music.title')} desc={t('music.modeDesc')} onClick={() => navigate('/music')} testId="mode-music" />
               <ModeCard icon={<Ear size={24} />} title={t('aq.listenWords')} desc={t('aq.listenWordsDesc')} onClick={() => navigate('/audio/listen')} testId="mode-listen" />
               <ModeCard icon={<Layers size={24} />} title={t('aq.flashcards')} desc={t('aq.flashcardsDesc')} onClick={() => navigate('/audio/flashcards')} testId="mode-flashcards" />
               <ModeCard icon={<Repeat2 size={24} />} title={t('aq.repeat')} desc={t('aq.repeatDesc')} onClick={() => navigate('/audio/repeat')} />

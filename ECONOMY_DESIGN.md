@@ -44,6 +44,7 @@ All values are in `REWARDS` / `ACHIEVEMENT_COINS` (`src/config/economy.ts`).
 | New lesson completed | 15, or 25 for a long lesson (≥ 24 answered exercises) | once per lesson (`lesson:<id>:first`) |
 | Finished lesson repeated | 5 | once per lesson per day, ≥ 5 answers |
 | Review / Endless practice / audio drill / audio flashcards | 5 · 8 · 10 · 12 · 15 for 5 · 10 · 15 · 20 · 30 fresh cards | a card earns once per day per kind of practice (reviews vs audio) |
+| Music Lab practice with a song | same tiers, counted in words and lines **answered correctly** | a word or line earns once per day in Music Lab (family `music`); playing a video earns nothing ([docs/MUSIC_LAB.md](docs/MUSIC_LAB.md)) |
 | Dialogue or story with questions | 5 + 1 per correct answer, max 12 | once per story per day, ≥ 2 answers |
 | Listening-only session played to the end ("audio marathon") | 5 | once per day; never per minute of playback |
 | Handwriting practice | 1 per character | once per character per day |
@@ -63,6 +64,9 @@ memory (and earns XP) but earns no further coins that day. The summary says so p
 ("Te karty przyniosły już dziś monety…"). Answers do not have to be correct: being wrong or
 using a hint never lowers a reward. Self-assessed exercises (speaking, shadowing, repeating,
 flashcards) count exactly like the others, so no microphone or speech recognition is needed.
+Music Lab is the exception: its coins count only correct answers, because a song's exercises
+can be repeated quickly and the material is the learner's own (a wrong answer still moves the
+review card, and the exercise comes back later in the session).
 
 ## Cosmetic catalogue
 
@@ -120,7 +124,7 @@ interface LedgerEntry {
   ref?: string;      // lesson, quest, achievement or item id
   items?: string[];  // items granted or bought
   refundOf?: string; // a refund's purchase
-  cards?: string[]; family?: 'review' | 'audio'; // practice rewards (anti-farming)
+  cards?: string[]; family?: 'review' | 'audio' | 'music'; // practice rewards (anti-farming)
 }
 ```
 

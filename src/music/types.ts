@@ -73,6 +73,11 @@ export interface Song {
    * hiragana (e.g. 今日 read こんにち when it is the greeting).
    */
   readings?: Record<string, Record<string, string>>;
+  /**
+   * Short Polish meanings of the song's words from the optional AI assistant (word key →
+   * meaning), shown labelled as AI. Saved to a word's own entry when the learner practises it.
+   */
+  glosses?: Record<string, string>;
   /** Public-domain sample: where the text comes from. */
   sample?: { id: string; source: string };
   progress: SongProgress;

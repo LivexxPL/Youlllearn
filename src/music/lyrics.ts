@@ -338,6 +338,8 @@ export function reconcileLines(previous: readonly LyricLine[], next: readonly Ly
     const old = pool.get(l.text)?.shift();
     if (old) {
       const keep: LyricLine = { ...l, id: old.id };
+      // The editor writes LRC without word tags: keep word times of a line whose start is unchanged.
+      if (old.words && !keep.words && old.start === keep.start) keep.words = old.words;
       if (old.pl !== undefined && keep.pl === undefined) {
         keep.pl = old.pl;
         if (old.plBy) keep.plBy = old.plBy;

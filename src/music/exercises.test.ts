@@ -147,6 +147,11 @@ describe('difficulty', () => {
     const course = getCourse('ja');
     const d = songDifficulty({ lang: 'ja', course, dict: courseDictionary(course), words: songWords(song, tokens), lineTexts: song.lines.map((l) => l.text), entries: new Map(), cards: new Map() });
     expect(d.kanji).toBeGreaterThanOrEqual(8);
+    // Words the course teaches in kana count too (遊ぶ = あそぶ, 山 = やま, 困る = こまる).
+    expect(d.levels.at(-1)!.cumulative).toBeGreaterThan(0.1);
+    const dict = courseDictionary(course);
+    expect(dict.lookup({ key: '遊ぶ', surface: '遊び', reading: 'あそぶ' })?.item.text).toBe('あそぶ');
+    expect(dict.lookup({ key: 'あそぶ', surface: 'あそぶ' })?.item.text).toBe('あそぶ');
     expect(shortLevel('A2 (JF) / N4')).toBe('N4');
     expect(shortLevel('A2+')).toBe('A2+');
   });

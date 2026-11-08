@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
 import { X, Zap } from 'lucide-react';
 import type { CourseId, Lesson } from '../../content/types';
 import { isGraded, type Exercise } from '../../engine/exercises';
@@ -31,6 +31,11 @@ export interface SessionPlayerProps {
   onFinish: (outcomes: SessionOutcomes, seconds: number) => Promise<SummaryData>;
   onExit: () => void;
   onProgress?: (index: number, total: number) => void;
+  /**
+   * Shown above the exercises for the whole session (Music Lab: the song's video, which
+   * must stay visible while it plays a line).
+   */
+  stage?: ReactNode;
 }
 
 function StepView(props: StepProps & { ex: Exercise }) {
@@ -67,7 +72,7 @@ function StepView(props: StepProps & { ex: Exercise }) {
   }
 }
 
-export function SessionPlayer({ courseId, steps, mode, lesson, showRomaji, startIndex = 0, nextLessonId, onFinish, onExit, onProgress }: SessionPlayerProps) {
+export function SessionPlayer({ courseId, steps, mode, lesson, showRomaji, startIndex = 0, nextLessonId, onFinish, onExit, onProgress, stage }: SessionPlayerProps) {
   const [queue, setQueue] = useState<Exercise[]>(steps);
   const [index, setIndex] = useState(Math.min(startIndex, steps.length - 1));
   const [result, setResult] = useState<ExerciseResult | null>(null);
@@ -196,6 +201,8 @@ export function SessionPlayer({ courseId, steps, mode, lesson, showRomaji, start
           <Zap size={14} /> {xp}
         </span>
       </header>
+
+      {stage && ex.kind !== 'summary' && <div className="session__stage">{stage}</div>}
 
       <div className="session__body page" key={ex.key}>
         {ex.kind === 'summary' ? (

@@ -36,7 +36,7 @@ export function entryReason(e: LedgerEntry): string {
       return title ? `${base}: ${title}` : base;
     }
     case 'practice':
-      return t('coins.why.practice', { count: e.cards?.length ?? 0 });
+      return e.family === 'music' ? t('coins.why.music', { count: e.cards?.length ?? 0 }) : t('coins.why.practice', { count: e.cards?.length ?? 0 });
     case 'story':
       return t('coins.why.story');
     case 'marathon':

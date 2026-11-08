@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
-import { ChevronDown, Clock, CloudUpload, Flame, Headphones, Play, RotateCcw, Shield, Sparkles, Timer, Trophy, Zap } from 'lucide-react';
+import { ChevronDown, Clock, CloudUpload, Flame, Headphones, Music4, Play, RotateCcw, Shield, Sparkles, Timer, Trophy, Zap } from 'lucide-react';
 import { useSettings } from '../../state/settings';
 import { getCourse, allCourses } from '../../content/registry';
 import { useAllStats, useCards, useCompleted, useDayKey, useToday } from '../../state/hooks';
@@ -296,6 +296,11 @@ export function HomeScreen() {
               <span className="subtle">{t('aq.subtitle')}</span>
             </button>
           </div>
+          <button type="button" className="card quick-card quick-card--wide" onClick={() => navigate('/music')} data-testid="home-music">
+            <Music4 size={22} />
+            <span className="card__title">{t('music.title')}</span>
+            <span className="subtle">{t('music.homeCard')}</span>
+          </button>
 
           {quests && <QuestList quests={quests.quests} allClaimed={quests.allClaimed} />}
         </div>

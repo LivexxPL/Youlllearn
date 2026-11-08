@@ -86,6 +86,7 @@ export interface CourseDictionary {
 }
 
 const dictionaries = new Map<CourseId, CourseDictionary>();
+const KANA_ONLY = /^[\p{Script=Hiragana}\p{Script=Katakana}ー]+$/u;
 
 function textForms(lang: CourseId, item: Item): string[] {
   const out: string[] = [];
@@ -114,7 +115,11 @@ export function courseDictionary(course: Course): CourseDictionary {
         const match: CourseMatch = { item, level };
         // The first (earliest) lesson that teaches a word wins.
         for (const form of textForms(course.id, item)) if (!byText.has(form)) byText.set(form, match);
-        if (course.id === 'ja' && item.reading && !byReading.has(item.reading)) byReading.set(item.reading, match);
+        if (course.id === 'ja') {
+          // The course often teaches a word in kana first (きょう, あそぶ): its spelling is a reading.
+          const plain = stripRuby(item.text);
+          for (const r of [item.reading, ...(KANA_ONLY.test(plain) ? [plain] : [])]) if (r && !byReading.has(r)) byReading.set(r, match);
+        }
       }
     }
   }
@@ -124,10 +129,10 @@ export function courseDictionary(course: Course): CourseDictionary {
       if (course.id === 'ja') {
         const hit = byText.get(word.key);
         if (hit) return hit;
-        // Kana-only spelling of a word the course writes with kanji (e.g. わたし / 私).
-        const kanaOnly = /^[\p{Script=Hiragana}\p{Script=Katakana}ー]+$/u.test(word.key);
-        if (kanaOnly) return byReading.get(word.key) ?? null;
-        return null;
+        // Same word in another spelling: the song's kana for a kanji word of the course
+        // (わたし / 私), or the song's kanji for a word the course teaches in kana (遊ぶ / あそぶ).
+        if (KANA_ONLY.test(word.key)) return byReading.get(word.key) ?? null;
+        return word.reading ? (byReading.get(word.reading) ?? null) : null;
       }
       const key = word.key;
       const exact = byText.get(key);

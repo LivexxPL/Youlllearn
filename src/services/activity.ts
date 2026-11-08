@@ -9,7 +9,7 @@
 import type { CourseId } from '../content/types';
 import { addStats } from './progress';
 
-export type ActivityKind = 'lesson' | 'review' | 'audio' | 'writing';
+export type ActivityKind = 'lesson' | 'review' | 'audio' | 'writing' | 'music';
 
 const IDLE_MS = 60_000;
 const FLUSH_EVERY = 5;

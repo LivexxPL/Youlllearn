@@ -23,6 +23,10 @@ export interface SummaryData {
   coins?: CoinLine[];
   /** Shown when practice earned no coins (cards already rewarded today). */
   coinNote?: string;
+  /** Other activities (Music Lab): own heading, a "new words" tile and the exit label. */
+  title?: string;
+  newLabel?: string;
+  exitLabel?: string;
 }
 
 export function SummaryStep({
@@ -45,7 +49,7 @@ export function SummaryStep({
       <Celebration fx={settings.cosmetics.fx} />
       <div className="summary__hero">
         <PartyPopper size={48} />
-        <h1>{mode === 'lesson' ? t('lesson.summaryTitle') : t('review.sessionDone')}</h1>
+        <h1>{summary?.title ?? (mode === 'lesson' ? t('lesson.summaryTitle') : t('review.sessionDone'))}</h1>
         {lesson && <p className="muted">{lesson.title}</p>}
       </div>
 
@@ -54,8 +58,8 @@ export function SummaryStep({
           <div className="grid-2">
             <StatTile icon={<Target size={20} />} value={formatPercent(summary.accuracy)} label={t('lesson.summaryAccuracy')} />
             <StatTile icon={<Zap size={20} />} value={`+${summary.xp}`} label={t('lesson.summaryXp')} />
-            {mode === 'lesson' ? (
-              <StatTile icon={<Sparkles size={20} />} value={summary.newItems} label={t('lesson.summaryNew')} />
+            {mode === 'lesson' || summary.newLabel ? (
+              <StatTile icon={<Sparkles size={20} />} value={summary.newItems} label={summary.newLabel ?? t('lesson.summaryNew')} />
             ) : (
               <StatTile icon={<RotateCcw size={20} />} value={summary.reviewed ?? 0} label={t('progress.reviews')} />
             )}
@@ -116,7 +120,7 @@ export function SummaryStep({
           </button>
         )}
         <button type="button" className={`btn btn--lg btn--block ${nextLessonId ? 'btn--outline' : 'btn--primary'}`} onClick={onExit} data-testid="summary-home">
-          <Home size={20} /> {t('lesson.backHome')}
+          <Home size={20} /> {summary?.exitLabel ?? t('lesson.backHome')}
         </button>
       </div>
     </div>

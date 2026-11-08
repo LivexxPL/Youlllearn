@@ -229,6 +229,14 @@ describe('editing', () => {
     ]);
   });
 
+  it('keeps word timing of unchanged lines when the text is edited as LRC', () => {
+    const before = parseLyrics('[00:01.00]<00:01.00>Alle <00:01.60>meine\n[00:04.00]schwimmen').lines;
+    const after = reconcileLines(before, parseLyrics(toLrc(before)).lines);
+    expect(after[0].words).toEqual(before[0].words);
+    const moved = reconcileLines(before, parseLyrics('[00:02.00]Alle meine\n[00:04.00]schwimmen').lines);
+    expect(moved[0].words).toBeUndefined();
+  });
+
   it('applies a pasted translation line by line', () => {
     const lines = parseLyrics('uno\ndos\ntres').lines;
     const r = applyTranslation(lines, 'jeden\n\ndwa');

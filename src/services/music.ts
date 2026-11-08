@@ -310,7 +310,15 @@ export async function recordMusicSession(
         continue;
       }
       if (isWordCardId(id)) {
-        const entry = await database.words.get(id.slice(2));
+        const entryId = id.slice(2);
+        let entry = await database.words.get(entryId);
+        // A word practised with the AI assistant's meaning gets its own entry now.
+        const key = entryId.slice(entryId.indexOf(':') + 1);
+        const gloss = song.glosses?.[key];
+        if (!entry && gloss) {
+          const line = song.lines.find((l) => l.text.includes(key)) ?? song.lines[0];
+          entry = { id: entryId, lang: song.lang, lemma: key, pl: gloss, plBy: 'ai', status: 'new', contexts: line ? [{ songId: song.id, lineId: line.id }] : [], createdAt: now, updatedAt: now };
+        }
         if (!entry || entry.status === 'known' || !entry.pl) continue;
         if (entry.status !== 'learning') await database.words.put({ ...entry, status: 'learning', updatedAt: now });
       }

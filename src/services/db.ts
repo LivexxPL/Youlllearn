@@ -329,9 +329,11 @@ export async function setMeta(key: string, value: unknown, database: PolyglotDB 
 
 /**
  * meta keys that describe this device rather than the learner: the Google account and sync
- * state, an unfinished lesson to resume, a dismissed install hint. They stay out of backup
+ * state, an unfinished lesson to resume, a dismissed install hint, the AI key. They stay out of backup
  * files and the cloud copy, and importing a backup keeps this device's values.
  */
 export function isDeviceMeta(key: string): boolean {
-  return key === CLOUD_META_KEY || key === 'installHintDismissed' || key === 'devAudit' || key.startsWith('resume:');
+  // 'ai': the learner's own Anthropic API key for Music Lab (src/music/ai.ts) — never leaves
+  // this device except in requests to Anthropic.
+  return key === CLOUD_META_KEY || key === 'installHintDismissed' || key === 'devAudit' || key === 'ai' || key.startsWith('resume:');
 }
