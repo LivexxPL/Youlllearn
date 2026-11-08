@@ -63,6 +63,7 @@ export const JA_NOTES = {
   nagara: note('ja.nagara', 'N4', 'ながら — „robiąc jednocześnie”', 'Czasownik w formie -masu bez ます + ながら: dwie czynności naraz (歌いながら — „śpiewając”).'),
   te: note('ja.te', 'N5', 'Forma -te', 'Forma -te łączy czynności po kolei („…i…”) i tworzy dalsze konstrukcje: 〜ている (trwanie), 〜てください (prośba), 〜てもいい (pozwolenie).'),
   ba: note('ja.ba', 'N4', 'Forma -ba — „jeśli”', 'Końcówka -ba tworzy warunek: 行けば — „jeśli pójdziesz”.'),
+  tewa: note('ja.tewa', 'N3', '〜ては — „raz po raz”, „jeśli…, to źle”', 'Forma -te + は: czynność, która się powtarza (泣いては — „raz po raz płacząc”), albo warunek z niepożądanym skutkiem (〜てはいけない — „nie wolno”).'),
   temo: note('ja.temo', 'N4', '〜ても — „nawet jeśli”', 'Forma -te + も: „nawet jeśli…, to…”.'),
   teiru: note('ja.teiru', 'N5', '〜ている — trwanie lub stan', '〜ている opisuje czynność w toku („teraz robię”) albo stan po zmianie („jestem żonaty”, „wiem”).'),
   teru: note('ja.teru', 'N4', '〜てる — skrót od 〜ている', 'W mowie i piosenkach い wypada: 見ている → 見てる („patrzę”). Znaczenie to samo.'),
@@ -107,7 +108,7 @@ export function japaneseNotes(tokens: readonly JaToken[]): FoundNote[] {
     if (t.ct.includes('文語')) add(JA_NOTES.classical, i);
     if (t.pos === '助詞') {
       const p1 = t.pos1;
-      if (t.s === 'は' && p1 === '係助詞') add(JA_NOTES.wa, i);
+      if (t.s === 'は' && p1 === '係助詞') add(prev && (prev.s === 'て' || prev.s === 'で') && prev.pos1 === '接続助詞' ? JA_NOTES.tewa : JA_NOTES.wa, i);
       else if (t.s === 'が' && p1 === '格助詞') add(JA_NOTES.ga, i);
       else if (t.s === 'が' && p1 === '接続助詞') add(JA_NOTES.gaBut, i);
       else if (t.s === 'を') add(JA_NOTES.wo, i);

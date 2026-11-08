@@ -17,6 +17,7 @@ import {
 } from './ai';
 import type { Song } from './types';
 import { isDeviceMeta } from '../services/db';
+import { redact } from '../services/diagnostics';
 
 const song: Song = {
   id: 'song-1',
@@ -46,8 +47,9 @@ describe('AI assistant (bring your own key)', () => {
     expect(maskKey(config.apiKey)).toBe('sk-ant-…wxyz');
   });
 
-  it('keeps the key on this device only', () => {
+  it('keeps the key on this device only and out of diagnostics', () => {
     expect(isDeviceMeta('ai')).toBe(true);
+    expect(redact(`AuthenticationError with ${config.apiKey}`)).toBe('AuthenticationError with sk-ant-[redacted]');
   });
 
   it('asks only for the given lines and words, in Polish, without adding lyrics', () => {

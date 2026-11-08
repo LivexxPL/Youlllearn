@@ -3695,20 +3695,33 @@ button.item-card:active {
   gap: var(--sp-4);
 }
 
+.music-song {
+  overflow-x: clip;
+}
+
 .music-song__media {
   display: flex;
   flex-direction: column;
-  gap: var(--sp-3);
-  /* The video stays in view while the lyrics scroll under it. */
+  gap: var(--sp-2);
+  /* The video stays in view while the lyrics scroll under it: a band across the whole width
+     (its edges outside the content), with the content aligned to the page. */
   position: sticky;
   top: 0;
   z-index: 5;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  padding: var(--sp-2) calc(50vw - 50%);
   background: var(--bg);
-  padding-bottom: var(--sp-2);
+  box-shadow: 0 8px 10px -10px rgb(0 0 0 / 0.35);
 }
 
 .music-song__media:has(.music-song__novideo) {
   position: static;
+  width: auto;
+  margin-left: 0;
+  padding: 0;
+  background: none;
+  box-shadow: none;
 }
 
 .music-song__novideo {
@@ -3744,6 +3757,17 @@ button.item-card:active {
 
 .music-controls .segmented {
   flex: 0 1 auto;
+}
+
+@media (max-width: 520px) {
+  .music-controls__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
 }
 
 .music-view {
@@ -4243,8 +4267,14 @@ button.item-card:active {
     align-items: start;
   }
 
+  /* Two columns: the lyrics scroll beside the video, not under it. */
   .music-song__media {
     top: var(--sp-4);
+    width: auto;
+    margin-left: 0;
+    padding: 0;
+    background: none;
+    box-shadow: none;
   }
 
   .music-song.page {

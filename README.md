@@ -26,6 +26,12 @@ an Android app (Capacitor). No account, no ads, no paid APIs: progress stays on 
   <img src="docs/screenshots/themes-mint-dark.jpg" width="200" alt="Home screen in the mint theme, dark mode">
 </p>
 
+<p>
+  <img src="docs/screenshots/music-japanese.jpg" width="200" alt="Music Lab: a Japanese song with furigana, hiragana reading line, Hepburn romaji and Polish translation">
+  <img src="docs/screenshots/music-word.jpg" width="200" alt="Music Lab: a word from the song with its reading, form and course meaning, ready to add to the reviews">
+  <img src="docs/screenshots/music-line.jpg" width="200" alt="Music Lab: a lyric line with its translation and grammar notes by level">
+</p>
+
 ## Status
 
 | Area | State |

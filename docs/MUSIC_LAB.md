@@ -106,9 +106,9 @@ are cleared on reset and on import. Changes to them never trigger a cloud upload
 
 ### Grammar notes
 
-`src/music/grammar.ts` holds 44 Japanese and 19 Spanish/German explanations written for the app.
+`src/music/grammar.ts` holds 45 Japanese and 19 Spanish/German explanations written for the app.
 Japanese rules read parts of speech and conjugations (particles は/が/を/に/で/へ/と/も/の/か,
-sentence-final particles, から/まで/けど/のに/ながら, te-form, 〜ている/〜てる, 〜てしまう/〜ちゃう,
+sentence-final particles, から/まで/けど/のに/ながら, te-form, 〜ては, 〜ても, 〜ている/〜てる, 〜てしまう/〜ちゃう,
 〜ます/〜ましょう, past, 〜たら, negation including ぬ/ん and 〜なきゃ, 〜たい, volitional, copula,
 〜んだ, causative, passive/potential, i- and na-adjectives, pronouns typical of songs, って, なんて,
 classical forms). Spanish and German rules match patterns (gustar, ir a, estar + gerundio, tener

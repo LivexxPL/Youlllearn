@@ -58,3 +58,25 @@ test('readme screenshots: colour themes', async ({ page }) => {
     await shot(`themes-${palette}-${scheme}`);
   }
 });
+
+test('readme screenshots: Music Lab', async ({ page }) => {
+  test.setTimeout(120_000);
+  const shot = (name: string) => page.screenshot({ path: `docs/screenshots/${name}.jpg`, type: 'jpeg', quality: 82 });
+  await onboard(page, { courses: ['ja'] });
+  await page.goto('./#/music');
+  await page.getByTestId('sample-donguri').click();
+  await page.locator('[data-testid="lyric-l2"] ruby').first().waitFor({ timeout: 60_000 });
+  await page.getByRole('switch', { name: 'Hiragana' }).click();
+  await page.getByTestId('lyrics').evaluate((el) => window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY - 190));
+  await page.waitForTimeout(400);
+  await shot('music-japanese');
+  await page.getByTestId('lyric-l4').getByRole('button', { name: /遊/ }).click();
+  await page.getByTestId('word-sheet').waitFor();
+  await page.waitForTimeout(400);
+  await shot('music-word');
+  await page.keyboard.press('Escape');
+  await page.getByTestId('line-more-l8').click();
+  await page.getByTestId('line-sheet').waitFor();
+  await page.waitForTimeout(400);
+  await shot('music-line');
+});

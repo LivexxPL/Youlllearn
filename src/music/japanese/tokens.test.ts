@@ -99,7 +99,9 @@ describe('Japanese analysis (kuromoji + IPADIC)', () => {
     expect(ids('君のことを見てる')).toEqual(expect.arrayContaining(['ja.no', 'ja.wo', 'ja.teru', 'ja.pronoun']));
     expect(ids('忘れちゃうなんて')).toEqual(expect.arrayContaining(['ja.shimau', 'ja.nante']));
     expect(ids('行かなきゃいけないんだ')).toEqual(expect.arrayContaining(['ja.nakya', 'ja.nda']));
-    expect(ids('泣いてはどじょうを 困らせた')).toEqual(expect.arrayContaining(['ja.causative', 'ja.ta', 'ja.wo']));
+    expect(ids('泣いてはどじょうを 困らせた')).toEqual(expect.arrayContaining(['ja.causative', 'ja.ta', 'ja.wo', 'ja.tewa']));
+    // は after the te-form is not the topic marker here.
+    expect(ids('泣いてはどじょうを 困らせた')).not.toContain('ja.wa');
     expect(ids('会いたい')).toContain('ja.tai');
     const found = japaneseNotes(analyse('君が好き'));
     expect(found.find((n) => n.note.id === 'ja.ga')?.tokens).toEqual([1]);

@@ -255,9 +255,11 @@ function SongView({ data }: { data: ReturnType<typeof useSongData> }) {
                   aria-pressed={Boolean(loopLine)}
                   disabled={!canPlayVideo || (!loopLine && active < 0)}
                   onClick={() => toggleLoop(loopLine ?? song.lines[active].id)}
+                  aria-label={t('music.controls.loop')}
+                  title={t('music.controls.loop')}
                   data-testid="loop-toggle"
                 >
-                  <Repeat size={16} /> {t('music.controls.loop')}
+                  <Repeat size={16} /> <span className="music-controls__label">{t('music.controls.loop')}</span>
                 </button>
               )}
               {!timed && (

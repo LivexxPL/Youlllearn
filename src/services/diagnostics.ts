@@ -10,6 +10,8 @@ import { storagePersisted } from './storage';
 export function redact(text: string): string {
   return text
     .replace(/ya29\.[\w.-]+/g, 'ya29.[redacted]')
+    // Anthropic API keys (Music Lab's optional AI assistant).
+    .replace(/sk-ant-[\w-]+/g, 'sk-ant-[redacted]')
     .replace(/(Bearer\s+)[\w.~+/-]+=*/gi, '$1[redacted]')
     .replace(/((?:access_token|id_token|refresh_token|token)["']?\s*[=:]\s*["']?)[\w.~+/-]+/gi, '$1[redacted]');
 }

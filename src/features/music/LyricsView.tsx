@@ -13,6 +13,38 @@ import type { LyricLine, Song, WordStatus } from '../../music/types';
 import { t } from '../../i18n';
 import { prefersReducedMotion } from '../../services/platform';
 
+/**
+ * The part of the screen where lyrics can be read: below the video when it is pinned above
+ * them (phones) and above the bottom navigation.
+ */
+function visibleBand(el: HTMLElement): { top: number; bottom: number } {
+  let top = 0;
+  let bottom = window.innerHeight;
+  const media = document.querySelector('.music-song__media');
+  if (media) {
+    const m = media.getBoundingClientRect();
+    const r = el.getBoundingClientRect();
+    const overlaps = m.left < r.right && m.right > r.left;
+    if (overlaps) top = Math.max(0, m.bottom);
+  }
+  const nav = document.querySelector('.nav');
+  if (nav) {
+    const n = nav.getBoundingClientRect();
+    if (n.top > window.innerHeight / 2) bottom = n.top;
+  }
+  return { top, bottom };
+}
+
+/** Scrolls so that the element sits in the middle of the readable band, unless it already is in it. */
+export function bringIntoView(el: HTMLElement) {
+  const r = el.getBoundingClientRect();
+  const band = visibleBand(el);
+  const margin = Math.min(72, (band.bottom - band.top) / 5);
+  if (r.top >= band.top + margin && r.bottom <= band.bottom - margin) return;
+  const target = band.top + Math.max(0, (band.bottom - band.top - r.height) / 2);
+  window.scrollBy({ top: r.top - target, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
+}
+
 export interface LyricsDisplay {
   furigana: boolean;
   reading: boolean;
@@ -109,14 +141,7 @@ function WordText({ line, lang, statusOf, onWord }: Pick<LineProps, 'line' | 'la
 const LineView = memo(function LineView({ line, index, lang, tokens, display, active, timed, statusOf, onWord, onLine, onSeek }: LineProps) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    if (!active || !ref.current) return;
-    const el = ref.current;
-    const rect = el.getBoundingClientRect();
-    const margin = window.innerHeight * 0.25;
-    // Follow the song only when the line leaves the comfortable middle of the screen.
-    if (rect.top < margin || rect.bottom > window.innerHeight - margin) {
-      el.scrollIntoView({ block: 'center', behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
-    }
+    if (active && ref.current) bringIntoView(ref.current);
   }, [active]);
   const ja = lang === 'ja' && tokens?.length;
   return (
@@ -202,8 +227,12 @@ export function KaraokeView({
   const prev = active > 0 ? song.lines[active - 1] : undefined;
   const next = song.lines[active + 1] ?? (active < 0 ? song.lines.find((l) => l.start !== undefined) : undefined);
   const lineTokens = line ? tokens?.[line.id] : undefined;
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (ref.current) bringIntoView(ref.current);
+  }, []);
   return (
-    <div className="karaoke" data-testid="karaoke" aria-live="off">
+    <div className="karaoke" data-testid="karaoke" aria-live="off" ref={ref}>
       <p className="karaoke__side" lang={song.lang}>
         {prev?.text ?? ' '}
       </p>
