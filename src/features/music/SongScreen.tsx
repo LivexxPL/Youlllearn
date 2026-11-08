@@ -26,6 +26,7 @@ import { navigate } from '../../app/router';
 import { t } from '../../i18n';
 import { EmptyState, PageHeader, Sheet, Segmented, Switch, ProgressBar } from '../../components/ui';
 import { activity } from '../../services/activity';
+import { screenShortcutAllowed } from '../../app/keys';
 import { useSettings } from '../../state/settings';
 import { useAudioStatus } from '../../state/hooks';
 import { getCourse } from '../../content/registry';
@@ -197,6 +198,35 @@ function SongView({ data }: { data: ReturnType<typeof useSongData> }) {
     activity.ping();
     setLoopLine((cur) => (cur === lineId ? null : lineId));
   }, []);
+
+  // Keyboard (desktop): Space play/pause, ←/→ previous/next line, L loop the current line.
+  const activeRef = useRef(active);
+  useEffect(() => {
+    activeRef.current = active;
+  });
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const player = playerRef.current;
+      if (!player?.ready || !screenShortcutAllowed(e) || e.ctrlKey || e.metaKey || e.altKey) return;
+      const s = songRef.current;
+      if (e.key === ' ' && !(e.target instanceof HTMLButtonElement)) {
+        e.preventDefault();
+        if (player.playing) player.pause();
+        else player.play();
+      } else if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        const timedLines = s.lines.map((l, i) => ({ l, i })).filter((x) => x.l.start !== undefined);
+        if (!timedLines.length) return;
+        e.preventDefault();
+        const cur = activeRef.current;
+        const next = e.key === 'ArrowRight' ? timedLines.find((x) => x.i > cur) : [...timedLines].reverse().find((x) => x.i < cur);
+        if (next) playLine(next.l.id);
+      } else if ((e.key === 'l' || e.key === 'L') && activeRef.current >= 0) {
+        toggleLoop(s.lines[activeRef.current].id);
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [playLine, toggleLoop]);
 
   const display = useMemo<LyricsDisplay>(() => ({ furigana: view.furigana, reading: view.reading, romaji: view.romaji, translation: view.translation }), [view.furigana, view.reading, view.romaji, view.translation]);
   const setOption = (k: keyof typeof view, v: boolean) => {

@@ -1187,7 +1187,7 @@ export const pl = {
   'music.song.edit': 'Edytuj',
   'music.song.sections': 'Części piosenki',
   'music.song.wordTiming': 'Plik z tekstem ma czasy poszczególnych słów — w trybie karaoke podświetlają się słowa.',
-  'music.song.footer': 'Stuknij słowo, żeby zobaczyć znaczenie i dodać je do powtórek; „…” przy wersie pokazuje tłumaczenie i gramatykę.',
+  'music.song.footer': 'Stuknij słowo, żeby zobaczyć znaczenie i dodać je do powtórek; „…” przy wersie pokazuje tłumaczenie i gramatykę. Na klawiaturze: spacja — odtwarzanie, strzałki — poprzedni i następny wers, L — zapętlenie.',
   'music.song.delete': 'Usuń piosenkę',
   'music.song.deleteTitle': 'Usunąć piosenkę?',
   'music.song.deleteBody': 'Tekst, tłumaczenia i postęp tej piosenki znikną (także z kopii na Dysku Google). Słówka dodane do powtórek zostaną.',

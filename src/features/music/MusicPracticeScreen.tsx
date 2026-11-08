@@ -158,6 +158,10 @@ export default function MusicPracticeScreen({ id, query }: { id: string; query: 
         mode="review"
         showRomaji={showRomaji}
         stage={stage}
+        // A line still playing from the previous exercise stops when the next one appears.
+        onProgress={() => {
+          if (controllerRef.current.playing) controllerRef.current.pause();
+        }}
         onFinish={onFinish}
         onExit={() => navigate(`/music/song/${song.id}`, { replace: true })}
       />

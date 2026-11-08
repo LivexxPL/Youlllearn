@@ -101,6 +101,10 @@ test.describe('Music Lab', () => {
     await page.getByRole('button', { name: '0.75×' }).click();
     await expect(page.getByRole('button', { name: '0.75×' })).toHaveAttribute('aria-pressed', 'true');
 
+    // Keyboard: → plays the next line.
+    await page.keyboard.press('ArrowRight');
+    await expect(page.getByTestId('lyric-l6')).toHaveAttribute('aria-current', 'true');
+
     // Karaoke: the line being sung, big, with the translation.
     await page.getByRole('switch', { name: 'Karaoke' }).click();
     await setVideoTime(page, 21.5);
