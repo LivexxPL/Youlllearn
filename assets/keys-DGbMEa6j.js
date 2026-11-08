@@ -1,0 +1,1 @@
+function e(e){return typeof HTMLElement>`u`||!(e instanceof HTMLElement)?!1:e instanceof HTMLInputElement||e instanceof HTMLTextAreaElement||e.isContentEditable}function t(){return typeof document<`u`&&document.querySelector(`[aria-modal="true"]`)!==null}function n(n){return!n.isComposing&&!e(n.target)&&!t()}export{t as n,n as r,e as t};
