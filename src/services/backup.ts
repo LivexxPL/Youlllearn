@@ -5,12 +5,12 @@
  */
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 import { Share } from '@capacitor/share';
-import { db, isDeviceMeta, TABLES, type MetaRecord, type PolyglotDB, type TableName } from './db';
+import { db, DEVICE_TABLES, isDeviceMeta, TABLES, type MetaRecord, type PolyglotDB, type TableName } from './db';
 import { appVersion, isNative } from './platform';
 import { dayKey } from '../engine/dates';
 
-/** 2: coin ledger added. Files of format 1 still import (without coins). */
-export const BACKUP_FORMAT = 2;
+/** 2: coin ledger added; 3: Music Lab (songs, playlists, words). Older files still import. */
+export const BACKUP_FORMAT = 3;
 
 export type BackupData = Record<TableName, unknown[]>;
 
@@ -64,12 +64,27 @@ export function validateBackup(raw: unknown): BackupFile {
   if (ledger.some(badTx)) throw new BackupError('uszkodzona historia monet');
   const meta = (f.data.meta ?? []) as { key?: unknown }[];
   if (meta.some((m) => typeof m.key !== 'string')) throw new BackupError('uszkodzone dane pomocnicze');
+  const songs = (f.data.songs ?? []) as { id?: unknown; lang?: unknown; lines?: unknown; updatedAt?: unknown }[];
+  if (songs.some((s) => typeof s.id !== 'string' || typeof s.lang !== 'string' || !Array.isArray(s.lines) || typeof s.updatedAt !== 'number')) {
+    throw new BackupError('uszkodzone piosenki (Music Lab)');
+  }
+  const playlists = (f.data.playlists ?? []) as { id?: unknown; songIds?: unknown }[];
+  if (playlists.some((p) => typeof p.id !== 'string' || !Array.isArray(p.songIds))) throw new BackupError('uszkodzone playlisty (Music Lab)');
+  const words = (f.data.words ?? []) as { id?: unknown; lang?: unknown; status?: unknown }[];
+  if (words.some((w) => typeof w.id !== 'string' || typeof w.lang !== 'string' || !['new', 'known', 'learning'].includes(w.status as string))) {
+    throw new BackupError('uszkodzone słówka z piosenek');
+  }
   return f as BackupFile;
 }
 
-/** Replaces all learner data with the file's; this device's own meta records are kept. */
+/**
+ * Replaces all learner data with the file's; this device's own meta records are kept. The
+ * device-only Music Lab tables (analysis cache, playback positions) belong to the replaced
+ * songs, so they are cleared.
+ */
 export async function importData(file: BackupFile, database: PolyglotDB = db): Promise<void> {
-  await database.transaction('rw', TABLES.map((t) => database.table(t)), async () => {
+  await database.transaction('rw', [...TABLES, ...DEVICE_TABLES].map((t) => database.table(t)), async () => {
+    for (const t of DEVICE_TABLES) await database.table(t).clear();
     const deviceMeta = (await database.meta.toArray()).filter((m) => isDeviceMeta(m.key));
     for (const t of TABLES) {
       await database.table(t).clear();
@@ -81,8 +96,9 @@ export async function importData(file: BackupFile, database: PolyglotDB = db): P
 }
 
 export async function resetAll(database: PolyglotDB = db): Promise<void> {
-  await database.transaction('rw', TABLES.map((t) => database.table(t)), async () => {
-    for (const t of TABLES) await database.table(t).clear();
+  const all = [...TABLES, ...DEVICE_TABLES];
+  await database.transaction('rw', all.map((t) => database.table(t)), async () => {
+    for (const t of all) await database.table(t).clear();
   });
 }
 

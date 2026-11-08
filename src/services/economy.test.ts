@@ -383,8 +383,11 @@ describe('migration and imports', () => {
     v1.close();
 
     const d = createDb(name);
-    expect(d.verno).toBe(2);
+    expect(d.verno).toBe(3);
     expect(await d.lessonProgress.count()).toBe(3);
+    // Later versions only add tables (coins in v2, Music Lab in v3).
+    expect(await d.songs.count()).toBe(0);
+    expect(await d.words.count()).toBe(0);
     expect((await d.dailyStats.get('2026-10-01'))?.xp).toBe(300);
     const granted = await reconcileRewards(d, NOON);
     expect(granted.find((e) => e.id === 'migration:v1')?.amount).toBe(3 * REWARDS.migration.perLesson);

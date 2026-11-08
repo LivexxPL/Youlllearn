@@ -106,7 +106,9 @@ export function buildReviewSession(o: ReviewOptions): Exercise[] {
 
   // Distractors come from lessons the learner has reached.
   const maxLesson = Math.max(0, ...courseCards.map((c) => course.lessonIndex.get(course.lessonOf.get(c.id) ?? '') ?? 0));
-  const pool = course.lessons.slice(0, maxLesson + 1).flatMap((l) => l.items);
+  // Words added from songs (items outside the lessons) are reviewed too and serve as distractors.
+  const extra = [...course.items.values()].filter((i) => !course.lessonOf.has(i.id));
+  const pool = [...course.lessons.slice(0, maxLesson + 1).flatMap((l) => l.items), ...extra];
   const sentencePool = course.lessons.slice(0, maxLesson + 1).flatMap((l) => l.sentences);
   const ctx: GenContext = { course, rng, pool, sentencePool, showRomaji: o.showRomaji };
 

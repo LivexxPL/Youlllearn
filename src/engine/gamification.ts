@@ -294,6 +294,8 @@ export interface AggregateStats {
   beginnerCourseDone: boolean;
   /** Coins earned in total (src/services/economy.ts). */
   coinsEarned: number;
+  /** Music Lab practice (src/services/music.ts): sessions, songs, lines, own words, mastery. */
+  music: { sessions: number; songs: number; lines: number; words: number; mastered: boolean };
 }
 
 export interface AchievementDef {
@@ -336,6 +338,12 @@ export const ACHIEVEMENTS: AchievementDef[] = [
   { id: 'course-es', icon: 'medal', check: (s) => s.lessonsPerCourse.es >= s.courseLessonTotals.es && s.courseLessonTotals.es > 0 },
   { id: 'course-de', icon: 'medal', check: (s) => s.lessonsPerCourse.de >= s.courseLessonTotals.de && s.courseLessonTotals.de > 0 },
   { id: 'course-ja', icon: 'medal', check: (s) => s.lessonsPerCourse.ja >= s.courseLessonTotals.ja && s.courseLessonTotals.ja > 0 },
+  // Music Lab: earned by exercises with songs, never by playing videos.
+  { id: 'music-first', icon: 'music', check: (s) => s.music.sessions >= 1 },
+  { id: 'music-lines-50', icon: 'mic', check: (s) => s.music.lines >= 50 },
+  { id: 'music-words-25', icon: 'gem', check: (s) => s.music.words >= 25 },
+  { id: 'music-songs-5', icon: 'disc', check: (s) => s.music.songs >= 5 },
+  { id: 'music-mastered', icon: 'star', check: (s) => s.music.mastered },
 ];
 
 export function newlyUnlocked(stats: AggregateStats, unlocked: ReadonlySet<string>): AchievementDef[] {

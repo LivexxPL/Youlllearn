@@ -9,6 +9,8 @@ import type { Card } from '../engine/srs';
 import type { PaletteId } from '../config/palettes';
 import { CLOUD_META_KEY } from '../config/cloud';
 import type { CurrencyId } from '../config/economy';
+import type { Playlist, Song, WordEntry } from '../music/types';
+import type { JaToken } from '../music/japanese/tokens';
 
 export type ThemePref = 'system' | 'light' | 'dark';
 export type MotionPref = 'system' | 'reduce' | 'full';
@@ -162,7 +164,7 @@ export interface LedgerEntry {
   refundOf?: string;
   /** Practice rewards: the cards that earned coins and the kind of practice (anti-farming). */
   cards?: string[];
-  family?: 'review' | 'audio';
+  family?: 'review' | 'audio' | 'music';
 }
 
 export type StrokePoint = [x: number, y: number, pressure: number];
@@ -191,6 +193,26 @@ export interface MetaRecord {
   value: unknown;
 }
 
+/**
+ * Device-only cache of a song's Japanese analysis (derived from the lyrics; recomputed when
+ * the lyrics change). Not synchronised or backed up.
+ */
+export interface SongCacheRecord {
+  id: string;
+  /** Fingerprint of the line texts the analysis belongs to. */
+  hash: string;
+  /** Analyser version (re-analyse after changes to the token format). */
+  v: number;
+  lines: Record<string, JaToken[]>;
+}
+
+/** Device-only playback state of a song (resume position, last opened). */
+export interface SongStateRecord {
+  id: string;
+  position: number;
+  lastOpenedAt: number;
+}
+
 export type PolyglotDB = Dexie & {
   settings: EntityTable<Settings, 'id'>;
   cards: EntityTable<Card, 'id'>;
@@ -201,6 +223,11 @@ export type PolyglotDB = Dexie & {
   drawings: EntityTable<Drawing, 'id'>;
   meta: EntityTable<MetaRecord, 'key'>;
   ledger: EntityTable<LedgerEntry, 'id'>;
+  songs: EntityTable<Song, 'id'>;
+  playlists: EntityTable<Playlist, 'id'>;
+  words: EntityTable<WordEntry, 'id'>;
+  songCache: EntityTable<SongCacheRecord, 'id'>;
+  songState: EntityTable<SongStateRecord, 'id'>;
 };
 
 export const DB_NAME = 'polyglot-quest';
@@ -221,6 +248,15 @@ export function createDb(name = DB_NAME): PolyglotDB {
   // by services/economy.ts (reconcileRewards).
   db.version(2).stores({
     ledger: 'id, date, type',
+  });
+  // v3: Music Lab — songs with the learner's lyrics, playlists, words met in songs; and two
+  // device-only tables (analysis cache, playback position) that are never synchronised.
+  db.version(3).stores({
+    songs: 'id, updatedAt, lang',
+    playlists: 'id, updatedAt',
+    words: 'id, lang, status, courseItemId',
+    songCache: 'id',
+    songState: 'id, lastOpenedAt',
   });
   return db;
 }
@@ -253,8 +289,14 @@ export const TABLES = [
   'drawings',
   'meta',
   'ledger',
+  'songs',
+  'playlists',
+  'words',
 ] as const;
 export type TableName = (typeof TABLES)[number];
+
+/** Tables that describe this device only: not in backups or the cloud copy, cleared on reset. */
+export const DEVICE_TABLES = ['songCache', 'songState'] as const;
 
 export function emptyDailyStats(date: string): DailyStats {
   return {

@@ -21,7 +21,7 @@ import { isActiveDay } from '../engine/gamification';
 import { CURRENCY, REWARDS, achievementCoins, lessonFirstCoins, practiceCoins, storyCoins } from '../config/economy';
 import { COSMETICS, bundlePrice, getBundle, getItem, rewardItemsOf } from '../config/cosmetics';
 
-export type PracticeFamily = 'review' | 'audio';
+export type PracticeFamily = 'review' | 'audio' | 'music';
 
 /** A purchase can be undone for this long (a mistaken tap). */
 export const REFUND_WINDOW_MS = 2 * 60_000;

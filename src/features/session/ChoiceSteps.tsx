@@ -5,7 +5,7 @@ import type { StepProps, ExerciseOf } from './types';
 import { ActionBar } from './ActionBar';
 import { t } from '../../i18n';
 import { TargetText } from '../../components/TargetText';
-import { AudioButton, useSpeaker } from '../../components/AudioButton';
+import { AudioButton, useSpeaker, useSpeechOverride } from '../../components/AudioButton';
 import { useSettings } from '../../state/settings';
 import { useAudioStatus } from '../../state/hooks';
 import { getCourse } from '../../content/registry';
@@ -35,6 +35,8 @@ function promptKey(mode: ExerciseOf<'choice'>['mode']) {
       return 'ex.readSentence' as const;
     case 'listen-sentence':
       return 'ex.listenPhrase' as const;
+    case 'reading':
+      return 'ex.chooseReading' as const;
   }
 }
 
@@ -129,7 +131,8 @@ export function ChoiceStep({ ex, courseId, locked, showRomaji, onResult }: StepP
   const [hintRomaji, setHintRomaji] = useState(false);
   const [usedHint, setUsedHint] = useState(false);
   const status = useAudioStatus(getCourse(courseId).speechLang);
-  const audioOk = status !== 'unsupported' && status !== 'missing';
+  const override = useSpeechOverride();
+  const audioOk = Boolean(ex.prompt.audio && override?.handles(ex.prompt.audio)) || (status !== 'unsupported' && status !== 'missing');
   const listening = ex.prompt.hideText;
   // Without a voice, listening prompts fall back to showing the text.
   const showText = !listening || !audioOk;
@@ -238,6 +241,11 @@ export function AuthoredStep({ ex, courseId, locked, onResult }: StepProps<Exerc
       ) : (
         <div className="prompt">
           <div className="prompt__text prompt__text--pl">{a.prompt}</div>
+          {a.target && a.showTarget && (
+            <div className="prompt__text">
+              <TargetText text={a.target} courseId={courseId} />
+            </div>
+          )}
           {a.target && <AudioButton courseId={courseId} content={a.target} size="m" />}
         </div>
       )}

@@ -35,7 +35,7 @@ export type Exercise =
   | (BaseExercise & { kind: 'examples'; sentences: Sentence[] })
   | (BaseExercise & {
       kind: 'choice';
-      mode: 'meaning' | 'target' | 'listen' | 'listen-target' | 'kana-sound' | 'kana-listen' | 'kana-from-romaji' | 'read-sentence' | 'listen-sentence';
+      mode: 'meaning' | 'target' | 'listen' | 'listen-target' | 'kana-sound' | 'kana-listen' | 'kana-from-romaji' | 'read-sentence' | 'listen-sentence' | 'reading';
       prompt: { text?: string; lang?: CourseId | 'pl'; audio?: string; hideText?: boolean; romaji?: string };
       options: ChoiceOption[];
       correct: number;

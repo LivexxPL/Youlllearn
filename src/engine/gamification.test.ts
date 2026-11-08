@@ -156,6 +156,7 @@ describe('achievements', () => {
     marathon: false,
     beginnerCourseDone: false,
     coinsEarned: 0,
+    music: { sessions: 0, songs: 0, lines: 0, words: 0, mastered: false },
   };
 
   it('unlock when conditions are met and only once', () => {
@@ -179,6 +180,14 @@ describe('achievements', () => {
     const ids = newlyUnlocked({ ...base, marathon: true, beginnerCourseDone: true, coinsEarned: 100 }, new Set()).map((a) => a.id);
     expect(ids).toEqual(expect.arrayContaining(['marathon', 'beginner-course', 'coins-100']));
     expect(newlyUnlocked({ ...base, coinsEarned: 99 }, new Set()).map((a) => a.id)).not.toContain('coins-100');
+  });
+
+  it('reward Music Lab practice by what was learnt, not by playing videos', () => {
+    const music = (m: Partial<(typeof base)['music']>) => ({ ...base, music: { ...base.music, ...m } });
+    expect(newlyUnlocked(music({ sessions: 1 }), new Set()).map((a) => a.id)).toEqual(['music-first']);
+    const ids = newlyUnlocked(music({ sessions: 9, songs: 5, lines: 50, words: 25, mastered: true }), new Set()).map((a) => a.id);
+    expect(ids).toEqual(expect.arrayContaining(['music-first', 'music-songs-5', 'music-lines-50', 'music-words-25', 'music-mastered']));
+    expect(newlyUnlocked(music({ sessions: 3, songs: 4, lines: 49, words: 24 }), new Set()).map((a) => a.id)).toEqual(['music-first']);
   });
 
   it('have unique ids and an i18n entry', async () => {

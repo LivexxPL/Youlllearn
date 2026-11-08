@@ -137,6 +137,8 @@ export type AuthoredExercise =
       target?: string;
       /** Language of the options; default: target language (Japanese: detected from kana). */
       optionsLang?: 'pl' | 'target';
+      /** Show the target line as text (not only as audio), e.g. a song line to analyse. */
+      showTarget?: boolean;
       options: string[];
       answer: number;
       explanation: string;

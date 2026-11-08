@@ -18,8 +18,13 @@
  * - ledger: union of coin transactions by id. Ids name the event (a lesson's first
  *   completion, a quest of a day, the n-th purchase of an item), so the same reward or
  *   purchase made on two devices is counted once.
+ * - songs: the more recently edited version (a deletion is an edit: the song stays as an
+ *   empty record so it does not come back), with the practice results of both combined.
+ * - playlists: the more recently edited version (deletions likewise).
+ * - words: the more recently changed entry, with the song lines of both.
  */
 import { isDeviceMeta, type AchievementRecord, type DailyStats, type Drawing, type LedgerEntry, type LessonProgress, type MetaRecord, type Settings, type TableName } from '../db';
+import type { LineStats, Playlist, Song, SongProgress, WordEntry } from '../../music/types';
 import type { BackupData } from '../backup';
 import type { Card } from '../../engine/srs';
 import type { StreakState } from '../../engine/gamification';
@@ -65,6 +70,41 @@ const mergeDay: Picker<DailyStats> = (l, r) => {
 const earlierUnlock: Picker<AchievementRecord> = (l, r) => (r.unlockedAt < l.unlockedAt ? r : l);
 
 const newerDrawing: Picker<Drawing> = (l, r) => (r.updatedAt > l.updatedAt ? r : l);
+
+function mergeLineStats(l: LineStats | undefined, r: LineStats | undefined): LineStats {
+  if (!l) return r!;
+  if (!r) return l;
+  return { seen: Math.max(l.seen, r.seen), correct: Math.max(l.correct, r.correct), last: Math.max(l.last, r.last) };
+}
+
+export function mergeSongProgress(l: SongProgress | undefined, r: SongProgress | undefined): SongProgress {
+  const a = l ?? { lines: {}, sessions: 0 };
+  const b = r ?? { lines: {}, sessions: 0 };
+  const lines: Record<string, LineStats> = {};
+  for (const id of new Set([...Object.keys(a.lines), ...Object.keys(b.lines)])) lines[id] = mergeLineStats(a.lines[id], b.lines[id]);
+  const last = Math.max(a.lastPracticedAt ?? 0, b.lastPracticedAt ?? 0);
+  return { lines, sessions: Math.max(a.sessions, b.sessions), ...(last ? { lastPracticedAt: last } : {}) };
+}
+
+export const mergeSong: Picker<Song> = (l, r) => {
+  const newer = r.updatedAt > l.updatedAt ? r : l;
+  if (newer.deletedAt) return newer;
+  return { ...newer, progress: mergeSongProgress(l.progress, r.progress) };
+};
+
+const newerPlaylist: Picker<Playlist> = (l, r) => (r.updatedAt > l.updatedAt ? r : l);
+
+export const mergeWord: Picker<WordEntry> = (l, r) => {
+  const newer = r.updatedAt > l.updatedAt ? r : l;
+  const seen = new Set<string>();
+  const contexts = [...l.contexts, ...r.contexts].filter((c) => {
+    const k = `${c.songId}/${c.lineId}`;
+    if (seen.has(k)) return false;
+    seen.add(k);
+    return true;
+  });
+  return { ...newer, contexts };
+};
 
 export function mergeSettings(local: Settings | undefined, remote: Settings | undefined): Settings | undefined {
   if (!remote) return local;
@@ -115,6 +155,9 @@ export function mergeData(local: BackupData, remote: Partial<BackupData>): Backu
     drawings: mergeBy<Drawing>(local.drawings, remote.drawings, (d) => d.id, newerDrawing),
     meta: mergeMeta(local.meta, remote.meta),
     ledger: mergeBy<LedgerEntry>(local.ledger, remote.ledger, (e) => e.id, keepLocal),
+    songs: mergeBy<Song>(local.songs, remote.songs, (s) => s.id, mergeSong),
+    playlists: mergeBy<Playlist>(local.playlists, remote.playlists, (p) => p.id, newerPlaylist),
+    words: mergeBy<WordEntry>(local.words, remote.words, (w) => w.id, mergeWord),
   } satisfies Record<TableName, unknown[]>;
 }
 

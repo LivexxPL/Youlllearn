@@ -32,6 +32,7 @@ import {
 } from 'lucide-react';
 import type { Course, CourseId, DialogueSpeaker, Story } from '../../content/types';
 import { getCourse, allCourses } from '../../content/registry';
+import { useStudyCourse } from '../music/hooks';
 import { useSettings } from '../../state/settings';
 import { useAudioStatus, useCards, useLessonProgress, useListeningStage, useShowRomaji } from '../../state/hooks';
 import { audioPool, buildDictationSteps, buildListeningSteps, buildPlaylist, buildSpeakingSteps, poolEntries, type ListeningStage, type PlaylistEntry } from '../../engine/audioSession';
@@ -163,7 +164,9 @@ function repeatPauseMs(e: PlaylistEntry, courseId: CourseId): number {
 
 function HandsFree({ query }: { query: URLSearchParams }) {
   const { settings } = useSettings();
-  const course = getCourse(settings.activeCourse);
+  const baseCourse = getCourse(settings.activeCourse);
+  const studyCourse = useStudyCourse(baseCourse.id);
+  const course = studyCourse ?? baseCourse;
   const cards = useCards(course.id);
   const autoStage = useListeningStage(course.id);
   const showRomaji = useShowRomaji();
@@ -193,10 +196,10 @@ function HandsFree({ query }: { query: URLSearchParams }) {
 
   // Build the playlist once, when the learner's cards are available.
   useEffect(() => {
-    if (list || !cards) return;
+    if (list || !cards || !studyCourse) return;
     const pool = audioPool(course, cards, Date.now(), lessonId);
     setList(buildPlaylist(pool, minutes, stage, createRng(Date.now())));
-  }, [cards, list, course, lessonId, minutes, stage]);
+  }, [cards, list, course, studyCourse, lessonId, minutes, stage]);
 
   const stopLoop = useCallback(() => {
     ctrl.current?.abort();
@@ -583,7 +586,9 @@ interface FlashCard {
 
 function AudioFlashcards() {
   const { settings } = useSettings();
-  const course = getCourse(settings.activeCourse);
+  const baseCourse = getCourse(settings.activeCourse);
+  const studyCourse = useStudyCourse(baseCourse.id);
+  const course = studyCourse ?? baseCourse;
   const cards = useCards(course.id);
   const showRomaji = useShowRomaji();
   const stage = useListeningStage(course.id);
@@ -597,11 +602,11 @@ function AudioFlashcards() {
   const done = deck !== null && i >= deck.length && deck.length > 0;
 
   useEffect(() => {
-    if (deck || !cards) return;
+    if (deck || !cards || !studyCourse) return;
     // Due and weakest cards first (audioPool), then shuffled so items and sentences mix.
     const pool = audioPool(course, cards, Date.now(), undefined, 12);
     setDeck(shuffle(poolEntries(pool), createRng(Date.now())).map((entry) => ({ refId: entry.refId, entry })));
-  }, [cards, deck, course]);
+  }, [cards, deck, course, studyCourse]);
 
   useEffect(() => {
     activity.start('audio', course.id);
@@ -1022,14 +1027,16 @@ function StoryView({ course, story }: { course: Course; story: Story }) {
 
 function AudioDrill({ mode }: { mode: DrillMode }) {
   const { settings } = useSettings();
-  const course = getCourse(settings.activeCourse);
+  const baseCourse = getCourse(settings.activeCourse);
+  const studyCourse = useStudyCourse(baseCourse.id);
+  const course = studyCourse ?? baseCourse;
   const cards = useCards(course.id);
   const showRomaji = useShowRomaji();
   const [steps, setSteps] = useState<Exercise[] | null>(null);
   const xpBefore = useXpBefore();
 
   useEffect(() => {
-    if (!cards || steps) return;
+    if (!cards || !studyCourse || steps) return;
     const now = Date.now();
     const seed = now;
     const built =
@@ -1039,7 +1046,7 @@ function AudioDrill({ mode }: { mode: DrillMode }) {
           ? buildDictationSteps(course, cards, now, seed)
           : buildSpeakingSteps(course, cards, now, seed, mode === 'shadowing' ? 'shadow' : 'repeat');
     setSteps(built);
-  }, [cards, steps, course, mode]);
+  }, [cards, studyCourse, steps, course, mode]);
 
   const [sessionId] = useState(newSessionId);
   const onFinish = useCallback(

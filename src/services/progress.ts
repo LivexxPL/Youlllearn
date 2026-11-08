@@ -9,6 +9,8 @@ import { achievementEntry, entry, grant, lessonEntry, practiceEntry, walletOf, t
 import { REWARDS } from '../config/economy';
 import { dayKey, weekKey, daysBetween } from '../engine/dates';
 import { introduceCard, reviewCard, cardStatus, type Card, type CardKind, type Outcome } from '../engine/srs';
+import { isWordCardId } from '../music/types';
+import { musicStats } from './music';
 import {
   XP,
   dailyQuests,
@@ -306,13 +308,14 @@ export async function updateStreak(today = dayKey(), database: PolyglotDB = db):
 // Achievements
 
 export async function aggregateStats(now = Date.now(), database: PolyglotDB = db): Promise<AggregateStats> {
-  const [progress, cards, days, streak, meta, ledger] = await Promise.all([
+  const [progress, cards, days, streak, meta, ledger, songs] = await Promise.all([
     database.lessonProgress.toArray(),
     database.cards.toArray(),
     database.dailyStats.toArray(),
     getMeta<StreakState>(STREAK_KEY, initialStreak, database),
     getMeta<{ comeback?: boolean; perfect?: boolean; marathon?: boolean }>('flags', {}, database),
     database.ledger.toArray(),
+    database.songs.toArray(),
   ]);
   const totals = Object.fromEntries(allCourses().map((c) => [c.id, c.lessons.length])) as Record<CourseId, number>;
   const lessonsOfLevel = (match: (level: string) => boolean) =>
@@ -334,7 +337,9 @@ export async function aggregateStats(now = Date.now(), database: PolyglotDB = db
     completedLessonIds: new Set(progress.map((p) => p.id)),
     lessonsPerCourse: perCourse,
     courseLessonTotals: totals,
-    itemsStarted: cards.filter((c) => c.kind === 'item').length,
+    // Words added from songs count only once practised (music-words-25), so adding many words
+    // in a minute cannot unlock the vocabulary badges.
+    itemsStarted: cards.filter((c) => c.kind === 'item' && !isWordCardId(c.id)).length,
     established: cards.filter((c) => cardStatus(c, now) === 'established').length,
     streakBest: streak.best,
     activeDays: days.filter(isActiveDay).length,
@@ -347,6 +352,7 @@ export async function aggregateStats(now = Date.now(), database: PolyglotDB = db
     marathon: Boolean(meta.marathon),
     beginnerCourseDone,
     coinsEarned: walletOf(ledger).earned,
+    music: musicStats(songs, cards),
   };
 }
 
@@ -357,7 +363,7 @@ export async function setFlag(flag: 'comeback' | 'perfect' | 'marathon', databas
 
 /** Unlocks achievements that are now earned, with their coins and items, in one transaction. */
 export async function refreshAchievements(database: PolyglotDB = db): Promise<AchievementDef[]> {
-  const tables = [database.achievements, database.ledger, database.lessonProgress, database.cards, database.dailyStats, database.meta];
+  const tables = [database.achievements, database.ledger, database.lessonProgress, database.cards, database.dailyStats, database.meta, database.songs];
   return database.transaction('rw', tables, async () => {
     const all: AchievementDef[] = [];
     // A second pass catches achievements that the first pass's coins unlock (e.g. "100 coins").

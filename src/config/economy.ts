@@ -26,10 +26,11 @@ export const REWARDS = {
     repeatMinAnswered: 5,
   },
   /**
-   * Review sessions, audio drills, audio flashcards and Endless practice: coins by the number
-   * of different cards practised that have not earned coins in the same kind of practice
-   * today. Practising the same cards again the same day still teaches (and earns XP) but
-   * earns no further coins — the anti-farming rule that keeps Endless practice unlimited.
+   * Review sessions, audio drills, audio flashcards, Endless practice and Music Lab exercises:
+   * coins by the number of different cards (Music Lab: words and lines answered correctly)
+   * practised that have not earned coins in the same kind of practice today. Practising the
+   * same cards again the same day still teaches (and earns XP) but earns no further coins —
+   * the anti-farming rule that keeps Endless practice unlimited.
    */
   practice: {
     /** [minimum fresh cards, coins], highest first. Fewer than the last row earns nothing. */
@@ -87,6 +88,10 @@ export const ACHIEVEMENT_TIERS: Record<string, AchievementTier> = {
   'course-es': 'large',
   'course-de': 'large',
   'course-ja': 'large',
+  'music-lines-50': 'medium',
+  'music-words-25': 'medium',
+  'music-songs-5': 'medium',
+  'music-mastered': 'medium',
 };
 
 export function practiceCoins(freshCards: number): number {

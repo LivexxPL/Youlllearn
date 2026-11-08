@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { Turtle, Volume2 } from 'lucide-react';
 import type { CourseId } from '../content/types';
 import { audio, type ListeningStage, type Speed, type VoiceSlot } from '../services/audio';
@@ -14,11 +14,33 @@ export interface Speakable {
   kind?: string;
 }
 
+/**
+ * Another source for some texts, used instead of speech synthesis: Music Lab plays the sung
+ * line from the song's video when an exercise "speaks" a lyric line.
+ */
+export interface SpeechOverride {
+  handles(text: string): boolean;
+  play(text: string, speed: Speed): Promise<void>;
+}
+
+export const SpeechOverrideContext = createContext<SpeechOverride | null>(null);
+
+export function useSpeechOverride(): SpeechOverride | null {
+  return useContext(SpeechOverrideContext);
+}
+
+const textOf = (content: Speakable | string) => (typeof content === 'string' ? content : content.text);
+
 export function useSpeaker(courseId: CourseId) {
   const stage = useListeningStage(courseId);
+  const override = useSpeechOverride();
   return (content: Speakable | string, speed: Speed = 'normal', opts: { slot?: VoiceSlot; accent?: string; stage?: ListeningStage } = {}) => {
     activity.ping();
-    return audio.say(courseId, content, { speed, stage: opts.stage ?? stage, slot: opts.slot, accent: opts.accent }).catch((e) => {
+    const text = textOf(content);
+    const played = override?.handles(text)
+      ? override.play(text, speed)
+      : audio.say(courseId, content, { speed, stage: opts.stage ?? stage, slot: opts.slot, accent: opts.accent });
+    return played.catch((e) => {
       console.warn('speech failed', e);
     });
   };
@@ -45,6 +67,7 @@ export function AudioButton({
   onPlayed?: () => void;
 }) {
   const speak = useSpeaker(courseId);
+  const override = useSpeechOverride();
   const status = useAudioStatus(accent ?? getCourse(courseId).speechLang);
   const [active, setActive] = useState<Speed | null>(null);
   const played = useRef(false);
@@ -66,7 +89,7 @@ export function AudioButton({
   }, [key]);
 
   useEffect(() => {
-    if (!autoPlay || played.current || status === 'unsupported') return;
+    if (!autoPlay || played.current || (status === 'unsupported' && !override?.handles(key))) return;
     // Marked inside the timer: an effect re-run (e.g. React StrictMode) must not cancel it for good.
     const id = setTimeout(() => {
       played.current = true;
@@ -79,7 +102,7 @@ export function AudioButton({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoPlay, key]);
 
-  const disabled = status === 'unsupported';
+  const disabled = status === 'unsupported' && !override?.handles(key);
   const dim = size === 'l' ? 88 : size === 'm' ? 64 : 48;
   return (
     <div className="audio-btns">

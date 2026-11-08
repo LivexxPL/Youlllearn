@@ -16,12 +16,16 @@ import { navigate } from '../../app/router';
 import { t } from '../../i18n';
 import { EmptyState, PageHeader } from '../../components/ui';
 import { strokeCharSet } from '../writing/strokes';
+import { useStudyCourse } from '../music/hooks';
 
 const MODES: ReviewMode[] = ['standard', 'quick', 'weak', 'extra', 'lesson'];
 
 export default function ReviewSessionScreen({ query }: { query: URLSearchParams }) {
   const { settings } = useSettings();
-  const course = getCourse(settings.activeCourse);
+  const baseCourse = getCourse(settings.activeCourse);
+  // Includes the learner's words from Music Lab songs.
+  const studyCourse = useStudyCourse(baseCourse.id);
+  const course = studyCourse ?? baseCourse;
   const cards = useCards(course.id);
   const showRomaji = useShowRomaji();
   const requested = query.get('mode') as ReviewMode | null;
@@ -36,7 +40,7 @@ export default function ReviewSessionScreen({ query }: { query: URLSearchParams 
   }, []);
 
   useEffect(() => {
-    if (!cards || steps) return;
+    if (!cards || !studyCourse || steps) return;
     setSteps(
       buildReviewSession({
         course,
@@ -50,7 +54,7 @@ export default function ReviewSessionScreen({ query }: { query: URLSearchParams 
         speaking: true,
       }),
     );
-  }, [cards, steps, course, mode, lessonId, showRomaji]);
+  }, [cards, studyCourse, steps, course, mode, lessonId, showRomaji]);
 
   const onFinish = useCallback(
     async (outcomes: SessionOutcomes, seconds: number): Promise<SummaryData> => {

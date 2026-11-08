@@ -29,6 +29,8 @@ import {
   Sunrise,
   TrendingUp,
   Trophy,
+  Music,
+  Disc3,
 } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { db, getMeta } from '../../services/db';
@@ -69,6 +71,8 @@ const ICONS: Record<string, ReactNode> = {
   medal: <Medal size={22} />,
   graduation: <GraduationCap size={22} />,
   coins: <Coins size={22} />,
+  music: <Music size={22} />,
+  disc: <Disc3 size={22} />,
 };
 
 export default function ProgressScreen() {

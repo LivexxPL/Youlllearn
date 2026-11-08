@@ -131,10 +131,13 @@ export class CloudSync {
 
     const prefix = `idb://${this.database.name}/`;
     Dexie.on('storagemutated', (parts) => {
+      // Device-only tables (Music Lab cache and playback positions) are never uploaded.
+      const synced = new Set<string>(TABLES);
       const tables = new Set(
         Object.keys(parts)
           .filter((k) => k.startsWith(prefix))
-          .map((k) => k.slice(prefix.length).split('/')[0]),
+          .map((k) => k.slice(prefix.length).split('/')[0])
+          .filter((t) => synced.has(t)),
       );
       if (!tables.size) return;
       // Time statistics are saved every few seconds while the app is open: on their own they

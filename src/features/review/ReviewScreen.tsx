@@ -13,6 +13,7 @@ import { MemoryBar, type MemoryState } from '../../components/charts';
 import { TargetText } from '../../components/TargetText';
 import { gloss } from '../../content/text';
 import { normalize } from '../../engine/answer';
+import { useStudyCourse } from '../music/hooks';
 
 export function memoryCounts(cards: Card[], totalItems: number, now: number): Record<MemoryState, number> {
   const counts: Record<MemoryState, number> = { established: 0, learning: 0, due: 0, struggling: 0, new: 0 };
@@ -24,7 +25,8 @@ export function memoryCounts(cards: Card[], totalItems: number, now: number): Re
 
 export default function ReviewScreen() {
   const { settings } = useSettings();
-  const course = getCourse(settings.activeCourse);
+  const baseCourse = getCourse(settings.activeCourse);
+  const course = useStudyCourse(baseCourse.id) ?? baseCourse;
   const cards = useCards(course.id);
   const completed = useCompletedSet(course.id);
   const [query, setQuery] = useState('');
